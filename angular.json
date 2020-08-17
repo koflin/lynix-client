@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "lynix-client"
+    }
+  },
+  "defaultProject": "lynix-client",
+  "cli": {
+    "analytics": false
+  }
 }
