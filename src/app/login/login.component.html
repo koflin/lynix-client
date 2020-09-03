@@ -1,15 +1,15 @@
-<mat-list>
-    <mat-list-item>
+<div fxLayoutAlign="center center" fxLayout="column" fxFlexFill>
+    <div fxFlex="5">
         <h2>Login</h2>
-    </mat-list-item>
-    <mat-list-item>
+    </div>
+    <div fxFlex="35">
         <div>
-            <mat-form-field appearance="standard">
+            <mat-form-field appearance="standard" class="full-width">
                 <mat-label>Enter your username</mat-label>
                 <input matInput type="text" [(ngModel)]="username" required>
             </mat-form-field>
             <br>
-            <mat-form-field appearance="standard">
+            <mat-form-field appearance="standard" class="full-width">
                 <mat-label>Enter your password</mat-label>
                 <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password" required>
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
@@ -17,7 +17,7 @@
                 </button>
             </mat-form-field>
             <br>
-            <button mat-raised-button color="primary">Login</button>
+            <button mat-raised-button color="primary" (click)="login()">Login</button>
         </div>
-    </mat-list-item>
-</mat-list>
+    </div>
+</div>

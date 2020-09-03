@@ -27,7 +27,7 @@ export class AuthService {
     return this.user.value;
   }
 
-  login(username: string, password: string): Observable<boolean> {
+  login(username: string, password: string): Promise<boolean> {
     return this.http.post<{ access_token: string, user: User }>(this.endpoint + '/login', {
       username,
       password
@@ -43,6 +43,6 @@ export class AuthService {
       catchError((error, caught) => {
         return of(false);
       })
-    );
+    ).toPromise();
   }
 }
