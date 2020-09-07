@@ -15,12 +15,24 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import { TestComponent } from './test/test.component';
+import { HomeComponent } from './home/home.component';
+import { NavComponent } from './components/nav/nav.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { OrdersOverviewComponent } from './views/orders/orders-overview/orders-overview.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TestComponent
+    TestComponent,
+    HomeComponent,
+    NavComponent,
+    OrdersOverviewComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +46,13 @@ import { TestComponent } from './test/test.component';
     MatIconModule,
     MatButtonModule,
     MatGridListModule,
-    MatListModule
+    MatListModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

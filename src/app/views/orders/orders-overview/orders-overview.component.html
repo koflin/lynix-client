@@ -1,0 +1,30 @@
+<app-nav title="Overview Orders"></app-nav>
+<div style="margin-top: 20px;">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let order of orders" style="margin-bottom: 10px;">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Work Order No: {{ order.id }}</mat-panel-title>
+        <mat-panel-description>
+          <div fxLayout="row" fxLayoutAlign="space-around center" style="width: 100%;">
+            <div>Name: {{ order.name }}</div>
+            <div>Description: {{ order.description }}</div>
+            <div>Status: {{ order.status }}</div>
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="20px">
+        <div *ngFor="let process of order.processes" style="width:100%;">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <div>{{ process.quantityDone }}/{{ process.quantityTotal }}</div>
+              <mat-card-title>{{ process.name }}</mat-card-title>
+              <mat-card-subtitle>Dummy Description</mat-card-subtitle>
+            </mat-card-header>
+            <!--<mat-card-content>
+            </mat-card-content>-->
+          </mat-card>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from '../models/user';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
@@ -10,39 +11,56 @@ import { map, catchError } from 'rxjs/operators';
 export class AuthService {
 
   private endpoint = 'http://localhost:3000/v0/auth';
-
-  private user: BehaviorSubject<User>;
-  public onUserChange: Observable<User>;
-
-  header: HttpHeaders = new HttpHeaders({
+  private headers = new HttpHeaders({
     'Content-Type': 'application/json'
   });
 
+  private accessToken: string;
+  private refreshToken: string;
+
+  private jwtHelper = new JwtHelperService();
+
   constructor(private http: HttpClient) {
-    this.user = new BehaviorSubject(undefined);
-    this.onUserChange = this.user.asObservable();
+    this.refreshToken = localStorage.getItem('refresh_token');
+
+    /*if (this.refreshToken && this.jwtHelper.isTokenExpired(this.refreshToken)) {
+      this.http.post(this.endpoint + '/token', {
+        refresh_token: this.refreshToken
+      }, {
+        headers: this.headers
+      }).subscribe((result) => {
+        this.accessToken = result['access_token'];
+      });
+    }*/
   }
 
-  getUser() {
-    return this.user.value;
+  getToken() {
+    //return this.accessToken;
+    return null;
+  }
+
+  isLoggedIn() {
+    //return this.accessToken !== null;
+    return true;
   }
 
   login(username: string, password: string): Promise<boolean> {
-    return this.http.post<{ access_token: string, user: User }>(this.endpoint + '/login', {
+    /*return this.http.post<{ access_token: string, refresh_token: string, user: User }>(this.endpoint + '/login', {
       username,
       password
     }, {
-      headers: this.header
+      headers: this.headers
     }).pipe(
       map((result) => {
-        localStorage.setItem('access_token', result.access_token);
-        this.user.next(result.user);
+        this.accessToken = result.access_token;
+        localStorage.setItem('refresh_token', result.refresh_token);
 
         return true;
       }),
       catchError((error, caught) => {
         return of(false);
       })
-    ).toPromise();
+    ).toPromise();*/
+    return of(true).toPromise();
   }
 }
