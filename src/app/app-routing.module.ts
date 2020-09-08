@@ -5,6 +5,7 @@ import { TestComponent } from './test/test.component';
 import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { OrdersOverviewComponent } from './views/orders/orders-overview/orders-overview.component';
+import { ProcessesOverviewComponent } from './views/processes/processes-overview/processes-overview.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'orders/overview', component: OrdersOverviewComponent, canActivate: [AuthGuard] },
+  { path: 'processes/overview', component: ProcessesOverviewComponent, canActivate: [AuthGuard] },
   { path: 'test', component: TestComponent, canActivate: [AuthGuard] }
 ];
 

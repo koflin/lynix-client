@@ -10,7 +10,7 @@ import { UsersService } from 'src/app/core/users/users.service';
 export class NavComponent implements OnInit {
 
   @Input() title: string;
-  
+
   user: User;
 
   constructor(private usersService: UsersService){

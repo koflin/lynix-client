@@ -24,6 +24,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { OrdersOverviewComponent } from './views/orders/orders-overview/orders-overview.component';
 import {MatCardModule} from '@angular/material/card';
+import { ProcessesOverviewComponent } from './views/processes/processes-overview/processes-overview.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {MatCardModule} from '@angular/material/card';
     TestComponent,
     HomeComponent,
     NavComponent,
-    OrdersOverviewComponent
+    OrdersOverviewComponent,
+    ProcessesOverviewComponent
   ],
   imports: [
     BrowserModule,

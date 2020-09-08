@@ -1,3 +1,4 @@
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Order } from 'src/app/models/order';
 
@@ -6,12 +7,11 @@ import { Order } from 'src/app/models/order';
 })
 export class OrdersService {
 
+  private orders: BehaviorSubject<Order[]>;
+  public onOrdersChange: Observable<Order[]>;
+
   constructor() {
-
-  }
-
-  getAll(): Order[] {
-    return [
+    this.orders = new BehaviorSubject([
       {
         id: '1000',
         companyId: '0',
@@ -20,6 +20,7 @@ export class OrdersService {
         description: 'Order for customer 1',
         processes: [
           {
+            id: '1',
             name: 'Hull',
             mainTasks: ['Task1', 'Task2'],
             estimatedTime: 3600,
@@ -42,9 +43,11 @@ export class OrdersService {
             currentStep: 0,
             quantityDone: 0,
             quantityTotal: 1,
-            timeTaken: 200
+            timeTaken: 200,
+            status: 'in_progress'
           },
           {
+            id: '2',
             name: 'Sail',
             mainTasks: ['Task1', 'Task2', 'Task3'],
             estimatedTime: 7000,
@@ -60,7 +63,8 @@ export class OrdersService {
             currentStep: 0,
             quantityDone: 0,
             quantityTotal: 1,
-            timeTaken: 0
+            timeTaken: 0,
+            status: 'released'
           }
         ]
       },
@@ -72,6 +76,7 @@ export class OrdersService {
         description: 'Order for customer 2',
         processes: [
           {
+            id: '3',
             name: 'Hull',
             mainTasks: ['Task1', 'Task2'],
             estimatedTime: 3600,
@@ -94,9 +99,11 @@ export class OrdersService {
             currentStep: 0,
             quantityDone: 2,
             quantityTotal: 2,
-            timeTaken: 7000
+            timeTaken: 7000,
+            status: 'completed'
           },
           {
+            id: '4',
             name: 'Sail',
             mainTasks: ['Task1', 'Task2', 'Task3'],
             estimatedTime: 7000,
@@ -112,11 +119,18 @@ export class OrdersService {
             currentStep: 0,
             quantityDone: 1,
             quantityTotal: 2,
-            timeTaken: 8000
+            timeTaken: 8000,
+            status: 'in_progress'
           }
         ]
       }
-    ];
+    ] as Order[]);
+
+    this.onOrdersChange = this.orders.asObservable();
+  }
+
+  getAll(): Order[] {
+    return this.orders.value;
   }
 }
 
