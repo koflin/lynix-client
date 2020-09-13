@@ -1,4 +1,6 @@
-export interface User {
+import { CompanyBase } from './companyBase';
+
+export interface User extends CompanyBase {
     id: string;
     username: string;
     firstName?: string;

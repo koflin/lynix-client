@@ -1,13 +1,17 @@
+import { CompanyBase } from './companyBase';
 import { ProductTemplate } from './productTemplate';
 import { Process } from './process';
 
 
-export interface Order {
+export interface Order extends CompanyBase {
   id: string;
-  companyId: string;
+
   status: string;
   name: string;
   description: string;
-  productTemplates?: ProductTemplate[];
-  processes: Process[];
+
+  products: {
+    templateId: string;
+    quantity: number;
+  }[];
 }

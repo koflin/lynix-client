@@ -10,6 +10,7 @@ export class UsersService {
 
   getCurrentUser(): User {
     return {
+      companyId: 'c0',
       id: '5f4411a4e9dc5b57b4a9782b',
       username: 'tester',
       firstName: 'Test',

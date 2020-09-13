@@ -1,4 +1,5 @@
 export interface Step {
+
   title: string;
   materials: string[];
   tools: string[];
@@ -6,5 +7,6 @@ export interface Step {
   tasks: string;
   pictureUris?: string[];
   videoUris?: string[];
+
   timeTaken?: number;
 }

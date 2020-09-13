@@ -1,6 +1,8 @@
+import { OrderNode } from './../../../models/ui/orderNode';
 import { OrdersService } from './../../../core/orders/orders.service';
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/models/order';
+import { OrdersOverviewService } from './orders-overview.service';
 
 @Component({
   selector: 'app-orders-overview',
@@ -9,12 +11,12 @@ import { Order } from 'src/app/models/order';
 })
 export class OrdersOverviewComponent implements OnInit {
 
-  orders: Order[];
+  orderNodes: OrderNode[];
 
-  constructor(private ordersService: OrdersService) { }
+  constructor(private ordersOverviewService: OrdersOverviewService) { }
 
   ngOnInit(): void {
-    this.orders = this.ordersService.getAll();
+    this.orderNodes = this.ordersOverviewService.getAll();
   }
 
 }
