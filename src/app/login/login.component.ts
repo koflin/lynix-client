@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
       if (success) {
         this.router.navigate(['home']);
       } else {
-        alert("The username or password is wrong!");
+        alert('The username or password is wrong!');
       }
     });
   }

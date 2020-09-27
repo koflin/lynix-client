@@ -27,7 +27,7 @@ export class OrdersOverviewService {
       }[] = [];
 
       this.processesService.getByOrderId(order.id).forEach((process) => {
-        const group = processGroups.find(g =>  g.id === process.templateId);
+        const group = processGroups.find(g =>  g.id === process.template.id);
         const done = process.status === 'completed' ? 1 : 0;
 
         if (group) {
@@ -35,7 +35,7 @@ export class OrdersOverviewService {
           group.quantityTotal += 1;
         } else {
           processGroups.push({
-            id: process.templateId,
+            id: process.template.id,
             quantityDone: done,
             quantityTotal: 1,
             name: process.name
@@ -46,10 +46,8 @@ export class OrdersOverviewService {
       return {
         workOderId: order.id,
         products: order.products.map((product) => {
-          const template = this.productTemplateService.getById(product.templateId);
-
           return {
-            name: template.name,
+            name: product.template.name,
             quantity: product.quantity
           };
         }),

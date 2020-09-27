@@ -1,0 +1,8 @@
+<app-nav title="Tool Library"></app-nav>
+<div style="margin-top: 10px;">
+  <div fxFill fxLayout="column" fxLayoutGap="10px">
+    <div *ngFor="let tool of tools">
+      <app-tool-node [tool]="tool"></app-tool-node>
+    </div>
+  </div>
+</div>

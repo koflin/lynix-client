@@ -6,12 +6,12 @@ import { Process } from './process';
 export interface Order extends CompanyBase {
   id: string;
 
-  status: string;
+  status: 'in_preparation' | 'released' | 'in_progress' | 'completed';
   name: string;
   description: string;
 
   products: {
-    templateId: string;
+    template: ProductTemplate;
     quantity: number;
   }[];
 }

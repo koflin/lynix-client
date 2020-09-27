@@ -25,6 +25,23 @@ import { TestComponent } from './test/test.component';
 import { OrdersOverviewComponent } from './views/orders/orders-overview/orders-overview.component';
 import { ProcessesOverviewComponent } from './views/processes/processes-overview/processes-overview.component';
 import { ProcessNodeComponent } from './components/process-node/process-node.component';
+import { ProductTemplateLibraryComponent } from './views/templates/product/product-template-library/product-template-library.component';
+import { ProcessTemplateLibraryComponent } from './views/templates/process/process-template-library/process-template-library.component';
+import { ProcessTemplateNodeComponent } from './components/process-template-node/process-template-node.component';
+import { ProductTemplateNodeComponent } from './components/product-template-node/product-template-node.component';
+import { ToolLibraryComponent } from './views/tools/tool-library/tool-library.component';
+import { ToolNodeComponent } from './components/tool-node/tool-node.component';
+import { OrdersDraftComponent } from './views/orders/orders-draft/orders-draft.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { ProductTemplateTabComponent } from './components/product-template-tab/product-template-tab.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ProductTemplateSelectionComponent } from './components/product-template-selection/product-template-selection.component';
+import {MatTableModule} from '@angular/material/table';
+import { ProcessTemplateSelectionComponent } from './components/process-template-selection/process-template-selection.component';
+import { ProcessTemplateTabComponent } from './components/process-template-tab/process-template-tab.component';
+import { StepTemplateTabComponent } from './components/step-template-tab/step-template-tab.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -36,7 +53,19 @@ import { ProcessNodeComponent } from './components/process-node/process-node.com
     NavComponent,
     OrdersOverviewComponent,
     ProcessesOverviewComponent,
-    ProcessNodeComponent
+    ProcessNodeComponent,
+    ProductTemplateLibraryComponent,
+    ProcessTemplateLibraryComponent,
+    ProcessTemplateNodeComponent,
+    ProductTemplateNodeComponent,
+    ToolLibraryComponent,
+    ToolNodeComponent,
+    OrdersDraftComponent,
+    ProductTemplateTabComponent,
+    ProductTemplateSelectionComponent,
+    ProcessTemplateSelectionComponent,
+    ProcessTemplateTabComponent,
+    StepTemplateTabComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +85,12 @@ import { ProcessNodeComponent } from './components/process-node/process-node.com
     MatMenuModule,
     MatDividerModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    MatTabsModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

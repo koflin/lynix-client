@@ -39,9 +39,9 @@ export class AuthService {
     return null;
   }
 
-  isLoggedIn() {
+  isLoggedIn(): boolean {
     //return this.accessToken !== null;
-    return true;
+    return sessionStorage.getItem('loggedIn') === '1';
   }
 
   login(username: string, password: string): Promise<boolean> {
@@ -61,6 +61,11 @@ export class AuthService {
         return of(false);
       })
     ).toPromise();*/
+    sessionStorage.setItem('loggedIn', '1');
     return of(true).toPromise();
+  }
+
+  logout() {
+    sessionStorage.setItem('loggedIn', '0');
   }
 }

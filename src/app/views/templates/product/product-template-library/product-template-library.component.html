@@ -1,0 +1,8 @@
+<app-nav title="Product Library"></app-nav>
+<div style="margin-top: 10px;">
+  <div fxFill fxLayout="column" fxLayoutGap="10px">
+    <div *ngFor="let template of templates">
+      <app-product-template-node [templateNode]="template" (selectChange)="onSelect(template.id)"></app-product-template-node>
+    </div>
+  </div>
+</div>

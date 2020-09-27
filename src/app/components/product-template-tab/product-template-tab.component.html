@@ -1,0 +1,51 @@
+<mat-tab-group mat-align-tabs="start" [selectedIndex]="selectedTab" (selectedIndexChange)="selectTab($event)">
+  <mat-tab label="Overview">
+    <div style="margin-top: 30px;padding-bottom: 10px;">
+      <div fxLayout="row">
+        <div fxFlex="40">
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="productTemplate.name" name="name">
+          </mat-form-field>
+        </div>
+        <div fxFlex="55">
+          <h2>Processes</h2>
+          <div fxLayout="column" fxLayoutGap="5px" style="margin-left: 16px;">
+            <div *ngFor="let process of productTemplate.processTemplates; let i = index">
+              <div fxLayout="row">
+                <div fxFlex="30">
+                  <h3>{{ process.name }}</h3>
+                </div>
+                <div fxFlex="50">
+                </div>
+                <div fxFlex="8">
+                  <button mat-icon-button aria-label="Edit" (click)="editProcess(i)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </div>
+                <div fxFlex="8">
+                  <button mat-icon-button aria-label="Remove" (click)="removeProcess(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">
+            <div>
+              <button mat-mini-fab color="primary" (click)="addProcess()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <div *ngFor="let process of productTemplate.processTemplates; let i = index">
+    <mat-tab [label]="process.name">
+      <app-process-template-tab [(processTemplate)]="productTemplate.processTemplates[i]" [(selectedTab)]="subSelect"></app-process-template-tab>
+      <span></span>
+    </mat-tab>
+  </div>
+</mat-tab-group>

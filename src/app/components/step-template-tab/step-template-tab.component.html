@@ -1,0 +1,207 @@
+<div fxLayout="column" fxLayoutGap="20px" style="padding: 10px">
+  <mat-accordion>
+    <mat-expansion-panel opened="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>General</mat-panel-title>
+        <mat-panel-description>Add general process information</mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="stepTemplate.title" name="title">
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Tasks</mat-panel-title>
+        <mat-panel-description>Tasks of the process step</mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field style="width: 100%;">
+        <mat-label>Tasks</mat-label>
+        <textarea matInput [(value)]="stepTemplate.tasks" cdkTextareaAutosize="true" cdkAutosizeMinRows="10"></textarea>
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Key Message</mat-panel-title>
+        <mat-panel-description>Key messages of the process step</mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field style="width: 100%;">
+        <mat-label>Key Message</mat-label>
+        <textarea matInput cdkTextareaAutosize="true" cdkAutosizeMinRows="10" [(value)]="stepTemplate.keyMessage"></textarea>
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div fxLayout="row" fxLayoutGap="20px">
+    <div fxFlex="50">
+      <mat-accordion>
+        <mat-expansion-panel opened="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Materials
+            </mat-panel-title>
+            <mat-panel-description>
+              Add materials
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div fxLayout="column">
+            <div *ngFor="let material of stepTemplate.materials; let i = index">
+              <div fxLayout="row">
+                <div fxFlex="90">
+                  <h3>{{ material }}</h3>
+                </div>
+                <div fxFlex="10">
+                  <button mat-icon-button (click)="removeMaterial(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div fxLayout="row">
+              <div fxFlex="90">
+                <mat-form-field>
+                  <input matInput [(ngModel)]="materialToAdd">
+                </mat-form-field>
+              </div>
+              <div fxFlex="10">
+                <button mat-icon-button (click)="addMaterial()" [disabled]="!materialToAdd || materialToAdd === ''">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div fxFlex="50">
+      <mat-accordion>
+        <mat-expansion-panel opened="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Tools
+            </mat-panel-title>
+            <mat-panel-description>
+              Add tool
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div fxLayout="column">
+            <div *ngFor="let tool of stepTemplate.toolIds; let i = index">
+              <div fxLayout="row">
+                <div fxFlex="90">
+                  <h3>{{ tool }}</h3>
+                </div>
+                <div fxFlex="10">
+                  <button mat-icon-button (click)="removeTool(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div fxLayout="row">
+              <div fxFlex="90">
+                <mat-form-field>
+                  <input matInput [(ngModel)]="toolToAdd">
+                </mat-form-field>
+              </div>
+              <div fxFlex="10">
+                <button mat-icon-button (click)="addTool()" [disabled]="!toolToAdd || toolToAdd === ''">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="20px">
+    <div fxFlex="50">
+      <mat-accordion>
+        <mat-expansion-panel opened="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Pictures
+            </mat-panel-title>
+            <mat-panel-description>
+              Add pictures
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div fxLayout="column">
+            <div *ngIf="stepTemplate.pictureUris.length > 0">
+              <button mat-mini-fab (click)="removeImage(pictureIndex)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <div *ngIf="stepTemplate.pictureUris.length > 0" style="width: 100%" #imageContainer>
+              <img *ngIf="stepTemplate.pictureUris.length > 0" [src]="stepTemplate.pictureUris[pictureIndex]" [width]="imageContainer.offsetWidth">
+            </div>
+            <div *ngIf="stepTemplate.pictureUris.length === 0">
+              <h2>There are no pictures yet</h2>
+            </div>
+            <div *ngIf="stepTemplate.pictureUris.length > 0">
+              <mat-paginator [length]="stepTemplate.pictureUris.length"
+                hidePageSize="true"
+                (page)="changeImageIndex($event)">
+              </mat-paginator>
+            </div>
+            <div>
+              <input type="file" accept="image/png, image/jpeg" (change)="addImage($event)" #imageInput style="display: none;">
+              <button mat-mini-fab (click)="imageInput.click()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div fxFlex="50">
+      <mat-accordion>
+        <mat-expansion-panel opened="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Videos
+            </mat-panel-title>
+            <mat-panel-description>
+              Add videos
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div fxLayout="column">
+            <div *ngIf="stepTemplate.videoUris.length > 0">
+              <button mat-mini-fab (click)="removeImage(pictureIndex)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <div *ngIf="stepTemplate.videoUris.length > 0" style="width: 100%" #videoContainer>
+              <video [width]="videoContainer.offsetWidth">
+                <source [src]="stepTemplate.videoUris[videoIndex]">
+              </video>
+              <img *ngIf="stepTemplate.videoUris.length > 0" [src]="" [width]="videoContainer.offsetWidth">
+            </div>
+            <div *ngIf="stepTemplate.pictureUris.length === 0">
+              <h2>There are no pictures yet</h2>
+            </div>
+            <div *ngIf="stepTemplate.pictureUris.length > 0">
+              <mat-paginator [length]="stepTemplate.pictureUris.length"
+                hidePageSize="true"
+                (page)="changeImageIndex($event)">
+              </mat-paginator>
+            </div>
+            <div>
+              <input type="file" accept="image/png, image/jpeg" (change)="addImage($event)" #imageInput style="display: none;">
+              <button mat-mini-fab (click)="imageInput.click()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

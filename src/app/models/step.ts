@@ -1,8 +1,9 @@
+import { Tool } from './tool';
 export interface Step {
 
   title: string;
   materials: string[];
-  tools: string[];
+  toolIds: string[];
   keyMessage: string;
   tasks: string;
   pictureUris?: string[];

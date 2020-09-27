@@ -1,0 +1,142 @@
+<mat-tab-group mat-align-tabs="start" [selectedIndex]="selectedTab" (selectedIndexChange)="selectTab($event)">
+  <mat-tab label="Overview">
+    <div style="margin-top: 30px;padding-bottom: 10px;">
+      <div fxLayout="row" fxLayoutGap="20px">
+        <div fxFlex="55">
+          <div fxLayout="column" fxLayoutGap="20px" style="padding-left: 10px;">
+            <div>
+              <mat-accordion>
+                <mat-expansion-panel opened="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      General
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Add general process information
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div fxLayout="column" fxLayoutGap="10px">
+                    <div>
+                      <mat-form-field>
+                        <mat-label>Process Name</mat-label>
+                        <input matInput [(ngModel)]="processTemplate.name" name="name">
+                      </mat-form-field>
+                    </div>
+                    <div>
+                      <div fxLayout="row" fxLayoutGap="5px">
+                        <mat-form-field style="width: 90px;">
+                          <mat-label>Estimated Time</mat-label>
+                          <input matInput [ngModel]="getEstimatedHours(processTemplate.estimatedTime)" (ngModelChange)="changeEstimatedHours($event)" name="estimated-time-h">
+                          <span matSuffix>h</span>
+                        </mat-form-field>
+                        <mat-form-field style="width: 90px;">
+                          <input matInput [ngModel]="getEstimatedMinutes(processTemplate.estimatedTime)"  (ngModelChange)="changeEstimatedMinutes($event)" name="estimated-time-m">
+                          <span matSuffix>m</span>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <div>
+              <mat-accordion>
+                <mat-expansion-panel opened="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Main Tasks & Challenges
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Add main tasks
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div fxLayout="column">
+                    <div *ngFor="let task of processTemplate.mainTasks; let i = index">
+                      <div fxLayout="row">
+                        <div fxFlex="90">
+                          <h3>{{ task }}</h3>
+                        </div>
+                        <div fxFlex="10">
+                          <button mat-icon-button (click)="removeTask(i)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div fxFlex="90">
+                        <mat-form-field>
+                          <input matInput [(ngModel)]="taskToAdd">
+                        </mat-form-field>
+                      </div>
+                      <div fxFlex="10">
+                        <button mat-icon-button (click)="addTask()" [disabled]="!taskToAdd || taskToAdd === ''">
+                          <mat-icon>add</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <div>
+              <mat-accordion>
+                <mat-expansion-panel opened="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Previous Comments
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Previous comments concerning the process
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div fxLayout="column">
+                    <div *ngFor="let comment of processTemplate.previousComments; let i = index">
+                      <h3>{{ comment }}</h3>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="40">
+          <h2>Steps</h2>
+          <div fxLayout="column" fxLayoutGap="5px" style="margin-left: 16px;">
+            <div *ngFor="let step of processTemplate.stepTemplates; let i = index">
+              <div fxLayout="row">
+                <div fxFlex="30">
+                  <h3>{{ step.title }}</h3>
+                </div>
+                <div fxFlex="50">
+                </div>
+                <div fxFlex="8">
+                  <button mat-icon-button aria-label="Edit" (click)="editStep(i)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </div>
+                <div fxFlex="8">
+                  <button mat-icon-button aria-label="Remove" (click)="removeStep(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center" style="margin-bottom: 10px;">
+            <div>
+              <button mat-mini-fab color="primary" (click)="addStep()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <div *ngFor="let step of processTemplate.stepTemplates; let i = index">
+    <mat-tab [label]="step.title">
+      <app-step-template-tab [(stepTemplate)]="processTemplate.stepTemplates[i]"></app-step-template-tab>
+    </mat-tab>
+  </div>
+</mat-tab-group>

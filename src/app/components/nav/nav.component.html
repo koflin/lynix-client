@@ -20,11 +20,15 @@
                     <div fxLayout="column" fxLayoutAlign="start start" style="height: 100%;">
                         <h5>{{ user.username }}</h5>
                         <h5>{{ user.firstName + ' ' + user.lastName }}</h5>
-                        <button>Logout</button>
+                        <button (click)="logout()">Logout</button>
                     </div>
                 </div>
             </div>
         </div>
+        <a mat-menu-item href="/">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </a>
         <a mat-menu-item href="/orders/overview">
             <mat-icon>list_alt</mat-icon>
             <span>Work Order Overview</span>
@@ -35,15 +39,20 @@
             <span>Process Overview</span>
         </a>
         <mat-divider></mat-divider>
-        <button mat-menu-item>
+        <a mat-menu-item href="/templates/product">
             <mat-icon>square_foot</mat-icon>
             <span>Product Templates</span>
-        </button>
+        </a>
         <mat-divider></mat-divider>
-        <button mat-menu-item>
+        <a mat-menu-item href="/templates/process">
+            <mat-icon>square_foot</mat-icon>
+            <span>Process Templates</span>
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-menu-item href="/tools">
             <mat-icon>construction</mat-icon>
             <span>Tool Library</span>
-        </button>
+        </a>
         <mat-divider></mat-divider>
         <button mat-menu-item>
             <mat-icon>self_improvement</mat-icon>

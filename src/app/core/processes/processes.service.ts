@@ -1,3 +1,4 @@
+import { ProcessTemplatesService } from './../processTemplates/process-templates.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Process } from 'src/app/models/process';
@@ -6,9 +7,8 @@ import { Process } from 'src/app/models/process';
   providedIn: 'root'
 })
 export class ProcessesService {
-  public onProcessesChange: Observable<void>;
 
-  private processes: Process[] = [
+  private _processes: any[] = [
     {
       companyId: 'c0',
       id: 'p0',
@@ -30,7 +30,7 @@ export class ProcessesService {
         {
           title: 'Inner Hull',
           materials: ['Wood'],
-          tools: ['Saw'],
+          toolIds: ['t0'],
           keyMessage: 'KeyMessage1\n KeyMessage2\n',
           tasks: 'Task1\nTask2\n',
 
@@ -39,7 +39,7 @@ export class ProcessesService {
         {
           title: 'Outer Hull',
           materials: ['Metal'],
-          tools: ['Welder'],
+          toolIds: ['t1'],
           keyMessage: 'KeyMessage1\n KeyMessage2\n',
           tasks: 'Task1\nTask2\n',
 
@@ -68,7 +68,7 @@ export class ProcessesService {
         {
           title: 'Inner Hull',
           materials: ['Wood'],
-          tools: ['Saw'],
+          toolIds: ['t0'],
           keyMessage: 'KeyMessage1\n KeyMessage2\n',
           tasks: 'Task1\nTask2\n',
           timeTaken: 2300,
@@ -76,7 +76,7 @@ export class ProcessesService {
         {
           title: 'Outer Hull',
           materials: ['Metal'],
-          tools: ['Welder'],
+          toolIds: ['t1'],
           keyMessage: 'KeyMessage1\n KeyMessage2\n',
           tasks: 'Task1\nTask2\n',
           timeTaken: 1200,
@@ -104,7 +104,7 @@ export class ProcessesService {
         {
           title: 'Inner Hull',
           materials: ['Wood'],
-          tools: ['Saw'],
+          toolIds: ['t0'],
           keyMessage: 'KeyMessage1\n KeyMessage2\n',
           tasks: 'Task1\nTask2\n',
           timeTaken: 800,
@@ -112,7 +112,7 @@ export class ProcessesService {
         {
           title: 'Outer Hull',
           materials: ['Metal'],
-          tools: ['Welder'],
+          toolIds: ['t1'],
           keyMessage: 'KeyMessage1\n KeyMessage2\n',
           tasks: 'Task1\nTask2\n',
           timeTaken: 0,
@@ -121,8 +121,36 @@ export class ProcessesService {
     },
   ];
 
-  constructor() {
-    this.onProcessesChange = new Observable();
+  get processes(): Process[] {
+    const storage = sessionStorage.getItem('processes');
+    if (!storage) {
+      return null;
+    }
+
+    const processes = JSON.parse(storage);
+
+    return processes.map((process) => {
+      process.template = this.processTemplatesService.getById(process.templateId);
+
+      return process;
+    });
+  }
+
+  set processes(processesOriginal: Process[]) {
+    let processes: any[] = processesOriginal;
+
+    processes = processes.map((process) => {
+      process.templateId = process.template.id;
+      return process;
+    });
+
+    sessionStorage.setItem('processes', JSON.stringify(processes));
+  }
+
+  constructor(private processTemplatesService: ProcessTemplatesService) {
+    if (!this.processes) {
+      sessionStorage.setItem('processes', JSON.stringify(this._processes));
+    }
   }
 
   getAll() {
