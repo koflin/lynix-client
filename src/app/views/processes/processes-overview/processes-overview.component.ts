@@ -1,6 +1,9 @@
+import { Router } from '@angular/router';
+import { ProcessesService } from './../../../core/processes/processes.service';
 import { ProcessesOverviewService } from './processes-overview.service';
 import { Component, OnInit } from '@angular/core';
 import { ProcessGroupNode } from 'src/app/models/ui/processGroupNode';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-processes-overview',
@@ -37,15 +40,15 @@ export class ProcessesOverviewComponent implements OnInit {
     }
   ];
 
-  constructor(private processesOverviewService: ProcessesOverviewService) {
+  constructor(
+    private router: Router,
+    private processesOverviewService: ProcessesOverviewService,
+    private processesService: ProcessesService
+    ) {
   }
 
   ngOnInit(): void {
-    const processNodes = this.processesOverviewService.getAll();
-
-    this.processNodeGroups.forEach((group) => {
-      group.nodes.push(...processNodes.filter((node) => node.status === group.status));
-    });
+    this.update();
   }
 
   onSelect(id: string) {
@@ -55,6 +58,21 @@ export class ProcessesOverviewComponent implements OnInit {
           node.selected = !node.selected;
         }
       });
+    });
+  }
+
+  onStart(id: string) {
+    this.processesService.start(id);
+    this.update();
+    this.router.navigate(['guide/' + id]);
+  }
+
+  update() {
+    const processNodes = this.processesOverviewService.getAll();
+
+    this.processNodeGroups.forEach((group) => {
+      group.nodes = [];
+      group.nodes.push(...processNodes.filter((node) => node.status === group.status));
     });
   }
 }

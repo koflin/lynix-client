@@ -1,3 +1,4 @@
+import { ProcessTemplateDraft } from './../../models/ui/orderDraft';
 import { ProcessTemplate } from './../../models/processTemplate';
 import { Injectable } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
@@ -38,7 +39,7 @@ export class ProcessTemplatesService {
 
   constructor() {
     if (!this.processTemplates) {
-      sessionStorage.setItem('processTemplates', JSON.stringify(this._processTemplates));
+      sessionStorage.setItem('processTemplates', JSON.stringify([]));
     }
   }
 
@@ -56,11 +57,27 @@ export class ProcessTemplatesService {
     sessionStorage.setItem('processTemplates', JSON.stringify(processTemplates));
   }
 
-  create(processTemplateDraft: ProcessTemplate): ProcessTemplate {
-    const id = uuidv4();
-    this.processTemplates = [ ...this.processTemplates, { id, companyId: 'c0', ...processTemplateDraft }];
+  save(processTemplateDraft: ProcessTemplate): ProcessTemplate {
+    const index = this.processTemplates.findIndex(process => process.id === processTemplateDraft.id);
+    const updatedProcess = this.processTemplates;
 
-    return this.getById(id);
+    updatedProcess[index] = processTemplateDraft;
+    this.processTemplates = updatedProcess;
+
+    return this.getById(processTemplateDraft.id);
+  }
+
+  create(processTemplateDraft: ProcessTemplate): ProcessTemplate {
+    processTemplateDraft.id = uuidv4();
+    processTemplateDraft.companyId = 'c0';
+
+    this.processTemplates = [ ...this.processTemplates, { ...processTemplateDraft } ];
+    return this.getById(processTemplateDraft.id);
+  }
+
+  delete(id: string) {
+    const index = this.processTemplates.findIndex(process => process.id === id);
+    this.processTemplates.splice(index, 1);
   }
 
   getAll(): ProcessTemplate[] {

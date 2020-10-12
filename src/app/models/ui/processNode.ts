@@ -7,6 +7,7 @@ export interface ProcessNode {
   name: string;
   timeTaken: number;
   status: string;
+  isOccupied: boolean;
 
   selected: boolean;
 }

@@ -42,6 +42,10 @@ import { ProcessTemplateSelectionComponent } from './components/process-template
 import { ProcessTemplateTabComponent } from './components/process-template-tab/process-template-tab.component';
 import { StepTemplateTabComponent } from './components/step-template-tab/step-template-tab.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { OrderTabComponent } from './components/order-tab/order-tab.component';
+import { GuideComponent } from './views/guide/guide.component';
+import { StepGuideTabComponent } from './components/step-guide-tab/step-guide-tab.component';
+
 
 
 @NgModule({
@@ -66,6 +70,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ProcessTemplateSelectionComponent,
     ProcessTemplateTabComponent,
     StepTemplateTabComponent,
+    OrderTabComponent,
+    GuideComponent,
+    StepGuideTabComponent,
   ],
   imports: [
     BrowserModule,

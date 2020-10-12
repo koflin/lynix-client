@@ -1,6 +1,6 @@
 import { ProcessTemplatesService } from './../../core/processTemplates/process-templates.service';
 import { ProductTemplate } from './../../models/productTemplate';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, SimpleChanges, OnChanges, DoCheck } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProcessTemplateSelectionComponent } from '../process-template-selection/process-template-selection.component';
 
@@ -9,17 +9,22 @@ import { ProcessTemplateSelectionComponent } from '../process-template-selection
   templateUrl: './product-template-tab.component.html',
   styleUrls: ['./product-template-tab.component.scss']
 })
-export class ProductTemplateTabComponent implements OnInit {
+export class ProductTemplateTabComponent implements OnInit, DoCheck {
 
   subSelect = 0;
 
   @Input() selectedTab: number;
   @Input() productTemplate: ProductTemplate;
+  @Output() productTemplateChange = new EventEmitter<ProductTemplate>();
 
   constructor(
     public dialog: MatDialog,
     private processTemplatesService: ProcessTemplatesService
     ) { }
+
+  ngDoCheck(): void {
+    //this.productTemplateChange.emit(this.productTemplate);
+  }
 
   ngOnInit(): void {
   }
@@ -32,13 +37,15 @@ export class ProductTemplateTabComponent implements OnInit {
 
     const selectDialog = this.dialog.open(ProcessTemplateSelectionComponent, {
       width: '700px',
-      data: options
+      data: {
+        options
+      }
     });
 
     selectDialog.afterClosed().subscribe(result => {
       // New process
       if (result === true) {
-        this.productTemplate.processTemplates.push({
+        this.productTemplate.processTemplates.push(this.processTemplatesService.create({
           companyId: null,
           id: null,
           name: 'Unnamed Process ' + (this.productTemplate.processTemplates.length + 1),
@@ -46,7 +53,7 @@ export class ProductTemplateTabComponent implements OnInit {
           mainTasks: [],
           stepTemplates: [],
           previousComments: null,
-        });
+        }));
       } else if (result) {
         this.productTemplate.processTemplates.push(this.processTemplatesService.getById(result));
       }
@@ -58,7 +65,7 @@ export class ProductTemplateTabComponent implements OnInit {
   }
 
   editProcess(index: number) {
-    // Go to process
+    this.selectedTab = index + 1;
   }
 
   selectTab(index: number) {

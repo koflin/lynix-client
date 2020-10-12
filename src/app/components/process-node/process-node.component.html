@@ -13,7 +13,7 @@
           <img src="https://image.flaticon.com/icons/png/512/37/37232.png" height="40px">
         </div>
         <div fxFlex="20">
-          Execution Time: {{ getHours(processNode.timeTaken) }}h
+          Execution Time: {{ getFullTime(processNode.timeTaken) }}
         </div>
         <div fxFlex="20">
           End Date: None
@@ -24,6 +24,10 @@
           </button>
           <button mat-icon-button *ngIf="processNode.status === 'in_preparation'">
             <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="start()"
+            *ngIf="!processNode.isOccupied && (processNode.status === 'released' || processNode.status === 'in_progress')">
+            <mat-icon>play_arrow</mat-icon>
           </button>
           <button mat-icon-button *ngIf="processNode.status === 'completed'">
             <mat-icon>archive</mat-icon>

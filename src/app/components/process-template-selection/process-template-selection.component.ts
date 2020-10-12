@@ -11,7 +11,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ProcessTemplateSelectionComponent implements OnInit {
 
   processes: ProcessTemplate[];
-  selectedProcess: ProcessTemplate;
+  selectedProcessId: string;
 
   displayedColumns: string[] = ['id', 'name'];
   dataSource: MatTableDataSource<ProcessTemplate>;
@@ -30,5 +30,9 @@ export class ProcessTemplateSelectionComponent implements OnInit {
 
   applyFilter() {
     this.dataSource.filter = this.filter;
+  }
+
+  selectProcess(id: string) {
+    this.selectedProcessId = id;
   }
 }

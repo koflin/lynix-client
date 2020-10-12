@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { OrderNode } from './../../../models/ui/orderNode';
 import { OrdersService } from './../../../core/orders/orders.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,10 +14,16 @@ export class OrdersOverviewComponent implements OnInit {
 
   orderNodes: OrderNode[];
 
-  constructor(private ordersOverviewService: OrdersOverviewService) { }
+  constructor(
+    private router: Router,
+    private ordersOverviewService: OrdersOverviewService
+    ) { }
 
   ngOnInit(): void {
     this.orderNodes = this.ordersOverviewService.getAll();
   }
 
+  edit(id: string) {
+    this.router.navigate(['orders/draft/' + id]);
+  }
 }

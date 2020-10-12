@@ -22,7 +22,8 @@ export class ProcessesOverviewService {
         name: process.name,
         status: process.status,
         timeTaken: process.timeTaken,
-        selected: false
+        isOccupied: process.isOccupied,
+        selected: false,
       };
     });
   }

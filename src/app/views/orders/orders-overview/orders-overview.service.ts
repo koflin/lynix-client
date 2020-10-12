@@ -45,9 +45,10 @@ export class OrdersOverviewService {
 
       return {
         workOderId: order.id,
+        status: order.status,
         products: order.products.map((product) => {
           return {
-            name: product.template.name,
+            name: product.template?.name,
             quantity: product.quantity
           };
         }),

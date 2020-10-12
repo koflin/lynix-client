@@ -20,7 +20,7 @@
       </mat-expansion-panel-header>
       <mat-form-field style="width: 100%;">
         <mat-label>Tasks</mat-label>
-        <textarea matInput [(value)]="stepTemplate.tasks" cdkTextareaAutosize="true" cdkAutosizeMinRows="10"></textarea>
+        <textarea matInput [(ngModel)]="stepTemplate.tasks" cdkTextareaAutosize="true" cdkAutosizeMinRows="10"></textarea>
       </mat-form-field>
     </mat-expansion-panel>
   </mat-accordion>
@@ -33,7 +33,7 @@
       </mat-expansion-panel-header>
       <mat-form-field style="width: 100%;">
         <mat-label>Key Message</mat-label>
-        <textarea matInput cdkTextareaAutosize="true" cdkAutosizeMinRows="10" [(value)]="stepTemplate.keyMessage"></textarea>
+        <textarea matInput cdkTextareaAutosize="true" cdkAutosizeMinRows="10" [(ngModel)]="stepTemplate.keyMessage"></textarea>
       </mat-form-field>
     </mat-expansion-panel>
   </mat-accordion>
@@ -134,13 +134,13 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div fxLayout="column">
-            <div *ngIf="stepTemplate.pictureUris.length > 0">
-              <button mat-mini-fab (click)="removeImage(pictureIndex)">
+            <div *ngIf="stepTemplate.pictureUris.length > 0" style="margin-bottom: 20px;">
+              <button mat-mini-fab (click)="removeImage(currentImageIndex)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
-            <div *ngIf="stepTemplate.pictureUris.length > 0" style="width: 100%" #imageContainer>
-              <img *ngIf="stepTemplate.pictureUris.length > 0" [src]="stepTemplate.pictureUris[pictureIndex]" [width]="imageContainer.offsetWidth">
+            <div *ngIf="stepTemplate.pictureUris.length > 0" style="width: 100%">
+              <img *ngIf="stepTemplate.pictureUris.length > 0" [src]="stepTemplate.pictureUris[currentImageIndex]" width="100%">
             </div>
             <div *ngIf="stepTemplate.pictureUris.length === 0">
               <h2>There are no pictures yet</h2>
@@ -174,28 +174,28 @@
           </mat-expansion-panel-header>
           <div fxLayout="column">
             <div *ngIf="stepTemplate.videoUris.length > 0">
-              <button mat-mini-fab (click)="removeImage(pictureIndex)">
+              <button mat-mini-fab (click)="removeVideo(currentVideoIndex)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
-            <div *ngIf="stepTemplate.videoUris.length > 0" style="width: 100%" #videoContainer>
-              <video [width]="videoContainer.offsetWidth">
-                <source [src]="stepTemplate.videoUris[videoIndex]">
+            <div *ngIf="stepTemplate.videoUris.length > 0" style="width: 100%">
+              <video width="100%">
+                <source [src]="stepTemplate.videoUris[currentVideoIndex]">
               </video>
-              <img *ngIf="stepTemplate.videoUris.length > 0" [src]="" [width]="videoContainer.offsetWidth">
+              <img *ngIf="stepTemplate.videoUris.length > 0" [src]="" width="100%">
             </div>
-            <div *ngIf="stepTemplate.pictureUris.length === 0">
-              <h2>There are no pictures yet</h2>
+            <div *ngIf="stepTemplate.videoUris.length === 0">
+              <h2>There are no videos yet</h2>
             </div>
-            <div *ngIf="stepTemplate.pictureUris.length > 0">
-              <mat-paginator [length]="stepTemplate.pictureUris.length"
+            <div *ngIf="stepTemplate.videoUris.length > 0">
+              <mat-paginator [length]="stepTemplate.videoUris.length"
                 hidePageSize="true"
-                (page)="changeImageIndex($event)">
+                (page)="changeVideoIndex($event)">
               </mat-paginator>
             </div>
             <div>
-              <input type="file" accept="image/png, image/jpeg" (change)="addImage($event)" #imageInput style="display: none;">
-              <button mat-mini-fab (click)="imageInput.click()">
+              <input type="file" accept="video/mp4" (change)="addVideo($event)" #videoInput style="display: none;">
+              <button mat-mini-fab (click)="videoInput.click()">
                 <mat-icon>add</mat-icon>
               </button>
             </div>

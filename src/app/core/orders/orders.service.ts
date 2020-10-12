@@ -1,3 +1,4 @@
+import { ProcessesService } from './../processes/processes.service';
 import { map } from 'rxjs/operators';
 import { ProductTemplatesService } from './../productTemplates/product-templates.service';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -42,9 +43,11 @@ export class OrdersService {
     }
   ];
 
-  constructor(private prodService: ProductTemplatesService) {
+  constructor(
+    private prodService: ProductTemplatesService,
+    private procService: ProcessesService) {
     if (!this.orders) {
-      sessionStorage.setItem('orders', JSON.stringify(this._orders));
+      sessionStorage.setItem('orders', JSON.stringify([]));
     }
   }
 
@@ -58,7 +61,9 @@ export class OrdersService {
 
     return orders.map((order) => {
       order.products = order.products.map((product) => {
-        product.template = this.prodService.getById(product.templateId);
+        if (product.templateId) {
+          product.template = this.prodService.getById(product.templateId);
+        }
         return product;
       });
       return order;
@@ -66,12 +71,15 @@ export class OrdersService {
   }
 
   set orders(ordersOriginal: Order[]) {
-    let orders: any = ordersOriginal;
+    let orders: any = [...ordersOriginal];
+
+    console.log(orders);
 
     orders = orders.map((order) => {
       order.products = order.products.map((product) => {
-        product.templateId = product.template.id;
-        product.template = undefined;
+        if (product.template) {
+          product.templateId = product.template.id;
+        }
         return product;
       });
       return order;
@@ -79,10 +87,28 @@ export class OrdersService {
     sessionStorage.setItem('orders', JSON.stringify(orders));
   }
 
-  create(orderDraft: Order): Order {
-    const id = uuidv4();
-    this.orders = [ ...this.orders, { id, companyId: 'c0', ...orderDraft } ];
-    return this.getById(id);
+  save(orderEdited: Order) {
+    const index = this.orders.findIndex(order => order.id === orderEdited.id);
+    const updatedOrders = this.orders;
+
+    updatedOrders[index] = orderEdited;
+    this.orders = updatedOrders;
+
+    return this.getById(orderEdited.id);
+  }
+
+  create(orderDraft: Order) {
+    orderDraft.id = uuidv4();
+    orderDraft.companyId = 'c0';
+
+    this.orders = [ ...this.orders, { ...orderDraft } ];
+
+    return this.getById(orderDraft.id);
+  }
+
+  delete(id: string) {
+    const index = this.orders.findIndex(order => order.id === id);
+    this.orders = this.orders.splice(index, 1);
   }
 
   getAll(): Order[] {
@@ -91,6 +117,18 @@ export class OrdersService {
 
   getById(id: string) {
     return this.orders.find(order => order.id === id);
+  }
+
+  publish(id: string) {
+    const index = this.orders.findIndex(order => order.id === id);
+    const updatedOrders = this.orders;
+
+    updatedOrders[index].status = 'released';
+    this.procService.createForOrder(updatedOrders[index]);
+
+    this.orders = updatedOrders;
+
+    return this.getById(id);
   }
 }
 

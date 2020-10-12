@@ -1,3 +1,4 @@
+import { ProcessTemplateDraft } from './../../models/ui/orderDraft';
 import { ProcessTemplatesService } from './../processTemplates/process-templates.service';
 import { map } from 'rxjs/operators';
 import { ProductTemplate } from './../../models/productTemplate';
@@ -20,7 +21,7 @@ export class ProductTemplatesService {
 
   constructor(private processTemplatesService: ProcessTemplatesService) {
     if (!this.productTemplates) {
-      sessionStorage.setItem('productTemplates', JSON.stringify(this._productTemplates));
+      sessionStorage.setItem('productTemplates', JSON.stringify([]));
     }
   }
 
@@ -57,10 +58,28 @@ export class ProductTemplatesService {
     sessionStorage.setItem('productTemplates', JSON.stringify(productTemplates));
   }
 
+  save(productTemplateDraft: ProductTemplate): ProductTemplate {
+    const index = this.productTemplates.findIndex(product => product.id === productTemplateDraft.id);
+    const updatedProducts = JSON.parse(JSON.stringify(this.productTemplates));
+
+    updatedProducts[index] = productTemplateDraft;
+    this.productTemplates = updatedProducts;
+
+    return this.getById(productTemplateDraft.id);
+  }
+
   create(productTemplateDraft: ProductTemplate): ProductTemplate {
-    const id = uuidv4();
-    this.productTemplates = [ ...this.productTemplates, { id, companyId: 'c0', ...productTemplateDraft } ];
-    return this.getById(id);
+    productTemplateDraft.id = uuidv4();
+    productTemplateDraft.companyId = 'c0';
+
+    this.productTemplates = [ ...this.productTemplates, { ...productTemplateDraft } ];
+
+    return this.getById(productTemplateDraft.id);
+  }
+
+  delete(id: string) {
+    const index = this.productTemplates.findIndex(product => product.id === id);
+    this.productTemplates.splice(index, 1);
   }
 
   getAll(): ProductTemplate[] {

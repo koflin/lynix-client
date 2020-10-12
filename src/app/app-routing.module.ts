@@ -1,3 +1,4 @@
+import { GuideGuard } from './views/guide/guide.guard';
 import { OrdersDraftComponent } from './views/orders/orders-draft/orders-draft.component';
 import { ToolLibraryComponent } from './views/tools/tool-library/tool-library.component';
 import { ProcessTemplateLibraryComponent } from './views/templates/process/process-template-library/process-template-library.component';
@@ -10,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { OrdersOverviewComponent } from './views/orders/orders-overview/orders-overview.component';
 import { ProcessesOverviewComponent } from './views/processes/processes-overview/processes-overview.component';
 import { LoginComponent } from './login/login.component';
+import { GuideComponent } from './views/guide/guide.component';
 
 
 const routes: Routes = [
@@ -22,6 +24,7 @@ const routes: Routes = [
   { path: 'processes/overview', component: ProcessesOverviewComponent, canActivate: [AuthGuard] },
   { path: 'templates/product', component: ProductTemplateLibraryComponent, canActivate: [AuthGuard] },
   { path: 'templates/process', component: ProcessTemplateLibraryComponent, canActivate: [AuthGuard] },
+  { path: 'guide/:id', component: GuideComponent, canActivate: [AuthGuard, GuideGuard] },
   { path: 'tools', component: ToolLibraryComponent, canActivate: [AuthGuard] },
   { path: 'test', component: TestComponent, canActivate: [AuthGuard] }
 ];

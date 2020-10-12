@@ -18,7 +18,7 @@
             <div fxFlex="60">
                 <div style="padding-left: 20px;">
                     <div fxLayout="column" fxLayoutAlign="start start" style="height: 100%;">
-                        <h5>{{ user.username }}</h5>
+                        <h5>{{ user.username }} - {{ user.id }}</h5>
                         <h5>{{ user.firstName + ' ' + user.lastName }}</h5>
                         <button (click)="logout()">Logout</button>
                     </div>

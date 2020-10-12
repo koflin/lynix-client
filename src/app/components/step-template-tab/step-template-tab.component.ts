@@ -1,5 +1,5 @@
 import { StepTemplate } from './../../models/stepTemplate';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-step-template-tab',
@@ -9,18 +9,20 @@ import { Component, Input, OnInit } from '@angular/core';
 export class StepTemplateTabComponent implements OnInit {
 
   @Input() stepTemplate: StepTemplate;
+  @Output() stepTemplateChange = new EventEmitter<StepTemplate>();
 
   materialToAdd: string;
   toolToAdd: string;
 
-  pictureIndex: number;
-  videoIndex: number;
+  currentImageIndex: number;
+  currentVideoIndex: number;
 
   imageFile: File;
+  videoFile: File;
 
   constructor() {
-    this.pictureIndex = 0;
-    this.videoIndex = 0;
+    this.currentImageIndex = 0;
+    this.currentVideoIndex = 0;
   }
 
   ngOnInit(): void {
@@ -57,6 +59,18 @@ export class StepTemplateTabComponent implements OnInit {
   }
 
   changeImageIndex(index: number) {
-    this.pictureIndex = index;
+    this.currentImageIndex = index;
+  }
+
+  addVideo(event) {
+    this.videoFile = event.target.files[0];
+  }
+
+  removeVideo(index: number) {
+    this.stepTemplate.videoUris.splice(index, 1);
+  }
+
+  changeVideoIndex(index: number) {
+    this.currentVideoIndex = index;
   }
 }

@@ -1,5 +1,5 @@
 import { ProcessTemplate } from './../../models/processTemplate';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, DoCheck } from '@angular/core';
 import { min } from 'rxjs/operators';
 
 @Component({
@@ -7,10 +7,11 @@ import { min } from 'rxjs/operators';
   templateUrl: './process-template-tab.component.html',
   styleUrls: ['./process-template-tab.component.scss']
 })
-export class ProcessTemplateTabComponent implements OnInit {
+export class ProcessTemplateTabComponent implements OnInit, DoCheck {
 
   @Input() selectedTab: number;
   @Input() processTemplate: ProcessTemplate;
+  @Output() processTemplateChange = new EventEmitter<ProcessTemplate>();
 
   estimatedTime: { hours: number, minutes: number };
 
@@ -18,11 +19,19 @@ export class ProcessTemplateTabComponent implements OnInit {
 
   constructor() { }
 
+  ngDoCheck(): void {
+    //this.processTemplateChange.emit(this.processTemplate);
+  }
+
   ngOnInit(): void {
     this.estimatedTime = {
       hours: this.getEstimatedHours(this.processTemplate.estimatedTime),
       minutes: this.getEstimatedMinutes(this.processTemplate.estimatedTime)
     };
+  }
+
+  stepTemplateChange() {
+    this.processTemplateChange.emit(this.processTemplate);
   }
 
   selectTab(index: number) {
@@ -36,8 +45,8 @@ export class ProcessTemplateTabComponent implements OnInit {
       tasks: null,
       materials: [],
       toolIds: [],
-      pictureUris: null,
-      videoUris: null
+      pictureUris: [],
+      videoUris: []
     });
 
     this.editStep(size - 1);

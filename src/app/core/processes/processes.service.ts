@@ -1,7 +1,11 @@
+import { OrdersService } from './../orders/orders.service';
+import { Step } from './../../models/step';
+import { Order } from 'src/app/models/order';
 import { ProcessTemplatesService } from './../processTemplates/process-templates.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Process } from 'src/app/models/process';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -144,12 +148,16 @@ export class ProcessesService {
       return process;
     });
 
+    console.log(processes);
+
     sessionStorage.setItem('processes', JSON.stringify(processes));
   }
 
-  constructor(private processTemplatesService: ProcessTemplatesService) {
+  constructor(
+    private processTemplatesService: ProcessTemplatesService
+    ) {
     if (!this.processes) {
-      sessionStorage.setItem('processes', JSON.stringify(this._processes));
+      sessionStorage.setItem('processes', JSON.stringify([]));
     }
   }
 
@@ -157,7 +165,79 @@ export class ProcessesService {
     return this.processes;
   }
 
+  getById(id: string) {
+    return this.processes.find(process => process.id === id);
+  }
+
   getByOrderId(orderId: string) {
     return this.processes.filter((process) => process.orderId === orderId);
+  }
+
+  save(process: Process) {
+    const index = this.processes.findIndex(proc => proc.id === process.id);
+    const updatedProcess = this.processes;
+
+    updatedProcess[index] = process;
+    this.processes = updatedProcess;
+
+    return this.getById(process.id);
+  }
+
+  canWorkOn(processId: string, userId: string) {
+    return this.processes.find(process => process.id = processId).assignedUserId === userId;
+  }
+
+  start(id: string) {
+    const index = this.processes.findIndex(process => process.id === id);
+
+    const updatedProcesses = this.processes;
+    updatedProcesses[index].status = 'in_progress';
+    updatedProcesses[index].isOccupied = true;
+
+    this.processes = updatedProcesses;
+  }
+
+  stop(id: string) {
+    const index = this.processes.findIndex(process => process.id === id);
+
+    const updatedProcesses = this.processes;
+    updatedProcesses[index].isOccupied = false;
+
+    this.processes = updatedProcesses;
+  }
+
+  createForOrder(order: Order) {
+    order.products.forEach((product) => {
+      product.template.processTemplates.forEach((processT) => {
+        const process: Process = {
+          companyId: 'c0',
+          id: null,
+          orderId: order.id,
+          status: 'released',
+
+          template: processT,
+          estimatedTime: processT.estimatedTime,
+          mainTasks: processT.mainTasks,
+          name: processT.name,
+          previousComments: processT.previousComments,
+          steps: processT.stepTemplates.map((stepT): Step => {
+            return {
+              ...stepT,
+              timeTaken: 0
+            };
+          }),
+
+          timeTaken: 0,
+          currentStepIndex: 0,
+          assignedUserId: '5f4411a4e9dc5b57b4a9782b',
+          isOccupied: false,
+          isRunning: false,
+        };
+
+        for (let i = 0; i < product.quantity; i++) {
+          this.processes = [...this.processes, {...process, id: uuidv4() }];
+        }
+      });
+    });
   }
 }

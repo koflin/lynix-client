@@ -1,15 +1,20 @@
 <app-nav title="Overview Orders"></app-nav>
 <div style="margin-top: 20px;">
   <mat-accordion>
-    <mat-expansion-panel *ngFor="let orderNode of orderNodes" style="margin-bottom: 10px;background-color: #F1F1F1;">
+    <mat-expansion-panel *ngFor="let orderNode of orderNodes" style="margin-bottom: 10px;background-color: #F1F1F1">
       <mat-expansion-panel-header>
         <mat-panel-title>Work Order No: {{ orderNode.workOderId }}</mat-panel-title>
         <mat-panel-description>
-          <div fxLayout="row" fxLayoutAlign="space-around center" style="width: 100%;">
-            <div>Products:
-              <p *ngFor="let product of orderNode.products">
-                {{ product.quantity }}x {{ product.name }}
-              </p>
+          <div fxLayout="row" style="width: 100%">
+            <div fxFlex="50">Products:
+              <span *ngFor="let product of orderNode.products">
+                {{ product.quantity }}x {{ product.name }},
+              </span>
+            </div>
+            <div fxFlex="20" *ngIf="orderNode.status === 'in_preparation'">
+              <button mat-icon-button (click)="edit(orderNode.workOderId)">
+                <mat-icon>edit</mat-icon>
+              </button>
             </div>
           </div>
         </mat-panel-description>
