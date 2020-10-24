@@ -1,0 +1,36 @@
+<app-nav title="User Overview"></app-nav>
+<div style="margin-top: 20px;">
+  <mat-form-field style="width: 100%;">
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter()" [(ngModel)]="searchQuery">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" style="width: 100%;">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.firstName }} {{ row.lastName }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef> Role </th>
+      <td mat-cell *matCellDef="let row"> {{row.role.name}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr *matNoDataRow>
+      <td colspan="4">No user found</td>
+    </tr>
+  </table>
+  <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 20px;">
+    <button mat-mini-fab color="primary" (click)="addUser()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

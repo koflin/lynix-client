@@ -45,6 +45,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { OrderTabComponent } from './components/order-tab/order-tab.component';
 import { GuideComponent } from './views/guide/guide.component';
 import { StepGuideTabComponent } from './components/step-guide-tab/step-guide-tab.component';
+import { UsersOverviewComponent } from './views/users/users-overview/users-overview.component';
+import { UsersDetailComponent } from './views/users/users-detail/users-detail.component';
+import { UserDraftComponent } from './components/user-draft/user-draft.component';
+import { TestDialogComponent } from './test/test-dialog/test-dialog.component';
 
 
 
@@ -73,6 +77,10 @@ import { StepGuideTabComponent } from './components/step-guide-tab/step-guide-ta
     OrderTabComponent,
     GuideComponent,
     StepGuideTabComponent,
+    UsersOverviewComponent,
+    UsersDetailComponent,
+    UserDraftComponent,
+    TestDialogComponent,
   ],
   imports: [
     BrowserModule,

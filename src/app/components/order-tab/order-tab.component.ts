@@ -69,7 +69,7 @@ export class OrderTabComponent implements OnInit, DoCheck {
             companyId: null,
             id: null,
             name: 'Unnamed Product ' + (index + 1),
-            processTemplates: [],
+            processes: [],
           }
         );
 

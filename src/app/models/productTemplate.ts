@@ -5,5 +5,9 @@ export interface ProductTemplate extends CompanyBase {
   id: string;
 
   name: string;
-  processTemplates: ProcessTemplate[];
+
+  processes: {
+    template: ProcessTemplate;
+    quantity: number;
+  }[];
 }

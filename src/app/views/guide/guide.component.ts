@@ -38,6 +38,10 @@ export class GuideComponent implements OnInit, OnDestroy, OnChanges {
 
       this.process = this.processesService.getById(id);
 
+      if (this.process.currentStepIndex) {
+        this.currentTabIndex = this.process.currentStepIndex + 1;
+      }
+
       this.updater = setInterval(this.onUpdate.bind(this), 1000);
     });
   }
@@ -79,6 +83,16 @@ export class GuideComponent implements OnInit, OnDestroy, OnChanges {
   onNext() {
     if (this.currentTabIndex < this.process.steps.length) {
       this.currentTabIndex += 1;
+    }
+  }
+
+  onJump() {
+    this.currentTabIndex = this.process.currentStepIndex + 1;
+  }
+
+  onSwitch() {
+    if (this.currentTabIndex !== 0) {
+      this.process.currentStepIndex = this.currentTabIndex - 1;
     }
   }
 

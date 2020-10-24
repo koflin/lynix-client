@@ -1,3 +1,5 @@
+import { ProcessTemplateNode } from './../../../../models/ui/processTemplateNode';
+import { ProcessTemplate } from './../../../../models/processTemplate';
 import { ProcessTemplatesService } from '../../../../core/processTemplates/process-templates.service';
 import { ProductTemplateNode } from '../../../../models/ui/productTemplateNode';
 import { ProductTemplatesService } from '../../../../core/productTemplates/product-templates.service';
@@ -17,10 +19,14 @@ export class ProductTemplateLibraryService {
       return {
         id: product.id,
         name: product.name,
-        processes: product.processTemplates.map((process) => {
+        processes: product.processes.map((process): ProcessTemplateNode => {
+          const processT = process.template;
+
           return {
-            id: process.id,
-            name: process.name
+            id: processT.id,
+            name: processT.name,
+            description: null,
+            selected: false,
           };
         }),
         selected: false

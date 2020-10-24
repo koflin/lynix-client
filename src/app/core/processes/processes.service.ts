@@ -148,8 +148,6 @@ export class ProcessesService {
       return process;
     });
 
-    console.log(processes);
-
     sessionStorage.setItem('processes', JSON.stringify(processes));
   }
 
@@ -208,8 +206,10 @@ export class ProcessesService {
 
   createForOrder(order: Order) {
     order.products.forEach((product) => {
-      product.template.processTemplates.forEach((processT) => {
-        const process: Process = {
+      product.template.processes.forEach((process) => {
+        const processT = process.template;
+
+        const processInstance: Process = {
           companyId: 'c0',
           id: null,
           orderId: order.id,
@@ -228,14 +228,16 @@ export class ProcessesService {
           }),
 
           timeTaken: 0,
-          currentStepIndex: 0,
+          currentStepIndex: null,
           assignedUserId: '5f4411a4e9dc5b57b4a9782b',
           isOccupied: false,
           isRunning: false,
         };
 
         for (let i = 0; i < product.quantity; i++) {
-          this.processes = [...this.processes, {...process, id: uuidv4() }];
+          for (let j = 0; j < process.quantity; j++) {
+            this.processes = [...this.processes, {...processInstance, id: uuidv4() }];
+          }
         }
       });
     });

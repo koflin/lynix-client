@@ -67,8 +67,8 @@ export class OrdersDraftComponent implements OnInit, DoCheck {
   saveDraft() {
     for (const product of this.orderDraft.products) {
       if (product.template) {
-        for (const process of product.template.processTemplates) {
-          this.processTemplatesService.save(process);
+        for (const process of product.template.processes) {
+          this.processTemplatesService.save(process.template);
         }
         this.productTemplatesService.save(product.template);
       }
@@ -95,7 +95,7 @@ export class OrdersDraftComponent implements OnInit, DoCheck {
     this.router.navigate(['orders/overview']);
   }
 
-  private insertDummyData() {
+  /*private insertDummyData() {
     this.orderDraft = {
       companyId: null,
       id: null,
@@ -134,5 +134,5 @@ export class OrdersDraftComponent implements OnInit, DoCheck {
       ],
       status: 'in_preparation'
     };
-  }
+  }*/
 }

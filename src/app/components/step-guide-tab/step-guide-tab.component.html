@@ -42,13 +42,13 @@
           <div fxLayout="row" fxLayoutGap="20px" style="margin-left: 15px;margin-right: 15px;">
             <div fxFlex="50">
               <h4>Materials: </h4>
-              <div *ngFor="let material of step.materials">
+              <div *ngFor="let material of step.materials" style="margin-bottom: 10px;">
                 <mat-card>{{ material }}</mat-card>
               </div>
             </div>
             <div fxFlex="50">
               <h4>Tools: </h4>
-              <div *ngFor="let tool of step.toolIds">
+              <div *ngFor="let tool of step.toolIds" style="margin-bottom: 10px;">
                 <mat-card>{{ tool }}</mat-card>
               </div>
             </div>

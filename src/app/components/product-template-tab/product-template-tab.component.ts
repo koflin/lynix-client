@@ -32,7 +32,7 @@ export class ProductTemplateTabComponent implements OnInit, DoCheck {
   addProcess() {
     // Filter non selected process templates
     const options = this.processTemplatesService.getAll().filter((process) => {
-      return this.productTemplate.processTemplates.findIndex(processUsed => processUsed.id === process.id) === -1;
+      return this.productTemplate.processes.findIndex(processUsed => processUsed.template.id === process.id) === -1;
     });
 
     const selectDialog = this.dialog.open(ProcessTemplateSelectionComponent, {
@@ -45,23 +45,32 @@ export class ProductTemplateTabComponent implements OnInit, DoCheck {
     selectDialog.afterClosed().subscribe(result => {
       // New process
       if (result === true) {
-        this.productTemplate.processTemplates.push(this.processTemplatesService.create({
-          companyId: null,
-          id: null,
-          name: 'Unnamed Process ' + (this.productTemplate.processTemplates.length + 1),
-          estimatedTime: null,
-          mainTasks: [],
-          stepTemplates: [],
-          previousComments: null,
-        }));
+        this.productTemplate.processes.push(
+          {
+            template: this.processTemplatesService.create({
+              companyId: null,
+              id: null,
+              name: 'Unnamed Process ' + (this.productTemplate.processes.length + 1),
+              estimatedTime: null,
+              mainTasks: [],
+              stepTemplates: [],
+              previousComments: null,
+            }),
+            quantity: 1,
+          }
+      );
       } else if (result) {
-        this.productTemplate.processTemplates.push(this.processTemplatesService.getById(result));
+        this.productTemplate.processes.push(
+        {
+          template: this.processTemplatesService.getById(result),
+          quantity: 1
+        });
       }
     });
   }
 
   removeProcess(index: number) {
-    this.productTemplate.processTemplates.splice(index, 1);
+    this.productTemplate.processes.splice(index, 1);
   }
 
   editProcess(index: number) {

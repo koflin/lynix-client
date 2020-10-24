@@ -11,12 +11,18 @@
         <div fxFlex="55">
           <h2>Processes</h2>
           <div fxLayout="column" fxLayoutGap="5px" style="margin-left: 16px;">
-            <div *ngFor="let process of productTemplate.processTemplates; let i = index">
+            <div *ngFor="let process of productTemplate.processes; let i = index">
               <div fxLayout="row">
                 <div fxFlex="30">
-                  <h3>{{ process.name }}</h3>
+                  <h3>{{ process.template.name }}</h3>
                 </div>
-                <div fxFlex="50">
+                <div fxFlex="15">
+                  <mat-form-field style="width: 50px;">
+                    <mat-label>Quantity</mat-label>
+                    <input matInput [(ngModel)]="process.quantity" type="number" min="1" name="quantity">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="35">
                 </div>
                 <div fxFlex="8">
                   <button mat-icon-button aria-label="Edit" (click)="editProcess(i)">
@@ -42,9 +48,9 @@
       </div>
     </div>
   </mat-tab>
-  <div *ngFor="let process of productTemplate.processTemplates; let i = index">
-    <mat-tab [label]="process.name">
-      <app-process-template-tab [(processTemplate)]="productTemplate.processTemplates[i]" [(selectedTab)]="subSelect"></app-process-template-tab>
+  <div *ngFor="let process of productTemplate.processes; let i = index">
+    <mat-tab [label]="process.template.name">
+      <app-process-template-tab [(processTemplate)]="productTemplate.processes[i]" [(selectedTab)]="subSelect"></app-process-template-tab>
       <span></span>
     </mat-tab>
   </div>

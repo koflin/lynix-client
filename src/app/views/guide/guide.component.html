@@ -116,17 +116,29 @@
         </button>
         <h5>Previous</h5>
       </div>
-      <div *ngIf="process.isRunning" style="text-align: center;" (click)="onStop()">
-        <button mat-icon-button style="height: 60px;width: 60px;">
+      <div *ngIf="process.isRunning " style="text-align: center;">
+        <button mat-icon-button style="height: 60px;width: 60px;" (click)="onStop()">
           <mat-icon style="transform: scale(2.5);">stop</mat-icon>
         </button>
         <h5>Pause</h5>
       </div>
-      <div *ngIf="!process.isRunning" style="text-align: center;">
+      <div *ngIf="!process.isRunning && process.currentStepIndex && currentTabIndex === process.currentStepIndex + 1" style="text-align: center;">
         <button mat-icon-button style="height: 60px;width: 60px;" (click)="onResume()">
           <mat-icon style="transform: scale(2.2);">play_arrow</mat-icon>
         </button>
         <h5>Resume</h5>
+      </div>
+      <div *ngIf="currentTabIndex !== 0 && (!process.currentStepIndex || currentTabIndex !== process.currentStepIndex + 1)" style="text-align: center;">
+        <button mat-icon-button style="height: 60px;width: 60px;" (click)="onSwitch()">
+          <mat-icon style="transform: scale(2.2);">input</mat-icon>
+        </button>
+        <h5>Switch step</h5>
+      </div>
+      <div *ngIf="currentTabIndex === 0" style="text-align: center;">
+        <button mat-icon-button style="height: 60px;width: 60px;" (click)="onJump()">
+          <mat-icon style="transform: scale(2.2);">fast_forward</mat-icon>
+        </button>
+        <h5>Jump</h5>
       </div>
       <div style="text-align: center;">
         <button mat-icon-button style="height: 60px;width: 60px;" [disabled]="currentTabIndex === process.steps.length" (click)="onNext()">

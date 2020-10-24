@@ -34,10 +34,11 @@ export class ProductTemplatesService {
     const products = JSON.parse(storage);
 
     return products.map((product) => {
-      product.processTemplates = [];
-
-      product.processTemplateIds.forEach((id) => {
-        product.processTemplates.push(this.processTemplatesService.getById(id));
+      product.processes.map((process) => {
+        if (process.templateId) {
+          process.template = this.processTemplatesService.getById(process.templateId)
+        }
+        return process;
       });
       return product;
     });
@@ -47,10 +48,11 @@ export class ProductTemplatesService {
     let productTemplates: any[] = productTemplatesOriginal;
 
     productTemplates = productTemplates.map((product) => {
-      product.processTemplateIds = [];
-
-      product.processTemplates.forEach((process) => {
-        product.processTemplateIds.push(process.id);
+      product.processes.map((process) => {
+        if (process.template) {
+          process.templateId = process.template.id;
+        }
+        return process;
       });
       return product;
     });
