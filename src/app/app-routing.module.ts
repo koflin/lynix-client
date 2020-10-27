@@ -39,7 +39,7 @@ const routes: Routes = [
   // Tools
   { path: 'tools', component: ToolLibraryComponent, canActivate: [AuthGuard] },
   // Testing
-  { path: 'test/storage', component: TestComponent, canActivate: [AuthGuard] },
+  { path: 'test/storage', component: TestComponent },
   { path: 'test/dialog', component: TestDialogComponent, canActivate: [AuthGuard] }
 ];
 

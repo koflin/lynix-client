@@ -28,8 +28,6 @@ export class OrdersDraftComponent implements OnInit, DoCheck {
     public dialog: MatDialog) { }
 
   ngDoCheck(): void {
-    console.log("CHANGED IN ORDER DRAFT");
-    console.log(this.orderDraft);
   }
 
   ngOnInit() {
@@ -38,8 +36,6 @@ export class OrdersDraftComponent implements OnInit, DoCheck {
 
       if (id) {
         this.orderDraft = this.ordersService.getById(id);
-        console.log('RETRIEVED FROM SESSION');
-        console.log(this.orderDraft);
       } else {
         this.orderDraft = {
           companyId: null,
@@ -52,11 +48,6 @@ export class OrdersDraftComponent implements OnInit, DoCheck {
         //this.insertDummyData();
       }
     });
-  }
-
-  orderDraftChange() {
-    console.log('Order draft change in order draft');
-    console.log(this.orderDraft);
   }
 
   discardDraft() {
@@ -94,45 +85,4 @@ export class OrdersDraftComponent implements OnInit, DoCheck {
     this.ordersService.publish(this.orderDraft.id);
     this.router.navigate(['orders/overview']);
   }
-
-  /*private insertDummyData() {
-    this.orderDraft = {
-      companyId: null,
-      id: null,
-      name: 'Order: Mr. Mueller',
-      description: '',
-      products: [
-        {
-          quantity: 1,
-          template: {
-            id: null,
-            companyId: null,
-            name: 'Boat 1000',
-            processTemplates: [
-              {
-                id: null,
-                companyId: null,
-                name: 'Sail',
-                estimatedTime: 3000,
-                mainTasks: ['Task 1', 'Task 2'],
-                previousComments: ['Test Comment'],
-                stepTemplates: [
-                  {
-                    title: 'Step 1',
-                    keyMessage: 'Key message 1',
-                    tasks: 'Task1\nTask2',
-                    materials: ['drill', 'saw'],
-                    toolIds: [],
-                    pictureUris: ['https://www.flightsails.com/assets/images/zorro_s.png'],
-                    videoUris: []
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ],
-      status: 'in_preparation'
-    };
-  }*/
 }
