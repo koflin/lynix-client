@@ -99,6 +99,86 @@
           <app-step-guide-tab [(step)]="process.steps[i]"></app-step-guide-tab>
         </mat-tab>
       </div>
+      <mat-tab label="Finish">
+        <div style="background-color:#f5f5f5;padding: 20px;">
+          <mat-grid-list cols="4" gutterSize="10px" rowHeight="120px">
+            <mat-grid-tile colspan="3" rowspan="1">
+              <mat-card class="menu-group">
+                <!--<mat-card-header>
+                  <mat-card-title>General</mat-card-title>
+                  <mat-card-subtitle>General process information</mat-card-subtitle>
+                </mat-card-header>-->
+                <mat-card-content>
+                  <div fxLayout="row" style="margin-left: 15px;margin-right: 15px;">
+                    <div>
+                      <h4>Order Id: </h4>
+                      <span>{{ process.orderId }}</span>
+                    </div>
+                    <div>
+                      <h4>Process Id: </h4>
+                      <span>{{ process.id }}</span>
+                    </div>
+                    <div>
+                      <h4>Assignee: </h4>
+                      <span>{{ process.assignedUserId }}</span>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+              <mat-card class="menu-group">
+                <!--<mat-card-header>
+                  <mat-card-title>General</mat-card-title>
+                  <mat-card-subtitle>General process information</mat-card-subtitle>
+                </mat-card-header>-->
+                <mat-card-content>
+                  <div fxLayout="column" style="margin-left: 15px;margin-right: 15px;">
+                    <div style="margin-bottom: 5px;">
+                      <h4>Estimated Time: </h4>
+                      <span>{{ getFullTime(process.estimatedTime) }}</span>
+                    </div>
+                    <div>
+                      <h4>Time Taken: </h4>
+                      <span>{{ getFullTime(process.timeTaken) }}</span>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="4" rowspan="4">
+              <mat-card class="menu-group">
+                <!--<mat-card-header>
+                  <mat-card-title>General</mat-card-title>
+                  <mat-card-subtitle>General process information</mat-card-subtitle>
+                </mat-card-header>-->
+                <mat-card-content>
+                  <table mat-table [dataSource]="dataSource" style="width: 100%; height: 100%;margin-top: 20px;">
+
+                    <ng-container matColumnDef="stepNo">
+                      <th mat-header-cell *matHeaderCellDef> Step Number </th>
+                      <td mat-cell *matCellDef="let element"> {{"1"}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="title">
+                      <th mat-header-cell *matHeaderCellDef> Title </th>
+                      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="timeTaken">
+                      <th mat-header-cell *matHeaderCellDef> Time Taken </th>
+                      <td mat-cell *matCellDef="let element"> {{ getFullTime(element.timeTaken) }} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+      </mat-tab>
     </mat-tab-group>
   </div>
   <div style="width: 100%;">
@@ -122,13 +202,13 @@
         </button>
         <h5>Pause</h5>
       </div>
-      <div *ngIf="!process.isRunning && process.currentStepIndex && currentTabIndex === process.currentStepIndex + 1" style="text-align: center;">
+      <div *ngIf="!process.isRunning && process.currentStepIndex !== undefined && currentTabIndex === process.currentStepIndex + 1" style="text-align: center;">
         <button mat-icon-button style="height: 60px;width: 60px;" (click)="onResume()">
           <mat-icon style="transform: scale(2.2);">play_arrow</mat-icon>
         </button>
         <h5>Resume</h5>
       </div>
-      <div *ngIf="currentTabIndex !== 0 && (!process.currentStepIndex || currentTabIndex !== process.currentStepIndex + 1)" style="text-align: center;">
+      <div *ngIf="currentTabIndex !== 0 && currentTabIndex !== process.steps.length + 1 && (process.currentStepIndex === undefined || currentTabIndex !== process.currentStepIndex + 1)" style="text-align: center;">
         <button mat-icon-button style="height: 60px;width: 60px;" (click)="onSwitch()">
           <mat-icon style="transform: scale(2.2);">input</mat-icon>
         </button>
@@ -140,8 +220,14 @@
         </button>
         <h5>Jump</h5>
       </div>
+      <div *ngIf="currentTabIndex === process.steps.length + 1" style="text-align: center;">
+        <button mat-icon-button style="height: 60px;width: 60px;" (click)="onFinish()">
+          <mat-icon style="transform: scale(2.2);">check_circle_outline</mat-icon>
+        </button>
+        <h5>Finish</h5>
+      </div>
       <div style="text-align: center;">
-        <button mat-icon-button style="height: 60px;width: 60px;" [disabled]="currentTabIndex === process.steps.length" (click)="onNext()">
+        <button mat-icon-button style="height: 60px;width: 60px;" [disabled]="currentTabIndex === process.steps.length + 1" (click)="onNext()">
           <mat-icon style="transform: scale(3);">skip_next</mat-icon>
         </button>
         <h5>Next</h5>

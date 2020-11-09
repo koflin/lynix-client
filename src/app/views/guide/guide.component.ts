@@ -1,3 +1,4 @@
+import { MatTableDataSource } from '@angular/material/table';
 import { TimeService } from './../../helpers/time/time.service';
 import { Process } from 'src/app/models/process';
 import { ProcessesService } from './../../core/processes/processes.service';
@@ -5,6 +6,7 @@ import { Route } from '@angular/compiler/src/core';
 import { Component, OnDestroy, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+import { Step } from 'src/app/models/step';
 
 @Component({
   selector: 'app-guide',
@@ -19,11 +21,15 @@ export class GuideComponent implements OnInit, OnDestroy, OnChanges {
 
   process: Process;
 
+  dataSource: MatTableDataSource<Step>;
+  displayedColumns = ['stepNo', 'title', 'timeTaken'];
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private processesService: ProcessesService
-    ) { }
+    ) {
+    }
 
   ngOnChanges(changes: SimpleChanges): void {
   }
@@ -37,6 +43,8 @@ export class GuideComponent implements OnInit, OnDestroy, OnChanges {
       const id = params.get('id');
 
       this.process = this.processesService.getById(id);
+
+      this.dataSource = new MatTableDataSource(this.process.steps);
 
       if (this.process.currentStepIndex) {
         this.currentTabIndex = this.process.currentStepIndex + 1;
@@ -81,7 +89,7 @@ export class GuideComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   onNext() {
-    if (this.currentTabIndex < this.process.steps.length) {
+    if (this.currentTabIndex < this.process.steps.length + 1) {
       this.currentTabIndex += 1;
     }
   }
@@ -94,6 +102,12 @@ export class GuideComponent implements OnInit, OnDestroy, OnChanges {
     if (this.currentTabIndex !== 0) {
       this.process.currentStepIndex = this.currentTabIndex - 1;
     }
+  }
+
+  onFinish() {
+    this.process.status = 'completed';
+    this.exit();
+    this.router.navigate(['processes/overview']);
   }
 
   exit() {

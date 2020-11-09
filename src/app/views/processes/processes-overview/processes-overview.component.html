@@ -22,7 +22,8 @@
   <mat-card-content>
     <div fxFill fxLayout="column" fxLayoutGap="10px">
       <div *ngFor="let node of group.nodes">
-        <app-process-node [processNode]="node" (selectChange)="onSelect(node.id)" (startWorking)="onStart(node.id)"></app-process-node>
+        <app-process-node [processNode]="node"
+        (selectChange)="onSelect(node.id)" (startWorking)="onStart(node.id)" (assignUser)="onAssign(node.id)"></app-process-node>
       </div>
     </div>
   </mat-card-content>

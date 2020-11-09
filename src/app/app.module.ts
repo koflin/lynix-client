@@ -19,8 +19,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { TestComponent } from './test/test.component';
 import { OrdersOverviewComponent } from './views/orders/orders-overview/orders-overview.component';
 import { ProcessesOverviewComponent } from './views/processes/processes-overview/processes-overview.component';
@@ -49,6 +47,9 @@ import { UsersOverviewComponent } from './views/users/users-overview/users-overv
 import { UsersDetailComponent } from './views/users/users-detail/users-detail.component';
 import { UserDraftComponent } from './components/user-draft/user-draft.component';
 import { TestDialogComponent } from './test/test-dialog/test-dialog.component';
+import { UserSelectionComponent } from './components/user-selection/user-selection.component';
+import { HomeComponent } from './views/home/home.component';
+import { LoginComponent } from './views/login/login.component';
 
 
 
@@ -81,6 +82,7 @@ import { TestDialogComponent } from './test/test-dialog/test-dialog.component';
     UsersDetailComponent,
     UserDraftComponent,
     TestDialogComponent,
+    UserSelectionComponent,
   ],
   imports: [
     BrowserModule,

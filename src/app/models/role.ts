@@ -1,5 +1,7 @@
 export interface Role {
   id: string;
   name: string;
-  premissions: ('view' | 'execute' | 'edit')[];
+  premissions: Permission[];
 }
+
+export type Permission = 'view' | 'execute' | 'edit' | 'assign';

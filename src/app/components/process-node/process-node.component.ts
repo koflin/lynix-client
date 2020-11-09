@@ -12,6 +12,7 @@ export class ProcessNodeComponent implements OnInit {
   @Input() processNode: ProcessNode;
   @Output() selectChange = new EventEmitter<boolean>();
   @Output() startWorking = new EventEmitter<void>();
+  @Output() assignUser = new EventEmitter<void>();
 
   constructor() { }
 
@@ -24,6 +25,10 @@ export class ProcessNodeComponent implements OnInit {
 
   start() {
     this.startWorking.emit();
+  }
+
+  assign() {
+    this.assignUser.emit();
   }
 
   getHours(seconds: number) {

@@ -1,3 +1,5 @@
+import { RolesService } from 'src/app/core/roles/roles.service';
+import { User } from 'src/app/models/user';
 import { OrdersService } from './../orders/orders.service';
 import { Step } from './../../models/step';
 import { Order } from 'src/app/models/order';
@@ -152,7 +154,8 @@ export class ProcessesService {
   }
 
   constructor(
-    private processTemplatesService: ProcessTemplatesService
+    private processTemplatesService: ProcessTemplatesService,
+    private rolesService: RolesService
     ) {
     if (!this.processes) {
       sessionStorage.setItem('processes', JSON.stringify([]));
@@ -163,12 +166,28 @@ export class ProcessesService {
     return this.processes;
   }
 
+  getAssigned(assigneId: string): Process[] {
+    return this.processes.filter(process => process.assignedUserId === assigneId);
+  }
+
   getById(id: string) {
     return this.processes.find(process => process.id === id);
   }
 
   getByOrderId(orderId: string) {
     return this.processes.filter((process) => process.orderId === orderId);
+  }
+
+  getForUser(user: User) {
+    let role = this.rolesService.getById(user.roleId);
+
+    if (role.premissions.includes('view')) {
+      return this.getAll();
+    } else if (role.premissions.includes('execute')) {
+      return this.getAssigned(user.id);
+    }
+
+    return [];
   }
 
   save(process: Process) {
@@ -204,6 +223,24 @@ export class ProcessesService {
     this.processes = updatedProcesses;
   }
 
+  assign(processId: string, assigneeId: string) {
+    const index = this.processes.findIndex(process => process.id === processId);
+
+    const updatedProcesses = this.processes;
+    updatedProcesses[index].assignedUserId = assigneeId;
+
+    this.processes = updatedProcesses;
+  }
+
+  finish(id: string) {
+    const index = this.processes.findIndex(process => process.id === id);
+
+    const updatedProcesses = this.processes;
+    updatedProcesses[index].status = 'completed';
+
+    this.processes = updatedProcesses;
+  }
+
   createForOrder(order: Order) {
     order.products.forEach((product) => {
       product.template.processes.forEach((process) => {
@@ -229,7 +266,7 @@ export class ProcessesService {
 
           timeTaken: 0,
           currentStepIndex: null,
-          assignedUserId: '5f4411a4e9dc5b57b4a9782b',
+          assignedUserId: null,
           isOccupied: false,
           isRunning: false,
         };

@@ -16,7 +16,7 @@
           Execution Time: {{ getFullTime(processNode.timeTaken) }}
         </div>
         <div fxFlex="20">
-          End Date: None
+          Assignee: {{ processNode.assignedUser ? processNode.assignedUser.username : " None" }}
         </div>
         <div fxFlex="15">
           <button mat-icon-button *ngIf="processNode.status === 'assistance_required'">
@@ -26,8 +26,12 @@
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button (click)="start()"
-            *ngIf="!processNode.isOccupied && (processNode.status === 'released' || processNode.status === 'in_progress')">
+            *ngIf="processNode.canExecute && !processNode.isOccupied && (processNode.status === 'released' || processNode.status === 'in_progress')">
             <mat-icon>play_arrow</mat-icon>
+          </button>
+          <button mat-icon-button (click)="assign()"
+            *ngIf="!processNode.assignedUser && processNode.status === 'released'">
+            <mat-icon>person_add</mat-icon>
           </button>
           <button mat-icon-button *ngIf="processNode.status === 'completed'">
             <mat-icon>archive</mat-icon>

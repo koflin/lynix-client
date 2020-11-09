@@ -1,3 +1,6 @@
+import { UsersOverviewService } from './../../users/users-overview/users-overview.service';
+import { UserSelectionComponent } from './../../../components/user-selection/user-selection.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ProcessesService } from './../../../core/processes/processes.service';
 import { ProcessesOverviewService } from './processes-overview.service';
@@ -43,7 +46,8 @@ export class ProcessesOverviewComponent implements OnInit {
   constructor(
     private router: Router,
     private processesOverviewService: ProcessesOverviewService,
-    private processesService: ProcessesService
+    private processesService: ProcessesService,
+    public dialog: MatDialog,
     ) {
   }
 
@@ -65,6 +69,22 @@ export class ProcessesOverviewComponent implements OnInit {
     this.processesService.start(id);
     this.update();
     this.router.navigate(['guide/' + id]);
+  }
+
+  onAssign(id: string) {
+    let dialogRef = this.dialog.open(UserSelectionComponent, {
+      width: '700px',
+      data: {
+        options: this.processesOverviewService.getPotentialAssignees()
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.processesService.assign(id, result);
+        this.update();
+      }
+    });
   }
 
   update() {

@@ -1,3 +1,4 @@
+import { UsersService } from 'src/app/core/users/users.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from '../models/user';
@@ -20,7 +21,10 @@ export class AuthService {
 
   private jwtHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private usersService: UsersService,
+    ) {
     this.refreshToken = localStorage.getItem('refresh_token');
 
     /*if (this.refreshToken && this.jwtHelper.isTokenExpired(this.refreshToken)) {
@@ -41,7 +45,7 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     //return this.accessToken !== null;
-    return sessionStorage.getItem('loggedIn') === '1';
+    return sessionStorage.getItem('currentUser') !== null;
   }
 
   login(username: string, password: string): Promise<boolean> {
@@ -61,11 +65,23 @@ export class AuthService {
         return of(false);
       })
     ).toPromise();*/
-    sessionStorage.setItem('loggedIn', '1');
+    let user = this.usersService.getByUserName(username);
+
+    console.log(user);
+
+    if (!user) {
+      return of(false).toPromise();
+    }
+
+    sessionStorage.setItem('currentUser', user.id);
     return of(true).toPromise();
   }
 
   logout() {
-    sessionStorage.setItem('loggedIn', '0');
+    sessionStorage.removeItem('currentUser');
+  }
+
+  getCurrentUserId() {
+    return sessionStorage.getItem('currentUser');
   }
 }

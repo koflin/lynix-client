@@ -16,7 +16,7 @@ export class RolesService {
 
   constructor() {
     if (!this.roles) {
-      sessionStorage.setItem('roles', '[{"id":"r0","name":"Developer","premissions":["view","execute","edit"]},{"id":"r1","name":"Operator","premissions":["view","execute"]},{"id":"r2","name":"Process Admin","premissions":["view","edit"]},{"id":"r3","name":"Manager","premissions":["view"]}]');
+      sessionStorage.setItem('roles', '[{"id":"r0","name":"Developer","premissions":["view","execute","edit", "assign"]},{"id":"r1","name":"Operator","premissions":["view","execute"]},{"id":"r2","name":"Process Admin","premissions":["view","edit", "assign"]},{"id":"r3","name":"Manager","premissions":["view"]}]');
     }
   }
 
