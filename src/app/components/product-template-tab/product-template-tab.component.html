@@ -1,5 +1,5 @@
 <mat-tab-group mat-align-tabs="start" [selectedIndex]="selectedTab" (selectedIndexChange)="selectTab($event)">
-  <mat-tab label="Overview">
+  <mat-tab label="Product: {{ productTemplate.name }}">
     <div style="margin-top: 30px;padding-bottom: 10px;">
       <div fxLayout="row">
         <div fxFlex="40">
@@ -10,6 +10,7 @@
         </div>
         <div fxFlex="55">
           <h2>Processes</h2>
+          <h4>Add processes to Product</h4>
           <div fxLayout="column" fxLayoutGap="5px" style="margin-left: 16px;">
             <div *ngFor="let process of productTemplate.processes; let i = index">
               <div fxLayout="row">
@@ -50,7 +51,7 @@
   </mat-tab>
   <div *ngFor="let process of productTemplate.processes; let i = index">
     <mat-tab [label]="process.template.name">
-      <app-process-template-tab [(processTemplate)]="productTemplate.processes[i]" [(selectedTab)]="subSelect"></app-process-template-tab>
+      <app-process-template-tab [(processTemplate)]="productTemplate.processes[i].template" [(selectedTab)]="subSelect"></app-process-template-tab>
       <span></span>
     </mat-tab>
   </div>

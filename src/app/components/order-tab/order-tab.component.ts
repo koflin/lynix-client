@@ -72,6 +72,7 @@ export class OrderTabComponent implements OnInit, DoCheck {
             processes: [],
           }
         );
+        this.selectTab(this.orderDraft.products.length);
 
       } else if (result) {
         this.orderDraft.products[index].template = this.productTemplatesService.getById(result);

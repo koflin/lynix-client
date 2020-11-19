@@ -8,35 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class ProcessTemplatesService {
 
-  private _processTemplates: ProcessTemplate[] = [
-    {
-      companyId: 'c0',
-      id: 'pt0',
-
-      name: 'Hull',
-      mainTasks: ['Task1', 'Task2'],
-      previousComments: ['Test Comment'],
-      estimatedTime: 3600,
-
-      stepTemplates: [
-        {
-          title: 'Inner Hull',
-          materials: ['Wood'],
-          toolIds: ['t0'],
-          keyMessage: 'KeyMessage1\n KeyMessage2\n',
-          tasks: 'Task1\nTask2\n',
-        },
-        {
-          title: 'Outer Hull',
-          materials: ['Metal'],
-          toolIds: ['t1'],
-          keyMessage: 'KeyMessage1\n KeyMessage2\n',
-          tasks: 'Task1\nTask2\n',
-        }
-      ]
-    }
-  ];
-
   constructor() {
     if (!this.processTemplates) {
       sessionStorage.setItem('processTemplates', JSON.stringify([]));

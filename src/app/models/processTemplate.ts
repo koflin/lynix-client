@@ -7,7 +7,6 @@ export interface ProcessTemplate extends CompanyBase {
   name: string;
   mainTasks: string[];
   previousComments?: string[];
-  estimatedTime: number | undefined;
 
   stepTemplates: StepTemplate[];
 }

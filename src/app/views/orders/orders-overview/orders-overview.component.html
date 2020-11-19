@@ -3,7 +3,7 @@
   <mat-accordion>
     <mat-expansion-panel *ngFor="let orderNode of orderNodes" style="margin-bottom: 10px;background-color: #F1F1F1">
       <mat-expansion-panel-header>
-        <mat-panel-title>Work Order No: {{ orderNode.workOderId }}</mat-panel-title>
+        <mat-panel-title>{{ orderNode.name }}</mat-panel-title>
         <mat-panel-description>
           <div fxLayout="row" style="width: 100%">
             <div fxFlex="50">Products:

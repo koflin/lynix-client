@@ -253,17 +253,17 @@ export class ProcessesService {
           status: 'released',
 
           template: processT,
-          estimatedTime: processT.estimatedTime,
+          estimatedTime: processT.stepTemplates.reduce((total, step) => total + step.estimatedTime, 0),
           mainTasks: processT.mainTasks,
           name: processT.name,
           previousComments: processT.previousComments,
           steps: processT.stepTemplates.map((stepT): Step => {
             return {
               ...stepT,
-              timeTaken: 0
+              timeTaken: 0,
+              estimatedTime: 0
             };
           }),
-
           timeTaken: 0,
           currentStepIndex: null,
           assignedUserId: null,

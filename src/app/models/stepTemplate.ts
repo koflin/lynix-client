@@ -8,4 +8,5 @@ export interface StepTemplate {
   tasks: string;
   pictureUris?: string[];
   videoUris?: string[];
+  estimatedTime: number;
 }

@@ -5,10 +5,27 @@
         <mat-panel-title>General</mat-panel-title>
         <mat-panel-description>Add general process information</mat-panel-description>
       </mat-expansion-panel-header>
-      <mat-form-field>
-        <mat-label>Title</mat-label>
-        <input matInput [(ngModel)]="stepTemplate.title" name="title">
-      </mat-form-field>
+      <div fxLayout="column" fxLayoutGap="10px">
+        <div>
+          <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput [(ngModel)]="stepTemplate.title" name="title">
+          </mat-form-field>
+        </div>
+        <div>
+          <div fxLayout="row" fxLayoutGap="5px">
+            <mat-form-field style="width: 90px;">
+              <mat-label>Estimated Time</mat-label>
+              <input matInput [ngModel]="getHours(stepTemplate.estimatedTime)" (ngModelChange)="changeEstimatedHours($event)" name="estimated-time-h">
+              <span matSuffix>h</span>
+            </mat-form-field>
+            <mat-form-field style="width: 90px;">
+              <input matInput [ngModel]="getMinutes(stepTemplate.estimatedTime)"  (ngModelChange)="changeEstimatedMinutes($event)" name="estimated-time-m">
+              <span matSuffix>m</span>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 

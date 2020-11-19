@@ -8,6 +8,7 @@ export interface Step {
   tasks: string;
   pictureUris?: string[];
   videoUris?: string[];
+  estimatedTime: number;
 
   timeTaken?: number;
 }

@@ -51,14 +51,15 @@ export class ProductTemplateTabComponent implements OnInit, DoCheck {
               companyId: null,
               id: null,
               name: 'Unnamed Process ' + (this.productTemplate.processes.length + 1),
-              estimatedTime: null,
               mainTasks: [],
               stepTemplates: [],
               previousComments: null,
             }),
             quantity: 1,
           }
-      );
+        );
+
+        this.selectTab(this.productTemplate.processes.length);
       } else if (result) {
         this.productTemplate.processes.push(
         {

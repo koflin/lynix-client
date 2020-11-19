@@ -1,3 +1,4 @@
+import { TimeService } from './../../helpers/time/time.service';
 import { ProcessTemplate } from './../../models/processTemplate';
 import { Component, Input, OnInit, Output, EventEmitter, DoCheck } from '@angular/core';
 import { min } from 'rxjs/operators';
@@ -13,21 +14,23 @@ export class ProcessTemplateTabComponent implements OnInit, DoCheck {
   @Input() processTemplate: ProcessTemplate;
   @Output() processTemplateChange = new EventEmitter<ProcessTemplate>();
 
-  estimatedTime: { hours: number, minutes: number };
+  //estimatedTime: { hours: number, minutes: number };
+  estimatedTime;
 
   taskToAdd: string;
 
-  constructor() { }
+  constructor(private timeService: TimeService) { }
 
   ngDoCheck(): void {
     //this.processTemplateChange.emit(this.processTemplate);
   }
 
   ngOnInit(): void {
-    this.estimatedTime = {
+    /*this.estimatedTime = {
       hours: this.getEstimatedHours(this.processTemplate.estimatedTime),
       minutes: this.getEstimatedMinutes(this.processTemplate.estimatedTime)
-    };
+    };*/
+    this.updateEstimatedTime();
   }
 
   stepTemplateChange() {
@@ -46,8 +49,11 @@ export class ProcessTemplateTabComponent implements OnInit, DoCheck {
       materials: [],
       toolIds: [],
       pictureUris: [],
-      videoUris: []
+      videoUris: [],
+      estimatedTime: 0,
     });
+
+    this.selectTab(this.processTemplate.stepTemplates.length);
 
     this.editStep(size - 1);
   }
@@ -69,7 +75,7 @@ export class ProcessTemplateTabComponent implements OnInit, DoCheck {
     this.processTemplate.mainTasks.splice(index, 1);
   }
 
-  changeEstimatedHours(hours: number) {
+  /*changeEstimatedHours(hours: number) {
     hours = hours ? hours : 0;
 
     this.estimatedTime.hours = hours;
@@ -81,17 +87,25 @@ export class ProcessTemplateTabComponent implements OnInit, DoCheck {
 
     this.estimatedTime.minutes = minutes;
     this.changeEstimatedTime();
+  }*/
+
+  calcEstimatedTime() {
+    return this.processTemplate.stepTemplates.reduce((total, step) => total + step.estimatedTime, 0);
   }
 
-  getEstimatedHours(seconds: number) {
+  updateEstimatedTime() {
+    this.estimatedTime = this.timeService.getDurationHmString(this.calcEstimatedTime());
+  }
+
+  /*getHours(seconds: number) {
     return Math.floor(seconds / 3600);
   }
 
-  getEstimatedMinutes(seconds: number) {
-    return Math.ceil((seconds - this.getEstimatedHours(seconds) * 3600) / 60);
-  }
+  getMinutes(seconds: number) {
+    return Math.ceil((seconds - this.getHours(seconds) * 3600) / 60);
+  }*/
 
-  private changeEstimatedTime() {
+  /*private changeEstimatedTime() {
     this.processTemplate.estimatedTime = this.estimatedTime.hours * 3600 + this.estimatedTime.minutes * 60;
-  }
+  }*/
 }

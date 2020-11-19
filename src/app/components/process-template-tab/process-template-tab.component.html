@@ -1,5 +1,5 @@
 <mat-tab-group mat-align-tabs="start" [selectedIndex]="selectedTab" (selectedIndexChange)="selectTab($event)">
-  <mat-tab label="Overview">
+  <mat-tab label="Process: {{ processTemplate.name }}">
     <div style="margin-top: 30px;padding-bottom: 10px;">
       <div fxLayout="row" fxLayoutGap="20px">
         <div fxFlex="55">
@@ -24,15 +24,18 @@
                     </div>
                     <div>
                       <div fxLayout="row" fxLayoutGap="5px">
-                        <mat-form-field style="width: 90px;">
+                        <!--<mat-form-field style="width: 90px;">
                           <mat-label>Estimated Time</mat-label>
+                          <span>{{ estimatedTime }}</span>
                           <input matInput [ngModel]="getEstimatedHours(processTemplate.estimatedTime)" (ngModelChange)="changeEstimatedHours($event)" name="estimated-time-h">
                           <span matSuffix>h</span>
                         </mat-form-field>
                         <mat-form-field style="width: 90px;">
                           <input matInput [ngModel]="getEstimatedMinutes(processTemplate.estimatedTime)"  (ngModelChange)="changeEstimatedMinutes($event)" name="estimated-time-m">
                           <span matSuffix>m</span>
-                        </mat-form-field>
+                        </mat-form-field>-->
+                        <span>Estimated Time Total: </span><br>
+                        <span>{{ estimatedTime }}</span>
                       </div>
                     </div>
                   </div>
@@ -102,6 +105,7 @@
         </div>
         <div fxFlex="40">
           <h2>Steps</h2>
+          <h4>Add steps to process</h4>
           <div fxLayout="column" fxLayoutGap="5px" style="margin-left: 16px;">
             <div *ngFor="let step of processTemplate.stepTemplates; let i = index">
               <div fxLayout="row">
@@ -136,7 +140,7 @@
   </mat-tab>
   <div *ngFor="let step of processTemplate.stepTemplates; let i = index">
     <mat-tab [label]="step.title">
-      <app-step-template-tab [(stepTemplate)]="processTemplate.stepTemplates[i]"></app-step-template-tab>
+      <app-step-template-tab [(stepTemplate)]="processTemplate.stepTemplates[i]" (estimatedTimeChange)="updateEstimatedTime()"></app-step-template-tab>
     </mat-tab>
   </div>
 </mat-tab-group>

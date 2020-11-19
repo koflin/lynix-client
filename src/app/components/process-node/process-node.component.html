@@ -7,10 +7,10 @@
     <mat-card-content>
       <div fxLayout="row">
         <div fxFlex="30">
-          <span>Process: {{ processNode.id }} {{ processNode.name }}</span>
+          <span>Process: {{ processNode.name}}</span><br>
         </div>
         <div fxFlex="10">
-          <img src="https://image.flaticon.com/icons/png/512/37/37232.png" height="40px">
+          <img *ngIf="processNode.assignedUser" [src]="processNode.assignedUser.avatar" height="30px">
         </div>
         <div fxFlex="20">
           Execution Time: {{ getFullTime(processNode.timeTaken) }}

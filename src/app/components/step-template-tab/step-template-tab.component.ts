@@ -10,6 +10,7 @@ export class StepTemplateTabComponent implements OnInit {
 
   @Input() stepTemplate: StepTemplate;
   @Output() stepTemplateChange = new EventEmitter<StepTemplate>();
+  @Output() estimatedTimeChange = new EventEmitter<number>();
 
   materialToAdd: string;
   toolToAdd: string;
@@ -20,12 +21,18 @@ export class StepTemplateTabComponent implements OnInit {
   imageFile: File;
   videoFile: File;
 
+  estimatedTime: { hours: number, minutes: number };
+
   constructor() {
     this.currentImageIndex = 0;
     this.currentVideoIndex = 0;
   }
 
   ngOnInit(): void {
+    this.estimatedTime = {
+      hours: this.getHours(this.stepTemplate.estimatedTime),
+      minutes: this.getMinutes(this.stepTemplate.estimatedTime)
+    };
   }
 
   addMaterial() {
@@ -72,5 +79,32 @@ export class StepTemplateTabComponent implements OnInit {
 
   changeVideoIndex(index: number) {
     this.currentVideoIndex = index;
+  }
+
+  changeEstimatedHours(hours: number) {
+    hours = hours ? hours : 0;
+
+    this.estimatedTime.hours = hours;
+    this.changeEstimatedTime();
+  }
+
+  changeEstimatedMinutes(minutes: number) {
+    minutes = minutes ? minutes : 0;
+
+    this.estimatedTime.minutes = minutes;
+    this.changeEstimatedTime();
+  }
+
+  getHours(seconds: number) {
+    return Math.floor(seconds / 3600);
+  }
+
+  getMinutes(seconds: number) {
+    return Math.ceil((seconds - this.getHours(seconds) * 3600) / 60);
+  }
+
+  private changeEstimatedTime() {
+    this.stepTemplate.estimatedTime = this.estimatedTime.hours * 3600 + this.estimatedTime.minutes * 60;
+    this.estimatedTimeChange.emit(this.stepTemplate.estimatedTime);
   }
 }

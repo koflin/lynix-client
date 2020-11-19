@@ -107,7 +107,7 @@ import { LoginComponent } from './views/login/login.component';
     MatSelectModule,
     MatDialogModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

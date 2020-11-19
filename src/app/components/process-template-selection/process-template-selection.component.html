@@ -18,7 +18,7 @@
 
       <ng-container matColumnDef="expandedDetail">
         <td mat-cell *matCellDef="let process" [attr.colspan]="displayedColumns.length">
-          <div [@detailExpand]="process.id == selectedProcessId ? 'expanded' : 'collapsed'">
+          <div [@detailExpand]="process.id == selectedProcessId ? 'expanded' : 'collapsed'" style="overflow: hidden;display: flex;">
             <div>
               <span style="font-size: 1em;">Steps:</span><br>
               <span *ngIf="!process.stepTemplates|| process.stepTemplates.length === 0">No steps added yet</span>
@@ -36,7 +36,7 @@
       <tr mat-row *matRowDef="let process; columns: displayedColumns;"
         (click)="selectProcess(process.id)" class="process-row" [class.selected-process-row]="process.id === selectedProcessId">
       </tr>
-      <tr mat-row *matRowDef="let expandedDetail; columns: ['expandedDetail']"></tr>
+      <tr mat-row *matRowDef="let expandedDetail; columns: ['expandedDetail']" style="height: 0;background: #efefef"></tr>
 
       <!-- Row shown when there is no matching data. -->
       <tr *matNoDataRow>

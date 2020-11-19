@@ -1,5 +1,5 @@
 <mat-tab-group mat-align-tabs="start" [selectedIndex]="selectedTab" (selectedIndexChange)="selectTab($event)" style="margin-top: 10px;">
-  <mat-tab [label]="orderDraft.name">
+  <mat-tab label="Order: {{ orderDraft.name }}">
     <div style="margin-top: 30px;padding-bottom: 10px;">
       <form>
         <div fxLayout="row" fxLayout="">
@@ -7,7 +7,7 @@
             <div fxLayout="column">
               <div>
                 <mat-form-field>
-                  <mat-label>Name</mat-label>
+                  <mat-label>Name / Number</mat-label>
                   <input matInput placeholder="Some name" [(ngModel)]="orderDraft.name" name="name">
                 </mat-form-field>
               </div>
