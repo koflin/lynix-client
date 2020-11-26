@@ -21,7 +21,10 @@ export class GuideComponent implements OnInit, OnDestroy, OnChanges {
 
   process: Process;
 
-  dataSource: MatTableDataSource<Step>;
+  dataSource: MatTableDataSource<{
+    index: number,
+    step: Step,
+  }>;
   displayedColumns = ['stepNo', 'title', 'timeTaken'];
 
   constructor(
@@ -44,7 +47,12 @@ export class GuideComponent implements OnInit, OnDestroy, OnChanges {
 
       this.process = this.processesService.getById(id);
 
-      this.dataSource = new MatTableDataSource(this.process.steps);
+      this.dataSource = new MatTableDataSource(this.process.steps.map((step, index) => {
+        return {
+          step,
+          index: index + 1
+        };
+      }));
 
       if (this.process.currentStepIndex) {
         this.currentTabIndex = this.process.currentStepIndex + 1;

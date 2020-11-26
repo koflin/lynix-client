@@ -79,4 +79,8 @@ export class OrderTabComponent implements OnInit, DoCheck {
       }
     });
   }
+
+  test(test: any) {
+    console.log(test);
+  }
 }

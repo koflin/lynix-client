@@ -1,3 +1,5 @@
+import { ToolDraftComponent } from './../../../components/tool-draft/tool-draft.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Tool } from './../../../models/tool';
 import { ToolsService } from './../../../core/tools/tools.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,9 +13,31 @@ export class ToolLibraryComponent implements OnInit {
 
   tools: Tool[];
 
-  constructor(private toolsService: ToolsService) { }
+  constructor(
+    private toolsService: ToolsService,
+    public dialog: MatDialog,
+    ) { }
 
   ngOnInit(): void {
-    this.tools = this.toolsService.getAll();
+    this.toolsService.getAll().subscribe(tools => {
+      this.tools = tools;
+    });
+  }
+
+  addTool() {
+    const draftDialog = this.dialog.open(ToolDraftComponent, {
+      width: '700px',
+    });
+
+    draftDialog.afterClosed().subscribe(result => {
+      // New process
+      if (result) {
+        this.toolsService.create(result);
+      }
+    });
+  }
+
+  removeTool(id: string) {
+    this.toolsService.delete(id);
   }
 }

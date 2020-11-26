@@ -16,6 +16,7 @@ import { ProcessesOverviewComponent } from './views/processes/processes-overview
 import { GuideComponent } from './views/guide/guide.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
+import { TestServiceComponent } from './test/test-service/test-service.component';
 
 
 const routes: Routes = [
@@ -40,7 +41,8 @@ const routes: Routes = [
   { path: 'tools', component: ToolLibraryComponent, canActivate: [AuthGuard] },
   // Testing
   { path: 'test/storage', component: TestComponent },
-  { path: 'test/dialog', component: TestDialogComponent, canActivate: [AuthGuard] }
+  { path: 'test/dialog', component: TestDialogComponent, canActivate: [AuthGuard] },
+  { path: 'test/test-service', component: TestServiceComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

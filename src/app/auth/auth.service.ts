@@ -67,8 +67,6 @@ export class AuthService {
     ).toPromise();*/
     let user = this.usersService.getByUserName(username);
 
-    console.log(user);
-
     if (!user) {
       return of(false).toPromise();
     }

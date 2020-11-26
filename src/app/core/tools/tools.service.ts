@@ -1,29 +1,43 @@
-import { Injectable } from '@angular/core';
+import { ApiService } from './../api/api.service';
+import { Injectable, OnInit } from '@angular/core';
 import { Tool } from 'src/app/models/tool';
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToolsService {
 
-  private tools: Tool[] = [
-    {
-      id: 't0',
-      name: 'Saw'
-    },
-    {
-      id: 't1',
-      name: 'Welding machine'
-    }
-  ];
+  private tools: BehaviorSubject<Tool[]>;
 
-  constructor() { }
+  constructor(private api: ApiService) {
+    this.tools = new BehaviorSubject(null);
+
+    this.update();
+  }
 
   getAll() {
-    return this.tools;
+    return this.tools.asObservable();
+  }
+
+  create(tool: Tool) {
+    this.api.post<Tool[]>('tools', tool).subscribe(() => this.update());
+  }
+
+  delete(id: string) {
+    this.api.delte('tools/' + id).subscribe(() => this.update());
   }
 
   getById(id: string) {
-    return this.tools.find(tool => tool.id === id);
+    return this.tools.asObservable().pipe(
+      map(tools => tools.find(tool => tool.id === id))
+    );
+  }
+
+  update() {
+    this.api.get<Tool[]>('tools').subscribe(tools => {
+      this.tools.next(tools);
+    });
   }
 }

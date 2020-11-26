@@ -35,7 +35,7 @@ export class UsersService {
   }
 
   getByUserName(username: string) {
-    return this.users.find(user => user.username = username);
+    return this.users.find(user => user.username === username);
   }
 
   getWithPermissions(...permissions: Permission[]): User[] {

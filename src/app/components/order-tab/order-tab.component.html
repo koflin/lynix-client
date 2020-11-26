@@ -44,7 +44,7 @@
                       <div fxFlex="15">
                         <mat-form-field style="width: 50px;">
                           <mat-label>Quantity</mat-label>
-                          <input matInput [(ngModel)]="product.quantity" type="number" min="1" name="quantity">
+                          <input matInput [ngModel]="product.quantity" (ngModelChange)="product.quantity = $event ? $event : 1" type="tel" name="quantity">
                         </mat-form-field>
                       </div>
                       <div fxFlex="8">

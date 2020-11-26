@@ -50,6 +50,8 @@ import { TestDialogComponent } from './test/test-dialog/test-dialog.component';
 import { UserSelectionComponent } from './components/user-selection/user-selection.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
+import { TestServiceComponent } from './test/test-service/test-service.component';
+import { ToolDraftComponent } from './components/tool-draft/tool-draft.component';
 
 
 
@@ -83,6 +85,8 @@ import { LoginComponent } from './views/login/login.component';
     UserDraftComponent,
     TestDialogComponent,
     UserSelectionComponent,
+    TestServiceComponent,
+    ToolDraftComponent,
   ],
   imports: [
     BrowserModule,

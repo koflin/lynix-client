@@ -265,7 +265,7 @@ export class ProcessesService {
             };
           }),
           timeTaken: 0,
-          currentStepIndex: null,
+          currentStepIndex: 0,
           assignedUserId: null,
           isOccupied: false,
           isRunning: false,
