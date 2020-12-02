@@ -1,3 +1,4 @@
+import { ApiService } from './../api/api.service';
 import { ProcessTemplateDraft } from './../../models/ui/orderDraft';
 import { ProcessTemplatesService } from './../processTemplates/process-templates.service';
 import { map } from 'rxjs/operators';
@@ -19,7 +20,10 @@ export class ProductTemplatesService {
     }
   ];
 
-  constructor(private processTemplatesService: ProcessTemplatesService) {
+  constructor(
+    private api: ApiService,
+    private processTemplatesService: ProcessTemplatesService
+    ) {
     if (!this.productTemplates) {
       sessionStorage.setItem('productTemplates', JSON.stringify([]));
     }
@@ -89,6 +93,6 @@ export class ProductTemplatesService {
   }
 
   getById(id: string) {
-    return this.productTemplates.find((template) => template.id === id);
+    return this.
   }
 }

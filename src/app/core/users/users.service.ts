@@ -1,3 +1,5 @@
+import { BehaviorSubject } from 'rxjs';
+import { ApiService } from './../api/api.service';
 import { AuthService } from './../../auth/auth.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { Injectable } from '@angular/core';
@@ -11,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class UsersService {
 
   constructor(
+    private api: ApiService,
     private rolesService: RolesService
   ) {
     if (!this.users) {

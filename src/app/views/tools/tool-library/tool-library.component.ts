@@ -19,8 +19,8 @@ export class ToolLibraryComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.toolsService.getAll().subscribe(tools => {
-      this.tools = tools;
+    this.toolsService.onToolsChange.subscribe(() => {
+      this.toolsService.getAll().subscribe(tools => this.tools = tools);
     });
   }
 

@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/auth/auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -8,7 +9,12 @@ export class ApiService {
 
   private apiRoot = 'http://localhost:3000/';
 
-  constructor(private http: HttpClient) { }
+  private headers = new HttpHeaders({
+    Authorization: 'Bearer ' + localStorage.getItem('access_token')
+  });
+
+  constructor(private http: HttpClient) {
+  }
 
   get<T>(route: string, params?: { [param: string]: string }) {
     return this.http.get<T>(this.apiRoot + route, { params });
