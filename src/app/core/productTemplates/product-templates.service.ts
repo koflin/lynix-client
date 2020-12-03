@@ -71,7 +71,8 @@ export class ProductTemplatesService {
     updatedProducts[index] = productTemplateDraft;
     this.productTemplates = updatedProducts;
 
-    return this.getById(productTemplateDraft.id);
+    //return this.getById(productTemplateDraft.id);
+    return null;
   }
 
   create(productTemplateDraft: ProductTemplate): ProductTemplate {
@@ -80,7 +81,8 @@ export class ProductTemplatesService {
 
     this.productTemplates = [ ...this.productTemplates, { ...productTemplateDraft } ];
 
-    return this.getById(productTemplateDraft.id);
+    //return this.getById(productTemplateDraft.id);
+    return null;
   }
 
   delete(id: string) {
@@ -93,6 +95,7 @@ export class ProductTemplatesService {
   }
 
   getById(id: string) {
-    return this.
+    //return this.api.get('templates/products')
+    return null;
   }
 }

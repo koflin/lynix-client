@@ -3,6 +3,7 @@ import { UserDraftComponent } from './../../components/user-draft/user-draft.com
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-test-dialog',
@@ -13,7 +14,8 @@ export class TestDialogComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private usersService: UsersService) {
+    private usersService: UsersService,
+    private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -23,7 +25,7 @@ export class TestDialogComponent implements OnInit {
         width: '600px',
         data: {
           userDraft: {
-            companyId: this.usersService.getCurrentUser().companyId
+            companyId: this.authService.getCurrentUser().companyId
           } as User
         }
       });

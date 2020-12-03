@@ -86,32 +86,39 @@ export class OrdersService {
   }
 
   save(orderEdited: Order) {
-    this.api.put('orders/' + orderEdited.id, orderEdited).subscribe(() => this.ordersChange.next());
+    //this.api.put('orders/' + orderEdited.id, orderEdited).subscribe(() => this.ordersChange.next());
+    return null;
   }
 
   create(orderDraft: Order) {
     orderDraft.companyId = 'c0';
 
     this.api.post('orders', orderDraft).subscribe(() => this.ordersChange.next());
+    return null;
   }
 
   delete(id: string) {
     this.api.delte('orders/' + id).subscribe(() => this.ordersChange.next());
+    return null;
   }
 
   getAll() {
-    return this.api.get<Order[]>('orders').pipe(map((orders) => {
-
-    }));
+    //return this.api.get('orders?_expand=');
+    return null;
   }
 
   getById(id: string) {
-    return this.api.get<Order>('orders/' + id);
+    //return this.api.get<Order>('orders/' + id);
+    return null;
   }
 
-  publish(order: Order) {
+  /*publish(order: Order) {
     order.status = 'released';
 
     this.api.put('orders/' + order.id, order);
+    return null;
+  }*/
+  publish(id: string) {
+    return null;
   }
 }

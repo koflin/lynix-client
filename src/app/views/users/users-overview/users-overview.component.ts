@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { User } from './../../../models/user';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-users-overview',
@@ -28,6 +29,7 @@ export class UsersOverviewComponent implements OnInit {
     private router: Router,
     private usersService: UsersService,
     private usersOverviewService: UsersOverviewService,
+    private authService: AuthService,
     public dialog: MatDialog
     ) {
   }
@@ -46,7 +48,7 @@ export class UsersOverviewComponent implements OnInit {
       width: '600px',
       data: {
         userDraft: {
-          companyId: this.usersService.getCurrentUser().companyId,
+          companyId: this.authService.getCurrentUser().companyId,
         } as User
       }
     });

@@ -16,70 +16,74 @@ export class AuthService {
     'Content-Type': 'application/json'
   });
 
-  private accessToken: string;
-  private refreshToken: string;
-
   private jwtHelper = new JwtHelperService();
+
+  private loggedInUserChange: BehaviorSubject<User>;
+  public onLoggedInUserChange: Observable<User>;
 
   constructor(
     private http: HttpClient,
-    private usersService: UsersService,
     ) {
-    this.refreshToken = localStorage.getItem('refresh_token');
 
-    /*if (this.refreshToken && this.jwtHelper.isTokenExpired(this.refreshToken)) {
-      this.http.post(this.endpoint + '/token', {
-        refresh_token: this.refreshToken
-      }, {
-        headers: this.headers
-      }).subscribe((result) => {
-        this.accessToken = result['access_token'];
-      });
-    }*/
+      if (this.isLoggedIn()) {
+        const user = this.jwtHelper.decodeToken(this.accessToken).user;
+
+        this.loggedInUserChange = new BehaviorSubject(user);
+      } else {
+        this.loggedInUserChange = new BehaviorSubject(null);
+      }
+
+      this.onLoggedInUserChange = this.loggedInUserChange.asObservable();
   }
 
-  getToken() {
-    //return this.accessToken;
-    return null;
+  private get accessToken() {
+    return localStorage.getItem('access_token');
   }
 
   isLoggedIn(): boolean {
-    //return this.accessToken !== null;
-    return sessionStorage.getItem('currentUser') !== null;
+    const accessToken = this.accessToken;
+
+    if (accessToken) {
+      return !this.jwtHelper.isTokenExpired(this.accessToken);
+    }
+    return false;
   }
 
   login(username: string, password: string): Promise<boolean> {
-    /*return this.http.post<{ access_token: string, refresh_token: string, user: User }>(this.endpoint + '/login', {
+    return this.http.post<{ access_token: string, refresh_token: string, user: User }>(this.endpoint + '/login', {
       username,
       password
     }, {
       headers: this.headers
     }).pipe(
       map((result) => {
-        this.accessToken = result.access_token;
-        localStorage.setItem('refresh_token', result.refresh_token);
+
+        localStorage.setItem('access_token', result.access_token);
+        const user = this.jwtHelper.decodeToken(result.access_token).user;
+
+        this.loggedInUserChange.next(user);
 
         return true;
       }),
       catchError((error, caught) => {
         return of(false);
       })
-    ).toPromise();*/
-    let user = this.usersService.getByUserName(username);
-
-    if (!user) {
-      return of(false).toPromise();
-    }
-
-    sessionStorage.setItem('currentUser', user.id);
-    return of(true).toPromise();
+    ).toPromise();
   }
 
   logout() {
-    sessionStorage.removeItem('currentUser');
+    localStorage.removeItem('access_token');
+    this.loggedInUserChange.next(null);
   }
 
-  getCurrentUserId() {
-    return sessionStorage.getItem('currentUser');
+  // Only temporarily like this
+  getCurrentUser(): User {
+    if (this.isLoggedIn()) {
+      const user = this.jwtHelper.decodeToken(this.accessToken).user;
+
+      return user;
+    }
+
+    return null;
   }
 }

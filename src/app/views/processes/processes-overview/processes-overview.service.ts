@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/auth/auth.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { UserRowNode } from './../../../models/ui/userRowNode';
 import { UsersService } from 'src/app/core/users/users.service';
@@ -17,11 +18,12 @@ export class ProcessesOverviewService {
               private usersService: UsersService,
               private rolesService: RolesService,
               private ordersService: OrdersService,
-              private processTemplatesService: ProcessTemplatesService) {
+              private processTemplatesService: ProcessTemplatesService,
+              private authService: AuthService) {
   }
 
   getAll(): ProcessNode[] {
-    let currentUser = this.usersService.getCurrentUser();
+    let currentUser = this.authService.getCurrentUser();
 
     return this.processesService.getForUser(currentUser).map((process) => {
       return {

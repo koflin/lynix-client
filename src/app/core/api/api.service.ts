@@ -7,9 +7,10 @@ import { Injectable } from '@angular/core';
 })
 export class ApiService {
 
-  private apiRoot = 'http://localhost:3000/';
+  private apiRoot = 'http://localhost:3000/v0/';
 
   private headers = new HttpHeaders({
+    'Content-Type': 'application/json',
     Authorization: 'Bearer ' + localStorage.getItem('access_token')
   });
 

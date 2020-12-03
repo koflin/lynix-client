@@ -8,18 +8,20 @@ export class CompaniesService {
 
   private companies: Company[] = [
     {
-      companyId: 'c0',
-      name: 'Lynix'
+      id: 'c0',
+      name: 'Lynix',
+      logo: null,
     },
     {
-      companyId: 'c1',
-      name : 'Stadler Winterthur AG'
+      id: 'c1',
+      name : 'Stadler Winterthur AG',
+      logo: null,
     }
   ];
 
   constructor() { }
 
   getById(id: string) {
-    return this.companies.find(company => company.companyId === id);
+    return this.companies.find(company => company.id === id);
   }
 }
