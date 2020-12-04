@@ -54,10 +54,6 @@ export class GuideComponent implements OnInit, OnDestroy, OnChanges {
         };
       }));
 
-      if (this.process.currentStepIndex) {
-        this.currentTabIndex = this.process.currentStepIndex + 1;
-      }
-
       this.updater = setInterval(this.onUpdate.bind(this), 1000);
     });
   }
@@ -104,6 +100,11 @@ export class GuideComponent implements OnInit, OnDestroy, OnChanges {
 
   onJump() {
     this.currentTabIndex = this.process.currentStepIndex + 1;
+  }
+
+  onStart() {
+    this.process.currentStepIndex = 0;
+    this.onJump();
   }
 
   onSwitch() {

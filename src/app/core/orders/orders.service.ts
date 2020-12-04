@@ -73,8 +73,6 @@ export class OrdersService {
   set orders(ordersOriginal: Order[]) {
     let orders: any = [...ordersOriginal];
 
-    console.log(orders);
-
     orders = orders.map((order) => {
       order.products = order.products.map((product) => {
         if (product.template) {

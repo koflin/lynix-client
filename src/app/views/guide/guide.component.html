@@ -202,23 +202,31 @@
         </button>
         <h5>Pause</h5>
       </div>
-      <div *ngIf="!process.isRunning && process.currentStepIndex !== undefined && currentTabIndex === process.currentStepIndex + 1" style="text-align: center;">
+      <div *ngIf="!process.isRunning && process.currentStepIndex !== null && currentTabIndex === process.currentStepIndex + 1" style="text-align: center;">
         <button mat-icon-button style="height: 60px;width: 60px;" (click)="onResume()">
           <mat-icon style="transform: scale(2.2);">play_arrow</mat-icon>
         </button>
         <h5>Resume</h5>
       </div>
-      <div *ngIf="currentTabIndex !== 0 && currentTabIndex !== process.steps.length + 1 && (process.currentStepIndex === undefined || currentTabIndex !== process.currentStepIndex + 1)" style="text-align: center;">
+      <div *ngIf="currentTabIndex !== 0 && currentTabIndex !== process.steps.length + 1 && (process.currentStepIndex === null || currentTabIndex !== process.currentStepIndex + 1)" style="text-align: center;">
         <button mat-icon-button style="height: 60px;width: 60px;" (click)="onSwitch()">
           <mat-icon style="transform: scale(2.2);">input</mat-icon>
         </button>
         <h5>Switch step</h5>
       </div>
       <div *ngIf="currentTabIndex === 0" style="text-align: center;">
-        <button mat-icon-button style="height: 60px;width: 60px;" (click)="onJump()">
-          <mat-icon style="transform: scale(2.2);">fast_forward</mat-icon>
-        </button>
-        <h5>Jump</h5>
+        <div *ngIf="process.currentStepIndex === null">
+          <button mat-icon-button style="height: 60px;width: 60px;" (click)="onStart()">
+            <mat-icon style="transform: scale(2.2);">not_started</mat-icon>
+          </button>
+          <h5>Start</h5>
+        </div>
+        <div *ngIf="process.currentStepIndex !== null">
+          <button mat-icon-button style="height: 60px;width: 60px;" (click)="onJump()">
+            <mat-icon style="transform: scale(2.2);">arrow_forward_ios</mat-icon>
+          </button>
+          <h5>Continue</h5>
+        </div>
       </div>
       <div *ngIf="currentTabIndex === process.steps.length + 1" style="text-align: center;">
         <button mat-icon-button style="height: 60px;width: 60px;" (click)="onFinish()">
@@ -233,7 +241,7 @@
         <h5>Next</h5>
       </div>
       <div>
-        <h2 *ngIf="process.steps[process.currentStepIndex] as currentStep">Current step: {{ currentStep.title }} - {{ getFullTime(currentStep.timeTaken) }}</h2>
+        <h2 *ngIf="process.currentStepIndex !== null && process.steps[process.currentStepIndex] as currentStep">Current step: {{ currentStep.title }} - {{ getFullTime(currentStep.timeTaken) }}</h2>
         <h2>Total time: {{ getFullTime(process.timeTaken) }}</h2>
       </div>
     </div>

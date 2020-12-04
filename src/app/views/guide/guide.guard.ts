@@ -22,6 +22,8 @@ export class GuideGuard implements CanActivate {
       return true;
     }
 
+    console.log(this.usersService.getCurrentUser().id + ': ' + route.paramMap.get('id'));
+
     this.router.navigate(['processes/overview']);
     return false;
   }

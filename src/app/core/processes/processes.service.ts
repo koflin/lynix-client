@@ -201,7 +201,7 @@ export class ProcessesService {
   }
 
   canWorkOn(processId: string, userId: string) {
-    return this.processes.find(process => process.id = processId).assignedUserId === userId;
+    return this.processes.find(process => process.id === processId).assignedUserId === userId;
   }
 
   start(id: string) {
@@ -209,7 +209,7 @@ export class ProcessesService {
 
     const updatedProcesses = this.processes;
     updatedProcesses[index].status = 'in_progress';
-    updatedProcesses[index].isOccupied = true;
+    //updatedProcesses[index].isOccupied = true;
 
     this.processes = updatedProcesses;
   }
@@ -218,7 +218,7 @@ export class ProcessesService {
     const index = this.processes.findIndex(process => process.id === id);
 
     const updatedProcesses = this.processes;
-    updatedProcesses[index].isOccupied = false;
+    //updatedProcesses[index].isOccupied = false;
 
     this.processes = updatedProcesses;
   }
@@ -265,7 +265,7 @@ export class ProcessesService {
             };
           }),
           timeTaken: 0,
-          currentStepIndex: 0,
+          currentStepIndex: null,
           assignedUserId: null,
           isOccupied: false,
           isRunning: false,
