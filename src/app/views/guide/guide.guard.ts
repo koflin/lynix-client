@@ -20,7 +20,7 @@ export class GuideGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.processesService.canWorkOn(route.paramMap.get('id'), this.authService.getCurrentUser().id)) {
+    if (this.processesService.canWorkOn(route.paramMap.get('id'), this.authService.getLocalUser().id)) {
       return true;
     }
 
