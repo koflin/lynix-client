@@ -1,3 +1,4 @@
+import { CompaniesService } from './../../../core/companies/companies.service';
 import { Router } from '@angular/router';
 import { UserDraftComponent } from './../../../components/user-draft/user-draft.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -30,48 +31,50 @@ export class UsersOverviewComponent implements OnInit {
     private usersService: UsersService,
     private usersOverviewService: UsersOverviewService,
     private authService: AuthService,
+    private companiesService: CompaniesService,
     public dialog: MatDialog
     ) {
   }
 
   ngOnInit(): void {
-    this.refresh();
+    this.usersOverviewService.onUsersChange.subscribe(id => {
+      this.usersOverviewService.getRows().subscribe(rows => {
+        this.userRows = rows;
+        this.dataSource = new MatTableDataSource(this.userRows);
+      });
+    });
   }
 
   applyFilter() {
     this.dataSource.filter = this.searchQuery;
   }
 
-  addUser() {
+  async addUser() {
+
+    let companyId = this.authService.getLocalUser().companyId;
     let dialogRef = this.dialog.open(UserDraftComponent, {
       height: '330px',
       width: '600px',
       data: {
         userDraft: {
-          companyId: this.authService.getCurrentUser().companyId,
-        } as User
+          companyId,
+        } as User,
+        company: await this.companiesService.getById(companyId).toPromise()
       }
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.usersService.createUser(result);
-        this.refresh();
       }
     });
   }
 
   removeUser(id: string) {
     this.usersService.deleteUser(id);
-    this.refresh();
   }
 
   editUser(id: string) {
     this.router.navigate(['users/' + id]);
-  }
-
-  refresh() {
-    this.userRows = this.usersOverviewService.getRows();
-    this.dataSource = new MatTableDataSource(this.userRows);
   }
 }

@@ -25,7 +25,7 @@ export class TestDialogComponent implements OnInit {
         width: '600px',
         data: {
           userDraft: {
-            companyId: this.authService.getCurrentUser().companyId
+            companyId: this.authService.getLocalUser().companyId
           } as User
         }
       });

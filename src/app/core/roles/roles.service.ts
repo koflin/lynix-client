@@ -21,7 +21,7 @@ export class RolesService {
   }
 
   getById(id: string) {
-    return this.roles.find(role => role.id === id);
+    return this.roles[0];
   }
 
   getAll() {

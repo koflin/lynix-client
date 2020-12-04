@@ -3,7 +3,7 @@ import { Role } from 'src/app/models/role';
 import { Company } from './../../models/company';
 import { CompaniesService } from './../../core/companies/companies.service';
 import { User } from './../../models/user';
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, AfterViewInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -18,16 +18,16 @@ export class UserDraftComponent implements OnInit {
   userDraft: User;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { userDraft: User },
+    @Inject(MAT_DIALOG_DATA) public data: { userDraft: User, company: Company },
     private companiesService: CompaniesService,
     private rolesService: RolesService) {
 
     this.userDraft = data.userDraft;
-    this.company = this.companiesService.getById(this.userDraft.companyId);
-    this.availableRoles = this.rolesService.getAll();
+    this.company = data.company;
   }
 
   ngOnInit(): void {
+    this.availableRoles = this.rolesService.getAll();
   }
 
 }

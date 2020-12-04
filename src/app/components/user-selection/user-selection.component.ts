@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/models/user';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-selection',
@@ -19,9 +20,12 @@ export class UserSelectionComponent implements OnInit {
   filter: string;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { options: UserRowNode[] }
+    @Inject(MAT_DIALOG_DATA) public data: { options: Observable<UserRowNode[]> }
     ) {
-      this.users = this.data.options;
+      this.data.options.subscribe(userRowNodes => {
+        this.users = userRowNodes;
+      });
+
       this.dataSource = new MatTableDataSource(this.users);
     }
 

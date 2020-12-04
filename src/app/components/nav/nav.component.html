@@ -9,7 +9,7 @@
     </button>
 </mat-toolbar>
 <mat-menu #menu="matMenu">
-    <div style="padding:10px;">
+    <div *ngIf="user" style="padding:10px;">
         <div fxLayout="row" style="height:120px;width:100%;margin:auto;padding: 10px;">
             <div fxFlex="40">
                 <!--<img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg">-->

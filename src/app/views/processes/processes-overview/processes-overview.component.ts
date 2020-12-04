@@ -90,9 +90,9 @@ export class ProcessesOverviewComponent implements OnInit {
   update() {
     const processNodes = this.processesOverviewService.getAll();
 
-    this.processNodeGroups.forEach((group) => {
+    /*this.processNodeGroups.forEach((group) => {
       group.nodes = [];
       group.nodes.push(...processNodes.filter((node) => node.status === group.status));
-    });
+    });*/
   }
 }

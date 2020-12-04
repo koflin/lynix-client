@@ -5,7 +5,7 @@ import { Step } from './../../models/step';
 import { Order } from 'src/app/models/order';
 import { ProcessTemplatesService } from './../processTemplates/process-templates.service';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Process } from 'src/app/models/process';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -178,16 +178,16 @@ export class ProcessesService {
     return this.processes.filter((process) => process.orderId === orderId);
   }
 
-  getForUser(user: User) {
+  getForUser(user: User): Observable<Process[]> {
     let role = this.rolesService.getById(user.roleId);
 
     if (role.premissions.includes('view')) {
-      return this.getAll();
+      return of(this.getAll());
     } else if (role.premissions.includes('execute')) {
-      return this.getAssigned(user.id);
+      return of(this.getAssigned(user.id));
     }
 
-    return [];
+    return of([]);
   }
 
   save(process: Process) {

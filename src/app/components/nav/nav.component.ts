@@ -23,8 +23,14 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.onLoggedInUserChange.subscribe(user => {
-      this.user = user;
+    this.authService.onLocalUserChange.subscribe(localUser => {
+      if (localUser) {
+        this.usersService.getById(localUser.id).subscribe(user => {
+          this.user = user;
+        });
+      } else {
+        this.user = null;
+      }
     });
   }
 

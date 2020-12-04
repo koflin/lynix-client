@@ -1,5 +1,5 @@
 <app-nav title="User"></app-nav>
-<div>
+<div *ngIf="userDetail">
   <h1 style="margin-top: 20px;margin-bottom: 0px;">{{ userDetail.firstName }} {{ userDetail.lastName }}</h1>
   <h3 style="color: grey;">{{ userDetail.username }}</h3>
   <div fxLayout="row" fxLayoutGap="60px">

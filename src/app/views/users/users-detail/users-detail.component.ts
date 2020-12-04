@@ -35,7 +35,22 @@ export class UsersDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.userId = params.get('id');
-      this.refresh();
+
+      this.usersDetailService.getDetail(this.userId).subscribe(detail => {
+        this.userDetail = detail;
+        this.editedUserDetail = {...this.userDetail};
+      });
+    });
+
+    this.availableRoles = this.rolesService.getAll();
+
+    this.usersDetailService.onDetailChange.subscribe(id => {
+      if (id === this.userId && !this.isEditing) {
+        this.usersDetailService.getDetail(id).subscribe(detail => {
+          this.userDetail = detail;
+          this.editedUserDetail = {...this.userDetail};
+        });
+      }
     });
   }
 
@@ -45,14 +60,11 @@ export class UsersDetailComponent implements OnInit {
 
   cancleEdit() {
     this.isEditing = false;
-    this.refresh();
   }
 
   save() {
     this.isEditing = false;
-
     this.usersDetailService.updateDetail(this.editedUserDetail);
-    this.refresh();
   }
 
   uploadAvatar(event) {
@@ -66,14 +78,5 @@ export class UsersDetailComponent implements OnInit {
 
   clearAvatar() {
     this.editedUserDetail.avatar = this.userDetail.avatar;
-  }
-
-  refresh() {
-    if (this.userId) {
-      this.userDetail = this.usersDetailService.getDetail(this.userId);
-      this.editedUserDetail = {...this.userDetail};
-    }
-
-    this.availableRoles = this.rolesService.getAll();
   }
 }

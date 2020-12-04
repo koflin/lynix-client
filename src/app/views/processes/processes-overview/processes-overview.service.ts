@@ -8,11 +8,17 @@ import { ProcessesService } from './../../../core/processes/processes.service';
 import { ProcessNode } from './../../../models/ui/processNode';
 import { Injectable, OnInit } from '@angular/core';
 import { ProcessGroupNode } from 'src/app/models/ui/processGroupNode';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Process } from 'src/app/models/process';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessesOverviewService {
+
+  private processNodeChange: BehaviorSubject<ProcessNode[]>;
+  public onProcessNodeChange: Observable<ProcessNode[]>;
 
   constructor(private processesService: ProcessesService,
               private usersService: UsersService,
@@ -22,25 +28,26 @@ export class ProcessesOverviewService {
               private authService: AuthService) {
   }
 
-  getAll(): ProcessNode[] {
-    let currentUser = this.authService.getCurrentUser();
-
-    return this.processesService.getForUser(currentUser).map((process) => {
-      return {
-        id: process.id,
-        name: process.name,
-        status: process.status,
-        timeTaken: process.timeTaken,
-        isOccupied: process.isOccupied,
-        canExecute: process.assignedUserId === currentUser.id,
-        assignedUser: this.usersService.getById(process.assignedUserId),
-        selected: false,
-      };
-    });
+  getAll() {
+    /*return this.processesService.getAll().pipe(mergeMap(processes =>
+      Promise.all(processes.map(async (process) => {
+        return {
+          id: process.id,
+          name: process.name,
+          status: process.status,
+          timeTaken: process.timeTaken,
+          isOccupied: process.isOccupied,
+          canExecute: process.assignedUserId === currentUser,
+          assignedUser: await this.usersService.getById(process.assignedUserId).toPromise(),
+          selected: false,
+        } as ProcessNode;
+      }))
+    ));*/
+    return of(null);
   }
 
-  getPotentialAssignees(): UserRowNode[] {
-    return this.usersService.getWithPermissions('execute').map((user): UserRowNode => {
+  getPotentialAssignees() {
+    /*return this.usersService.getWithPermissions('execute').map((user): UserRowNode => {
       return {
         id: user.id,
         username: user.username,
@@ -48,6 +55,17 @@ export class ProcessesOverviewService {
         lastName: user.lastName,
         role: this.rolesService.getById(user.roleId),
       };
-    });
+    });*/
+    return this.usersService.getAll().pipe<UserRowNode[]>(map(users => {
+      return users.map(user => {
+        return {
+          id: user.id,
+          username: user.username,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          role: this.rolesService.getById(user.roleId),
+        };
+      });
+    }));
   }
 }

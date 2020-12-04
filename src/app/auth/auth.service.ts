@@ -1,3 +1,4 @@
+import { LocalUser } from './../models/localUser';
 import { UsersService } from 'src/app/core/users/users.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -18,22 +19,15 @@ export class AuthService {
 
   private jwtHelper = new JwtHelperService();
 
-  private loggedInUserChange: BehaviorSubject<User>;
-  public onLoggedInUserChange: Observable<User>;
+  private localUserChange: BehaviorSubject<LocalUser>;
+  public onLocalUserChange: Observable<LocalUser>;
 
   constructor(
     private http: HttpClient,
+    private usersService: UsersService
     ) {
-
-      if (this.isLoggedIn()) {
-        const user = this.jwtHelper.decodeToken(this.accessToken).user;
-
-        this.loggedInUserChange = new BehaviorSubject(user);
-      } else {
-        this.loggedInUserChange = new BehaviorSubject(null);
-      }
-
-      this.onLoggedInUserChange = this.loggedInUserChange.asObservable();
+      this.localUserChange = new BehaviorSubject(this.getLocalUser());
+      this.onLocalUserChange = this.localUserChange.asObservable();
   }
 
   private get accessToken() {
@@ -59,9 +53,7 @@ export class AuthService {
       map((result) => {
 
         localStorage.setItem('access_token', result.access_token);
-        const user = this.jwtHelper.decodeToken(result.access_token).user;
-
-        this.loggedInUserChange.next(user);
+        this.localUserChange.next(this.getLocalUser());
 
         return true;
       }),
@@ -73,15 +65,12 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('access_token');
-    this.loggedInUserChange.next(null);
+    this.localUserChange.next(this.getLocalUser());
   }
 
-  // Only temporarily like this
-  getCurrentUser(): User {
+  getLocalUser(): LocalUser {
     if (this.isLoggedIn()) {
-      const user = this.jwtHelper.decodeToken(this.accessToken).user;
-
-      return user;
+      return this.jwtHelper.decodeToken(this.accessToken).user;
     }
 
     return null;
