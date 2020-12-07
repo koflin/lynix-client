@@ -32,12 +32,12 @@
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>Tasks</mat-panel-title>
-        <mat-panel-description>Tasks of the process step</mat-panel-description>
+        <mat-panel-title>Key Message</mat-panel-title>
+        <mat-panel-description>Key messages of the process step</mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field style="width: 100%;">
-        <mat-label>Tasks</mat-label>
-        <textarea matInput [(ngModel)]="stepTemplate.tasks" cdkTextareaAutosize="true" cdkAutosizeMinRows="10"></textarea>
+        <mat-label>Key Message</mat-label>
+        <textarea matInput cdkTextareaAutosize="true" cdkAutosizeMinRows="10" [(ngModel)]="stepTemplate.keyMessage"></textarea>
       </mat-form-field>
     </mat-expansion-panel>
   </mat-accordion>
@@ -45,12 +45,12 @@
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>Key Message</mat-panel-title>
-        <mat-panel-description>Key messages of the process step</mat-panel-description>
+        <mat-panel-title>Tasks</mat-panel-title>
+        <mat-panel-description>Tasks of the process step</mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field style="width: 100%;">
-        <mat-label>Key Message</mat-label>
-        <textarea matInput cdkTextareaAutosize="true" cdkAutosizeMinRows="10" [(ngModel)]="stepTemplate.keyMessage"></textarea>
+        <mat-label>Tasks</mat-label>
+        <textarea matInput [(ngModel)]="stepTemplate.tasks" cdkTextareaAutosize="true" cdkAutosizeMinRows="10"></textarea>
       </mat-form-field>
     </mat-expansion-panel>
   </mat-accordion>
@@ -157,15 +157,17 @@
               </button>
             </div>
             <div *ngIf="stepTemplate.pictureUris.length > 0" style="width: 100%">
-              <img *ngIf="stepTemplate.pictureUris.length > 0" [src]="stepTemplate.pictureUris[currentImageIndex]" width="100%">
+              <img [src]="stepTemplate.pictureUris[currentImageIndex]" width="100%">
             </div>
             <div *ngIf="stepTemplate.pictureUris.length === 0">
               <h2>There are no pictures yet</h2>
             </div>
             <div *ngIf="stepTemplate.pictureUris.length > 0">
               <mat-paginator [length]="stepTemplate.pictureUris.length"
+                [pageSize]="1"
                 hidePageSize="true"
-                (page)="changeImageIndex($event)">
+                [pageIndex]="currentImageIndex"
+                (page)="currentImageIndex = $event.pageIndex">
               </mat-paginator>
             </div>
             <div>

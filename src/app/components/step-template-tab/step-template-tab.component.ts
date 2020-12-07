@@ -1,5 +1,7 @@
+import { MediaService } from './../../helpers/media/media.service';
 import { StepTemplate } from './../../models/stepTemplate';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { warn } from 'console';
 
 @Component({
   selector: 'app-step-template-tab',
@@ -23,7 +25,7 @@ export class StepTemplateTabComponent implements OnInit {
 
   estimatedTime: { hours: number, minutes: number };
 
-  constructor() {
+  constructor(private mediaService: MediaService) {
     this.currentImageIndex = 0;
     this.currentVideoIndex = 0;
   }
@@ -59,14 +61,16 @@ export class StepTemplateTabComponent implements OnInit {
 
   addImage(event) {
     this.imageFile = event.target.files[0];
+
+    this.mediaService.imageToBase64(this.imageFile).then((url: string) => {
+      this.stepTemplate.pictureUris.push(url);
+    }).catch((error) => {
+      alert('Could not upload image, try a different file!');
+    });
   }
 
   removeImage(index: number) {
     this.stepTemplate.pictureUris.splice(index, 1);
-  }
-
-  changeImageIndex(index: number) {
-    this.currentImageIndex = index;
   }
 
   addVideo(event) {
