@@ -46,6 +46,7 @@ export class OrdersOverviewService {
       return {
         workOderId: order.id,
         name: order.name,
+        deliveryDate: order.deliveryDate,
         status: order.status,
         products: order.products.map((product) => {
           return {

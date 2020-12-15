@@ -10,7 +10,7 @@ export interface Order extends CompanyBase {
   name: string;
   description: string;
 
-  //dueBy: string;
+  deliveryDate: Date;
 
   products: {
     template: ProductTemplate;

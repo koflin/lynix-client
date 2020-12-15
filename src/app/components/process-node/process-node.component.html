@@ -6,19 +6,22 @@
     </mat-card-header>
     <mat-card-content>
       <div fxLayout="row">
-        <div fxFlex="30">
+        <div fxFlex="20">
           <span>Process: {{ processNode.name}}</span><br>
         </div>
-        <div fxFlex="10">
+        <div fxFlex="8">
           <img *ngIf="processNode.assignedUser" [src]="processNode.assignedUser.avatar" height="30px">
         </div>
         <div fxFlex="20">
+          Delivery Date {{ processNode.deliveryDate }}
+        </div>
+        <div fxFlex="25">
           Execution Time: {{ getFullTime(processNode.timeTaken) }}
         </div>
         <div fxFlex="20">
           Assignee: {{ processNode.assignedUser ? processNode.assignedUser.username : " None" }}
         </div>
-        <div fxFlex="15">
+        <div fxFlex="10">
           <button mat-icon-button *ngIf="processNode.status === 'assistance_required'">
             <mat-icon>headset_mic</mat-icon>
           </button>

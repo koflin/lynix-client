@@ -14,35 +14,6 @@ export class OrdersService {
 
   public onOrdersChange: Observable<void>;
 
-  private _orders: any[] = [
-    {
-      companyId: 'c0',
-      id: 'o0',
-      status: 'completed',
-      name: 'Order 0',
-      description: 'Order for customer 1',
-      products: [
-        {
-          templateId: 'pt0',
-          quantity: 1
-        }
-      ]
-    },
-    {
-      companyId: 'c0',
-      id: 'o1',
-      status: 'completed',
-      name: 'Order 1',
-      description: 'Order for customer 2',
-      products: [
-        {
-          templateId: 'pt0',
-          quantity: 2
-        }
-      ]
-    }
-  ];
-
   constructor(
     private prodService: ProductTemplatesService,
     private procService: ProcessesService) {

@@ -28,6 +28,7 @@ export class ProcessesOverviewService {
         id: process.id,
         name: process.name,
         status: process.status,
+        deliveryDate: process.deliveryDate,
         timeTaken: process.timeTaken,
         isOccupied: process.isOccupied,
         canExecute: process.assignedUserId === currentUser.id,

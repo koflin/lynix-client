@@ -42,6 +42,7 @@ export class OrdersDraftComponent implements OnInit, DoCheck {
           id: null,
           name: 'Unnamed',
           description: '',
+          deliveryDate: new Date(),
           products: [],
           status: 'in_preparation'
         };

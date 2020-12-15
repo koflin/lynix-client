@@ -17,6 +17,14 @@
                   <textarea matInput placeholder="Some fancy description" [(ngModel)]="orderDraft.description" name="description"></textarea>
                 </mat-form-field>
               </div>
+              <div>
+                <mat-form-field>
+                  <mat-label>Delivery Date</mat-label>
+                  <input matInput placeholder="Delivery date" [(ngModel)]="orderDraft.deliveryDate" name="dueBy" [matDatepicker]="picker">
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <button style="margin-left: 20px;" mat-raised-button (click)="picker.open()">Open</button>
+              </div>
             </div>
           </div>
           <div fxFlex="55">

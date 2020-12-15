@@ -11,6 +11,9 @@
                 {{ product.quantity }}x {{ product.name }},
               </span>
             </div>
+            <div fxFlex="20">
+              <span>Delivery Date: {{ orderNode.deliveryDate }}</span>
+            </div>
             <div fxFlex="20" *ngIf="orderNode.status === 'in_preparation'">
               <button mat-icon-button (click)="edit(orderNode.workOderId)">
                 <mat-icon>edit</mat-icon>

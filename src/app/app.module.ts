@@ -52,6 +52,8 @@ import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { TestServiceComponent } from './test/test-service/test-service.component';
 import { ToolDraftComponent } from './components/tool-draft/tool-draft.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -112,6 +114,9 @@ import { ToolDraftComponent } from './components/tool-draft/tool-draft.component
     MatDialogModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

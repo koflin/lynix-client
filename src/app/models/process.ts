@@ -11,6 +11,8 @@ export interface Process extends CompanyBase {
   mainTasks: string[];
   previousComments?: string[];
 
+  deliveryDate: Date;
+
   estimatedTime: number | undefined;
 
   timeTaken: number;
