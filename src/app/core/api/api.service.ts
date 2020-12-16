@@ -51,7 +51,7 @@ export class ApiService {
     });
   }
 
-  delte(route: string) {
+  delete(route: string) {
     return this.http.delete(this.apiRoot + route, {
       headers: this.headers
     });

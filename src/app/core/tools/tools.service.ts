@@ -26,7 +26,7 @@ export class ToolsService {
   }
 
   delete(id: string) {
-    this.api.delte('tools/' + id).subscribe(() => this.toolsChange.next());
+    this.api.delete('tools/' + id).subscribe(() => this.toolsChange.next());
   }
 
   getById(id: string) {

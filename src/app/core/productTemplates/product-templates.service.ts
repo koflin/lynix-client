@@ -5,97 +5,40 @@ import { map } from 'rxjs/operators';
 import { ProductTemplate } from './../../models/productTemplate';
 import { Injectable } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductTemplatesService {
 
-  private _productTemplates: any[] = [
-    {
-      companyId: 'c0',
-      id: 'pt0',
-      name: 'Boot 3000',
-      processTemplateIds: ['pt0']
-    }
-  ];
+  private productTemplatesChange: BehaviorSubject<string>;
+  public onProductTemplatesChange: Observable<string>;
 
   constructor(
     private api: ApiService,
-    private processTemplatesService: ProcessTemplatesService
-    ) {
-    if (!this.productTemplates) {
-      sessionStorage.setItem('productTemplates', JSON.stringify([]));
-    }
+  ) {
+    this.productTemplatesChange = new BehaviorSubject(null);
+    this.onProductTemplatesChange = this.productTemplatesChange.asObservable();
   }
 
-  get productTemplates(): ProductTemplate[] {
-    const storage = sessionStorage.getItem('productTemplates');
-    if (!storage) {
-      return null;
-    }
-
-    const products = JSON.parse(storage);
-
-    return products.map((product) => {
-      product.processes.map((process) => {
-        if (process.templateId) {
-          process.template = this.processTemplatesService.getById(process.templateId)
-        }
-        return process;
-      });
-      return product;
-    });
+  save(templateDraft: ProductTemplate){
+    this.api.put<ProductTemplate>('templates/product/' + templateDraft.id, templateDraft).subscribe(template => this.productTemplatesChange.next(template.id));
   }
 
-  set productTemplates(productTemplatesOriginal: ProductTemplate[]) {
-    let productTemplates: any[] = productTemplatesOriginal;
-
-    productTemplates = productTemplates.map((product) => {
-      product.processes.map((process) => {
-        if (process.template) {
-          process.templateId = process.template.id;
-        }
-        return process;
-      });
-      return product;
-    });
-
-    sessionStorage.setItem('productTemplates', JSON.stringify(productTemplates));
-  }
-
-  save(productTemplateDraft: ProductTemplate): ProductTemplate {
-    const index = this.productTemplates.findIndex(product => product.id === productTemplateDraft.id);
-    const updatedProducts = JSON.parse(JSON.stringify(this.productTemplates));
-
-    updatedProducts[index] = productTemplateDraft;
-    this.productTemplates = updatedProducts;
-
-    //return this.getById(productTemplateDraft.id);
-    return null;
-  }
-
-  create(productTemplateDraft: ProductTemplate): ProductTemplate {
-    productTemplateDraft.id = uuidv4();
-    productTemplateDraft.companyId = 'c0';
-
-    this.productTemplates = [ ...this.productTemplates, { ...productTemplateDraft } ];
-
-    //return this.getById(productTemplateDraft.id);
-    return null;
+  create(templateDraft: ProductTemplate) {
+    this.api.post<ProductTemplate>('templates/product', templateDraft).subscribe(template => this.productTemplatesChange.next(template.id));
   }
 
   delete(id: string) {
-    const index = this.productTemplates.findIndex(product => product.id === id);
-    this.productTemplates.splice(index, 1);
+    this.api.delete('templates/product' + id).subscribe(() => this.productTemplatesChange.next(id));
   }
 
-  getAll(): ProductTemplate[] {
-    return this.productTemplates;
+  getAll() {
+    return this.api.get<ProductTemplate[]>('templates/product');
   }
 
   getById(id: string) {
-    //return this.api.get('templates/products')
-    return null;
+    return this.api.get<ProductTemplate>('templates/product/' + id);
   }
 }

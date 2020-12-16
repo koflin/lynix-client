@@ -13,112 +13,41 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class OrdersService {
 
-  private ordersChange: BehaviorSubject<void>;
-  public onOrdersChange: Observable<void>;
-
-  private _orders: any[] = [
-    {
-      companyId: 'c0',
-      id: 'o0',
-      status: 'completed',
-      name: 'Order 0',
-      description: 'Order for customer 1',
-      products: [
-        {
-          templateId: 'pt0',
-          quantity: 1
-        }
-      ]
-    },
-    {
-      companyId: 'c0',
-      id: 'o1',
-      status: 'completed',
-      name: 'Order 1',
-      description: 'Order for customer 2',
-      products: [
-        {
-          templateId: 'pt0',
-          quantity: 2
-        }
-      ]
-    }
-  ];
+  private ordersChange: BehaviorSubject<string>;
+  public onOrdersChange: Observable<string>;
 
   constructor(
     private api: ApiService,
     private prodService: ProductTemplatesService,
-    private procService: ProcessesService) {
+    private procService: ProcessesService,
+  ) {
+    this.ordersChange = new BehaviorSubject(null);
+    this.onOrdersChange = this.ordersChange.asObservable();
   }
 
-  get orders(): Order[] {
-    const storage = sessionStorage.getItem('orders');
-    if (!storage) {
-      return null;
-    }
-
-    const orders = JSON.parse(storage);
-
-    return orders.map((order) => {
-      order.products = order.products.map((product) => {
-        if (product.templateId) {
-          product.template = this.prodService.getById(product.templateId);
-        }
-        return product;
-      });
-      return order;
-    });
-  }
-
-  set orders(ordersOriginal: Order[]) {
-    let orders: any = [...ordersOriginal];
-
-    orders = orders.map((order) => {
-      order.products = order.products.map((product) => {
-        if (product.template) {
-          product.templateId = product.template.id;
-        }
-        return product;
-      });
-      return order;
-    });
-    sessionStorage.setItem('orders', JSON.stringify(orders));
-  }
-
-  save(orderEdited: Order) {
-    //this.api.put('orders/' + orderEdited.id, orderEdited).subscribe(() => this.ordersChange.next());
-    return null;
+  save(order: Order){
+    this.api.put<Order>('orders/' + order.id, order).subscribe(order => this.ordersChange.next(order.id));
   }
 
   create(orderDraft: Order) {
-    orderDraft.companyId = 'c0';
-
-    this.api.post('orders', orderDraft).subscribe(() => this.ordersChange.next());
-    return null;
+    return this.api.post<Order>('orders', orderDraft).subscribe(order => this.ordersChange.next(order.id));
   }
 
   delete(id: string) {
-    this.api.delte('orders/' + id).subscribe(() => this.ordersChange.next());
-    return null;
+    this.api.delete('orders' + id).subscribe(() => this.ordersChange.next(id));
   }
 
   getAll() {
-    //return this.api.get('orders?_expand=');
-    return null;
+    return this.api.get<Order[]>('orders');
   }
 
   getById(id: string) {
-    //return this.api.get<Order>('orders/' + id);
-    return null;
+    return this.api.get<Order>('orders/' + id);
   }
 
-  /*publish(order: Order) {
+  publish(order: Order) {
     order.status = 'released';
 
-    this.api.put('orders/' + order.id, order);
-    return null;
-  }*/
-  publish(id: string) {
-    return null;
+    this.api.put('orders/' + order.id, order).subscribe(() => this.ordersChange.next(order.id));
   }
 }

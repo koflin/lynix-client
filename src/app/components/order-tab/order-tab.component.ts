@@ -26,6 +26,9 @@ export class OrderTabComponent implements OnInit, DoCheck {
   }
 
   ngOnInit(): void {
+    this.productTemplatesService.onProductTemplatesChange.subscribe(id => {
+      this.
+    });
   }
 
   selectTab(index: number) {

@@ -2,60 +2,41 @@ import { ProcessTemplateDraft } from './../../models/ui/orderDraft';
 import { ProcessTemplate } from './../../models/processTemplate';
 import { Injectable } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ApiService } from '../api/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessTemplatesService {
 
-  constructor() {
-    if (!this.processTemplates) {
-      sessionStorage.setItem('processTemplates', JSON.stringify([]));
-    }
+  private processTemplatesChange: BehaviorSubject<string>;
+  public onProcessTemplatesChange: Observable<string>;
+
+  constructor(
+    private api: ApiService,
+  ) {
+    this.processTemplatesChange = new BehaviorSubject(null);
+    this.onProcessTemplatesChange = this.processTemplatesChange.asObservable();
   }
 
-  get processTemplates(): ProcessTemplate[] {
-    const storage = sessionStorage.getItem('processTemplates');
-    if (!storage) {
-      return null;
-    }
-
-    const templates = JSON.parse(storage);
-    return templates;
+  save(templateDraft: ProcessTemplate){
+    this.api.put<ProcessTemplate>('templates/process/' + templateDraft.id, templateDraft).subscribe(template => this.processTemplatesChange.next(template.id));
   }
 
-  set processTemplates(processTemplates: ProcessTemplate[]) {
-    sessionStorage.setItem('processTemplates', JSON.stringify(processTemplates));
-  }
-
-  save(processTemplateDraft: ProcessTemplate): ProcessTemplate {
-    const index = this.processTemplates.findIndex(process => process.id === processTemplateDraft.id);
-    const updatedProcess = this.processTemplates;
-
-    updatedProcess[index] = processTemplateDraft;
-    this.processTemplates = updatedProcess;
-
-    return this.getById(processTemplateDraft.id);
-  }
-
-  create(processTemplateDraft: ProcessTemplate): ProcessTemplate {
-    processTemplateDraft.id = uuidv4();
-    processTemplateDraft.companyId = 'c0';
-
-    this.processTemplates = [ ...this.processTemplates, { ...processTemplateDraft } ];
-    return this.getById(processTemplateDraft.id);
+  create(templateDraft: ProcessTemplate) {
+    this.api.post<ProcessTemplate>('templates/process', templateDraft).subscribe(template => this.processTemplatesChange.next(template.id));
   }
 
   delete(id: string) {
-    const index = this.processTemplates.findIndex(process => process.id === id);
-    this.processTemplates.splice(index, 1);
+    this.api.delete('templates/process' + id).subscribe(() => this.processTemplatesChange.next(id));
   }
 
-  getAll(): ProcessTemplate[] {
-    return this.processTemplates;
+  getAll() {
+    return this.api.get<ProcessTemplate[]>('templates/process');
   }
 
-  getById(id: string): ProcessTemplate {
-    return this.processTemplates.find((template) => template.id === id);
+  getById(id: string) {
+    return this.api.get<ProcessTemplate>('templates/process/' + id);
   }
 }

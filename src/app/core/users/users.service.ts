@@ -55,6 +55,6 @@ export class UsersService {
   }
 
   deleteUser(id: string) {
-    this.api.delte('users/' + id).subscribe(() => this.usersChange.next(id));
+    this.api.delete('users/' + id).subscribe(() => this.usersChange.next(id));
   }
 }
