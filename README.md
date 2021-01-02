@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0.
 
 # Branch Info
-master - contains the current front-end branch
+feature/mvp - contains the MVP branch
 
 ## Development server
 
