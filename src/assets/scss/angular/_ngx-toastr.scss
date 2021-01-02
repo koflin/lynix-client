@@ -1,0 +1,27 @@
+.ngx-toastr {
+  width: calc(100% - 30px) !important;
+  max-width: 600px;
+  top: 15px;
+  padding-right: 80px !important;
+  padding: 1rem 1.5rem !important;
+
+  .alert-icon:before {
+    font-size: 22px;
+  }
+
+  .toast-close-button {
+    top: 1rem !important;
+    font-size: 1.5rem !important;
+    right: 1.5rem !important;
+    transform: translateY(0);
+    position: absolute !important;
+  }
+}
+.toast-container .ngx-toastr .toast-close-button:hover,
+.toast-container .ngx-toastr .toast-close-button:focus {
+  color: rgba(255, 255, 255, 0.6) !important;
+  outline: none !important;
+  font-size: 1.5rem;
+  background-color: transparent !important;
+  opacity: 0.75 !important;
+}

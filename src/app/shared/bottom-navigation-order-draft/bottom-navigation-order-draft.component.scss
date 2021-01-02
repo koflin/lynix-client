@@ -1,0 +1,17 @@
+.navigation_bar {
+    background-color: rgb(255, 255, 255) !important;
+}
+.navbar {
+    background: #fff;
+    box-shadow: 1px 1px 15px rgba(0,0,0,.38);
+    -moz-box-shadow: 1px 1px 15px rgba(0,0,0,.38);
+    -webkit-box-shadow: 1px 1px 15px rgba(0,0,0,.38);
+    height: 90px;
+}
+.sticky {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    z-index: 300;
+    
+}

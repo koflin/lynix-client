@@ -1,0 +1,301 @@
+<div class=" header bg-default pb-7"  style="background-image: url(assets/img/theme/process.jpg); background-size: cover; background-position: center center;">
+    <span class=" mask bg-gradient-primary opacity-7"> </span>    
+    <app-breadcrumb-header [breadCrumbs]=breadCrumbs ></app-breadcrumb-header>
+</div>
+<div class=" container-fluid mt--5">
+    <div class=" row">
+        <div class="col-12">
+            <app-tabs [tabsvalue]="stepNames" [(tabsResIndex)]="stepToggleId" [bgColorClassNotSelected]="'bg-default'"> </app-tabs>
+            <div class="pt-4 pb-4 mb-6 container-fluid" [@animSlider]="stepToggleId">
+                <div class="row" >
+                    <ng-container *ngFor="let step of process.steps; let i=index" >
+                        <ng-container *ngIf="stepToggleId == i+1 && stepToggleId != stepNames.length -1">
+                            <app-step-guide-tab class="container-fluid" [process]="process" [stepIndex]="i"> </app-step-guide-tab>
+                            
+                            
+                        </ng-container>
+                        
+                    </ng-container>
+                    <ng-container *ngIf="!stepToggleId">
+                        
+                        <div class="col-sm-12 col-md-7">
+                            <div class=" card pb-2 pt-2 shadow-card-stronger " >
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h4> 
+                                                Order:
+                                            </h4>
+                                            <p>
+                                                {{order.name}}
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            <h4> 
+                                                Process:
+                                            </h4>
+                                            <p>
+                                                {{process.name}}
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            <h4> 
+                                                Assignee:
+                                            </h4>
+                                            <p>
+                                                {{assignee.username}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                <div class="col-sm-12 col-md-5">
+                                    <div class=" card pb-2 pt-2 shadow-card-stronger  " >
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h4> 
+                                                        Delivery Date:
+                                                    </h4>
+                                                    <p>
+                                                        {{order.deliveryDate | date}}
+                                                    </p>
+                                                </div>
+                                                <div class="col">
+                                                    <h4> 
+                                                        Estimated Time:
+                                                    </h4>
+                                                    <p>
+                                                        {{ getFullTime(process.estimatedTime) }}
+                                                    </p>
+                                                </div>
+                                            </div>
+        
+                                        </div>
+        
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6" *ngIf="process.mainTasks.length>0">
+                                    <div class=" card pb-2 pt-2 shadow-card-stronger">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h4>
+                                                        Main Tasks & Challenges
+                                                    </h4>
+                                                    <ul class="list-group list-item-no-full-border pt-2 pb-2">
+                                                        <ng-container *ngFor="let item of process.mainTasks; let i=index; let first = first; let last = last">
+                                                            <li  class="list-group-item list-item-no-sideborder" [ngClass]="{'no-border-top':first, 'no-border-bottom':last}" >{{item}}</li>
+
+                                                        </ng-container>
+                                                        
+                                                        
+                                                      </ul>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class=" card pb-2 pt-2 shadow-card-stronger ">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h4>
+                                                        Steps
+                                                    </h4>
+                                                    <ul class="list-group list-item-no-full-border pt-2 pb-2">
+                                                        <ng-container *ngFor="let item of process.steps; let i=index; let first = first; let last = last">
+                                                            <li (click)="stepToggleId=i+1" class="list-group-item list-item-no-sideborder zooming d-flex justify-content-between" [ngClass]="{'no-border-top':first, 'no-border-bottom':last}" >
+                                                                {{item.title}} <i class="fas fa-angle-right"></i>
+                                                            </li>
+
+                                                        </ng-container>
+                                                        
+                                                        
+                                                      </ul>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            <div>
+
+                        </div>
+                        
+                    </ng-container>
+                    <ng-container *ngIf="stepToggleId == stepNames.length -1">
+                        <div class="col-sm-12 col-md-7">
+                            <div class=" card pb-2 pt-2 shadow-card-stronger" >
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h4> 
+                                                Order:
+                                            </h4>
+                                            <p>
+                                                {{order.name}}
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            <h4> 
+                                                Process:
+                                            </h4>
+                                            <p>
+                                                {{process.name}}
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            <h4> 
+                                                Assignee:
+                                            </h4>
+                                            <p>
+                                                {{assignee.username}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-5">
+                            <div class=" card pb-2 pt-2 shadow-card-stronger" >
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h4> 
+                                                Delivery Date:
+                                            </h4>
+                                            <p>
+                                                {{order.deliveryDate | date}}
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            <h4> 
+                                                Estimated Time:
+                                            </h4>
+                                            <p>
+                                                {{ getFullTime(process.estimatedTime) }}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card shadow-card-stronger p-0" style="width: fit-content !important;">
+                                <div class="table-responsive">
+                                    <div class="table align-items-center table-flush">
+                                        <thead class=" thead-light">
+                                            <tr>
+                                                <th scope="col">Steps Number</th>
+                                  
+                                                <th scope="col">Step Name</th>
+                                                <th scope="col">Taken Time</th>
+                        
+                                            </tr>
+                                        </thead> 
+                                        <tbody class="list">
+                                            <tr *ngFor="let item of process.steps; let i = index" >
+                                                <th>
+                                                    {{i+1}}
+                                                </th>
+                                                <td>
+                                                    {{item.title}}
+                                                </td>
+                                                <td>
+                                                    {{ getFullTime(item.timeTaken) }}
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>  
+                </div>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+<app-bottom-navigation-order-draft [noPadding]=true>
+    <div class="d-flex justify-content-between nav-pl-0" style="width: 100%;">
+        <div>
+            <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onExit()">
+                <span class="btn-inner--icon"><i style="font-size: 30px;" class="fas fa-times"></i></span> <br>
+                <span class="btn-inner--text ml-0">Exit</span>
+              </button>
+        </div>
+        <div>
+            <button class="btn btn-icon btn-3 btn-white none-shadow" [disabled]="stepToggleId === 0" type="button" (click)="onPrevious()">
+                <span class="btn-inner--icon">
+                    <i style="font-size: 30px;" class="fas fa-step-backward"></i></span> <br>
+                <span class="btn-inner--text ml-0">Previous Step</span>
+              </button>
+        </div>
+        <div *ngIf="process.isRunning">
+            <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onStop()">
+                <span class="btn-inner--icon">
+                    <i style="font-size: 30px;" class="fas fa-pause"></i></span> <br>
+                <span class="btn-inner--text ml-0">Stop</span>
+              </button>
+        </div>
+        <div *ngIf="!process.isRunning && process.currentStepIndex !== null && stepToggleId === process.currentStepIndex + 1">
+            <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onResume()">
+                <span class="btn-inner--icon">
+                    <i style="font-size: 30px;" class="fas fa-play"></i></span> <br>
+                <span class="btn-inner--text ml-0">Resume</span>
+              </button>
+        </div>
+        <div *ngIf="stepToggleId != 0 && stepToggleId != stepNames.length -1 && (process.currentStepIndex === null || stepToggleId !== process.currentStepIndex + 1)">
+            <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onSwitch()">
+                <span class="btn-inner--icon">
+                    <i style="font-size: 30px;" class="fas fa-sign-in-alt"></i></span> <br>
+                <span class="btn-inner--text ml-0">Switch step</span>
+              </button>
+        </div>
+        <div *ngIf="stepToggleId == 0 && process.currentStepIndex === null">
+            <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onStart()">
+                <span class="btn-inner--icon">
+                    <i style="font-size: 30px;" class="fas fa-play"></i></span> <br>
+                <span class="btn-inner--text ml-0">Start</span>
+              </button>
+        </div>
+        <div *ngIf="stepToggleId == 0 && process.currentStepIndex !== null">
+            <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onJump()">
+                <span class="btn-inner--icon">
+                    <i style="font-size: 30px;" class="fas fa-angle-double-right"></i></span> <br>
+                <span class="btn-inner--text ml-0">Continue Work</span>
+              </button>
+        </div>
+        <div *ngIf="stepToggleId == stepNames.length-1">
+            <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onFinish()">
+                <span class="btn-inner--icon">
+                    <i style="font-size: 30px;" class="far fa-check-circle"></i></span> <br>
+                <span class="btn-inner--text ml-0">Finish</span>
+              </button>
+        </div>
+        <div>
+            <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" [disabled]="stepToggleId == stepNames.length-1" (click)="onNext()">
+                <span class="btn-inner--icon">
+                    <i style="font-size: 30px;" class="fas fa-step-forward"></i></span> <br>
+                <span class="btn-inner--text ml-0">Next step</span>
+              </button>
+        </div>
+
+    </div>
+
+</app-bottom-navigation-order-draft>
+

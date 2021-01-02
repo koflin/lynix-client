@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -9,23 +8,41 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  hide = true;
-  username: string;
-  password: string;
-
-  constructor(private router: Router, private authService: AuthService, private http: HttpClient) { }
+  //achtung, das ist nicht die standard-verfahrensweise
+  focus;
+  focus1;
+  // bis hierhin nicht standard
+  user:string=""
+  password:string=""
+  showPassword=false
+  error=false
+  constructor(private authService: AuthService, private router: Router ) { }
+ 
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent){
+    if (event.key != undefined) {
+      if (event.key== "Enter") {
+        this.signIn()
+      }
+    }
+  }
 
   ngOnInit(): void {
   }
 
-  login() {
-    this.authService.login(this.username, this.password).then((success) => {
-      if (success) {
-        this.router.navigate(['home']);
-      } else {
-        alert('The username or password is wrong!');
-      }
-    });
+  signIn(){
+    //this.authService.login()
+    if (this.password && this.user) {
+      this.authService.login(this.user, this.password).then((result:boolean) => {
+          this.error = !result
+          if (this.error == false) {
+            this.router.navigate(['home'])
+
+          }
+      })
+    }else{
+      this.error = true
+    }
   }
+
 }

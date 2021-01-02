@@ -1,0 +1,159 @@
+<div class=" header bg-default pb-7"  style="background-image: url(assets/img/theme/process.jpg); background-size: cover; background-position: center center;">
+    <span class=" mask bg-gradient-primary opacity-7"> </span>    
+    <app-breadcrumb-header [breadCrumbs]=breadCrumbs ></app-breadcrumb-header>
+</div>
+<div class=" container-fluid mt--4">
+    <div class=" row">
+        <div class=" col padding-0-mobile">
+            <ng-container *ngIf="nodesAreEmpty; else elseTemplate" >
+                <div>
+                    <div class="alert alert-warning" role="alert">
+                        <strong>Warning!</strong> You haven't published Orders yet!
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <ng-container *ngFor="let group of processNodeGroups" >
+                    <div class="card" *ngIf="group.nodes.length>0">
+                        <div class="card-body">
+                            <h5 class="h2 card-title mb-0">{{group.title}}</h5>
+                        </div>
+                        <div class="card-body pl-0 pr-0">
+                            <ngx-datatable
+                            #myTable
+                            
+                            class="bootstrap selection-cell"
+                            [columnMode]="'force'"
+                            [headerHeight]="50"
+                            [footerHeight]="50"
+                            [rowHeight]="'auto'"
+                            [scrollbarH]="true"
+                            [scrollbarV]="false"
+                            
+                            [rows]="group.nodes"
+                            
+                            >
+                            <!-- Row Detail Template -->
+                                <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onActivate($event)">
+                                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                                    <div class="container-fluid">
+                                        <div class="row pl-2 pr-2">
+                                            <div class="col-12"> 
+                                                <p> <span class="h4"> ID: </span>  {{ row.id }}</p>
+                                            </div>
+                                            <div class="col-12" *ngIf="windowWidth<=966"> 
+                                                <p> <span class="h4"> Execution time: </span>  {{ getFullTime(row.timeTaken) }}</p>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                    </ng-template>
+                                </ngx-datatable-row-detail>
+                                <!-- Column Detail Templates -->
+                                <ngx-datatable-column
+                                [width]=50
+                                [maxWidth]=50
+                                [resizeable]="false"
+                                [sortable]="false"
+                                [draggable]="false"
+                                [canAutoResize]="false"
+                                [cellClass]="paddingLeftNone"
+                                
+                                >
+                                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                                    <a
+                                        style="font-size: 30px;"
+                                        class="text-default pl-1"
+                                        href="javascript:void(0)"
+                                        [class.datatable-icon-up]="!expanded"
+                                        [class.datatable-icon-down]="expanded"
+                                        title="Expand/Collapse Row"
+                                        (click)="toggleExpandRow(row)"
+                                        >
+                                    </a>
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <!-- Name -->
+                                <ngx-datatable-column *ngIf="windowWidth>843" name="process name" prop="name" [sortable]="true" >
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <p class="h3 text-default"> 
+                                        {{row.name}}
+                                    </p>
+                                    
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                
+                                <!-- Date -->
+                                <ngx-datatable-column [minWidth]="(windowWidth<=566) ? 220 : 50"  [width]=150 name="delivery date" prop="deliveryDate" [sortable]="true" >
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <p class="h3 text-default" *ngIf="windowWidth<=843"> 
+                                            {{row.name}}
+                                        </p>
+                                    <p class=""> 
+                                        {{row.deliveryDate | date}}
+                                    </p>
+                                    <div *ngIf="windowWidth<=566">
+                                        <div *ngIf="role.premissions.includes('view'); else elseTemplate"> 
+                                            <app-single-multiple-choice [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
+                                        </div>
+                                        <ng-template #elseTemplate>
+                                            {{ (row.assignedUser) ? row.assignedUser.username : 'none'+ row.id }}
+                                        </ng-template>
+                                    </div>
+                                    
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <!-- Time -->
+                                <ngx-datatable-column *ngIf="windowWidth>966" [width]=125 [maxWidth]=125 name="Execution Time" prop="timeTaken" [sortable]="true" >
+                                    <ng-template let-value="value" ngx-datatable-cell-template>
+                                    <p class=""> 
+                                        {{ getFullTime(value) }}
+                                    </p>
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <!-- assignee -->
+                                <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=190 name="Assignee" prop="assignedUser" [comparator]="userNameSort" [cellClass]="getCellClass" >
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <div *ngIf="role.premissions.includes('view'); else elseTemplate"> 
+                                        <app-single-multiple-choice [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
+                                    </div>
+                                    <ng-template #elseTemplate>
+                                        {{ (row.assignedUser) ? row.assignedUser.username : 'none'+ row.id }}
+                                    </ng-template>
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <!-- status -->
+                                <ngx-datatable-column [maxWidth]=80 [width]=45 [minWidth]=45 name="" prop="status" [sortable]="false" [cellClass]="paddingClass" >
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" *ngIf="row.status === 'assistance_required'" >
+                                            <span class="btn-inner--icon"><i class="fas fa-headset"></i></span>
+                                            
+                                          </button>
+                                          <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" *ngIf="row.status === 'in_preparation'" >
+                                            <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
+                                          </button>
+                                          <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" (click)="start(row.id)" type="button" *ngIf="row.canExecute && !row.isOccupied && (row.status === 'released' || row.status === 'in_progress')" >
+                                            <span class="btn-inner--icon"><i class="fas fa-play"></i></span>
+                                      
+                                          </button>
+                                          <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" *ngIf="row.status === 'completed'" >
+                                            <span class="btn-inner--icon"><i class="fas fa-archive"></i></span>
+                                     
+                                          </button>
+                                    </ng-template>
+                                </ngx-datatable-column>
+                            </ngx-datatable>
+                            
+                        </div>
+                        
+                    </div>
+                </ng-container>
+            </ng-template>
+           
+            
+            
+            
+        </div>
+    </div>
+</div>

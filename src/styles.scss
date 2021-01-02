@@ -1,4 +1,231 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  font-family: 'Rubik' !important;
+}
+.full-height{
+    min-height: 100vh;
+}
+
+.justify-content-space-around{
+    justify-content: space-around;
+}
+
+.header-card-full-widht{
+    padding-left: -15px;
+}
+
+.header-card-strong-border-and-position{
+    position:relative;
+    border-bottom: 0px !important;
+}
+.z-index-1{
+    z-index: 1;
+}
+.zooming:hover{
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    transition: .5s ease;
+    transition: all .5s ease;
+}
+
+.card-stronger-shadow{
+    box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.35) !important;
+}
+
+.card-stronger-shadow:hover{
+    box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.65) !important;
+}
+
+.nav-link-tab{
+    font-weight: bold;
+    padding-top: 13px;
+    text-align: center;
+    
+    color: #fff;
+    border-radius: 20px;
+    padding-bottom: 1rem;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    min-height: auto;
+    // border: white solid 2px;
+    width: -moz-fit-content;
+    width: fit-content;
+    min-width: 90px;
+    padding-left: 12px;
+    padding-right: 12px;
+    -webkit-box-shadow: 0px -1px 10px 4px rgba(136, 152, 170, 0.35);
+    -moz-box-shadow: 0px -1px 10px 4px rgba(136, 152, 170, 0.35);
+    box-shadow: 0px -1px 10px 4px rgba(136, 152, 170, 0.35);
+  }
+  .nav-link-tab.active{
+    background-color: #fff !important;
+    color: #000;
+    // border: grey solid 2px
+  }
+  
+
+  .no-top-radius{
+      border-top-left-radius: 0px !important;
+      border-top-right-radius: 0px !important;
+  }
+
+  .none-shadow{
+      box-shadow: none !important;
+  }
+
+  .shadow-right{
+    -webkit-box-shadow: 3px 5px 2px 2px rgba(136, 152, 170, 1) !important;
+    -moz-box-shadow: 3px 5px 2px 2px rgba(136, 152, 170, 1) !important;
+    box-shadow: 3px 5px 2px 2px rgba(136, 152, 170, 1) !important;
+  }
+
+  .fa-angle-down{
+    transform: rotate(0deg);
+    transition: transform 0.3s linear;
+  }
+  
+  .fa-angle-down.open{
+    transform: rotate(180deg);
+    transition: transform 0.3s linear;
+  }
+  .panel-open .fa-angle-down{
+    transform: rotate(180deg);
+    transition: transform 0.3s linear;
+  }
+
+
+
+  .fa-angle-right{
+    transform: rotate(0deg);
+    transition: transform 0.3s linear;
+  }
+  
+  .fa-angle-right.open{
+    transform: rotate(90deg);
+    transition: transform 0.3s linear;
+  }
+
+  .bg-gray-2{
+    background-color: #eceded !important;
+  }
+
+  .ng-select.custom {
+    display: block;
+    width: 100%;
+    height: calc( 1.5em + 1.25rem + 2px );
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #8898aa;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    box-shadow: 0 3px 2px rgba(233, 236, 239, 0.05);
+    transition: all 0.15s;
+    font-size: 0.875rem;
+    transition: all 0.15s ease-in-out;
+    height: calc( 1.5em + 1.25rem + 5px );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ng-select.custom .ng-select-container  {            
+    min-height: 0px;
+    border-radius: 0;
+    border: none;
+}
+.error .ng-select.custom {
+  border-color: #fb6340;
+}
+.error .ql-toolbar{
+  border-color: #fb6340;
+  border-bottom: none;
+
+}
+.error .ql-editor{
+  border-color: #fb6340;
+  border-top: none;
+}
+.disabled .ql-toolbar{
+  display: none;
+
+}
+.disabled .ql-editor{
+  background: none;
+  border: none;
+}
+
+
+.ng-invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #fb6340;
+}
+
+.error-color{
+  color: #fb6340;
+
+}
+
+.no-bottom-radius{
+  border-bottom: none !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+@media only screen and (max-width: 576px){
+  .table-resposive-phone{
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+}
+
+.object-fit-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.image-round-fix{
+  max-height: 74px !important;
+  max-height: 74px !important;
+  height: 74px;
+  object-fit: cover !important
+}
+
+.overflow-visible{
+  overflow: visible !important;
+}
+.list-item-no-sideborder{
+  border-left: none !important;
+  border-right: none !important;
+}
+.list-item-no-full-border:first-child{
+  border-top: none !important;
+}
+.list-item-no-full-border:last-child{
+  border-bottom: none !important;
+}
+.no-border-top{
+  border-top: none !important
+}
+.no-border-bottom{
+  border-bottom: none !important
+}
+.datatable-body{
+  padding-bottom: 100px !important;
+}
+.shadow-card-stronger, .accordion-card-shaddow .card{
+  box-shadow: 0 0.5rem 2rem 0 rgba(118, 153, 192, 0.85) !important;
+}
+li:focus{
+  outline:none;
+}
+

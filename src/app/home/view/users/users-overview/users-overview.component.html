@@ -1,0 +1,94 @@
+<div class=" header bg-default pb-7"  style="background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center center;">
+    <span class=" mask bg-gradient-primary opacity-7"> </span>    
+    <app-breadcrumb-header [breadCrumbs]=breadCrumbs ></app-breadcrumb-header>
+</div>
+<div class=" container-fluid mt--6">
+    <div class=" row">
+        <div class=" col">
+            <div class="card">
+                <div class="container-fluid">
+                    <div class="row p-3">
+                        <div class="d-flex justify-content-between" style="width: 100%;">
+                            <button class="btn btn-icon btn-3 btn-default" type="button" (click)="editUser('undefined')">
+                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                                <span class="btn-inner--text">New user</span>
+                            </button>
+                            <div id="datatable_filter" class="dataTables_filter search" type="search" style="float: left; width:50%">
+                                <label style="width: 100%;">
+                                  <input
+                                    type="search"
+                                    class="form-control form-control-sm"
+                                    placeholder="Search records"
+                                    aria-controls="datatable"
+                                    [(ngModel)]="searchValue"
+                                    (keyup)="filterTable($event)"
+                                  />
+                                </label>
+                              </div>
+                        </div>
+                        
+    
+                    </div>
+                </div>
+                
+                <div class="table-resposive-phone" id="user-list">
+                    <table class=" table align-items-center table-flush">
+                        <thead class=" thead-light">
+                            <tr style="min-height: 50px !important; height:50px">
+                                <th scope="col"></th>
+                                <th scope="col" class="sort" data-sort="user-name" >Username</th>
+                  
+                                <th scope="col" class="sort" data-sort="name">Name</th>
+                                <th scope="col" class="sort" data-sort="role">Role</th>
+
+                                <th scope="col">Operation 
+                                    
+                                </th>
+    
+                            </tr>
+                        </thead>
+                        <tbody class="list" >
+                            <tr *ngFor="let user of temp; let i=index" [id]="user.id">
+                                <td scope="row">
+                                    <div  class="avatar avatar-xl rounded-circle " style="background-color: aliceblue;">
+                                        <img alt="Image placeholder" class="image-round-fix"
+                                        style=""  [src]="(user.avatar) ? user.avatar :  'assets/img/nopicture.png'">
+                                        <span *ngIf="!user.avatar" class="badge badge-warning" style="position: fixed;
+                                        margin-top: 40px;">No picture available</span>
+                                    </div>
+                                </td>
+                                <td scope="row">
+                                  <p class="text-default user-name">{{user.username}}</p>
+                                  
+                                </td>
+                                <td scope="row" class="name">
+                                    {{user.firstName}} {{user.lastName}}
+                                </td>
+                                <td scope="row" class="role">
+                                    {{user.role.name}}
+                                </td>
+                                <td scope="row"> 
+                                    <button  class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button" (click)="editUser(user.id)">
+                                        <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
+                                    </button>
+                                    <button  class=" ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-danger remove" type="button" (click)="deleteModal(user.id)" >
+                                        <span  class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
+                                    </button>
+                                </td>
+                              </tr>
+                            
+                            
+                        </tbody>
+                                
+                    </table>
+                    <div class="col-12 p-4" *ngIf="(showArray.length<1 && this.searchValue) || this.temp.length<1">
+                        <div class="d-flex justify-content-center">
+                            <p>No user</p>
+                        </div>
+                    </div>
+                </div> 
+
+            </div>
+        </div>
+    </div>
+</div>

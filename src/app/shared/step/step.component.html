@@ -1,0 +1,261 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-card-stronger">
+                <div class="container-fluid card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <app-text-field [result]="stepTemplate.title" (resultChange)="stepTemplate.title = $event; stepTemplateChange.emit(stepTemplate)" [(fieldInformation)]=name  [inputCheckForError]="checkForError" [inputRequired]="true"> </app-text-field>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="basic-url">Estimated Time</label>
+                                <div class="row">
+                                    <div class="input-group col-6">
+                                        <input type="number" class="form-control" [ngModel]="getHours(stepTemplate.estimatedTime)" (ngModelChange)="changeEstimatedHours($event)" aria-label="Estimated Time">
+                                        <div class="input-group-append">
+                                          <span class="input-group-text">h</span>
+                                        </div>
+                                      </div>
+                                      <div class="input-group col-6">
+                                          <input type="number" class="form-control" [ngModel]="getMinutes(stepTemplate.estimatedTime)"  (ngModelChange)="changeEstimatedMinutes($event)" aria-label="Estimated Time">
+                                          <div class="input-group-append">
+                                            <span class="input-group-text">min</span>
+                                          </div>
+                                      </div>
+                                </div>
+                                
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                    
+        
+        <div class="col-12 accordion-card-shaddow">
+            <accordion [isAnimated]="true" [closeOthers]="false">
+                <accordion-group >
+                    <div accordion-heading>
+                        <p class="col-auto mb-0 h5 text-primary" >Key Message  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p> 
+                        <p><small class="text-muted col-12"> Key messages of the process step</small> </p> 
+                    </div>
+                    <div class="col-12">
+                        <app-text-area [(result)]="stepTemplate.keyMessage" (resultChange)="stepTemplateChange.emit(stepTemplate)" [(fieldInformation)]=keyMessage> </app-text-area>
+                    </div>
+                    
+                 
+                </accordion-group>
+              </accordion>
+        </div>
+        <div class="col-12 accordion-card-shaddow">
+            <accordion [isAnimated]="true" [closeOthers]="false">
+                <accordion-group >
+                    <div accordion-heading>
+                        <p class="col-auto mb-0 h5 text-primary" >Tasks  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p> 
+                        <p><small class="text-muted col-12"> Tasks of the process step</small> </p> 
+                    </div>
+                    <div class="col-12">
+                        <app-text-area [(result)]="stepTemplate.tasks" (resultChange)="stepTemplateChange.emit(stepTemplate)" [(fieldInformation)]=tasks> </app-text-area>
+                    </div>
+                    
+                 
+                </accordion-group>
+              </accordion>
+        </div>
+        <div class="col-12 col-md-6 accordion-card-shaddow">
+            <accordion [isAnimated]="true" [closeOthers]="false">
+                <accordion-group >
+                    <div accordion-heading>
+                        <p class="col-auto mb-0 h5 text-primary" >Materials  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p> 
+                        <p><small class="text-muted col-12"> Add materials</small> </p> 
+                    </div>
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <div class="table align-items-center table-flush">
+                                <thead class=" thead-light">
+                                    <tr>
+                                        <th scope="col">Material</th>
+                          
+                                        <th scope="col">Operation</th>
+                
+                                    </tr>
+                                </thead> 
+                                
+                               
+                                
+                                <tbody class="list">
+                                    
+                                    <tr *ngFor="let material of stepTemplate.materials ; let i = index">
+                                        
+                                        <td scope="row">
+                                            <div  class="pt-3">
+                                                {{material}}
+                                            </div>
+                                        </td>
+                                        <td scope="row">
+                                            <button class="btn btn-icon btn-3 btn-danger" type="button" (click)="removeMaterial(i)">
+                                                <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
+                                            </button>
+                                           
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <div class="pt-0">
+                                                <app-text-field [inputPlaceholder]="'material'" [(result)]="materialToAdd"> </app-text-field>
+                                            </div>
+                                        </td>
+                                        <td class="pt-0">
+                                            
+                                            <button class="btn btn-icon btn-3 btn-default" type="button" (click)="addMaterial()" > 
+                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                                                
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </div>
+                        </div>
+                    </div>
+                    
+                 
+                </accordion-group>
+              </accordion>
+        </div>
+        <div class="col-12 col-md-6 accordion-card-shaddow">
+            <accordion [isAnimated]="true" [closeOthers]="false">
+                <accordion-group >
+                    <div accordion-heading>
+                        <p class="col-auto mb-0 h5 text-primary" >Tools  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p> 
+                        <p><small class="text-muted col-12"> Add tols</small> </p> 
+                    </div>
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <div class="table align-items-center table-flush">
+                                <thead class=" thead-light">
+                                    <tr>
+                                        <th scope="col">Tool</th>
+                          
+                                        <th scope="col">Operation</th>
+                
+                                    </tr>
+                                </thead> 
+                                
+                               
+                                
+                                <tbody class="list">
+                                    
+                                    <tr *ngFor="let tool of stepTemplate.toolIds ; let i = index">
+                                        
+                                        <td scope="row">
+                                            <div  class="pt-3">
+                                                {{tool}}
+                                            </div>
+                                        </td>
+                                        <td scope="row">
+                                            <button class="btn btn-icon btn-3 btn-danger" type="button" (click)="removeTool(i)">
+                                                <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
+                                            </button>
+                                           
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <div class="pt-0">
+                                                <app-text-field [inputPlaceholder]="'tool'" [(result)]="toolToAdd"> </app-text-field>
+                                            </div>
+                                        </td>
+                                        <td class="pt-0">
+                                            <button class="btn btn-icon btn-3 btn-default" type="button" (click)="addTool()" > 
+                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </div>
+                        </div>
+                    </div>
+                    
+                 
+                </accordion-group>
+              </accordion>
+        </div>
+        <div class="col-12 col-md-6 accordion-card-shaddow">
+            <accordion [isAnimated]="true" [closeOthers]="false">
+                <accordion-group >
+                    <div accordion-heading>
+                        <p class="col-auto mb-0 h5 text-primary" >Picture  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p> 
+                        <p><small class="text-muted col-12"> Add pictrue</small> </p> 
+                    </div>
+                    <div class="col-12">
+                        <carousel *ngIf="stepTemplate.pictureUris.length !== 0; else elseTemplate">
+                            <slide *ngFor="let picture of stepTemplate.pictureUris; let i=index" >
+                              <img [src]="picture" alt="first slide" style="display: block;" class="object-fit-cover">
+                              <div class="carousel-caption d-none d-md-block">
+                                <button class="btn btn-icon btn-2 btn-danger" type="button" (click)="removeImage(i)">
+                                    <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
+                                </button>
+                              </div>
+                            </slide>
+                          </carousel>
+                          <ng-template #elseTemplate>
+                            <p class="text-default">There are no videos yet</p>
+                          </ng-template>
+                    </div>
+                    <div class="col-12 pt-5">
+                        <form>
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" accept="image/png, image/jpeg" (change)="addImage($event)" #imageInput lang="en">
+                              <label class="custom-file-label" for="customFileLang">Add new File</label>
+                            </div>
+                          </form>
+                    </div>
+                    
+                 
+                </accordion-group>
+              </accordion>
+        </div>
+        <div class="col-12 col-md-6 accordion-card-shaddow">
+            <accordion [isAnimated]="true" [closeOthers]="false">
+                <accordion-group >
+                    <div accordion-heading>
+                        <p class="col-auto mb-0 h5 text-primary" >Video  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p> 
+                        <p><small class="text-muted col-12"> Add video</small> </p> 
+                    </div>
+                    <div class="col-12">
+                        <carousel *ngIf="stepTemplate.videoUris.length > 0; else elseTemplate">
+                            <slide *ngFor="let video of stepTemplate.videoUris; let i=index" >
+                                <video width="100%">
+                                    <source [src]="video">
+                                  </video>
+                              <div class="carousel-caption d-none d-md-block">
+                                <button class="btn btn-icon btn-2 btn-danger" type="button" (click)="removeVideo(i)">
+                                    <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
+                                </button>
+                              </div>
+                            </slide>
+                          </carousel>
+                          <ng-template #elseTemplate>
+                            <p class="text-default">There are no videos yet</p>
+                          </ng-template>
+                    </div>
+                    <div class="col-12 pt-5">
+                        <form>
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" accept="image/png, image/jpeg" (change)="addImage($event)" #imageInput lang="en">
+                              <label class="custom-file-label" for="customFileLang">Add new File</label>
+                            </div>
+                          </form>
+                    </div>
+                    
+                 
+                </accordion-group>
+              </accordion>
+        </div>
+    </div>
+</div>
+

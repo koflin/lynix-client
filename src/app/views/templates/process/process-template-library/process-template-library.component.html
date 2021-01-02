@@ -1,8 +1,0 @@
-<app-nav title="Process Library"></app-nav>
-<div style="margin-top: 10px;">
-  <div fxFill fxLayout="column" fxLayoutGap="10px">
-    <div *ngFor="let template of templates">
-      <app-process-template-node [templateNode]="template" (selectChange)="onSelect(template.id)"></app-process-template-node>
-    </div>
-  </div>
-</div>

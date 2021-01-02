@@ -1,0 +1,7 @@
+.btn {
+  &:not(:last-child) {
+    &[tooltip] {
+      margin-right: 0;
+    }
+  }
+}

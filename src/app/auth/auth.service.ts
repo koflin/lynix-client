@@ -1,10 +1,10 @@
-import { UsersService } from 'src/app/core/users/users.service';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { User } from '../models/user';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { of } from 'rxjs';
+import { UsersService } from '../core/users/users.service';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,20 +24,13 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private usersService: UsersService,
-    ) {
+  ) { 
     this.refreshToken = localStorage.getItem('refresh_token');
 
-    /*if (this.refreshToken && this.jwtHelper.isTokenExpired(this.refreshToken)) {
-      this.http.post(this.endpoint + '/token', {
-        refresh_token: this.refreshToken
-      }, {
-        headers: this.headers
-      }).subscribe((result) => {
-        this.accessToken = result['access_token'];
-      });
-    }*/
   }
 
+
+  
   getToken() {
     //return this.accessToken;
     return null;
@@ -66,8 +59,8 @@ export class AuthService {
       })
     ).toPromise();*/
     let user = this.usersService.getByUserName(username);
-
-    if (!user) {
+      //kann theoretisch auch undefined sein
+    if (!user || user.password != password) {
       return of(false).toPromise();
     }
 

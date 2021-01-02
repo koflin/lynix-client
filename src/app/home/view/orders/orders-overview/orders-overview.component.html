@@ -1,0 +1,180 @@
+<div class=" header bg-default pb-7"  style="background-image: url(assets/img/theme/order.jpg); background-size: cover; background-position: center center;">
+  <span class=" mask bg-gradient-primary opacity-7"> </span>    
+  <app-breadcrumb-header [breadCrumbs]=breadCrumbs ></app-breadcrumb-header>
+</div>
+<div class=" container-fluid mt--6">
+    <div class=" row">
+        <div class=" col">
+            <div class="card">
+                <!-- Card header -->
+                
+                <div class="dataTables_wrapper py-4 container-fluid">
+                  <div class="row">
+                    <div class="col-6 col-md-4">
+                      <div class="dataTables_length" id="datatable_length">
+                        <label>
+                          Show
+                          <select
+                            name="datatable_length"
+                            aria-controls="datatable"
+                            class="form-control form-control-sm"
+                            (change)="entriesChange($event)"
+                          >
+                            <option value="10" [selected]="entries == 10">10</option>
+                            <option value="25" [selected]="entries == 25">25</option>
+                            <option value="50" [selected]="entries == 50">50</option>
+                            <option value="-1" [selected]="entries == -1">All</option>
+                          </select>
+                          entries
+                        </label>
+                      </div>
+                    </div>
+                    
+                    <div class="col-6 col-md-4 d-flex align-items-start ">
+                      
+                      <label class="pb-2 mr-2">Show released</label>
+                      <label class="custom-toggle" >
+                        <input type="checkbox" [(ngModel)]="showReleased">
+                        <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
+                      </label>
+                    </div>
+                    
+                    <div class="col-6 col-md-4 d-flex justify-content-end" style="padding-left: 2.5rem;">
+                      <div id="datatable_filter" class="dataTables_filter" style="float: left; width:100%">
+                        <label style="width: 100%;">
+                          <input
+                            type="search"
+                            class="form-control form-control-sm"
+                            placeholder="Search records"
+                            aria-controls="datatable"
+                            [(ngModel)]="searchValue"
+                            (keyup)="filterTable($event)"
+                          />
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-12  d-flex align-items-end justify-content-end " style="padding-right: 2.5rem;">
+                      <button [routerLink]="'/orders/draft'" class="btn btn-icon btn-3 btn-default" type="button">
+                        <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                        <span class="btn-inner--text" >Add new order</span>
+                      </button>
+                    </div>
+                  </div>
+        
+                  <ngx-datatable
+                    #myTable
+                    id="print-section"
+                    class="bootstrap selection-cell"
+                    [columnMode]="'force'"
+                    [headerHeight]="50"
+                    [footerHeight]="50"
+                    [rowHeight]="'auto'"
+                    [scrollbarH]="true"
+                    [limit]="entries != -1 ? entries : undefined"
+                    [rows]="temp"
+                    (activate)="onActivate($event)"
+                  >
+                   <!-- Row Detail Template -->
+                   <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow>
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                    <div class="container-fluid">
+                        <div class="row pl-2 pr-2">
+                            <div class="col-12"> 
+                                <p> <span class="h4"> Delivery Date: </span>  {{ row.deliveryDate | date }}</p>
+                            </div>
+                            <ng-container *ngIf="row.processGroups.length>0">
+                              <div class=" table-responsive">
+                                <table class=" table align-items-center table-flush">
+                                  <thead class=" thead-light">
+                                    <tr>
+                                      <th class=""  scope="col">Processes</th>
+
+                                      <th class=""  scope="col">Quantity</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody class=" list">
+                                    <tr *ngFor="let item of row.processGroups">
+                                      <td scope="row">
+                                        <h4 class="text-default">{{item.name}} </h4>
+                                      </td>
+                                      <td scope="row">
+                                        <p>{{item.quantityDone}}/{{item.quantityTotal}}</p>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                               
+                              </div>                              
+                            </ng-container>
+                            
+                            
+                        </div>
+                        
+                    </div>
+                    </ng-template>
+                </ngx-datatable-row-detail>
+                <!-- Column Detail Templates -->
+                <ngx-datatable-column
+                [width]=50
+                [resizeable]="false"
+                [sortable]="false"
+                [draggable]="false"
+                [canAutoResize]="false"
+               
+              >
+                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                  <a
+                    style="font-size: 30px;"
+                    class="text-default pl-1"
+                    href="javascript:void(0)"
+                    [class.datatable-icon-up]="!expanded"
+                    [class.datatable-icon-down]="expanded"
+                    title="Expand/Collapse Row"
+                    
+                  >
+                  </a>
+                </ng-template>
+              </ngx-datatable-column>
+                    <!-- Name -->
+                    <ngx-datatable-column name="name" [sortable]="true" >
+                      <ng-template let-value="value" ngx-datatable-cell-template>
+                        <p class="h3 text-default"> 
+                          {{value}}
+                        </p>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <!-- Product -->
+                    <ngx-datatable-column name="products" [sortable]="false">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                          <div *ngFor="let item of value let last = last ">
+                            <p>
+                              {{ item.quantity }}x{{item.name}}<ng-container *ngIf="!last">,</ng-container>
+                            </p> 
+                               
+                          </div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                    <!-- Edit -->
+                    <ngx-datatable-column name="status" [sortable]="true">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          
+                            <ng-container *ngIf="row.status=='in_preparation'; else elseTemplate">
+                              <button (click)="edit(row.workOderId)" class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button">
+                                <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
+                              </button>
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <p>  {{row.status}} <br> delivery date : {{ row.deliveryDate | date }}</p>
+                            </ng-template>
+                          
+
+                        </ng-template>
+                      </ngx-datatable-column>
+                   
+                    
+                  </ngx-datatable>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

@@ -1,18 +1,129 @@
-import { RolesService } from 'src/app/core/roles/roles.service';
-import { User } from 'src/app/models/user';
-import { OrdersService } from './../orders/orders.service';
-import { Step } from './../../models/step';
-import { Order } from 'src/app/models/order';
-import { ProcessTemplatesService } from './../processTemplates/process-templates.service';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Order } from 'src/app/models/order';
 import { Process } from 'src/app/models/process';
+import { Step } from 'src/app/models/step';
+import { User } from 'src/app/models/user';
+import { ProcessTemplatesService } from '../processTemplates/process-templates.service';
+import { RolesService } from '../roles/roles.service';
 import { v4 as uuidv4 } from 'uuid';
-
+import * as _ from 'lodash'
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessesService {
+
+  private _processes: any[] = [
+    {
+      companyId: 'c0',
+      id: 'p0',
+      orderId: 'o0',
+      templateId: 'pt0',
+
+      name: 'Hull',
+      mainTasks: ['Task1', 'Task2'],
+      previousComments: 'Test Comment',
+      estimatedTime: 3600,
+
+      timeTaken: 3000,
+      currentStepIndex: 1,
+      status: 'completed',
+
+      assignedUserId: '5f4411a4e9dc5b57b4a9782b',
+
+      steps: [
+        {
+          title: 'Inner Hull',
+          materials: ['Wood'],
+          toolIds: ['t0'],
+          keyMessage: 'KeyMessage1\n KeyMessage2\n',
+          tasks: 'Task1\nTask2\n',
+
+          timeTaken: 2000,
+        },
+        {
+          title: 'Outer Hull',
+          materials: ['Metal'],
+          toolIds: ['t1'],
+          keyMessage: 'KeyMessage1\n KeyMessage2\n',
+          tasks: 'Task1\nTask2\n',
+
+          timeTaken: 1000,
+        }
+      ]
+    },
+    {
+      companyId: 'c0',
+      id: 'p1',
+      orderId: 'o1',
+      templateId: 'pt0',
+
+      name: 'Hull',
+      mainTasks: ['Task1', 'Task2'],
+      previousComments: 'Test Comment',
+      estimatedTime: 3600,
+
+      timeTaken: 3500,
+      currentStepIndex: 1,
+      status: 'completed',
+
+      assignedUserId: '5f4411a4e9dc5b57b4a9782b',
+
+      steps: [
+        {
+          title: 'Inner Hull',
+          materials: ['Wood'],
+          toolIds: ['t0'],
+          keyMessage: 'KeyMessage1\n KeyMessage2\n',
+          tasks: 'Task1\nTask2\n',
+          timeTaken: 2300,
+        },
+        {
+          title: 'Outer Hull',
+          materials: ['Metal'],
+          toolIds: ['t1'],
+          keyMessage: 'KeyMessage1\n KeyMessage2\n',
+          tasks: 'Task1\nTask2\n',
+          timeTaken: 1200,
+        }
+      ]
+    },
+    {
+      companyId: 'c0',
+      id: 'p2',
+      orderId: 'o1',
+      templateId: 'pt0',
+
+      name: 'Hull',
+      mainTasks: ['Task1', 'Task2'],
+      previousComments: 'Test Comment',
+      estimatedTime: 3600,
+
+      timeTaken: 800,
+      currentStepIndex: 0,
+      status: 'in_progress',
+
+      assignedUserId: '5f4411a4e9dc5b57b4a9782b',
+
+      steps: [
+        {
+          title: 'Inner Hull',
+          materials: ['Wood'],
+          toolIds: ['t0'],
+          keyMessage: 'KeyMessage1\n KeyMessage2\n',
+          tasks: 'Task1\nTask2\n',
+          timeTaken: 800,
+        },
+        {
+          title: 'Outer Hull',
+          materials: ['Metal'],
+          toolIds: ['t1'],
+          keyMessage: 'KeyMessage1\n KeyMessage2\n',
+          tasks: 'Task1\nTask2\n',
+          timeTaken: 0,
+        }
+      ]
+    },
+  ];
 
   get processes(): Process[] {
     const storage = sessionStorage.getItem('processes');
@@ -40,17 +151,14 @@ export class ProcessesService {
     sessionStorage.setItem('processes', JSON.stringify(processes));
   }
 
-  constructor(
-    private processTemplatesService: ProcessTemplatesService,
-    private rolesService: RolesService
-    ) {
-    if (!this.processes) {
-      sessionStorage.setItem('processes', JSON.stringify([]));
-    }
-  }
-
+  constructor(private processTemplatesService: ProcessTemplatesService,
+    private rolesService: RolesService) {
+      if (!this.processes) {
+        sessionStorage.setItem('processes', JSON.stringify([]));
+      }
+     }
   getAll() {
-    return this.processes;
+  return this.processes;
   }
 
   getAssigned(assigneId: string): Process[] {
@@ -140,12 +248,17 @@ export class ProcessesService {
           status: 'released',
 
           template: processT,
-          deliveryDate: order.deliveryDate,
           estimatedTime: processT.stepTemplates.reduce((total, step) => total + step.estimatedTime, 0),
           mainTasks: processT.mainTasks,
           name: processT.name,
           previousComments: processT.previousComments,
           steps: processT.stepTemplates.map((stepT): Step => {
+            if (typeof stepT.keyMessage == 'string') {
+              stepT.keyMessage = {ops:[]}
+            }
+            if (typeof stepT.tasks == 'string') {
+              stepT.tasks = {ops:[]}
+            }
             return {
               ...stepT,
               timeTaken: 0,

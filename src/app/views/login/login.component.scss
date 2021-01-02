@@ -1,3 +1,12 @@
-.full-width {
-    width: 100%;
-}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: grayscale($color: blue);
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: grayscale($color: blue);
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: grayscale($color: blue);
+  }

@@ -5,4 +5,5 @@ export interface UserRowNode {
   firstName?: string;
   lastName?: string;
   role?: Role;
+  avatar?: string
 }

@@ -1,0 +1,9 @@
+.background-default{
+    background-color: theme-color("default")
+}
+
+/* error field */
+
+.field-error{
+    border-color: theme-color("danger") !important
+}

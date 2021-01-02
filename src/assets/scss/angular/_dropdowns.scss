@@ -1,0 +1,20 @@
+.navbar.navbar-top {
+  .dropdown .nav-link:after {
+    display: none;
+  }
+}
+.no-caret .dropdown-toggle::after {
+  display: none;
+}
+.dropdown-toggle.btn {
+  margin-right: 0;
+}
+.navbar-top {
+  @include media-breakpoint-down(xs) {
+    .nav-item {
+      .dropdown-menu {
+        left: 3% !important;
+      }
+    }
+  }
+}

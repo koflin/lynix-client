@@ -4,9 +4,8 @@ export interface OrderNode {
   workOderId: string;
   name: string;
 
-  deliveryDate: Date;
-
   status: string;
+  deliveryDate: Date
 
   products: {
     name: string;

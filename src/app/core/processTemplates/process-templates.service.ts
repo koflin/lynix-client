@@ -1,6 +1,5 @@
-import { ProcessTemplateDraft } from './../../models/ui/orderDraft';
-import { ProcessTemplate } from './../../models/processTemplate';
 import { Injectable } from '@angular/core';
+import { ProcessTemplate } from 'src/app/models/processTemplate';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
@@ -12,9 +11,8 @@ export class ProcessTemplatesService {
     if (!this.processTemplates) {
       sessionStorage.setItem('processTemplates', JSON.stringify([]));
     }
-  }
-
-  get processTemplates(): ProcessTemplate[] {
+   }
+   get processTemplates(): ProcessTemplate[] {
     const storage = sessionStorage.getItem('processTemplates');
     if (!storage) {
       return null;

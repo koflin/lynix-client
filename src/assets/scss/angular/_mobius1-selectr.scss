@@ -1,0 +1,237 @@
+//
+// selectr.scss
+// selectr plugin overrides
+//
+
+.selectr-selection__arrow {
+  display: none;
+}
+
+.selectr.selectr-container {
+  width: 100% !important;
+}
+
+.selectr-container .selectr-selected,
+.selectr-container.has-selected .selectr-selection-multiple,
+.selectr-options-container .selectr-selection-multiple,
+.selectr-options-container .selectr-input-container .selectr-input {
+  display: block;
+  width: 100%;
+  height: $input-height;
+  padding: $input-padding-y $input-padding-x !important;
+  font-size: $font-size-base;
+  line-height: $input-line-height;
+  color: $input-color;
+  background-color: $input-bg;
+  background-clip: padding-box;
+  border: $input-border-width solid $input-border-color !important;
+
+  // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
+  @if $enable-rounded {
+    // Manually use the if/else instead of the mixin to account for iOS override
+    border-radius: $input-border-radius;
+  } @else {
+    // Otherwise undo the iOS default
+    border-radius: 0;
+  }
+
+  @include box-shadow($input-box-shadow);
+  @include transition($input-transition);
+
+  // Unstyle the caret on `<select>`s in IE10+.
+  &::-ms-expand {
+    background-color: transparent;
+    border: 0;
+  }
+
+  // Customize the `:focus` state to imitate native WebKit styles.
+  @include form-control-focus();
+
+  // Placeholder
+  &::placeholder {
+    color: $input-placeholder-color;
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: 1;
+  }
+
+  // Disabled and read-only inputs
+  //
+  // HTML5 says that controls under a fieldset > legend:first-child won't be
+  // disabled if the fieldset is disabled. Due to implementation difficulty, we
+  // don't honor that edge case; we style them as disabled anyway.
+  &:disabled,
+  &[readonly] {
+    background-color: $input-disabled-bg;
+    // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
+    opacity: 1;
+  }
+}
+
+.selectr-container .selectr-selection-single .selectr-selection__rendered {
+  padding: 0;
+  overflow: inherit;
+  text-overflow: inherit;
+  white-space: inherit;
+}
+
+.selectr-options-container
+  .selectr-selection-single
+  .selectr-selection__rendered {
+  color: inherit;
+  line-height: inherit;
+}
+
+.selectr-options-container {
+  padding: $dropdown-padding-y 0;
+  background-color: $dropdown-bg;
+  border: 1px solid $input-border-color !important;
+  border-radius: $dropdown-border-radius;
+}
+
+.selectr-option {
+  padding: $dropdown-item-padding-y $input-padding-x;
+  background-color: $dropdown-link-bg;
+  color: $dropdown-link-color;
+  font-size: $font-size-sm;
+
+  @include hover-focus {
+    color: $dropdown-link-hover-color;
+    text-decoration: none;
+    @include gradient-bg($dropdown-link-hover-bg);
+  }
+}
+
+.selectr-options-container .active[aria-selected],
+.selectr-options-container .selectr-option[aria-selected="true"] {
+  background-color: $dropdown-link-active-bg;
+  color: $dropdown-link-active-color;
+}
+
+.selectr-options-container .selectr-option[aria-disabled="true"] {
+  color: $dropdown-link-disabled-color;
+}
+
+.selectr-container.has-selected .selectr-selection-multiple,
+.selectr-options-container .selectr-selection-multiple {
+  height: auto;
+  min-height: $input-height;
+}
+
+.selectr-options-container
+  .selectr-selection-multiple
+  .selectr-selection__rendered {
+  display: block;
+  margin: 0 0 -0.25rem -0.25rem;
+  padding: 0;
+}
+
+.selectr-options-container
+  .selectr-selection-multiple
+  .selectr-selection__choice {
+  display: inline-flex;
+  padding: 0 0.5rem;
+  margin: 0 0 0.25rem 0.25rem;
+  background-color: $light;
+  border: none;
+  border-radius: $border-radius-sm;
+  line-height: ($input-line-height * $font-size-base);
+  font-size: $font-size-sm;
+  color: $input-color;
+}
+
+.selectr-options-container
+  .selectr-selection-multiple
+  .selectr-selection__choice__remove {
+  order: 2;
+  margin-left: 0.5rem;
+  color: $text-muted;
+
+  &:hover {
+    color: $body-color;
+  }
+}
+
+.selectr-container .selectr-search-inline {
+  display: none;
+}
+
+.selectr-selection[aria-expanded="true"] {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+// Search bar
+
+.selectr-input-container {
+  padding: $dropdown-item-padding-y $input-padding-x;
+}
+
+.selectr-options-container .selectr-input-container .selectr-input {
+  // height: $input-height-sm;
+  padding: $input-padding-y-sm $input-padding-x-sm;
+  font-size: $font-size-sm;
+  line-height: $input-line-height-sm;
+  @include border-radius($input-border-radius-sm);
+  margin: 0;
+}
+
+// Sizing
+//
+// Makes the selectr containers respect the .form-control-sm and .form-control-lg classes
+
+.form-control-sm + .selectr-container .selectr-selection-single,
+.form-control-sm + .selectr-container.has-selected .selectr-selection-multiple,
+.form-control-sm + .selectr-options-container .selectr-selection-multiple {
+  height: $input-height-sm;
+  padding: $input-padding-y-sm $input-padding-x-sm;
+  font-size: $font-size-sm;
+  line-height: $input-line-height-sm;
+  @include border-radius($input-border-radius-sm);
+}
+
+.form-control-sm + .selectr-container.has-selected .selectr-selection-multiple,
+.form-control-sm + .selectr-options-container .selectr-selection-multiple {
+  min-height: $input-height-sm;
+}
+
+.form-control-sm
+  + .selectr-options-container
+  .selectr-selection-multiple
+  .selectr-selection__choice {
+  line-height: ($input-line-height-sm * $font-size-sm);
+}
+
+.form-control-lg + .selectr-container .selectr-selection-single,
+.form-control-lg + .selectr-container.has-selected .selectr-selection-multiple,
+.form-control-lg + .selectr-options-container .selectr-selection-multiple {
+  height: $input-height-lg;
+  padding: $input-padding-y-lg $input-padding-x-lg;
+  font-size: $font-size-lg;
+  line-height: $input-line-height-lg;
+  @include border-radius($input-border-radius-lg);
+}
+
+.form-control-lg + .selectr-container.has-selected .selectr-selection-multiple,
+.form-control-lg + .selectr-options-container .selectr-selection-multiple {
+  min-height: $input-height-lg;
+}
+
+.form-control-lg
+  + .selectr-options-container
+  .selectr-selection-multiple
+  .selectr-selection__choice {
+  line-height: ($input-line-height-lg * $font-size-lg);
+}
+.selectr-selected::before {
+  display: none;
+}
+
+.selectr-container.has-selected .selectr-selected {
+  border-color: #5e72e4 !important;
+}
+.selectr-container.has-selected.open .selectr-selected {
+  border-color: #dee2e6 !important;
+}
+.selectr-tag {
+  background: #5e72e4 !important;
+}
