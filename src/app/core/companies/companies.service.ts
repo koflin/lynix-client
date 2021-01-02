@@ -1,3 +1,4 @@
+import { ApiService } from './../api/api.service';
 import { Company } from './../../models/company';
 import { Injectable } from '@angular/core';
 
@@ -6,20 +7,10 @@ import { Injectable } from '@angular/core';
 })
 export class CompaniesService {
 
-  private companies: Company[] = [
-    {
-      companyId: 'c0',
-      name: 'Lynix'
-    },
-    {
-      companyId: 'c1',
-      name : 'Stadler Winterthur AG'
-    }
-  ];
-
-  constructor() { }
+  constructor(private api: ApiService) {
+  }
 
   getById(id: string) {
-    return this.companies.find(company => company.companyId === id);
+    return this.api.get<Company>('companies/' + id);
   }
 }

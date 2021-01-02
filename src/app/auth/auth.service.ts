@@ -1,3 +1,5 @@
+import { LocalUser } from './../models/localUser';
+import { UsersService } from 'src/app/core/users/users.service';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { JwtHelperService } from "@auth0/angular-jwt";
@@ -16,41 +18,43 @@ export class AuthService {
     'Content-Type': 'application/json'
   });
 
-  private accessToken: string;
-  private refreshToken: string;
-
   private jwtHelper = new JwtHelperService();
+
+  private localUserChange: BehaviorSubject<LocalUser>;
+  public onLocalUserChange: Observable<LocalUser>;
 
   constructor(
     private http: HttpClient,
-    private usersService: UsersService,
-  ) { 
-    this.refreshToken = localStorage.getItem('refresh_token');
-
+    private usersService: UsersService
+    ) {
+      this.localUserChange = new BehaviorSubject(this.getLocalUser());
+      this.onLocalUserChange = this.localUserChange.asObservable();
   }
 
-
-  
-  getToken() {
-    //return this.accessToken;
-    return null;
+  private get accessToken() {
+    return localStorage.getItem('access_token');
   }
 
   isLoggedIn(): boolean {
-    //return this.accessToken !== null;
-    return sessionStorage.getItem('currentUser') !== null;
+    const accessToken = this.accessToken;
+
+    if (accessToken) {
+      return !this.jwtHelper.isTokenExpired(this.accessToken);
+    }
+    return false;
   }
 
   login(username: string, password: string): Promise<boolean> {
-    /*return this.http.post<{ access_token: string, refresh_token: string, user: User }>(this.endpoint + '/login', {
+    return this.http.post<{ access_token: string, refresh_token: string, user: User }>(this.endpoint + '/login', {
       username,
       password
     }, {
       headers: this.headers
     }).pipe(
       map((result) => {
-        this.accessToken = result.access_token;
-        localStorage.setItem('refresh_token', result.refresh_token);
+
+        localStorage.setItem('access_token', result.access_token);
+        this.localUserChange.next(this.getLocalUser());
 
         return true;
       }),
@@ -69,10 +73,15 @@ export class AuthService {
   }
 
   logout() {
-    sessionStorage.removeItem('currentUser');
+    localStorage.removeItem('access_token');
+    this.localUserChange.next(this.getLocalUser());
   }
 
-  getCurrentUserId() {
-    return sessionStorage.getItem('currentUser');
+  getLocalUser(): LocalUser {
+    if (this.isLoggedIn()) {
+      return this.jwtHelper.decodeToken(this.accessToken).user;
+    }
+
+    return null;
   }
 }

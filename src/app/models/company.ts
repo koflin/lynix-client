@@ -1,6 +1,7 @@
 import { CompanyBase } from './companyBase';
 
-export interface Company extends CompanyBase {
+export interface Company {
+  id: string;
   name: string;
   logo?: string;
 }

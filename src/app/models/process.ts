@@ -5,7 +5,8 @@ import { Step } from './step';
 export interface Process extends CompanyBase {
   id: string;
   orderId: string;
-  template: ProcessTemplate;
+  //templateId: string;
+  //template: ProcessTemplate;
 
   name: string;
   mainTasks: string[];

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Order } from 'src/app/models/order';
+import { Observable, of } from 'rxjs';
 import { Process } from 'src/app/models/process';
 import { Step } from 'src/app/models/step';
 import { User } from 'src/app/models/user';
@@ -11,119 +11,6 @@ import * as _ from 'lodash'
   providedIn: 'root'
 })
 export class ProcessesService {
-
-  private _processes: any[] = [
-    {
-      companyId: 'c0',
-      id: 'p0',
-      orderId: 'o0',
-      templateId: 'pt0',
-
-      name: 'Hull',
-      mainTasks: ['Task1', 'Task2'],
-      previousComments: 'Test Comment',
-      estimatedTime: 3600,
-
-      timeTaken: 3000,
-      currentStepIndex: 1,
-      status: 'completed',
-
-      assignedUserId: '5f4411a4e9dc5b57b4a9782b',
-
-      steps: [
-        {
-          title: 'Inner Hull',
-          materials: ['Wood'],
-          toolIds: ['t0'],
-          keyMessage: 'KeyMessage1\n KeyMessage2\n',
-          tasks: 'Task1\nTask2\n',
-
-          timeTaken: 2000,
-        },
-        {
-          title: 'Outer Hull',
-          materials: ['Metal'],
-          toolIds: ['t1'],
-          keyMessage: 'KeyMessage1\n KeyMessage2\n',
-          tasks: 'Task1\nTask2\n',
-
-          timeTaken: 1000,
-        }
-      ]
-    },
-    {
-      companyId: 'c0',
-      id: 'p1',
-      orderId: 'o1',
-      templateId: 'pt0',
-
-      name: 'Hull',
-      mainTasks: ['Task1', 'Task2'],
-      previousComments: 'Test Comment',
-      estimatedTime: 3600,
-
-      timeTaken: 3500,
-      currentStepIndex: 1,
-      status: 'completed',
-
-      assignedUserId: '5f4411a4e9dc5b57b4a9782b',
-
-      steps: [
-        {
-          title: 'Inner Hull',
-          materials: ['Wood'],
-          toolIds: ['t0'],
-          keyMessage: 'KeyMessage1\n KeyMessage2\n',
-          tasks: 'Task1\nTask2\n',
-          timeTaken: 2300,
-        },
-        {
-          title: 'Outer Hull',
-          materials: ['Metal'],
-          toolIds: ['t1'],
-          keyMessage: 'KeyMessage1\n KeyMessage2\n',
-          tasks: 'Task1\nTask2\n',
-          timeTaken: 1200,
-        }
-      ]
-    },
-    {
-      companyId: 'c0',
-      id: 'p2',
-      orderId: 'o1',
-      templateId: 'pt0',
-
-      name: 'Hull',
-      mainTasks: ['Task1', 'Task2'],
-      previousComments: 'Test Comment',
-      estimatedTime: 3600,
-
-      timeTaken: 800,
-      currentStepIndex: 0,
-      status: 'in_progress',
-
-      assignedUserId: '5f4411a4e9dc5b57b4a9782b',
-
-      steps: [
-        {
-          title: 'Inner Hull',
-          materials: ['Wood'],
-          toolIds: ['t0'],
-          keyMessage: 'KeyMessage1\n KeyMessage2\n',
-          tasks: 'Task1\nTask2\n',
-          timeTaken: 800,
-        },
-        {
-          title: 'Outer Hull',
-          materials: ['Metal'],
-          toolIds: ['t1'],
-          keyMessage: 'KeyMessage1\n KeyMessage2\n',
-          tasks: 'Task1\nTask2\n',
-          timeTaken: 0,
-        }
-      ]
-    },
-  ];
 
   get processes(): Process[] {
     const storage = sessionStorage.getItem('processes');
@@ -173,16 +60,16 @@ export class ProcessesService {
     return this.processes.filter((process) => process.orderId === orderId);
   }
 
-  getForUser(user: User) {
+  getForUser(user: User): Observable<Process[]> {
     let role = this.rolesService.getById(user.roleId);
 
     if (role.premissions.includes('view')) {
-      return this.getAll();
+      return of(this.getAll());
     } else if (role.premissions.includes('execute')) {
-      return this.getAssigned(user.id);
+      return of(this.getAssigned(user.id));
     }
 
-    return [];
+    return of([]);
   }
 
   save(process: Process) {
@@ -247,7 +134,6 @@ export class ProcessesService {
           orderId: order.id,
           status: 'released',
 
-          template: processT,
           estimatedTime: processT.stepTemplates.reduce((total, step) => total + step.estimatedTime, 0),
           mainTasks: processT.mainTasks,
           name: processT.name,

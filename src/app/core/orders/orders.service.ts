@@ -1,3 +1,8 @@
+import { ApiService } from './../api/api.service';
+import { ProcessesService } from './../processes/processes.service';
+import { map } from 'rxjs/operators';
+import { ProductTemplatesService } from './../productTemplates/product-templates.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Order } from 'src/app/models/order';
 import { v4 as uuidv4 } from 'uuid';
@@ -9,118 +14,41 @@ import { ProductTempaltesService } from '../productTemplates/product-tempaltes.s
 })
 export class OrdersService {
 
-  private _orders: any[] = [
-    {
-      companyId: 'c0',
-      id: 'o0',
-      status: 'completed',
-      name: 'Order 0',
-      description: 'Order for customer 1',
-      products: [
-        {
-          templateId: 'pt0',
-          quantity: 1
-        }
-      ]
-    },
-    {
-      companyId: 'c0',
-      id: 'o1',
-      status: 'completed',
-      name: 'Order 1',
-      description: 'Order for customer 2',
-      products: [
-        {
-          templateId: 'pt0',
-          quantity: 2
-        }
-      ]
-    }
-  ];
+  private ordersChange: BehaviorSubject<string>;
+  public onOrdersChange: Observable<string>;
 
-  constructor(private prodService: ProductTempaltesService ,
-    private procService: ProcessesService) {
-      //sessionStorage.setItem('orders', JSON.stringify([]));
+  constructor(
+    private api: ApiService,
+    private prodService: ProductTemplatesService,
+    private procService: ProcessesService,
+  ) {
+    this.ordersChange = new BehaviorSubject(null);
+    this.onOrdersChange = this.ordersChange.asObservable();
+  }
 
-     }
-     get orders(): Order[] {
-      const storage = sessionStorage.getItem('orders');
-      if (!storage) {
-        return null;
-      }
-  
-      const orders = JSON.parse(storage);
-  
-      return orders.map((order) => {
-        order.deliveryDate = new Date(order.deliveryDate)
+  save(order: Order){
+    this.api.put<Order>('orders/' + order.id, order).subscribe(order => this.ordersChange.next(order.id));
+  }
 
-        order.products = order.products.map((product) => {
-          if (product.templateId) {
-            product.template = this.prodService.getById(product.templateId);
-          }
-          return product;
-        });
-        return order;
-      });
-    }
-  
-    set orders(ordersOriginal: Order[]) {
-      let orders: any = [...ordersOriginal];
-  
-      orders = orders.map((order) => {
-        order.deliveryDate = new Date(order.deliveryDate)
-        order.products = order.products.map((product) => {
-          if (product.template) {
-            product.templateId = product.template.id;
-          }
-          return product;
-        });
-        return order;
-      });
-      sessionStorage.setItem('orders', JSON.stringify(orders));
-    }
-  
-    save(orderEdited: Order) {
-      const index = this.orders.findIndex(order => order.id === orderEdited.id);
-      const updatedOrders = this.orders;
-  
-      updatedOrders[index] = orderEdited;
-      this.orders = updatedOrders;
-      
-      return this.getById(orderEdited.id);
-    }
-  
-    create(orderDraft: Order) {
-      orderDraft.id = uuidv4();
-      orderDraft.companyId = 'c0';
-  
-      this.orders = [ ...this.orders, { ...orderDraft } ];
-  
-      return this.getById(orderDraft.id);
-    }
-  
-    delete(id: string) {
-      const index = this.orders.findIndex(order => order.id === id);
-      this.orders = this.orders.splice(index, 1);
-    }
-  
-    getAll(): Order[] {
-      return this.orders;
-    }
-  
-    getById(id: string) {
-      return this.orders.find(order => order.id === id);
-    }
-  
-    publish(id: string) {
-      const index = this.orders.findIndex(order => order.id === id);
-      const updatedOrders = this.orders;
-  
-      updatedOrders[index].status = 'released';
-      this.procService.createForOrder(updatedOrders[index]);
-  
-      this.orders = updatedOrders;
-  
-      return this.getById(id);
-    }
+  create(orderDraft: Order) {
+    return this.api.post<Order>('orders', orderDraft).subscribe(order => this.ordersChange.next(order.id));
+  }
+
+  delete(id: string) {
+    this.api.delete('orders' + id).subscribe(() => this.ordersChange.next(id));
+  }
+
+  getAll() {
+    return this.api.get<Order[]>('orders');
+  }
+
+  getById(id: string) {
+    return this.api.get<Order>('orders/' + id);
+  }
+
+  publish(order: Order) {
+    order.status = 'released';
+
+    this.api.put('orders/' + order.id, order).subscribe(() => this.ordersChange.next(order.id));
+  }
 }
