@@ -1,13 +1,11 @@
 import { ApiService } from './../api/api.service';
 import { ProcessesService } from './../processes/processes.service';
 import { map } from 'rxjs/operators';
-import { ProductTemplatesService } from './../productTemplates/product-templates.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Order } from 'src/app/models/order';
 import { v4 as uuidv4 } from 'uuid';
-import { ProcessesService } from '../processes/processes.service';
-import { ProductTempaltesService } from '../productTemplates/product-tempaltes.service';
+import { ProductTemplatesService } from '../productTemplates/product-tempaltes.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +29,10 @@ export class OrdersService {
   }
 
   create(orderDraft: Order) {
-    return this.api.post<Order>('orders', orderDraft).subscribe(order => this.ordersChange.next(order.id));
+    return this.api.post<Order>('orders', orderDraft).pipe(map((order) => {
+      this.ordersChange.next(order.id);
+      return order.id;
+    }));
   }
 
   delete(id: string) {

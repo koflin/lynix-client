@@ -10,6 +10,7 @@ import { User } from 'src/app/models/user';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { Role } from 'src/app/models/role';
 import { SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-processes-overview',
@@ -60,19 +61,22 @@ export class ProcessesOverviewComponent implements OnInit {
     private router: Router,
     private processesOverviewService: ProcessesOverviewService ,
     private processesService: ProcessesService ,
-    private usersService: UsersService ,
+    private usersService: UsersService,
+    private authService: AuthService,
     private rolesService: RolesService
-  ) { 
+  ) {
 
   }
 
   ngOnInit(): void {
-    this.currentUser = this.usersService.getCurrentUser();
+    this.currentUser = this.authService.getLocalUser();
     this.role = this.rolesService.getById(this.currentUser.roleId);
     this.update();
-    this.potentialAssignees = this.processesOverviewService.getPotentialAssignees().map((d)=>{
-      return {'value': d.id, 'label':d.username}
-    })
+    this.processesOverviewService.getPotentialAssignees().subscribe(candidates => {
+      this.potentialAssignees = candidates.map((d)=>{
+        return {'value': d.id, 'label':d.username}
+      })
+    });
     this.windowWidth = window.innerWidth
 
   }
@@ -128,26 +132,24 @@ export class ProcessesOverviewComponent implements OnInit {
   }
 
   update() {
-    
-    const processNodes = this.processesOverviewService.getAll();
 
-    this.processNodeGroups.forEach((group) => {
-      group.nodes = [];
-      group.nodes.push(...processNodes.filter((node) => node.status === group.status));
+    this.processesOverviewService.getAll().subscribe((processNodes) => {
+      this.processNodeGroups.forEach((group) => {
+        group.nodes = [];
+        group.nodes.push(...processNodes.filter((node) => node.status === group.status));
+      });
+      this.nodesAreEmpty=true
+      for (let index = 0; index < this.processNodeGroups.length; index++) {
+        const element = this.processNodeGroups[index];
+        if(element.nodes.length>0){
+          this.nodesAreEmpty=false
+          break;
+        }
+      }
     });
-    this.nodesAreEmpty=true
-    for (let index = 0; index < this.processNodeGroups.length; index++) {
-      const element = this.processNodeGroups[index];
-      if(element.nodes.length>0){
-        this.nodesAreEmpty=false 
-        break;
-      } 
-    }
-    
-    console.log(this.processNodeGroups)
 
   }
-  
+
   getFullTime(seconds: number) {
     const duration = moment.duration(seconds, 'seconds');
     return Math.floor(duration.asHours()) + 'h ' + duration.minutes() + 'm ';

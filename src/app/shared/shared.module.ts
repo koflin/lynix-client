@@ -26,8 +26,9 @@ import { ProcessNodeComponent } from './process-node/process-node.component';
 import { StepGuideTabComponent } from './step-guide-tab/step-guide-tab.component';
 import { ChartBarStakedComponent } from './chart/chart-bar-staked/chart-bar-staked.component';
 import { PieChartComponent } from './chart/pie-chart/pie-chart.component';
+import { CoreModule } from '../core/core.module';
 @NgModule({
-  declarations: [TopNavigationComponent, 
+  declarations: [TopNavigationComponent,
     TabsComponent,
     BreadcrumbHeaderComponent,
     TextFieldComponent,
@@ -43,14 +44,14 @@ import { PieChartComponent } from './chart/pie-chart/pie-chart.component';
     StepGuideTabComponent,
     ChartBarStakedComponent,
     PieChartComponent,
-    
 
-    
+
+
      ],
   imports: [
     CommonModule,
     RouterModule,
-    // ngxDatatable für komplizierte Tables 
+    // ngxDatatable für komplizierte Tables
     NgxDatatableModule,
 
     ButtonsModule.forRoot(),
@@ -61,13 +62,13 @@ import { PieChartComponent } from './chart/pie-chart/pie-chart.component';
     // ngSelectModule ist für single und multiple choice inputfelder
     NgSelectModule,
     AccordionModule.forRoot(),
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
     // lodash https://lodash.com/ Nutzung für Arrays und Objekte nützlich, weil native funktionen manchmal unzuverlässig sind (deep clone, check if 2 nested objects/arrays are equal )
     // list.js für einfache Tables
     //restliche modules sind in der Dokumentation ersichtlich
-    
 
-    
+    CoreModule
+
   ],
   exports:[
     TopNavigationComponent,
@@ -100,6 +101,6 @@ import { PieChartComponent } from './chart/pie-chart/pie-chart.component';
 
 
   ]
-  
+
 })
 export class SharedModule { }

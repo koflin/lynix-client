@@ -7,6 +7,7 @@ import { ProcessTemplatesService } from '../processTemplates/process-templates.s
 import { RolesService } from '../roles/roles.service';
 import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash'
+import { Order } from 'src/app/models/order';
 @Injectable({
   providedIn: 'root'
 })

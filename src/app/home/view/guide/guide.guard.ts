@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ProcessesService } from 'src/app/core/processes/processes.service';
+import { UsersService } from 'src/app/core/users/users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class GuideGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.processesService.canWorkOn(route.paramMap.get('id'), this.authService.getLocalUser().id)) {
+    if (this.processesService.canWorkOn(state.root.paramMap.get('id'), this.authService.getLocalUser().id)) {
       return true;
     }
 

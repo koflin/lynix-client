@@ -1,10 +1,10 @@
 import { switchMap } from 'rxjs/operators';
-import { CompaniesService } from './../../../core/companies/companies.service';
-import { UserDetailNode } from './../../../models/ui/userDetailNode';
 import { Injectable } from '@angular/core';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { UsersService } from 'src/app/core/users/users.service';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { CompaniesService } from 'src/app/core/companies/companies.service';
+import { UserDetailNode } from 'src/app/models/ui/userDetailNode';
 
 @Injectable({
   providedIn: 'root'

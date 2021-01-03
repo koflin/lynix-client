@@ -5,7 +5,6 @@ import { Role } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { UserDetailNode } from 'src/app/models/ui/userDetailNode';
 import { InputOutputValue, SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
-import { UserDetailService } from './user-detail.service';
 import * as _ from 'lodash';
 import swal from 'sweetalert2';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
@@ -13,6 +12,8 @@ import { LocationStrategy } from '@angular/common';
 import { UsersService } from 'src/app/core/users/users.service';
 import { User } from 'src/app/models/user';
 import { v4 as uuidv4 } from 'uuid';
+import { AuthService } from 'src/app/auth/auth.service';
+import { UsersDetailService } from './user-detail.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -54,15 +55,16 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
   }
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private usersDetailService: UserDetailService ,
+    private usersDetailService: UsersDetailService ,
     private rolesService: RolesService,
     private usersService: UsersService,
+    private authService: AuthService
     ) {
       //history.pushState(null, null, window.location.href);
     // check if back or forward button is pressed.
     /* this.location.onPopState(() => {
         history.pushState(null, null, window.location.href);
-    });  */ 
+    });  */
      }
 
   ngOnInit(): void {
@@ -81,20 +83,20 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
   onPopState(event) {
     this.cancelModal()
   } */
-   
+
   hasUnsavedData(){
     return (! _.isEqual(this.userDetail, this.orginalUserDetail))
   }
   s(){
     let d = _.isEqual(this.userDetail, this.orginalUserDetail)
   }
-  
+
 
   save() {
     this.checkForError=true
     if (!(this.roleField.error || this.usernameField.error || this.firstname.error || this.lastname.error || this.password.error)) {
       if (this.userDetail.id==undefined) {
-        let userDraft:User = {...this.userDetail, 'companyId': this.usersService.getCurrentUser().companyId, 'roleId': this.userDetail.role.id}
+        let userDraft:User = {...this.userDetail, 'companyId': this.authService.getLocalUser().companyId, 'roleId': this.userDetail.role.id}
         this.usersService.createUser(userDraft);
       }else{
         this.usersDetailService.updateDetail(this.userDetail);
@@ -104,7 +106,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
       //this.refresh();
       this.saveModal()
     }
-    
+
   }
 
   uploadAvatar(event) {
@@ -121,11 +123,11 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
   } */
 
   refresh() {
-    
+
     if (this.userId!= 'undefined') {
-      this.userDetail = this.usersDetailService.getDetail(this.userId);
+      this.usersDetailService.getDetail(this.userId).subscribe(detail => this.userDetail = detail);
     }else{
-      this.userDetail = { 
+      this.userDetail = {
         role: undefined,
         company:undefined,
         id: undefined,
@@ -133,8 +135,8 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
         username:"",
         firstName:"",
         lastName:"",
-        avatar: undefined        
-      } 
+        avatar: undefined
+      }
     }
     this.orginalUserDetail = _.cloneDeep(this.userDetail)
     this.breadCrumbs = [{name:"Users Overview", url: "/home/users" },
@@ -144,7 +146,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     this.availableRoles = this.rolesService.getAll();
     this.availabelRolesSelection= this.availableRoles.map((r)=>{
       return {value:r.id, label:r.name}
-      
+
     })
   }
   cancelModal(){
@@ -171,7 +173,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
       this.router.navigate(['home/users']);
     } */
     this.router.navigate(['home/users']);
-    
+
   }
   deleteModal(){
 
@@ -186,7 +188,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
       cancelButtonClass: 'btn btn-secondary'
     }).then((result) => {
       if (result.value) {
-          
+
           if (this.userDetail.id) {
             this.usersService.deleteUser(this.userDetail.id);
             this.router.navigate(['home/users'])
@@ -214,8 +216,9 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
           // Show confirmation
           this.router.navigate(['home/users']);
       }else{
-        let a = this.usersService.getByUserName(this.userDetail.username)
-        this.router.navigate(['home/users/'+a.id])
+        this.usersService.getByUserName(this.userDetail.username).subscribe(user => {
+          this.router.navigate(['home/users/' + user.id])
+        });
       }
     })
     }

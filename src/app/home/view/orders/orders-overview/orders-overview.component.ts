@@ -26,7 +26,7 @@ export class OrdersOverviewComponent implements OnInit {
       this._showReleased = value
       this.filterOrders()
   }
-  
+
   @ViewChild('myTable') table: any;
   constructor(
     private router: Router,
@@ -34,22 +34,23 @@ export class OrdersOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.orderNodes = this.ordersOverviewService.getAll();
-    this.filterOrders()
-    
+    this.ordersOverviewService.getAll().subscribe(nodes => {
+      this.orderNodes = nodes;
+      this.filterOrders();
+    });
   }
 
   filterOrders(): void {
     this.temp = this.orderNodes
     .filter(f => ((f.status != 'released' && this.showReleased == false) || (this.showReleased==true) ) )
     .map((prop, key) => {
-      
+
         return {
           ...prop,
           id: key
-        }; 
-      
-      
+        };
+
+
     });
   }
 
@@ -74,16 +75,16 @@ export class OrdersOverviewComponent implements OnInit {
             return true;
           }
         }
-        
+
       }
       return false;
-    }).filter(f => ((f.status != 'released' && this.showReleased == false) || 
+    }).filter(f => ((f.status != 'released' && this.showReleased == false) ||
       (this.showReleased==true) ) ).map((prop, key) => {
-      
+
       return {
         ...prop,
         id: key
-      }; 
+      };
     })
   }
 

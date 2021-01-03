@@ -17,16 +17,16 @@ export class TopNavigationComponent implements OnInit {
   public subMenu: boolean = false;
   public activeItem: string = 'home';
   user: User;
-  
+
   constructor(
     private router: Router,
     private usersService: UsersService,
     private authService: AuthService){
   }
   ngOnInit(): void {
-    this.user = this.usersService.getCurrentUser();
+    this.user = this.authService.getLocalUser();
   }
- 
+
 
   closeOverlay() {
     history.back();
@@ -39,13 +39,13 @@ export class TopNavigationComponent implements OnInit {
   openNavigation() {
     history.pushState(null, null, 'navigation');
     this.navBar = true
-    
+
   }
   logout() {
     this.authService.logout();
     this.router.navigate(['login']);
   }
-  
+
   isActive(item) {
     return this.activeItem === item
   }

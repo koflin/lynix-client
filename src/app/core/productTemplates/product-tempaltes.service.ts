@@ -2,7 +2,6 @@ import { ApiService } from './../api/api.service';
 import { ProcessTemplateDraft } from './../../models/ui/orderDraft';
 import { ProcessTemplatesService } from './../processTemplates/process-templates.service';
 import { map } from 'rxjs/operators';
-import { ProductTemplate } from './../../models/productTemplate';
 import { Injectable } from '@angular/core';
 import { ProductTemplate } from 'src/app/models/productTemplate';
 import { v4 as uuidv4 } from 'uuid';

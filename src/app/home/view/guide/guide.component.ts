@@ -62,7 +62,7 @@ export class GuideComponent implements OnInit {
     private ordersService: OrdersService,
     private usersService: UsersService ) { }
 
-  
+
   ngOnDestroy(): void {
     this.exit();
   }
@@ -91,7 +91,7 @@ export class GuideComponent implements OnInit {
       this.updater = setInterval(this.onUpdate.bind(this), 1000);
     });
   }
- 
+
 
   onUpdate() {
     if (this.process.isRunning) {

@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from 'src/app/core/orders/orders.service';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
-import { ProductTempaltesService } from 'src/app/core/productTemplates/product-tempaltes.service';
 import { Order } from 'src/app/models/order';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { trigger, transition, query, style, animate, group } from '@angular/animations';
 import { InputOutputValue } from 'src/app/shared/models/InputOutputValue';
 import swal from 'sweetalert2';
 import {deletingDataInformation} from 'src/app/models/ui/deletingData'
+import { ProductTemplatesService } from 'src/app/core/productTemplates/product-tempaltes.service';
 const left = [
   query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
   group([
@@ -55,7 +55,7 @@ export class OrdersDraftComponent implements OnInit {
 
   }
   breadCrumbs: BreadCrumbInfo[] = [{name:"Order Overview", url: "/orders/overview"}, {name:"Order Draft", url: this.router.url },];
- 
+
   //productsNames:string[]=[]
   get productsNames():string[]{
     return this.orderDraft.products.filter((p) => {
@@ -72,10 +72,10 @@ export class OrdersDraftComponent implements OnInit {
         return p.template
       }).map((process)=>{
         return process.template.name
-      }) 
+      })
     }
     return []
-    
+
   }
   _stepsName:string[]=[]
   get stepsName():string[]{
@@ -84,11 +84,11 @@ export class OrdersDraftComponent implements OnInit {
         return p.title
       }).map((process)=>{
         return process.title
-      }) 
+      })
     }
     return []
-    
-  } 
+
+  }
   _stepToggleId:number
   get stepToggleId(){
     return this._stepToggleId
@@ -107,7 +107,7 @@ export class OrdersDraftComponent implements OnInit {
   }
   _productToggleId:number
   get productToggleId(){
-    
+
     return this._productToggleId
   }
   set productToggleId(value){
@@ -116,16 +116,16 @@ export class OrdersDraftComponent implements OnInit {
     this.stepToggleId=undefined
     this.processToggleId=undefined
   }
-  
-  
+
+
   isEdited: false;
-  
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private ordersService: OrdersService,
-    private productTemplatesService: ProductTempaltesService,
     private processTemplatesService: ProcessTemplatesService,
+    private productTemplatesService: ProductTemplatesService
   ) { }
 
   ngOnInit(): void {
@@ -133,7 +133,9 @@ export class OrdersDraftComponent implements OnInit {
       const id = params.get('id');
 
       if (id) {
-        this.orderDraft = this.ordersService.getById(id);
+        this.ordersService.getById(id).subscribe(draft => {
+          this.orderDraft = draft;
+        });
       } else {
         this.orderDraft = {
           companyId: null,
@@ -146,10 +148,10 @@ export class OrdersDraftComponent implements OnInit {
         };
         //this.insertDummyData();
       }
-      
+
       //this.productsNames=['d', 'd', 'd', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd']
-      
-      
+
+
 
     });
   }
@@ -167,7 +169,7 @@ export class OrdersDraftComponent implements OnInit {
     this.productToggleId=undefined
     this.stepToggleId=undefined
   }
-  
+
 
   discardDraft() {
     // Ask if really want to discard changes
@@ -185,9 +187,9 @@ export class OrdersDraftComponent implements OnInit {
     }
 
     if (this.orderDraft.id) {
-      this.orderDraft = this.ordersService.save(this.orderDraft);
+      this.ordersService.save(this.orderDraft);
     } else {
-      const id = this.ordersService.create(this.orderDraft).id;
+      const id = this.ordersService.create(this.orderDraft);
       this.router.navigate(['orders/draft/' + id]);
     }
 
@@ -205,7 +207,7 @@ export class OrdersDraftComponent implements OnInit {
 
   publishDraft() {
     this.saveDraft(true);
-    this.ordersService.publish(this.orderDraft.id);
+    this.ordersService.publish(this.orderDraft);
     this.router.navigate(['orders/overview']);
   }
 
@@ -257,7 +259,7 @@ export class OrdersDraftComponent implements OnInit {
       }
     })
     }
-    
+
   }
   publishModal(){
     swal.fire({
@@ -297,10 +299,10 @@ export class OrdersDraftComponent implements OnInit {
       }
     })
   }
-  
+
   deleting(data: deletingDataInformation){
     switch (data.tabContainerPublicName ) {
-      
+
       case 'step':
         if (data.tabId>0) {
           this.stepToggleId=data.tabId-1
@@ -342,25 +344,25 @@ export class OrdersDraftComponent implements OnInit {
         deletingData.parentTabId=this.processToggleId
         deletingData.tabId=this.stepToggleId
         deletingData.tabName= this.stepsName[this.stepToggleId]
-        deletingData.tabContainerPublicName='step' 
+        deletingData.tabContainerPublicName='step'
         break;
       case 'processes':
         deletingData.parentTabId=this.productToggleId
         deletingData.tabId=this.processToggleId
         deletingData.tabName= this.processesNames[this.processToggleId]
-        deletingData.tabContainerPublicName='process' 
+        deletingData.tabContainerPublicName='process'
         break;
       case 'product':
         deletingData.parentTabId=0
         deletingData.tabId=this.productToggleId
         deletingData.tabName= this.productsNames[this.productToggleId]
-        deletingData.tabContainerPublicName='product' 
+        deletingData.tabContainerPublicName='product'
         break;
       default:
         deletingData.parentTabId=undefined
         deletingData.tabId=0
         deletingData.tabName= this.orderDraft.name
-        deletingData.tabContainerPublicName='order' 
+        deletingData.tabContainerPublicName='order'
         break;
     }
     return deletingData

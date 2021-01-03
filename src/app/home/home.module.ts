@@ -15,6 +15,8 @@ import { GuideComponent } from './view/guide/guide.component';
 import { GuideGuard } from './view/guide/guide.guard';
 import { ProductTemplateLibraryComponent } from './view/templates/product-template-library/product-template-library.component';
 import { ProcessTemplateLibraryComponent } from './view/templates/process-template-library/process-template-library.component';
+import { CoreModule } from '../core/core.module';
+import { UsersDetailService } from './view/users/user-detail/user-detail.service';
 
 
 @NgModule({
@@ -30,16 +32,16 @@ import { ProcessTemplateLibraryComponent } from './view/templates/process-templa
     GuideComponent,
     ProductTemplateLibraryComponent,
     ProcessTemplateLibraryComponent,
-    
+    UsersDetailService
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     SharedModule,
-    
+    CoreModule
   ],
   bootstrap: [],
   providers:[HasUnsavedDataGuard, GuideGuard ]
-  
+
 })
 export class HomeModule { }

@@ -52,7 +52,7 @@ export class UsersOverviewComponent implements OnInit {
             return true;
           }
         }
-        
+
       }
       return false;
     }).map((u)=>{
@@ -67,20 +67,21 @@ export class UsersOverviewComponent implements OnInit {
       }else{
         row.hidden=true
       }
-      
+
     }
   }
   refresh() {
-    this.userRows = this.usersOverviewService.getRows();
+    this.usersOverviewService.getRows().subscribe(rows => this.userRows = rows);
+
     this.temp = this.userRows.map((prop, key) => {
-      
+
       return {
         ...prop,
-        
-      }; 
-    
-    
-    
+
+      };
+
+
+
   });
   console.log(this.temp)
   }
@@ -92,7 +93,7 @@ export class UsersOverviewComponent implements OnInit {
     a.remove()
     //this.usersService.deleteUser(id);
     this.refresh();
-    
+
   }
   deleteModal(id:string){
 
@@ -108,14 +109,14 @@ export class UsersOverviewComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let a = document.getElementById(id)
-        
+
           this.removeUser(id)
           // Show confirmation
           //this.deleteDraft()
       }
     })
   }
-  
-  
+
+
 
 }

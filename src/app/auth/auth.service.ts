@@ -3,8 +3,10 @@ import { UsersService } from 'src/app/core/users/users.service';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { of } from 'rxjs';
-import { UsersService } from '../core/users/users.service';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { ApiService } from '../core/api/api.service';
+import { catchError, map } from 'rxjs/operators';
+import { User } from '../models/user';
 
 
 
@@ -25,6 +27,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
+    private api: ApiService,
     private usersService: UsersService
     ) {
       this.localUserChange = new BehaviorSubject(this.getLocalUser());
@@ -45,11 +48,9 @@ export class AuthService {
   }
 
   login(username: string, password: string): Promise<boolean> {
-    return this.http.post<{ access_token: string, refresh_token: string, user: User }>(this.endpoint + '/login', {
+    return this.api.post<{ access_token: string, refresh_token: string, user: User }>(this.endpoint + '/login', {
       username,
       password
-    }, {
-      headers: this.headers
     }).pipe(
       map((result) => {
 
@@ -61,15 +62,7 @@ export class AuthService {
       catchError((error, caught) => {
         return of(false);
       })
-    ).toPromise();*/
-    let user = this.usersService.getByUserName(username);
-      //kann theoretisch auch undefined sein
-    if (!user || user.password != password) {
-      return of(false).toPromise();
-    }
-
-    sessionStorage.setItem('currentUser', user.id);
-    return of(true).toPromise();
+    ).toPromise();
   }
 
   logout() {

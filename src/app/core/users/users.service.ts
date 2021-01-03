@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 import { Permission } from 'src/app/models/role';
 import { User } from 'src/app/models/user';
 import { v4 as uuidv4 } from 'uuid';
-import { RolesService } from '../roles/roles.service';
 
 @Injectable({
   providedIn: 'root'

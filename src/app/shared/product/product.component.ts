@@ -21,9 +21,9 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.setProcessOptions()
     this.setIgnoreProcessesOptions()
-    
+
   }
-  
+
   productSelector($e, index) {
     if ($e) {
       if ($e.hasOwnProperty('value')) {
@@ -31,18 +31,20 @@ export class ProductComponent implements OnInit {
         if (this.productTemplate.processes[index].template) {
           if (this.productTemplate.processes[index].template.id != $e.value) {
             set = true
-          }         
+          }
         }else{
           set = true
         }
         if(set && $e){
-          this.productTemplate.processes[index].template = this.processTemplatesService.getById($e.value)
-          this.setIgnoreProcessesOptions()
-          this.productTemplateChange.emit(this.productTemplate)
+          this.processTemplatesService.getById($e.value).subscribe((template) => {
+            this.productTemplate.processes[index].template = template;
+            this.setIgnoreProcessesOptions();
+            this.productTemplateChange.emit(this.productTemplate);
+          });
         }
       }else{
         if ($e.label) {
-          this.productTemplate.processes[index].template= this.processTemplatesService.create({
+          this.processTemplatesService.create({
               companyId: null,
               id: null,
               name: $e.label,
@@ -66,21 +68,24 @@ export class ProductComponent implements OnInit {
     });
   }
   setProcessOptions(){
-    let temp = this.processTemplatesService.getAll()
-    this.processOptions = temp.map((t)=> {
-      return {value: t.id, label:t.name}
-    })
+    this.processTemplatesService.getAll().subscribe((temp) => {
+      this.processOptions = temp.map((t)=> {
+        return {value: t.id, label:t.name}
+      });
+    });
   }
+
   setIgnoreProcessesOptions(){
-    this.ignoreOptions = this.processTemplatesService.getAll().filter((product) => {
-      return this.productTemplate.processes.findIndex(processUsed => processUsed.template && processUsed.template.id === product.id) !== -1;
-    }).map((t)=> {
-      return {value: t.id, label:t.name}
-    })
-
+    this.processTemplatesService.getAll().subscribe((templates) => {
+      this.ignoreOptions = templates.filter((product) => {
+        return this.productTemplate.processes.findIndex(processUsed => processUsed.template && processUsed.template.id === product.id) !== -1;
+      }).map((t)=> {
+        return {value: t.id, label:t.name}
+      });
+    });
   }
 
-  
-  
+
+
 
 }

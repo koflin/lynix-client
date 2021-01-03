@@ -10,6 +10,7 @@ import { ProcessGroupNode } from 'src/app/models/ui/processGroupNode';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Process } from 'src/app/models/process';
+import { UserRowNode } from 'src/app/models/ui/userRowNode';
 
 @Injectable({
   providedIn: 'root'
