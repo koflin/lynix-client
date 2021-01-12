@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Process } from 'src/app/models/process';
 import { Step } from 'src/app/models/step';
 import { User } from 'src/app/models/user';
@@ -8,60 +8,41 @@ import { RolesService } from '../roles/roles.service';
 import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash'
 import { Order } from 'src/app/models/order';
+import { ApiService } from '../api/api.service';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessesService {
 
-  get processes(): Process[] {
-    const storage = sessionStorage.getItem('processes');
-    if (!storage) {
-      return null;
-    }
+  private processChange: BehaviorSubject<string>;
+  public onProcessChange: Observable<string>;
 
-    const processes = JSON.parse(storage);
-
-    return processes.map((process) => {
-      process.template = this.processTemplatesService.getById(process.templateId);
-
-      return process;
-    });
+  constructor(
+    private api: ApiService,
+  ) {
+    this.processChange = new BehaviorSubject(null);
+    this.onProcessChange = this.processChange.asObservable();
   }
 
-  set processes(processesOriginal: Process[]) {
-    let processes: any[] = processesOriginal;
-
-    processes = processes.map((process) => {
-      process.templateId = process.template.id;
-      return process;
-    });
-
-    sessionStorage.setItem('processes', JSON.stringify(processes));
-  }
-
-  constructor(private processTemplatesService: ProcessTemplatesService,
-    private rolesService: RolesService) {
-      if (!this.processes) {
-        sessionStorage.setItem('processes', JSON.stringify([]));
-      }
-     }
   getAll() {
-  return this.processes;
+    return this.api.get<Process[]>('process');
   }
 
-  getAssigned(assigneId: string): Process[] {
-    return this.processes.filter(process => process.assignedUserId === assigneId);
+  getAssigned(assigneeId: string) {
+    return this.api.get<Process[]>('process', { assignedUserId: assigneeId } );
   }
 
   getById(id: string) {
-    return this.processes.find(process => process.id === id);
+    return this.api.get<Process>('process/' + id);
   }
 
   getByOrderId(orderId: string) {
-    return this.processes.filter((process) => process.orderId === orderId);
+    return this.api.get<Process[]>('process', { orderId: orderId } );
   }
 
-  getForUser(user: User): Observable<Process[]> {
+  // TODO Not implemented yet
+  /*getForUser(user: User): Observable<Process[]> {
     let role = this.rolesService.getById(user.roleId);
 
     if (role.premissions.includes('view')) {
@@ -71,57 +52,30 @@ export class ProcessesService {
     }
 
     return of([]);
-  }
+  }*/
 
   save(process: Process) {
-    const index = this.processes.findIndex(proc => proc.id === process.id);
-    const updatedProcess = this.processes;
-
-    updatedProcess[index] = process;
-    this.processes = updatedProcess;
-
-    return this.getById(process.id);
+    this.api.put<Process>('process/' + process.id, process).subscribe(process => this.processChange.next(process.id));
   }
 
   canWorkOn(processId: string, userId: string) {
-    return this.processes.find(process => process.id === processId).assignedUserId === userId;
+    return this.getById(processId).pipe(map(process => process.assignedUserId === userId));
   }
 
-  start(id: string) {
-    const index = this.processes.findIndex(process => process.id === id);
-
-    const updatedProcesses = this.processes;
-    updatedProcesses[index].status = 'in_progress';
-    //updatedProcesses[index].isOccupied = true;
-
-    this.processes = updatedProcesses;
+  start(id: string, userId: string) {
+    this.api.put('process/' + id + '/start', { userId }).subscribe(() => this.processChange.next(id));
   }
 
   stop(id: string) {
-    const index = this.processes.findIndex(process => process.id === id);
-
-    const updatedProcesses = this.processes;
-    //updatedProcesses[index].isOccupied = false;
-
-    this.processes = updatedProcesses;
+    this.api.put('process/' + id + '/stop').subscribe(() => this.processChange.next(id));
   }
 
   assign(processId: string, assigneeId: string) {
-    const index = this.processes.findIndex(process => process.id === processId);
-
-    const updatedProcesses = this.processes;
-    updatedProcesses[index].assignedUserId = assigneeId;
-
-    this.processes = updatedProcesses;
+    this.api.put('process/' + processId + '/assign', { assigneeId }).subscribe(() => this.processChange.next(processId));
   }
 
   finish(id: string) {
-    const index = this.processes.findIndex(process => process.id === id);
-
-    const updatedProcesses = this.processes;
-    updatedProcesses[index].status = 'completed';
-
-    this.processes = updatedProcesses;
+    this.api.put('process/' + id + '/finish').subscribe(() => this.processChange.next(id));
   }
 
   createForOrder(order: Order) {

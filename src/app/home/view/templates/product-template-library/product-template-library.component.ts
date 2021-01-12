@@ -23,7 +23,7 @@ export class ProductTemplateLibraryComponent implements OnInit {
     private productTemplateLibraryService: ProductTemplateLibraryService) { }
 
   ngOnInit(): void {
-    this.templates = this.productTemplateLibraryService.getAll();
+    this.productTemplateLibraryService.getAll().subscribe(templates => this.templates = templates);
     console.log(this.templates)
     this.windowWidth = window.innerWidth
   }

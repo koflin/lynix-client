@@ -23,8 +23,7 @@ export class ProcessTemplateLibraryComponent implements OnInit {
     private processTemplateLibraryService: ProcessTemplateLibraryService ) { }
 
   ngOnInit(): void {
-    this.templates = this.processTemplateLibraryService.getAll();
-    console.log(this.templates)
+    this.processTemplateLibraryService.getAll().subscribe(templates => this.templates = templates);
     this.windowWidth = window.innerWidth
   }
   onActivate($event){
