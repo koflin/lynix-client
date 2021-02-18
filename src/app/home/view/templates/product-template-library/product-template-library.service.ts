@@ -22,6 +22,7 @@ export class ProductTemplateLibraryService {
             return {
               id: processT.id,
               name: processT.name,
+              quantity: process.quantity,
               description: null,
               selected: false,
             };

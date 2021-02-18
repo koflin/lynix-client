@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './home/home.module';
-import { CoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -16,9 +15,9 @@ import { CoreModule } from './core/core.module';
     LoginComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     HttpClientModule,
     FormsModule,
     HomeModule

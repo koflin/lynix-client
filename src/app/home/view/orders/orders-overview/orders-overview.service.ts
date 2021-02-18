@@ -24,21 +24,23 @@ export class OrdersOverviewService {
           name: string;
         }[] = [];
 
-        this.processesService.getByOrderId(order.id).forEach((process) => {
-          const group = processGroups.find(g =>  g.id === process.templateId);
-          const done = process.status === 'completed' ? 1 : 0;
+        this.processesService.getByOrderId(order.id).subscribe(processes => {
+          processes.forEach((process) => {
+            const group = processGroups.find(g =>  g.id === process.templateId);
+            const done = process.status === 'completed' ? 1 : 0;
 
-          if (group) {
-            group.quantityDone += done;
-            group.quantityTotal += 1;
-          } else {
-            processGroups.push({
-              id: process.templateId,
-              quantityDone: done,
-              quantityTotal: 1,
-              name: process.name
-            });
-          }
+            if (group) {
+              group.quantityDone += done;
+              group.quantityTotal += 1;
+            } else {
+              processGroups.push({
+                id: process.templateId,
+                quantityDone: done,
+                quantityTotal: 1,
+                name: process.name
+              });
+            }
+          });
         });
 
         return {

@@ -91,7 +91,7 @@ export class ProcessesOverviewComponent implements OnInit {
   }
 
   onStart(id: string) {
-    this.processesService.start(id);
+    this.processesService.start(id, this.currentUser.id);
     this.update();
     this.router.navigate(['guide/' + id]);
   }
@@ -190,7 +190,7 @@ export class ProcessesOverviewComponent implements OnInit {
       }
   }
   start(processId){
-    this.processesService.start(processId);
+    this.processesService.start(processId, this.currentUser.id);
     this.update();
     this.router.navigate(['guide/' + processId]);
   }

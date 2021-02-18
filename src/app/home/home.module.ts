@@ -1,3 +1,4 @@
+import { ApiService } from './../core/api/api.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './view/dashboard/dashboard.component';
@@ -15,8 +16,7 @@ import { GuideComponent } from './view/guide/guide.component';
 import { GuideGuard } from './view/guide/guide.guard';
 import { ProductTemplateLibraryComponent } from './view/templates/product-template-library/product-template-library.component';
 import { ProcessTemplateLibraryComponent } from './view/templates/process-template-library/process-template-library.component';
-import { CoreModule } from '../core/core.module';
-import { UsersDetailService } from './view/users/user-detail/user-detail.service';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -31,14 +31,12 @@ import { UsersDetailService } from './view/users/user-detail/user-detail.service
     ProcessesOverviewComponent,
     GuideComponent,
     ProductTemplateLibraryComponent,
-    ProcessTemplateLibraryComponent,
-    UsersDetailService
+    ProcessTemplateLibraryComponent
   ],
   imports: [
-    CommonModule,
     HomeRoutingModule,
-    SharedModule,
-    CoreModule
+    CommonModule,
+    SharedModule
   ],
   bootstrap: [],
   providers:[HasUnsavedDataGuard, GuideGuard ]

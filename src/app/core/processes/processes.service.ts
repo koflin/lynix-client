@@ -26,19 +26,19 @@ export class ProcessesService {
   }
 
   getAll() {
-    return this.api.get<Process[]>('process');
+    return this.api.get<Process[]>('processes');
   }
 
   getAssigned(assigneeId: string) {
-    return this.api.get<Process[]>('process', { assignedUserId: assigneeId } );
+    return this.api.get<Process[]>('processes', { assignedUserId: assigneeId } );
   }
 
   getById(id: string) {
-    return this.api.get<Process>('process/' + id);
+    return this.api.get<Process>('processes/' + id);
   }
 
   getByOrderId(orderId: string) {
-    return this.api.get<Process[]>('process', { orderId: orderId } );
+    return this.api.get<Process[]>('processes', { orderId: orderId } );
   }
 
   // TODO Not implemented yet
@@ -55,7 +55,7 @@ export class ProcessesService {
   }*/
 
   save(process: Process) {
-    this.api.put<Process>('process/' + process.id, process).subscribe(process => this.processChange.next(process.id));
+    this.api.put<Process>('processes/' + process.id, process).subscribe(process => this.processChange.next(process.id));
   }
 
   canWorkOn(processId: string, userId: string) {
@@ -63,59 +63,38 @@ export class ProcessesService {
   }
 
   start(id: string, userId: string) {
-    this.api.put('process/' + id + '/start', { userId }).subscribe(() => this.processChange.next(id));
+    this.api.put('processes/' + id + '/start', { userId }).subscribe(() => this.processChange.next(id));
   }
 
   stop(id: string) {
-    this.api.put('process/' + id + '/stop').subscribe(() => this.processChange.next(id));
+    this.api.put('processes/' + id + '/stop').subscribe(() => this.processChange.next(id));
   }
 
   assign(processId: string, assigneeId: string) {
-    this.api.put('process/' + processId + '/assign', { assigneeId }).subscribe(() => this.processChange.next(processId));
+    this.api.put('processes/' + processId + '/assign', { assigneeId }).subscribe(() => this.processChange.next(processId));
   }
 
   finish(id: string) {
-    this.api.put('process/' + id + '/finish').subscribe(() => this.processChange.next(id));
+    this.api.put('processes/' + id + '/finish').subscribe(() => this.processChange.next(id));
   }
 
   createForOrder(order: Order) {
     order.products.forEach((product) => {
       product.template.processes.forEach((process) => {
-        const processT = process.template;
+        const templateId = process.template.id;
 
-        const processInstance: Process = {
-          companyId: 'c0',
-          id: null,
-          orderId: order.id,
-          status: 'released',
-
-          estimatedTime: processT.stepTemplates.reduce((total, step) => total + step.estimatedTime, 0),
-          mainTasks: processT.mainTasks,
-          name: processT.name,
-          previousComments: processT.previousComments,
-          steps: processT.stepTemplates.map((stepT): Step => {
-            if (typeof stepT.keyMessage == 'string') {
+        /* CAST QUERY FOR MESSAGE FIELDS
+        if (typeof stepT.keyMessage == 'string') {
               stepT.keyMessage = {ops:[]}
             }
             if (typeof stepT.tasks == 'string') {
               stepT.tasks = {ops:[]}
             }
-            return {
-              ...stepT,
-              timeTaken: 0,
-              estimatedTime: 0
-            };
-          }),
-          timeTaken: 0,
-          currentStepIndex: null,
-          assignedUserId: null,
-          isOccupied: false,
-          isRunning: false,
-        };
+        */
 
         for (let i = 0; i < product.quantity; i++) {
           for (let j = 0; j < process.quantity; j++) {
-            this.processes = [...this.processes, {...processInstance, id: uuidv4() }];
+            this.api.post<Process>('processes', { orderId: order.id, templateId }).subscribe((process) => this.processChange.next(process.id));
           }
         }
       });

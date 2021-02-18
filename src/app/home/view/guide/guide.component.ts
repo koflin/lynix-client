@@ -71,15 +71,27 @@ export class GuideComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
 
-      this.process = this.processesService.getById(id);
-      this.breadCrumbs=[{name:"Process Overview", url: "/processes/overview" }, {name:'Process: ' + this.process.name , url: this.router.url},];
-      this.stepNames = this.process.steps.map((s)=>{
-        return s.title
-      })
-      this.stepNames.unshift("Overview")
-      this.stepNames.push("Finish")
-      this.order = this.ordersService.getById(this.process.orderId)
-      this.assignee= this.usersService.getById(this.process.assignedUserId)
+      if (id) {
+        this.processesService.onProcessChange.subscribe((changedId) => {
+          if (changedId === id) {
+            this.processesService.getById(id).subscribe(process => {
+              this.process = process;
+
+              this.ordersService.getById(this.process.orderId).subscribe(order => this.order = order);
+              this.usersService.getById(this.process.assignedUserId).subscribe(assignee => this.assignee = assignee);
+
+              this.breadCrumbs=[{name:"Process Overview", url: "/processes/overview" }, {name:'Process: ' + this.process.name , url: this.router.url},];
+              this.stepNames = this.process.steps.map((s)=>{
+                return s.title
+              })
+              this.stepNames.unshift("Overview")
+              this.stepNames.push("Finish")
+            });
+          }
+        });
+
+        this.updater = setInterval(this.onUpdate.bind(this), 1000);
+      }
       console.log(this.order, this.process)
       /* this.dataSource = new MatTableDataSource(this.process.steps.map((step, index) => {
         return {
@@ -87,8 +99,6 @@ export class GuideComponent implements OnInit {
           index: index + 1
         };
       })); */
-
-      this.updater = setInterval(this.onUpdate.bind(this), 1000);
     });
   }
 
@@ -119,10 +129,12 @@ export class GuideComponent implements OnInit {
   }
 
   onResume() {
+    this.processesService.start(this.process.id, this.assignee.id);
     this.process.isRunning = true;
   }
 
   onStop() {
+    this.processesService.stop(this.process.id);
     this.process.isRunning = false;
   }
 
@@ -150,6 +162,7 @@ export class GuideComponent implements OnInit {
   onFinish() {
     this.process.status = 'completed';
     this.exit();
+    this.processesService.finish(this.process.id);
     this.router.navigate(['processes/overview']);
   }
 

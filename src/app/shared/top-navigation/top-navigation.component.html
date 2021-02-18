@@ -2,9 +2,9 @@
 <nav class="navbar navbar-expand-lg sticky desktop_nav navigation_bar">
     <div class="d-flex justify-content-between" style="width: 100%;">
       <a class="navbar-brand" routerLink="/home/dashboard"><img style="object-fit: scale-down;" src="assets/img/Logo_Lynix_RGB.svg"></a>
-      
+
       <p class="d-none d-lg-block text-default" style="padding-top:10px"> SMART ASSISTANT SYSTEM </p>
-      
+
       <div class="navbar-toggle">
         <div class="menu-icon-margin">
             <i class="fas fa-bars" style="font-size: 36px;" (click)="openNavigation()"></i>
@@ -12,21 +12,21 @@
     </div>
     </div>
   </nav>
-  
-  
-  
+
+
+
   <!-- Navbar -->
   <a  class="overlay-sidebar-header" [class.show]="navBar" (click)="closeOverlay()"></a>
   <div class="sidenav" [class.open]="navBar">
-    <nav [class.openSidebar]="openSide">
-       
+    <nav [class.openSidebar]="openSide" *ngIf="user" >
+
         <div class="col-12 pl-4" style="padding-top:20px">
           <div  class="avatar rounded-circle" style=" background-color: aliceblue;">
             <img alt="Image placeholder image-fit-round"  class="image-fit-round"
             style=""  [src]="(user.avatar) ? user.avatar :  'assets/img/nopicture.png'">
-            
+
         </div>
-          
+
           <h5>{{ user.firstName + ' ' + user.lastName }}</h5>
         </div>
         <nav>
@@ -34,17 +34,17 @@
               <li class="nav-item active card menu-card-bottom-margin zooming" (click)="logout()">
                 <a class="nav-link menu-card-a-padding">
                   <div class="d-flex align-items-center">
-                    <i class="icon icon-log-out icon-big item-icon mt--1"></i> <span>Logout</span> 
+                    <i class="icon icon-log-out icon-big item-icon mt--1"></i> <span>Logout</span>
                   </div>
                 </a>
-                
-  
+
+
               </li>
-              
+
               <li class="nav-item dropdown card menu-card-bottom-margin zooming ">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('order')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
-                    <i class="icon icon-hierarchy-56 icon-big item-icon mt--1"></i> <span>Order</span> 
+                    <i class="icon icon-hierarchy-56 icon-big item-icon mt--1"></i> <span>Order</span>
                   </div>
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('order')" aria-labelledby="navbarDropdownMenuLink">
@@ -56,18 +56,18 @@
               <li class="nav-item dropdown card menu-card-bottom-margin zooming ">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('process')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
-                    <i class="icon icon-configuration-tool icon-big item-icon mt--1"></i> <span>Process</span> 
+                    <i class="icon icon-configuration-tool icon-big item-icon mt--1"></i> <span>Process</span>
                   </div>
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('process')" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item h4 zooming" routerLink="/home/processes/overview" >Overview</a>
-                
+
 
                 </div>
               </li><li class="nav-item dropdown card menu-card-bottom-margin zooming ">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('template')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
-                    <i class="icon icon-web-design-2 icon-big item-icon mt--1"></i> <span>Template</span> 
+                    <i class="icon icon-web-design-2 icon-big item-icon mt--1"></i> <span>Template</span>
                   </div>
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('template')" aria-labelledby="navbarDropdownMenuLink">
@@ -80,9 +80,9 @@
               </li><li class="nav-item dropdown card menu-card-bottom-margin zooming ">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('admin')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
-                    <i class="icon icon-folder-shared icon-big item-icon mt--1"></i> <span>Administration</span> 
+                    <i class="icon icon-folder-shared icon-big item-icon mt--1"></i> <span>Administration</span>
                   </div>
-                  
+
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('admin')" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item h4 zooming" routerLink="/home/user" >Users</a>
@@ -90,8 +90,8 @@
 
                 </div>
               </li>
-                
-                
+
+
               </ul>
         </nav>
     </nav>

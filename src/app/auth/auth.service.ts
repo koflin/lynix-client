@@ -15,11 +15,6 @@ import { User } from '../models/user';
 })
 export class AuthService {
 
-  private endpoint = 'http://localhost:3000/v0/auth';
-  private headers = new HttpHeaders({
-    'Content-Type': 'application/json'
-  });
-
   private jwtHelper = new JwtHelperService();
 
   private localUserChange: BehaviorSubject<LocalUser>;
@@ -48,7 +43,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Promise<boolean> {
-    return this.api.post<{ access_token: string, refresh_token: string, user: User }>(this.endpoint + '/login', {
+    return this.api.post<{ access_token: string, refresh_token: string, user: User }>('auth/login', {
       username,
       password
     }).pipe(

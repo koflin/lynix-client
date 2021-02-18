@@ -1,3 +1,4 @@
+import { LocalUser } from './../../models/localUser';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -16,6 +17,7 @@ export class TopNavigationComponent implements OnInit {
   public openSide: boolean = false;
   public subMenu: boolean = false;
   public activeItem: string = 'home';
+  localUser: LocalUser;
   user: User;
 
   constructor(
@@ -24,7 +26,8 @@ export class TopNavigationComponent implements OnInit {
     private authService: AuthService){
   }
   ngOnInit(): void {
-    this.user = this.authService.getLocalUser();
+    this.localUser = this.authService.getLocalUser();
+    this.usersService.getById(this.localUser.id).subscribe(user => this.user = user);
   }
 
 

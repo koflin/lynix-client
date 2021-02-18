@@ -1,5 +1,5 @@
 <div class=" header bg-default pb-7"  style="background-image: url(assets/img/theme/template.jpg); background-size: cover; background-position: center center;">
-    <span class=" mask bg-gradient-primary opacity-7"> </span>    
+    <span class=" mask bg-gradient-primary opacity-7"> </span>
     <app-breadcrumb-header [breadCrumbs]=breadCrumbs ></app-breadcrumb-header>
 </div>
 <div class=" container-fluid mt--4">
@@ -18,7 +18,7 @@
                     <div class="card-body pl-0 pr-0 pt-0">
                         <ngx-datatable
                             #myTable
-                            
+
                             class="bootstrap selection-cell"
                             [columnMode]="'force'"
                             [headerHeight]="50"
@@ -26,22 +26,22 @@
                             [rowHeight]="'auto'"
                             [scrollbarH]="true"
                             [scrollbarV]="false"
-                            
+
                             [rows]="templates"
-                            
+
                         >
                         <!-- Row Detail Template -->
                         <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onActivate($event)">
                             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
                             <div class="container-fluid">
                                 <div class="row pl-2 pr-2">
-                                    <div class="col-12"> 
+                                    <div class="col-12">
                                         <p> <span class="h4"> ID: </span>  {{ row.id }}</p>
                                     </div>
-                                    
-                                    
+
+
                                 </div>
-                                
+
                             </div>
                             </ng-template>
                         </ngx-datatable-row-detail>
@@ -54,7 +54,7 @@
                         [draggable]="false"
                         [canAutoResize]="false"
                         [cellClass]="paddingLeftNone"
-                        
+
                         >
                             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
                             <a
@@ -70,23 +70,32 @@
                             </ng-template>
                         </ngx-datatable-column>
                          <!-- Name -->
-                         <ngx-datatable-column  name="process name" prop="name" [sortable]="true" >
+                         <ngx-datatable-column  name="Product Name" prop="name" [sortable]="true" >
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                            <p class="h3 text-default"> 
+                            <p class="h3 text-default">
                                 {{row.name}}
                             </p>
-                            
+
                             </ng-template>
                         </ngx-datatable-column>
                          <!-- Description -->
                          <ngx-datatable-column  name="Processes" prop="processes" [sortable]="true" >
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                            <p *ngFor="let item of row.processes; let i=index; let first = first; let last = last" class=""> 
+                            <p *ngFor="let item of row.processes; let i=index; let first = first; let last = last" class="">
                                 {{item.name}} <ng-container *ngIf="!(first && last) && !last" >,</ng-container>
                             </p>
-                            
+
                             </ng-template>
                         </ngx-datatable-column>
+                        <!-- Quantity -->
+                        <ngx-datatable-column  name="Quantity" prop="quantity" [sortable]="true" >
+                          <ng-template let-row="row" ngx-datatable-cell-template>
+                          <p *ngFor="let item of row.processes; let i=index; let first = first; let last = last" class="">
+                              {{item.quantity}} <ng-container *ngIf="!(first && last) && !last" >,</ng-container>
+                          </p>
+
+                          </ng-template>
+                      </ngx-datatable-column>
                         </ngx-datatable>
 
                     </div>
