@@ -16,6 +16,7 @@ export class ProcessTemplateLibraryService {
         return {
           id: template.id,
           name: template.name,
+          quantity: 1,
           description: 'Not implemented yet',
           selected: false
         };

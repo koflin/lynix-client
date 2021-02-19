@@ -138,8 +138,8 @@ export class OrdersDraftComponent implements OnInit {
         });
       } else {
         this.orderDraft = {
-          companyId: null,
-          id: null,
+          companyId: undefined,
+          id: undefined,
           name: 'Unnamed',
           description: '',
           products: [],
@@ -189,8 +189,7 @@ export class OrdersDraftComponent implements OnInit {
     if (this.orderDraft.id) {
       this.ordersService.save(this.orderDraft);
     } else {
-      const id = this.ordersService.create(this.orderDraft);
-      this.router.navigate(['orders/draft/' + id]);
+      this.ordersService.create(this.orderDraft).subscribe(id => this.router.navigate(['orders/draft/' + id]));
     }
 
     this.isEdited = false;

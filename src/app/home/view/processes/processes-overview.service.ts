@@ -29,7 +29,7 @@ export class ProcessesOverviewService {
   }
 
   getAll() {
-    /*return this.processesService.getAll().pipe(mergeMap(processes =>
+    return this.processesService.getAll().pipe(mergeMap(processes =>
       Promise.all(processes.map(async (process) => {
         return {
           id: process.id,
@@ -37,13 +37,12 @@ export class ProcessesOverviewService {
           status: process.status,
           timeTaken: process.timeTaken,
           isOccupied: process.isOccupied,
-          canExecute: process.assignedUserId === currentUser,
-          assignedUser: await this.usersService.getById(process.assignedUserId).toPromise(),
+          canExecute: process.assignedUserId === this.authService.getLocalUser().id,
+          assignedUser: process.assignedUserId ? await this.usersService.getById(process.assignedUserId).toPromise() : null,
           selected: false,
         } as ProcessNode;
       }))
-    ));*/
-    return of(null);
+    ));
   }
 
   getPotentialAssignees() {

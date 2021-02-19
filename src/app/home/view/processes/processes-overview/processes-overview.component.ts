@@ -19,7 +19,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class ProcessesOverviewComponent implements OnInit {
   breadCrumbs: BreadCrumbInfo[]=[{name:"Process Overview", url: this.router.url },];
-  nodesAreEmpty:boolean=true
+  nodesAreEmpty:boolean = undefined;
   windowWidth:number
   processNodeGroups: ProcessGroupNode [] = [
     {
@@ -134,18 +134,11 @@ export class ProcessesOverviewComponent implements OnInit {
   update() {
 
     this.processesOverviewService.getAll().subscribe((processNodes) => {
+      this.nodesAreEmpty = processNodes.length < 1 ? true : false;
       this.processNodeGroups.forEach((group) => {
         group.nodes = [];
         group.nodes.push(...processNodes.filter((node) => node.status === group.status));
       });
-      this.nodesAreEmpty=true
-      for (let index = 0; index < this.processNodeGroups.length; index++) {
-        const element = this.processNodeGroups[index];
-        if(element.nodes.length>0){
-          this.nodesAreEmpty=false
-          break;
-        }
-      }
     });
 
   }

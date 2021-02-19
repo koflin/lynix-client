@@ -1,5 +1,5 @@
 <div class=" header bg-default pb-7"  style="background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center center;">
-    <span class=" mask bg-gradient-primary opacity-7"> </span>    
+    <span class=" mask bg-gradient-primary opacity-7"> </span>
     <app-breadcrumb-header [breadCrumbs]=breadCrumbs ></app-breadcrumb-header>
 </div>
 <div class=" container-fluid mt--6">
@@ -21,34 +21,35 @@
                                     placeholder="Search records"
                                     aria-controls="datatable"
                                     [(ngModel)]="searchValue"
-                                    (keyup)="filterTable($event)"
+                                    (keyup)="filterTable()"
+                                    (mouseup)="filterTable()"
                                   />
                                 </label>
                               </div>
                         </div>
-                        
-    
+
+
                     </div>
                 </div>
-                
+
                 <div class="table-resposive-phone" id="user-list">
-                    <table class=" table align-items-center table-flush">
+                    <table class=" table align-items-center table-flush" *ngIf="userRows">
                         <thead class=" thead-light">
                             <tr style="min-height: 50px !important; height:50px">
                                 <th scope="col"></th>
                                 <th scope="col" class="sort" data-sort="user-name" >Username</th>
-                  
+
                                 <th scope="col" class="sort" data-sort="name">Name</th>
                                 <th scope="col" class="sort" data-sort="role">Role</th>
 
-                                <th scope="col">Operation 
-                                    
+                                <th scope="col">Operation
+
                                 </th>
-    
+
                             </tr>
                         </thead>
                         <tbody class="list" >
-                            <tr *ngFor="let user of temp; let i=index" [id]="user.id">
+                            <tr *ngFor="let user of userRows; trackBy: trackRow" [id]="user.id">
                                 <td scope="row">
                                     <div  class="avatar avatar-xl rounded-circle " style="background-color: aliceblue;">
                                         <img alt="Image placeholder" class="image-round-fix"
@@ -59,7 +60,7 @@
                                 </td>
                                 <td scope="row">
                                   <p class="text-default user-name">{{user.username}}</p>
-                                  
+
                                 </td>
                                 <td scope="row" class="name">
                                     {{user.firstName}} {{user.lastName}}
@@ -67,7 +68,7 @@
                                 <td scope="row" class="role">
                                     {{user.role.name}}
                                 </td>
-                                <td scope="row"> 
+                                <td scope="row">
                                     <button  class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button" (click)="editUser(user.id)">
                                         <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
                                     </button>
@@ -76,17 +77,17 @@
                                     </button>
                                 </td>
                               </tr>
-                            
-                            
+
+
                         </tbody>
-                                
+
                     </table>
-                    <div class="col-12 p-4" *ngIf="(showArray.length<1 && this.searchValue) || this.temp.length<1">
+                    <div class="col-12 p-4" *ngIf="(showArray.length<1 && this.searchValue) || !userRows || userRows.length<1">
                         <div class="d-flex justify-content-center">
                             <p>No user</p>
                         </div>
                     </div>
-                </div> 
+                </div>
 
             </div>
         </div>

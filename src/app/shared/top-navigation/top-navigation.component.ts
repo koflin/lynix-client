@@ -26,8 +26,11 @@ export class TopNavigationComponent implements OnInit {
     private authService: AuthService){
   }
   ngOnInit(): void {
-    this.localUser = this.authService.getLocalUser();
-    this.usersService.getById(this.localUser.id).subscribe(user => this.user = user);
+    this.authService.onLocalUserChange.subscribe(localUser => {
+      if (localUser) {
+        this.usersService.getById(localUser.id).subscribe(user => this.user = user);
+      }
+    });
   }
 
 

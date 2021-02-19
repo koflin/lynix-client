@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/core/users/users.service';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
@@ -6,6 +6,7 @@ import { UserRowNode } from 'src/app/models/ui/userRowNode';
 import { UsersOverviewService } from '../users-overview.service';
 import List from "list.js";
 import swal from 'sweetalert2';
+import { clone, cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-users-overview',
@@ -16,36 +17,39 @@ export class UsersOverviewComponent implements OnInit {
   entries: number = 10;
   searchValue:string= ""
   breadCrumbs: BreadCrumbInfo[]=[{name:"Users Overview", url: this.router.url },];
-  userRows: UserRowNode[]=[];
-  temp: UserRowNode[]=[]
+  userRows: UserRowNode[];
   options = {
     valueNames: [ 'user-name', 'name' ]
   };
-  list
-  showArray=[]
+  list;
+  showArray: string[]=[]
   @ViewChild('myTable') table: any;
 
   constructor(
     private router: Router,
     private usersService: UsersService,
-    private usersOverviewService: UsersOverviewService ,
-
+    private usersOverviewService: UsersOverviewService
   ) { }
 
   ngOnInit(): void {
-    this.refresh()
+    this.refresh();
   }
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
-    this.list = new List('user-list', this.options);
+    //this.list = new List('user-list', this.options);
   }
   entriesChange($event) {
     this.entries = $event.target.value;
   }
-  filterTable($event){
-    let searchValue = this.searchValue
+  filterTable(){
+    let searchValue = this.searchValue.toLowerCase();
+
     this.showArray = this.userRows.filter((u)=>{
+      if (!searchValue || searchValue === "") {
+        return true;
+      }
+
       for (let key in u) {
         if (typeof u[key]=== 'string' && key != 'avatar') {
           if (u[key].toLowerCase().indexOf(searchValue) !== -1) {
@@ -71,19 +75,9 @@ export class UsersOverviewComponent implements OnInit {
     }
   }
   refresh() {
-    this.usersOverviewService.getRows().subscribe(rows => this.userRows = rows);
-
-    this.temp = this.userRows.map((prop, key) => {
-
-      return {
-        ...prop,
-
-      };
-
-
-
-  });
-  console.log(this.temp)
+    this.usersOverviewService.getRows().subscribe(rows => {
+      this.userRows = [...rows];
+    });
   }
   editUser(i){
     this.router.navigate(['users/'+i])
@@ -117,6 +111,8 @@ export class UsersOverviewComponent implements OnInit {
     })
   }
 
-
+  public trackRow(index: number, item: UserRowNode) {
+    return item.id;
+  }
 
 }

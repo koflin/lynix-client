@@ -5,7 +5,7 @@ export interface OrderNode {
   name: string;
 
   status: string;
-  deliveryDate: Date
+  deliveryDate: string;
 
   products: {
     name: string;
