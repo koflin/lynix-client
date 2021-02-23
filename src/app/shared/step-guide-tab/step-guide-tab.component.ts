@@ -20,10 +20,10 @@ export class StepGuideTabComponent implements OnInit {
   showAlert:boolean=true;
   currentImageIndex: number;
   currentVideoIndex: number;
-  constructor(private mediaService: MediaService) { }
+  constructor(private mediaService: MediaService) {
+  }
 
   ngOnInit(): void {
-    console.log(this.stepIndex)
   }
   getFullTime(seconds: number) {
     const duration = moment.duration(seconds, 'seconds');
@@ -44,7 +44,7 @@ export class StepGuideTabComponent implements OnInit {
         }
       }
     }
-    
+
     return true
   }
 

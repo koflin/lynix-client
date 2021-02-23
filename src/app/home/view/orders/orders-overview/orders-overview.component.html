@@ -148,7 +148,7 @@
                         <ng-template let-value="value" ngx-datatable-cell-template>
                           <div *ngFor="let item of value let last = last ">
                             <p>
-                              {{ item.quantity }}x{{item.name}}<ng-container *ngIf="!last">,</ng-container>
+                              {{ item.quantity }}x{{item.name}}<ng-container *ngIf="!last"></ng-container>
                             </p>
 
                           </div>
@@ -175,15 +175,16 @@
                     <ngx-datatable-column name="edit" [sortable]="true">
                         <ng-template let-row="row" ngx-datatable-cell-template>
 
-                            <ng-container *ngIf="row.status=='in_preparation'; else elseTemplate">
+                            <ng-container *ngIf="row.status=='in_preparation'">
                               <button (click)="edit(row.workOderId)" class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button">
                                 <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
                               </button>
                             </ng-container>
-                            <ng-template #elseTemplate>
-                                <p>  {{row.status}} <br> delivery date : {{ row.deliveryDate | date }}</p>
-                            </ng-template>
-
+                            <ng-container>
+                              <button (click)="delte(row.workOderId)" class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button">
+                                <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
+                              </button>
+                            </ng-container>
 
                         </ng-template>
                       </ngx-datatable-column>

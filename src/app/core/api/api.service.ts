@@ -17,12 +17,13 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
-  get<T>(route: string, queryParams?: { [param: string]: string }) {
+  get<T>(route: string, queryParams?: any) {
     let query = '?';
 
     for (const key in queryParams) {
       if (queryParams.hasOwnProperty(key)) {
-        query += + key + '=' + encodeURIComponent(queryParams[key]) + '&';
+        console.log(key);
+        query += key + '=' + encodeURIComponent(queryParams[key]) + '&';
       }
     }
 

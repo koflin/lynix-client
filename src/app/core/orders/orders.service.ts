@@ -37,7 +37,7 @@ export class OrdersService {
   }
 
   delete(id: string) {
-    this.api.delete('orders' + id).subscribe(() => this.ordersChange.next(id));
+    this.api.delete('orders/' + id).subscribe(() => this.ordersChange.next(id));
   }
 
   getAll() {
@@ -46,11 +46,5 @@ export class OrdersService {
 
   getById(id: string) {
     return this.api.get<Order>('orders/' + id);
-  }
-
-  publish(order: Order) {
-    order.status = 'released';
-
-    this.save(order);
   }
 }

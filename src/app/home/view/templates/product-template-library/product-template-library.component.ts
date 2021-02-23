@@ -24,9 +24,9 @@ export class ProductTemplateLibraryComponent implements OnInit {
 
   ngOnInit(): void {
     this.productTemplateLibraryService.getAll().subscribe(templates => this.templates = templates);
-    console.log(this.templates)
     this.windowWidth = window.innerWidth
   }
+
   onSelect(id: string) {
     this.templates.forEach((template) => {
       if (template.id === id) {

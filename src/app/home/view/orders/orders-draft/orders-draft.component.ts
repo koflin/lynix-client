@@ -1,3 +1,4 @@
+import { ProcessesService } from './../../../../core/processes/processes.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from 'src/app/core/orders/orders.service';
@@ -128,7 +129,8 @@ export class OrdersDraftComponent implements OnInit {
     private ordersService: OrdersService,
     private processTemplatesService: ProcessTemplatesService,
     private productTemplatesService: ProductTemplatesService,
-    private authService: AuthService
+    private authService: AuthService,
+    private processService: ProcessesService
   ) { }
 
   ngOnInit(): void {
@@ -136,9 +138,7 @@ export class OrdersDraftComponent implements OnInit {
       const id = params.get('id');
 
       if (id) {
-        this.ordersService.getById(id).subscribe(draft => {
-          this.orderDraft = draft;
-        });
+        this.getOrder(id);
       } else {
         this.orderDraft = {
           companyId: this.authService.getLocalUser().companyId,
@@ -147,17 +147,28 @@ export class OrdersDraftComponent implements OnInit {
           description: undefined,
           products: [],
           status: 'in_preparation',
-          deliveryDate: undefined
+          deliveryDate: new Date()
         };
         //this.insertDummyData();
       }
 
       //this.productsNames=['d', 'd', 'd', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd']
 
+    });
 
-
+    this.ordersService.onOrdersChange.subscribe((id) => {
+      if (this.orderDraft && this.orderDraft.id === id) {
+        this.getOrder(id);
+      }
     });
   }
+
+  getOrder(id: string) {
+    this.ordersService.getById(id).subscribe(draft => {
+      this.orderDraft = draft;
+    });
+  }
+
   setProductNames(){
     /* this.productsNames = this.orderDraft.products.filter((p) => {
       return p.template
@@ -211,8 +222,9 @@ export class OrdersDraftComponent implements OnInit {
   }
 
   publishDraft() {
+    this.orderDraft.status = 'released';
     this.saveDraft(true);
-    this.ordersService.publish(this.orderDraft);
+    this.processService.createForOrder(this.orderDraft);
     this.router.navigate(['orders/overview']);
   }
 

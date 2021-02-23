@@ -64,6 +64,14 @@ export class ProcessesService {
     return this.getById(processId).pipe(map(process => process.assignedUserId === userId));
   }
 
+  enter(id: string) {
+    this.api.put('processes/' + id + '/enter').subscribe(() => this.processChange.next(id));
+  }
+
+  exit(id: string) {
+    return this.api.put<void>('processes/' + id + '/exit');
+  }
+
   start(id: string, userId: string) {
     this.api.put('processes/' + id + '/start', { userId }).subscribe(() => this.processChange.next(id));
   }

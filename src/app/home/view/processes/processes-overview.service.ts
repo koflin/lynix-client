@@ -17,7 +17,6 @@ import { UserRowNode } from 'src/app/models/ui/userRowNode';
 })
 export class ProcessesOverviewService {
 
-  private processNodeChange: BehaviorSubject<ProcessNode[]>;
   public onProcessNodeChange: Observable<ProcessNode[]>;
 
   constructor(private processesService: ProcessesService,
@@ -26,6 +25,9 @@ export class ProcessesOverviewService {
               private ordersService: OrdersService,
               private processTemplatesService: ProcessTemplatesService,
               private authService: AuthService) {
+    this.onProcessNodeChange = processesService.onProcessChange.pipe(switchMap((id) => {
+      return this.getAll();
+    }));
   }
 
   getAll() {

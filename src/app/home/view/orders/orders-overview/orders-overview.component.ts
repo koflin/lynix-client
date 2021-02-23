@@ -1,3 +1,4 @@
+import { OrdersService } from './../../../../core/orders/orders.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderNode } from 'src/app/models/ui';
@@ -30,15 +31,15 @@ export class OrdersOverviewComponent implements OnInit {
   @ViewChild('myTable') table: any;
   constructor(
     private router: Router,
-    private ordersOverviewService: OrdersOverviewService
+    private ordersOverviewService: OrdersOverviewService,
+    private ordersService: OrdersService
   ) { }
 
   ngOnInit(): void {
-    this.ordersOverviewService.getAll().subscribe(nodes => {
+    this.ordersOverviewService.onChange.subscribe(nodes => {
       this.orderNodes = nodes;
-      console.log(this.orderNodes);
       this.filterOrders();
-    });
+    })
   }
 
   filterOrders(): void {
@@ -58,6 +59,11 @@ export class OrdersOverviewComponent implements OnInit {
   edit(id: string) {
     this.router.navigate(['orders/draft/' + id]);
   }
+
+  delte(id: string) {
+    this.ordersService.delete(id);
+  }
+
   onActivate($event){
     if ($event.type=="click") {
       this.toggleExpandRow($event.row)

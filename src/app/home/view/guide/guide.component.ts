@@ -73,12 +73,12 @@ export class GuideComponent implements OnInit {
 
       if (id) {
         this.processesService.onProcessChange.subscribe((changedId) => {
-          if (changedId === id) {
-            this.processesService.getById(id).subscribe(process => {
+          if (!changedId || changedId === id) {
+            this.processesService.getById(id).subscribe(async (process) => {
               this.process = process;
 
-              this.ordersService.getById(this.process.orderId).subscribe(order => this.order = order);
-              this.usersService.getById(this.process.assignedUserId).subscribe(assignee => this.assignee = assignee);
+              this.order = await this.ordersService.getById(this.process.orderId).toPromise();
+              this.assignee = await this.usersService.getById(this.process.assignedUserId).toPromise();
 
               this.breadCrumbs=[{name:"Process Overview", url: "/processes/overview" }, {name:'Process: ' + this.process.name , url: this.router.url},];
               this.stepNames = this.process.steps.map((s)=>{
@@ -86,13 +86,14 @@ export class GuideComponent implements OnInit {
               })
               this.stepNames.unshift("Overview")
               this.stepNames.push("Finish")
+
+              if (!this.updater) {
+                this.updater = setInterval(this.onUpdate.bind(this), 1000);
+              }
             });
           }
         });
-
-        this.updater = setInterval(this.onUpdate.bind(this), 1000);
       }
-      console.log(this.order, this.process)
       /* this.dataSource = new MatTableDataSource(this.process.steps.map((step, index) => {
         return {
           step,
@@ -104,7 +105,7 @@ export class GuideComponent implements OnInit {
 
 
   onUpdate() {
-    if (this.process.isRunning) {
+    if (this.process.isRunning && this.process.currentStepIndex != null) {
       this.process.steps[this.process.currentStepIndex].timeTaken += 1;
       this.process.timeTaken += 1;
     }
@@ -119,8 +120,7 @@ export class GuideComponent implements OnInit {
   }
 
   onExit() {
-    this.exit();
-    this.router.navigate(['processes/overview']);
+    this.exit().then(() => this.router.navigate(['processes/overview']));
   }
   onPrevious() {
     if (this.stepToggleId > 0) {
@@ -161,16 +161,15 @@ export class GuideComponent implements OnInit {
 
   onFinish() {
     this.process.status = 'completed';
-    this.exit();
     this.processesService.finish(this.process.id);
     this.router.navigate(['processes/overview']);
   }
 
-  exit() {
+  async exit() {
     clearInterval(this.updater);
+    this.updater = null;
     this.process.isRunning = false;
-    this.processesService.save(this.process);
-    this.processesService.stop(this.process.id);
+    await this.processesService.exit(this.process.id).toPromise();
   }
 
   getEstimatedHours(seconds: number) {

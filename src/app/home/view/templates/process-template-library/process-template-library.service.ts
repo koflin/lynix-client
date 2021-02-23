@@ -18,6 +18,7 @@ export class ProcessTemplateLibraryService {
           name: template.name,
           quantity: 1,
           description: 'Not implemented yet',
+          stepNames: template.stepTemplates.map(step => step.title),
           selected: false
         };
       });

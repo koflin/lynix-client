@@ -71,7 +71,15 @@ export class ProcessesOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authService.getLocalUser();
     this.role = this.rolesService.getById(this.currentUser.roleId);
-    this.update();
+
+    this.processesOverviewService.onProcessNodeChange.subscribe((nodes) => {
+      this.nodesAreEmpty = nodes.length < 1 ? true : false;
+      this.processNodeGroups.forEach((group) => {
+        group.nodes = [];
+        group.nodes.push(...nodes.filter((node) => node.status === group.status));
+      });
+    });
+
     this.processesOverviewService.getPotentialAssignees().subscribe(candidates => {
       this.potentialAssignees = candidates.map((d)=>{
         return {'value': d.id, 'label':d.username}
@@ -90,27 +98,6 @@ export class ProcessesOverviewComponent implements OnInit {
     });
   }
 
-  onStart(id: string) {
-    this.processesService.start(id, this.currentUser.id);
-    this.update();
-    this.router.navigate(['guide/' + id]);
-  }
-
-  onAssign(id: string) {
-    /* let dialogRef = this.dialog.open(UserSelectionComponent, {
-      width: '700px',
-      data: {
-        options: this.processesOverviewService.getPotentialAssignees()
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.processesService.assign(id, result);
-        this.update();
-      }
-    }); */
-  }
   onActivate($event){
     if ($event.type=="click") {
       this.toggleExpandRow($event.row)
@@ -123,7 +110,6 @@ export class ProcessesOverviewComponent implements OnInit {
     }
     if (assignedUser != userId) {
       this.processesService.assign(process.id, userId);
-      this.update()
     }
     //console.log(process, userId)
   }
@@ -132,7 +118,6 @@ export class ProcessesOverviewComponent implements OnInit {
   }
 
   update() {
-
     this.processesOverviewService.getAll().subscribe((processNodes) => {
       this.nodesAreEmpty = processNodes.length < 1 ? true : false;
       this.processNodeGroups.forEach((group) => {
@@ -183,8 +168,7 @@ export class ProcessesOverviewComponent implements OnInit {
       }
   }
   start(processId){
-    this.processesService.start(processId, this.currentUser.id);
-    this.update();
+    this.processesService.enter(processId);
     this.router.navigate(['guide/' + processId]);
   }
 

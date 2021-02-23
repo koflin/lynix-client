@@ -1,11 +1,11 @@
 <div class=" header bg-default pb-7"  style="background-image: url(assets/img/theme/template.jpg); background-size: cover; background-position: center center;">
-    <span class=" mask bg-gradient-primary opacity-7"> </span>    
+    <span class=" mask bg-gradient-primary opacity-7"> </span>
     <app-breadcrumb-header [breadCrumbs]=breadCrumbs ></app-breadcrumb-header>
 </div>
 <div class=" container-fluid mt--4">
     <div class=" row">
         <div class=" col padding-0-mobile">
-            <ng-container *ngIf="templates.length<1; else elseTemplate" >
+            <ng-container *ngIf="!templates || templates.length<1; else elseTemplate" >
                 <div>
                     <div class="alert alert-warning" role="alert">
                         <strong>Warning!</strong> You haven't created Processes yet!
@@ -18,7 +18,7 @@
                     <div class="card-body pl-0 pr-0 pt-0">
                         <ngx-datatable
                             #myTable
-                            
+
                             class="bootstrap selection-cell"
                             [columnMode]="'force'"
                             [headerHeight]="50"
@@ -26,22 +26,25 @@
                             [rowHeight]="'auto'"
                             [scrollbarH]="true"
                             [scrollbarV]="false"
-                            
+
                             [rows]="templates"
-                            
+
                         >
                         <!-- Row Detail Template -->
                         <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onActivate($event)">
                             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
                             <div class="container-fluid">
                                 <div class="row pl-2 pr-2">
-                                    <div class="col-12"> 
+                                    <div class="col-12">
                                         <p> <span class="h4"> ID: </span>  {{ row.id }}</p>
                                     </div>
-                                    
-                                    
+                                    <div class="col-12">
+                                      <p *ngIf="row.stepNames.length > 0"><span class="h4"> Steps: </span>  {{ row.stepNames.join(', ') }}</p>
+                                      <p *ngIf="row.stepNames.length == 0"><span class="h4"> Steps: </span> None</p>
+                                    </div>
+
                                 </div>
-                                
+
                             </div>
                             </ng-template>
                         </ngx-datatable-row-detail>
@@ -54,7 +57,7 @@
                         [draggable]="false"
                         [canAutoResize]="false"
                         [cellClass]="paddingLeftNone"
-                        
+
                         >
                             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
                             <a
@@ -72,19 +75,19 @@
                          <!-- Name -->
                          <ngx-datatable-column  name="process name" prop="name" [sortable]="true" >
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                            <p class="h3 text-default"> 
+                            <p class="h3 text-default">
                                 {{row.name}}
                             </p>
-                            
+
                             </ng-template>
                         </ngx-datatable-column>
                          <!-- Description -->
                          <ngx-datatable-column  name="description" prop="description" [sortable]="true" >
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                            <p class=""> 
+                            <p class="">
                                 {{row.description}}
                             </p>
-                            
+
                             </ng-template>
                         </ngx-datatable-column>
                         </ngx-datatable>

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-12"> 
+    <div class="col-12">
         <div class="card shadow-card-stronger p-3">
             <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="process.currentStepIndex != stepIndex">
                 <span class="alert-inner--text"><strong>Warning!</strong> If you want to start this process step, please switch!</span>
@@ -8,7 +8,7 @@
                 </button>
               </div>
               <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="process.currentStepIndex == stepIndex && !process.isRunning ">
-                
+
                 <span class="alert-inner--text"><strong>Warning!</strong> If you want to start this process step, please press "start"!</span>
                 <button type="button" (click)="showAlert=false" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">×</span>
@@ -17,10 +17,10 @@
             <ng-container  *ngIf="process.currentStepIndex !== null && process.steps[stepIndex] as currentStep">
                 <p>
                    <span class="h4"> Time Spend on current step:</span>  {{ getFullTime(currentStep.timeTaken) }}
-                </p> 
+                </p>
             </ng-container>
-            
-            
+
+
             <p> <span class="h4"> Total time: </span> {{ getFullTime(process.timeTaken) }} </p>
         </div>
     </div>
@@ -36,8 +36,8 @@
                             <ng-container *ngFor="let item of process.steps[stepIndex].materials ; let i=index; let first = first; let last = last">
                                 <li class="list-group-item list-item-no-sideborder" [ngClass]="{'no-border-top':first, 'no-border-bottom':last}" >{{item}}</li>
                             </ng-container>
-                            
-                            
+
+
                         </ul>
                     </div>
                 </div>
@@ -80,8 +80,8 @@
                             </div>
                         </div>
                     </div>
-                        
-                    
+
+
                 </ng-container>
             </ng-container>
             <ng-container *ngIf="process.steps[stepIndex].tasks " >
@@ -100,15 +100,15 @@
                             </div>
                         </div>
                     </div>
-                        
-                    
+
+
                 </ng-container>
             </ng-container>
         </div>
-       
+
     </div>
     <div class="container-fluid">
-        
+
         <div class="row">
             <ng-container *ngIf="process.steps[stepIndex].pictureUris">
                 <div class="col-sm-12 col-md"  *ngIf="process.steps[stepIndex].pictureUris.length !== 0">
@@ -122,7 +122,7 @@
                                     <carousel>
                                         <slide *ngFor="let picture of process.steps[stepIndex].pictureUris; let i=index" >
                                           <img [src]="picture" alt="first slide" style="display: block;" class="object-fit-cover">
-                                         
+
                                         </slide>
                                       </carousel>
                                 </div>
@@ -157,5 +157,5 @@
 
         </div>
     </div>
-    
+
 </div>

@@ -3,6 +3,7 @@ export interface ProcessTemplateNode {
   name: string;
   quantity: number;
   description: string;
+  stepNames: string[];
 
   selected: boolean;
 }

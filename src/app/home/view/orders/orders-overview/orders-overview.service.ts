@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { OrdersService } from 'src/app/core/orders/orders.service';
 import { ProcessesService } from 'src/app/core/processes/processes.service';
 import { OrderNode } from 'src/app/models/ui';
 import * as moment from 'moment';
+import { flatMap } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersOverviewService {
 
+  public onChange: Observable<OrderNode[]>;
+
   constructor(
     private ordersService: OrdersService,
-    private processesService: ProcessesService) { }
+    private processesService: ProcessesService) {
+      this.onChange = this.ordersService.onOrdersChange.pipe(switchMap(() => {
+        return this.getAll();
+      }));
+    }
 
   getAll(): Observable<OrderNode[]> {
     return this.ordersService.getAll().pipe(map((orders) => {

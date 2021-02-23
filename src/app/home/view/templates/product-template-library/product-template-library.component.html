@@ -5,7 +5,7 @@
 <div class=" container-fluid mt--4">
     <div class=" row">
         <div class=" col padding-0-mobile">
-            <ng-container *ngIf="templates.length<1; else elseTemplate" >
+            <ng-container *ngIf="!templates || templates.length<1; else elseTemplate" >
                 <div>
                     <div class="alert alert-warning" role="alert">
                         <strong>Warning!</strong> You haven't created Processes yet!
@@ -82,7 +82,7 @@
                          <ngx-datatable-column  name="Processes" prop="processes" [sortable]="true" >
                             <ng-template let-row="row" ngx-datatable-cell-template>
                             <p *ngFor="let item of row.processes; let i=index; let first = first; let last = last" class="">
-                                {{item.name}} <ng-container *ngIf="!(first && last) && !last" >,</ng-container>
+                                {{item.name}} <ng-container *ngIf="!(first && last) && !last" ></ng-container>
                             </p>
 
                             </ng-template>
@@ -91,7 +91,7 @@
                         <ngx-datatable-column  name="Quantity" prop="quantity" [sortable]="true" >
                           <ng-template let-row="row" ngx-datatable-cell-template>
                           <p *ngFor="let item of row.processes; let i=index; let first = first; let last = last" class="">
-                              {{item.quantity}} <ng-container *ngIf="!(first && last) && !last" >,</ng-container>
+                              {{item.quantity}} <ng-container *ngIf="!(first && last) && !last" ></ng-container>
                           </p>
 
                           </ng-template>
