@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { isNullOrUndefined } from '@swimlane/ngx-datatable';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
 import { ProductTemplate } from 'src/app/models/productTemplate';
 import { InputOutputValue, SingleMultiChoiceItem } from '../models/InputOutputValue';
@@ -45,12 +46,12 @@ export class ProductComponent implements OnInit {
       }else{
         if ($e.label) {
           this.processTemplatesService.create({
-              companyId: null,
-              id: null,
+              companyId: undefined,
+              id: undefined,
               name: $e.label,
               mainTasks: [],
               stepTemplates: [],
-              previousComments: null,
+              previousComments: [],
             }),
 
           this.productTemplateChange.emit(this.productTemplate)

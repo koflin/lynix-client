@@ -53,7 +53,7 @@
                         </label>
                       </div>
                     </div>
-                    <div class="col-6 col-md-12  d-flex align-items-end justify-content-end " style="padding-right: 2.5rem;">
+                    <div class="col-6 col-md-12 mb-3 d-flex align-items-end justify-content-end " style="padding-right: 2.5rem;">
                       <button [routerLink]="'/orders/draft'" class="btn btn-icon btn-3 btn-default" type="button">
                         <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
                         <span class="btn-inner--text" >Add new order</span>
@@ -80,7 +80,7 @@
                     <div class="container-fluid">
                         <div class="row pl-2 pr-2">
                             <div class="col-12">
-                                <p> <span class="h4"> Delivery Date: </span>  {{ row.deliveryDate | date }}</p>
+                                <p> <span class="h4"> Delivery Date: </span>  {{ row.deliveryDate | date: "dd.MM.yyyy" }}</p>
                             </div>
                             <ng-container *ngIf="row.processGroups.length>0">
                               <div class=" table-responsive">
@@ -158,21 +158,21 @@
                     <ngx-datatable-column name="status" [sortable]="true" >
                       <ng-template let-value="value" ngx-datatable-cell-template>
                         <p class="h3 text-default">
-                          {{value}}
+                          {{value | status }}
                         </p>
                       </ng-template>
                     </ngx-datatable-column>
                     <!-- Delivery Date -->
-                    <ngx-datatable-column name="deliveryDate" [sortable]="true" >
+                    <ngx-datatable-column name="delivery date" [sortable]="true" >
                       <ng-template let-value="value" ngx-datatable-cell-template>
                         <p class="h3 text-default">
-                          {{ value }}
+                          {{ value | date: "dd.MM.yyyy" }}
                         </p>
                       </ng-template>
                     </ngx-datatable-column>
                     <!-- Edit -->
 
-                    <!--<ngx-datatable-column name="status" [sortable]="true">
+                    <ngx-datatable-column name="edit" [sortable]="true">
                         <ng-template let-row="row" ngx-datatable-cell-template>
 
                             <ng-container *ngIf="row.status=='in_preparation'; else elseTemplate">
@@ -186,7 +186,7 @@
 
 
                         </ng-template>
-                      </ngx-datatable-column>-->
+                      </ngx-datatable-column>
 
 
                   </ngx-datatable>

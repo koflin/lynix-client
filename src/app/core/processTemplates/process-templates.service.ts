@@ -1,3 +1,4 @@
+import { EditProcessTemplateDto } from './../../dto/processTemplate/editProcessTemplateDto';
 import { Injectable } from '@angular/core';
 import { ProcessTemplate } from 'src/app/models/processTemplate';
 import { v4 as uuidv4 } from 'uuid';
@@ -20,7 +21,7 @@ export class ProcessTemplatesService {
   }
 
   save(templateDraft: ProcessTemplate){
-    this.api.put<ProcessTemplate>('templates/process/' + templateDraft.id, templateDraft).subscribe(template => this.processTemplatesChange.next(template.id));
+    this.api.put<ProcessTemplate>('templates/process/' + templateDraft.id, new EditProcessTemplateDto(templateDraft)).subscribe(template => this.processTemplatesChange.next(template.id));
   }
 
   create(templateDraft: ProcessTemplate) {

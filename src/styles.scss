@@ -43,7 +43,7 @@ html, body {
     font-weight: bold;
     padding-top: 13px;
     text-align: center;
-    
+
     color: #fff;
     border-radius: 20px;
     padding-bottom: 1rem;
@@ -65,7 +65,7 @@ html, body {
     color: #000;
     // border: grey solid 2px
   }
-  
+
 
   .no-top-radius{
       border-top-left-radius: 0px !important;
@@ -86,7 +86,7 @@ html, body {
     transform: rotate(0deg);
     transition: transform 0.3s linear;
   }
-  
+
   .fa-angle-down.open{
     transform: rotate(180deg);
     transition: transform 0.3s linear;
@@ -102,7 +102,7 @@ html, body {
     transform: rotate(0deg);
     transition: transform 0.3s linear;
   }
-  
+
   .fa-angle-right.open{
     transform: rotate(90deg);
     transition: transform 0.3s linear;
@@ -135,7 +135,7 @@ html, body {
     align-items: center;
 }
 
-.ng-select.custom .ng-select-container  {            
+.ng-select.custom .ng-select-container  {
     min-height: 0px;
     border-radius: 0;
     border: none;
@@ -220,7 +220,7 @@ html, body {
   border-bottom: none !important
 }
 .datatable-body{
-  padding-bottom: 100px !important;
+  padding-bottom: 20px !important;
 }
 .shadow-card-stronger, .accordion-card-shaddow .card{
   box-shadow: 0 0.5rem 2rem 0 rgba(118, 153, 192, 0.85) !important;

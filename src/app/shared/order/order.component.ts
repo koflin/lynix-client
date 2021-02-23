@@ -1,4 +1,5 @@
-import { Component, Input,EventEmitter, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input,EventEmitter, OnInit, Output, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import moment from 'moment';
 import { ProductTemplatesService } from 'src/app/core/productTemplates/product-tempaltes.service';
 import { Order } from 'src/app/models/order';
 import { InputOutputValue, SingleMultiChoiceItem } from '../models/InputOutputValue';
@@ -20,11 +21,11 @@ export class OrderComponent implements OnInit {
   dueDate: InputOutputValue
   description: InputOutputValue
   constructor(
+    private cdRef: ChangeDetectorRef,
     private productTemplatesService: ProductTemplatesService
     ) { }
 
   ngOnInit(): void {
-
   }
   ngOnChanges(changes: SimpleChanges ): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
@@ -34,6 +35,7 @@ export class OrderComponent implements OnInit {
     this.setProductOptions()
     this.setIgnoreProductOptions()
   }
+
   setProductOptions(){
     this.productTemplatesService.getAll().subscribe(temp => {
       this.productOptions = temp.map((t)=> {
@@ -59,6 +61,12 @@ export class OrderComponent implements OnInit {
     this.dueDate = new InputOutputValue("duedate", "Delivery Date", false)
     this.description = new InputOutputValue("description", "Description", false)
 
+  }
+
+  changeDeliveryDate(newDate: string) {
+    this.order.deliveryDate = newDate != 'Invalid Date' ? moment(newDate, 'DD.MM.YYYY').toDate() : undefined;
+    this.cdRef.detectChanges();
+    this.orderChange.emit(this.order);
   }
 
   addProduct() {
@@ -94,8 +102,8 @@ export class OrderComponent implements OnInit {
         if ($e.label) {
           this.productTemplatesService.create(
             {
-              companyId: null,
-              id: null,
+              companyId: undefined,
+              id: undefined,
               name: $e.label,
               processes: [],
             }

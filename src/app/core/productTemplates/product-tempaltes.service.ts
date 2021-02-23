@@ -1,3 +1,4 @@
+import { EditProcessDto } from './../../dto/process/editProcessDto';
 import { ApiService } from './../api/api.service';
 import { ProcessTemplateDraft } from './../../models/ui/orderDraft';
 import { ProcessTemplatesService } from './../processTemplates/process-templates.service';
@@ -6,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { ProductTemplate } from 'src/app/models/productTemplate';
 import { v4 as uuidv4 } from 'uuid';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { EditProductTemplateDto } from 'src/app/dto/productTemplate/editProductTemplateDto';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,7 @@ export class ProductTemplatesService {
   }
 
   save(templateDraft: ProductTemplate){
-    this.api.put<ProductTemplate>('templates/product/' + templateDraft.id, templateDraft).subscribe(template => this.productTemplatesChange.next(template.id));
+    this.api.put<ProductTemplate>('templates/product/' + templateDraft.id, new EditProductTemplateDto(templateDraft)).subscribe(template => this.productTemplatesChange.next(template.id));
   }
 
   create(templateDraft: ProductTemplate) {

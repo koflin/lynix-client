@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { InputOutputValue } from '../../models/InputOutputValue';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-single-date-picker',
@@ -23,7 +24,8 @@ export class SingleDatePickerComponent implements OnInit {
   formatError:boolean = false
   error:boolean = false
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
@@ -31,8 +33,7 @@ export class SingleDatePickerComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
-    this.validation_save(false);    
-    
+    this.validation_save(false);
   }
   validation_save(userHasTyped:boolean){
     this.requiredError = false
@@ -52,7 +53,7 @@ export class SingleDatePickerComponent implements OnInit {
         if(this.inputCheckForError || userHasTyped){
           this.requiredError=true;
         }
-        this.error=true;  
+        this.error=true;
     }
     this.fieldInformation.error = this.error
 

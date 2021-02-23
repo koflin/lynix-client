@@ -9,6 +9,9 @@ import { InputOutputValue } from 'src/app/shared/models/InputOutputValue';
 import swal from 'sweetalert2';
 import {deletingDataInformation} from 'src/app/models/ui/deletingData'
 import { ProductTemplatesService } from 'src/app/core/productTemplates/product-tempaltes.service';
+import moment from 'moment';
+import { AuthService } from 'src/app/auth/auth.service';
+
 const left = [
   query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
   group([
@@ -47,10 +50,10 @@ const right = [
 export class OrdersDraftComponent implements OnInit {
   _orderDraft: Order;
   get orderDraft():Order{
-    return this._orderDraft
+    return this._orderDraft;
   }
   set orderDraft(value:Order){
-    this._orderDraft = value
+    this._orderDraft = value;
     this.setProductNames()
 
   }
@@ -58,12 +61,12 @@ export class OrdersDraftComponent implements OnInit {
 
   //productsNames:string[]=[]
   get productsNames():string[]{
-    return this.orderDraft.products.filter((p) => {
+    return this.orderDraft ? this.orderDraft.products.filter((p) => {
       return p.template
     })
     .map((product)=>{
       return product.template.name
-    })
+    }) : [];
   }
   _processesNames:string[]=[]
   get processesNames():string[]{
@@ -111,7 +114,6 @@ export class OrdersDraftComponent implements OnInit {
     return this._productToggleId
   }
   set productToggleId(value){
-    console.log(value)
     this._productToggleId=value
     this.stepToggleId=undefined
     this.processToggleId=undefined
@@ -125,7 +127,8 @@ export class OrdersDraftComponent implements OnInit {
     private route: ActivatedRoute,
     private ordersService: OrdersService,
     private processTemplatesService: ProcessTemplatesService,
-    private productTemplatesService: ProductTemplatesService
+    private productTemplatesService: ProductTemplatesService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -138,10 +141,10 @@ export class OrdersDraftComponent implements OnInit {
         });
       } else {
         this.orderDraft = {
-          companyId: undefined,
+          companyId: this.authService.getLocalUser().companyId,
           id: undefined,
           name: 'Unnamed',
-          description: '',
+          description: undefined,
           products: [],
           status: 'in_preparation',
           deliveryDate: undefined
@@ -180,13 +183,16 @@ export class OrdersDraftComponent implements OnInit {
     for (const product of this.orderDraft.products) {
       if (product.template) {
         for (const process of product.template.processes) {
-          this.processTemplatesService.save(process.template);
+          if (process.template) {
+            this.processTemplatesService.save(process.template);
+          }
         }
+
         this.productTemplatesService.save(product.template);
       }
     }
 
-    if (this.orderDraft.id) {
+    if (this.orderDraft && this.orderDraft.id) {
       this.ordersService.save(this.orderDraft);
     } else {
       this.ordersService.create(this.orderDraft).subscribe(id => this.router.navigate(['orders/draft/' + id]));

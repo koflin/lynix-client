@@ -2,10 +2,10 @@
     <div class=" col-md-12 mb-3">
         <div class=" form-group" [ngClass]="{'has-danger': (inputCheckForError || userHasTyped) && fieldInformation.error}">
             <label class=" form-control-label" [for]="fieldInformation.name" [ngClass]="{'text-danger': (inputCheckForError || userHasTyped) && fieldInformation.error}">
-                {{fieldInformation.label}} <span class="text-primary" *ngIf="fieldInformation.label && inputRequired">*</span> 
+                {{fieldInformation.label}} <span class="text-primary" *ngIf="fieldInformation.label && inputRequired">*</span>
             </label>
             <input
-                
+
                 type="text"
                 [placeholder]="placeholder"
                 class="form-control"
@@ -15,7 +15,8 @@
                 (ngModelChange)="validation_save(true)"
                 [bsConfig]="{
                 isAnimated: true,
-                containerClass: 'theme-blue'
+                containerClass: 'theme-blue',
+                dateInputFormat: 'DD.MM.YYYY'
                 }"
             />
             <ng-container  *ngIf="(inputCheckForError || userHasTyped) && fieldInformation.error">
@@ -23,14 +24,14 @@
                     Please fill the field.
                 </div>
                 <div *ngIf="formatError" class=" invalid-feedback">
-                    Please check the format. It has to look like: 02/02/2021
+                    Please check the format. It has to look like: 03/30/2021
                 </div>
                 <div *ngIf="errorMessage" class=" invalid-feedback">
                     {{errorMessage}}
                 </div>
             </ng-container>
-          
+
         </div>
     </div>
 </div>
-        
+

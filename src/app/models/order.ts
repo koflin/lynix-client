@@ -11,7 +11,7 @@ export interface Order extends CompanyBase {
   status: 'in_preparation' | 'released' | 'in_progress' | 'completed';
   name: string;
   description: string;
-  deliveryDate: string;
+  deliveryDate: Date;
 
   products: {
     template: ProductTemplate;

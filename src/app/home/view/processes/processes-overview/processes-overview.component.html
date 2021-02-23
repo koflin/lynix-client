@@ -27,7 +27,7 @@
                             [headerHeight]="50"
                             [footerHeight]="50"
                             [rowHeight]="'auto'"
-                            [scrollbarH]="true"
+                            [scrollbarH]="false"
                             [scrollbarV]="false"
 
                             [rows]="group.nodes"
@@ -123,8 +123,8 @@
                                     </ng-template>
                                     </ng-template>
                                 </ngx-datatable-column>
-                                <!-- status -->
-                                <ngx-datatable-column [maxWidth]=80 [width]=45 [minWidth]=45 name="" prop="status" [sortable]="false" [cellClass]="paddingClass" >
+                                <!-- Actions -->
+                                <ngx-datatable-column [maxWidth]=160 [minWidth]=0 name="" prop="status" [sortable]="false" [cellClass]="paddingClass" >
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" *ngIf="row.status === 'assistance_required'" >
                                             <span class="btn-inner--icon"><i class="fas fa-headset"></i></span>

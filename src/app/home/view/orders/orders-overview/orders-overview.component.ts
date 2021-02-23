@@ -36,6 +36,7 @@ export class OrdersOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.ordersOverviewService.getAll().subscribe(nodes => {
       this.orderNodes = nodes;
+      console.log(this.orderNodes);
       this.filterOrders();
     });
   }

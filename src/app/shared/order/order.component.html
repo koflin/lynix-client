@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="order">
     <div class="row">
         <div class="col-12">
             <div class="card shadow-card-stronger">
@@ -8,16 +8,16 @@
                             <app-text-field [(result)]="order.name" (resultChange)="orderChange.emit(order)" [(fieldInformation)]=name  [inputCheckForError]="checkForError" [inputRequired]="true"> </app-text-field>
                         </div>
                         <div class="col-12 col-md-6">
-                            <app-single-date-picker [(result)]="order.deliveryDate" (resultChange)="orderChange.emit(order)" [(fieldInformation)]=dueDate [inputCheckForError]="checkForError" [inputRequired]="true"> </app-single-date-picker>
+                            <app-single-date-picker [result]="order.deliveryDate | date: 'dd.MM.yyyy'" (resultChange)="changeDeliveryDate($event)" [(fieldInformation)]=dueDate [inputCheckForError]="checkForError" [inputRequired]="true"> </app-single-date-picker>
                         </div>
                     </div>
 
 
                 </div>
-                
+
             </div>
         </div>
-        
+
         <div class="col-12">
             <div class="card shadow-card-stronger">
                 <div class="container-fluid card-body">
@@ -40,33 +40,33 @@
                                     <span class="btn-inner--text" >Add Products to your order</span>
                                   </button>
                             </div>
-                            
+
                         </div>
-                        
+
                         <div class="table-resposive-phone">
                             <table class=" table align-items-center table-flush">
                                 <thead class=" thead-light">
                                     <tr>
                                         <th scope="col">select or create a Product</th>
-                          
+
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Operation</th>
-            
+
                                     </tr>
                                 </thead>
                                 <tbody class="list">
                                     <tr *ngIf="order.products.length<1; elseTemplate" >
                                       <th scope="row">
-                                        You haven't added products yet. 
-                                        
+                                        You haven't added products yet.
+
                                       </th>
                                     </tr>
-                                    
+
                                     <tr #elseTemplate *ngFor="let product of order.products; let i=index">
                                         <td scope="row">
-                                          
-                                          <app-single-multiple-choice  [result]="(product.template) ? {'value': product.template.id, 'label' : product.template.name} : ''" (resultChange)=productSelector($event,i) [ignoreOptions]=ignoreOptions  [isMultipleChoice]=false [inputCheckForError]=checkForError  [isSearchable]=true [inputRequired]=true [data]="productOptions" [allowUserCreateOption]="true" [placeholder]="'select a product or type a new productname'"> </app-single-multiple-choice>
-                                          
+
+                                          <app-single-multiple-choice [result]="(product.template) ? {'value': product.template.id, 'label' : product.template.name} : ''" (resultChange)=productSelector($event,i) [ignoreOptions]=ignoreOptions  [isMultipleChoice]=false [inputCheckForError]=checkForError  [isSearchable]=true [inputRequired]=true [data]="productOptions" [allowUserCreateOption]="true" [placeholder]="'select a product or type a new productname'"> </app-single-multiple-choice>
+
                                         </td>
                                         <td scope="row">
                                             <app-text-field [inputType]="'number'" [inputValidation]="'int'"  [result]="product.quantity" (resultChange)="product.quantity = $event ? $event : 1; orderChange.emit(order)"></app-text-field>
@@ -78,22 +78,22 @@
                                             <button (click)="removeProduct(i)" class=" ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-danger" type="button">
                                                 <span  class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
                                             </button>
-                                            
-                                            
+
+
                                         </td>
                                       </tr>
                                 </tbody>
-                                        
+
                             </table>
                         </div>
-            
+
                     </div>
                 </div>
             </div>
         </div>
 
-        
-        
+
+
     </div>
 </div>
 

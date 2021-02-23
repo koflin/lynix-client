@@ -1,3 +1,4 @@
+import { StatusPipe } from './../pipes/status.pipe';
 import { ApiService } from './../core/api/api.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -31,7 +32,8 @@ import { RouterModule } from '@angular/router';
     ProcessesOverviewComponent,
     GuideComponent,
     ProductTemplateLibraryComponent,
-    ProcessTemplateLibraryComponent
+    ProcessTemplateLibraryComponent,
+    StatusPipe
   ],
   imports: [
     HomeRoutingModule,

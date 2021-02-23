@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 import { Permission } from 'src/app/models/role';
 import { User } from 'src/app/models/user';
 import { v4 as uuidv4 } from 'uuid';
+import { EditUserDto } from 'src/app/dto/user/editUserDto';
+import { CreateUserDto } from 'src/app/dto/user/createUserDto';
 
 @Injectable({
   providedIn: 'root'
@@ -47,11 +49,11 @@ export class UsersService {
   }*/
 
   createUser(userDraft: User) {
-    this.api.post<User>('users', userDraft).subscribe(user => this.usersChange.next(user.id));
+    this.api.post<User>('users', new CreateUserDto(userDraft)).subscribe(user => this.usersChange.next(user.id));
   }
 
   save(user: User) {
-    this.api.put<User>('users/' + user.id, user).subscribe(() => this.usersChange.next(user.id));
+    this.api.put<User>('users/' + user.id, new EditUserDto(user)).subscribe(() => this.usersChange.next(user.id));
   }
 
   deleteUser(id: string) {

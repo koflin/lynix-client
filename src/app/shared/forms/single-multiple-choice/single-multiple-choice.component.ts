@@ -20,14 +20,12 @@ export class SingleMultipleChoiceComponent implements OnInit {
   @Input() allowUserCreateOption:boolean =false
   @Input() placeholder:string = "selecting a option..."
   @Input() ignoreOptions: any[]
-  _data: SingleMultiChoiceItem[] 
-  @Input() data:SingleMultiChoiceItem[]=   [{value: "c1bcf373-fd06-4c30-8bf6-5d98596a78b8", label: "Unnamed Product 4"},
-  {value: "1b276523-fc81-4f6d-bd4b-a9fa68ad7417", label: "Unnamed Product 3"},
-  {value: "ab9acd58-4f79-476d-b5ce-fceb5d6a889c", label: "Unnamed Product 4"}]
+  _data: SingleMultiChoiceItem[] = []
+  @Input() data:SingleMultiChoiceItem[] = [];
 
   tempData: SingleMultiChoiceItem[]
   @Input() addTagText:string= "press enter to create a new option"
-  
+
   requiredError:boolean = false
   error:boolean = false
   @Input() errorMessage:string=""
@@ -39,40 +37,40 @@ export class SingleMultipleChoiceComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
 
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
-    this.tempData = this.data.map((d) => {
-      return {...d}
-    })
-    
-    if (this.ignoreOptions) {
-      
-      this.tempData = this.tempData.filter((df) =>{
-        return this.ignoreOptions.findIndex(ignoreOption => ignoreOption.value == df.value ) === -1
+
+    if (this.data) {
+      this.tempData = this.data.map((d) => {
+        return {...d}
       })
+
+      if (this.ignoreOptions) {
+
+        this.tempData = this.tempData.filter((df) =>{
+          return this.ignoreOptions.findIndex(ignoreOption => ignoreOption.value == df.value ) === -1
+        })
+      }
+
+      if (this.allowUserCreateOption) {
+        this.tempData.unshift({'label':this.placeholder, value: undefined, disabled:true})
+      }
+      this.validation_save(false);
     }
-    
-    
-    if (this.allowUserCreateOption) {
-      this.tempData.unshift({'label':this.placeholder, value: undefined, disabled:true})
-    }
-    this.validation_save(false); 
-        
-    
   }
-  
+
   validation_save(userHasTyped:boolean, option?){
-    
+
     this.error= false
     this.requiredError = false
     let requiredError = false
     if (!this.userHasTyped) {
       this.userHasTyped = userHasTyped
     }
-    
+
     let testValue=[]
     if( ! (this.result instanceof Array) ){
       testValue = [this.result]
@@ -103,7 +101,7 @@ export class SingleMultipleChoiceComponent implements OnInit {
       }else{
         requiredError = true
       }
-      
+
       if (requiredError) {
         if((this.inputCheckForError || userHasTyped)){
           this.requiredError=true;
@@ -111,10 +109,10 @@ export class SingleMultipleChoiceComponent implements OnInit {
         this.error=true;
 
       }
-           
+
     }
 
-    
+
     this.fieldInformation.error = this.error
     if (this.errorMessage) {
       this.fieldInformation.error = true
@@ -122,12 +120,12 @@ export class SingleMultipleChoiceComponent implements OnInit {
 
     this.fieldInformationChange.emit(this.fieldInformation)
     this.resultChange.emit(this.result)
-    
 
-    
-    
-    
-    
+
+
+
+
+
   }
 
 }

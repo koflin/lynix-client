@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Order } from 'src/app/models/order';
 import { v4 as uuidv4 } from 'uuid';
 import { ProductTemplatesService } from '../productTemplates/product-tempaltes.service';
+import { EditOrderDto } from 'src/app/dto/order/editOrderDto';
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +26,11 @@ export class OrdersService {
   }
 
   save(order: Order){
-    this.api.put<Order>('orders/' + order.id, order).subscribe(order => this.ordersChange.next(order.id));
+    this.api.put<Order>('orders/' + order.id, new EditOrderDto(order)).subscribe(order => this.ordersChange.next(order.id));
   }
 
   create(orderDraft: Order) {
-    return this.api.post<Order>('orders', orderDraft).pipe(map((order) => {
+    return this.api.post<Order>('orders', new EditOrderDto(orderDraft)).pipe(map((order) => {
       this.ordersChange.next(order.id);
       return order.id;
     }));
@@ -50,6 +51,6 @@ export class OrdersService {
   publish(order: Order) {
     order.status = 'released';
 
-    this.api.put('orders/' + order.id, order).subscribe(() => this.ordersChange.next(order.id));
+    this.save(order);
   }
 }

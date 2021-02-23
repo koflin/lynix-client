@@ -10,6 +10,8 @@ import * as _ from 'lodash'
 import { Order } from 'src/app/models/order';
 import { ApiService } from '../api/api.service';
 import { map } from 'rxjs/operators';
+import { EditProcessDto } from 'src/app/dto/process/editProcessDto';
+import { CreateProcessDto } from 'src/app/dto/process/createProcessDto';
 @Injectable({
   providedIn: 'root'
 })
@@ -55,7 +57,7 @@ export class ProcessesService {
   }*/
 
   save(process: Process) {
-    this.api.put<Process>('processes/' + process.id, process).subscribe(process => this.processChange.next(process.id));
+    this.api.put<Process>('processes/' + process.id, new EditProcessDto(process)).subscribe(process => this.processChange.next(process.id));
   }
 
   canWorkOn(processId: string, userId: string) {
@@ -94,7 +96,7 @@ export class ProcessesService {
 
         for (let i = 0; i < product.quantity; i++) {
           for (let j = 0; j < process.quantity; j++) {
-            this.api.post<Process>('processes', { orderId: order.id, templateId }).subscribe((process) => this.processChange.next(process.id));
+            this.api.post<Process>('processes', new CreateProcessDto(order.id, templateId )).subscribe((process) => this.processChange.next(process.id));
           }
         }
       });
