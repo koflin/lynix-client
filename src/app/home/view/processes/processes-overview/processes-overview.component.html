@@ -13,7 +13,7 @@
                 </div>
             </ng-container>
             <ng-template #elseTemplate>
-                <ng-container *ngFor="let group of processNodeGroups" >
+                <ng-container *ngFor="let group of processNodeGroups; let i = index" >
                     <div class="card" *ngIf="group.nodes.length>0">
                         <div class="card-body">
                             <h5 class="h2 card-title mb-0">{{group.title}}</h5>
@@ -34,7 +34,7 @@
 
                             >
                             <!-- Row Detail Template -->
-                                <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onActivate($event)">
+                                <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onActivate(myTable, $event)">
                                     <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
                                     <div class="container-fluid">
                                         <div class="row pl-2 pr-2">
@@ -69,7 +69,7 @@
                                         [class.datatable-icon-up]="!expanded"
                                         [class.datatable-icon-down]="expanded"
                                         title="Expand/Collapse Row"
-                                        (click)="toggleExpandRow(row)"
+                                        (click)="toggleExpandRow(myTable, row)"
                                         >
                                     </a>
                                     </ng-template>
@@ -91,10 +91,10 @@
                                             {{row.name}}
                                         </p>
                                     <p class="">
-                                        {{row.deliveryDate | date}}
+                                        {{row.deliveryDate | date: 'dd.MM.yyyy'}}
                                     </p>
                                     <div *ngIf="windowWidth<=566">
-                                        <div *ngIf="role.premissions.includes('view'); else elseTemplate">
+                                        <div *ngIf="role.premissions.includes(permissionView); else elseTemplate">
                                             <app-single-multiple-choice [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
                                         </div>
                                         <ng-template #elseTemplate>
@@ -115,7 +115,7 @@
                                 <!-- assignee -->
                                 <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=190 name="Assignee" prop="assignedUser" [comparator]="userNameSort" [cellClass]="getCellClass" >
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                    <div *ngIf="role.premissions.includes('view'); else elseTemplate">
+                                    <div *ngIf="role.premissions.includes(permissionView); else elseTemplate">
                                         <app-single-multiple-choice [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
                                     </div>
                                     <ng-template #elseTemplate>

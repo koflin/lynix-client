@@ -1,3 +1,5 @@
+import { User } from "src/app/models/user";
+
 export class CreateUserDto {
   companyId: string;
   username: string;
@@ -6,7 +8,9 @@ export class CreateUserDto {
   roleId?: string;
   avatar?: string;
 
-  constructor(user: CreateUserDto) {
+  constructor(user: User) {
     Object.assign(this, user);
+
+    this.roleId = user.role.id;
   }
 }

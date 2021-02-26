@@ -1,3 +1,4 @@
+import { ApiService } from './../api/api.service';
 import { Injectable } from '@angular/core';
 import { Role } from 'src/app/models/role';
 
@@ -6,25 +7,16 @@ import { Role } from 'src/app/models/role';
 })
 export class RolesService {
 
-  get roles(): Role[] {
-    return JSON.parse(sessionStorage.getItem('roles'));
-  }
-
-  set roles(roles: Role[]) {
-    sessionStorage.setItem('roles', JSON.stringify(roles));
-  }
-
-  constructor() {
-    if (!this.roles) {
-      sessionStorage.setItem('roles', '[{"id":"r0","name":"Developer","premissions":["view","execute","edit", "assign"]},{"id":"r1","name":"Operator","premissions":["view","execute"]},{"id":"r2","name":"Process Admin","premissions":["view","edit", "assign"]},{"id":"r3","name":"Manager","premissions":["view"]}]');
-    }
+  constructor(
+    private api: ApiService
+  ) {
   }
 
   getById(id: string) {
-    return this.roles[0];
+    return this.api.get<Role>('roles/' + id);
   }
 
   getAll() {
-    return this.roles;
+    return this.api.get<Role[]>('roles');
   }
 }

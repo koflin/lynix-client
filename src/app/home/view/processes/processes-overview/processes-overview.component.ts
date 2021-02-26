@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import { UsersService } from 'src/app/core/users/users.service';
 import { User } from 'src/app/models/user';
 import { RolesService } from 'src/app/core/roles/roles.service';
-import { Role } from 'src/app/models/role';
+import { Permission, Role } from 'src/app/models/role';
 import { SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -18,6 +18,8 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./processes-overview.component.scss']
 })
 export class ProcessesOverviewComponent implements OnInit {
+  permissionView = Permission.VIEW;
+
   breadCrumbs: BreadCrumbInfo[]=[{name:"Process Overview", url: this.router.url },];
   nodesAreEmpty:boolean = undefined;
   windowWidth:number
@@ -52,7 +54,6 @@ export class ProcessesOverviewComponent implements OnInit {
   currentUser:User
   role:Role
   potentialAssignees:SingleMultiChoiceItem[]
-  @ViewChild('myTable') table: any;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.windowWidth = event.target.innerWidth
@@ -70,7 +71,6 @@ export class ProcessesOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.getLocalUser();
-    this.role = this.rolesService.getById(this.currentUser.roleId);
 
     this.processesOverviewService.onProcessNodeChange.subscribe((nodes) => {
       this.nodesAreEmpty = nodes.length < 1 ? true : false;
@@ -98,9 +98,9 @@ export class ProcessesOverviewComponent implements OnInit {
     });
   }
 
-  onActivate($event){
+  onActivate(table, $event){
     if ($event.type=="click") {
-      this.toggleExpandRow($event.row)
+      this.toggleExpandRow(table, $event.row)
     }
   }
   assignUserToProcess(userId, process:ProcessNode){
@@ -113,8 +113,8 @@ export class ProcessesOverviewComponent implements OnInit {
     }
     //console.log(process, userId)
   }
-  toggleExpandRow(row) {
-    this.table.rowDetail.toggleExpandRow(row);
+  toggleExpandRow(table, row) {
+    table.rowDetail.toggleExpandRow(row);
   }
 
   update() {

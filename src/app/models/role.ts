@@ -4,4 +4,9 @@ export interface Role {
   premissions: Permission[];
 }
 
-export type Permission = 'view' | 'execute' | 'edit' | 'assign';
+export enum Permission {
+  VIEW = 'view',
+  EXECUTE = 'execute',
+  EDIT = 'edit',
+  ASSIGN = 'assign'
+}

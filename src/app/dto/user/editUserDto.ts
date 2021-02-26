@@ -9,5 +9,7 @@ export class EditUserDto {
 
   constructor(user: User) {
     Object.assign(this, user);
+
+    this.roleId = user.role.id;
   }
 }

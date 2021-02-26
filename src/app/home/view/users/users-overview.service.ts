@@ -27,7 +27,7 @@ export class UsersOverviewService {
           username: user.username,
           firstName: user.firstName,
           lastName: user.lastName,
-          role: this.rolesService.getById(user.roleId),
+          role: user.role,
           avatar: user.avatar
         } as UserRowNode;
       }))

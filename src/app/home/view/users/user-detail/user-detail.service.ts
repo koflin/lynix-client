@@ -35,7 +35,7 @@ export class UsersDetailService {
         firstName: user.firstName,
         lastName: user.lastName,
         avatar: user.avatar,
-        role: this.rolesService.getById(user.roleId),
+        role: user.role,
         company: await this.companiesService.getById(user.companyId).toPromise()
       };
     }));
@@ -49,7 +49,7 @@ export class UsersDetailService {
       avatar: userDetail.avatar,
       firstName: userDetail.firstName,
       lastName: userDetail.lastName,
-      roleId: userDetail.role.id
+      role: userDetail.role
     });
   }
 }

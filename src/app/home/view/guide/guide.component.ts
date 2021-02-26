@@ -77,7 +77,6 @@ export class GuideComponent implements OnInit {
             this.processesService.getById(id).subscribe(async (process) => {
               this.process = process;
 
-              this.order = await this.ordersService.getById(this.process.orderId).toPromise();
               this.assignee = await this.usersService.getById(this.process.assignedUserId).toPromise();
 
               this.breadCrumbs=[{name:"Process Overview", url: "/processes/overview" }, {name:'Process: ' + this.process.name , url: this.router.url},];

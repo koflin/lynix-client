@@ -22,8 +22,6 @@ export class ProcessesOverviewService {
   constructor(private processesService: ProcessesService,
               private usersService: UsersService,
               private rolesService: RolesService,
-              private ordersService: OrdersService,
-              private processTemplatesService: ProcessTemplatesService,
               private authService: AuthService) {
     this.onProcessNodeChange = processesService.onProcessChange.pipe(switchMap((id) => {
       return this.getAll();
@@ -42,6 +40,7 @@ export class ProcessesOverviewService {
           canExecute: process.assignedUserId === this.authService.getLocalUser().id,
           assignedUser: process.assignedUserId ? await this.usersService.getById(process.assignedUserId).toPromise() : null,
           selected: false,
+          deliveryDate: process.order.deliveryDate,
         } as ProcessNode;
       }))
     ));
@@ -64,7 +63,7 @@ export class ProcessesOverviewService {
           username: user.username,
           firstName: user.firstName,
           lastName: user.lastName,
-          role: this.rolesService.getById(user.roleId),
+          role: user.role,
         };
       });
     }));

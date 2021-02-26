@@ -1,3 +1,4 @@
+import { Role } from 'src/app/models/role';
 import { CompanyBase } from './companyBase';
 
 export interface User extends CompanyBase {
@@ -6,6 +7,6 @@ export interface User extends CompanyBase {
   username: string;
   firstName?: string;
   lastName?: string;
-  roleId?: string;
+  role?: Role;
   avatar?: string;
 }

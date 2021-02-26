@@ -50,7 +50,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
   set selectedRole(value:SingleMultiChoiceItem){
     if (value!=this._selectedRole) {
       this._selectedRole=value
-      this.userDetail.role = this.rolesService.getById(value.value.toString())
+      this.rolesService.getById(value.value.toString()).subscribe(role => this.userDetail.role = role);
     }
   }
   constructor(private router: Router,
@@ -96,7 +96,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     this.checkForError=true
     if (!(this.roleField.error || this.usernameField.error || this.firstname.error || this.lastname.error || this.password.error)) {
       if (this.userDetail.id==undefined) {
-        let userDraft:User = {...this.userDetail, 'companyId': this.authService.getLocalUser().companyId, 'roleId': this.userDetail.role.id}
+        let userDraft:User = {...this.userDetail, 'companyId': this.authService.getLocalUser().companyId, 'role': this.userDetail.role }
         this.usersService.createUser(userDraft);
       }else{
         this.usersDetailService.updateDetail(this.userDetail);
@@ -122,10 +122,10 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     this.userDetail.avatar = this.userDetail.avatar;
   } */
 
-  refresh() {
+  async refresh() {
 
     if (this.userId!= 'undefined') {
-      this.usersDetailService.getDetail(this.userId).subscribe(detail => this.userDetail = detail);
+      this.userDetail = await this.usersDetailService.getDetail(this.userId).toPromise();
     }else{
       this.userDetail = {
         role: undefined,
@@ -143,7 +143,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
       {name:(this.userDetail.id)? this.userDetail.username : 'New', url:this.router.url}]
 
 
-    this.availableRoles = this.rolesService.getAll();
+    this.availableRoles = await this.rolesService.getAll().toPromise();
     this.availabelRolesSelection= this.availableRoles.map((r)=>{
       return {value:r.id, label:r.name}
 
