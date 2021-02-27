@@ -1,3 +1,4 @@
+import { RolesOverviewComponent } from './view/roles/roles-overview/roles-overview.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, CanDeactivate  } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
@@ -21,19 +22,20 @@ import { UsersOverviewComponent } from './view/users/users-overview/users-overvi
 const routes: Routes = [
   { path: '', component: HomeComponent, children:[
     {
-      path:"dashboard", component: DashboardComponent, canActivate: [AuthGuard] 
+      path:"dashboard", component: DashboardComponent, canActivate: [AuthGuard]
     },
     {
-      path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard] 
+      path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard]
     },
     //Order
     {
-      path: 'orders/overview', component: OrdersOverviewComponent, canActivate: [AuthGuard] 
+      path: 'orders/overview', component: OrdersOverviewComponent, canActivate: [AuthGuard]
     },
     { path: 'orders/draft', component: OrdersDraftComponent, canActivate: [AuthGuard] },
     { path: 'orders/draft/:id', component: OrdersDraftComponent, canActivate: [AuthGuard] },
     { path: 'users', component: UsersOverviewComponent, canActivate: [AuthGuard]  },
     { path: 'users/:id', component: UserDetailComponent , canActivate: [AuthGuard ], canDeactivate:[HasUnsavedDataGuard]  },
+    { path: 'roles', component: RolesOverviewComponent, canActivate: [AuthGuard] },
 
     {path: 'test/storage', component: TestingComponent, canActivate: [AuthGuard] },
     {path: 'processes/overview', component: ProcessesOverviewComponent , canActivate: [AuthGuard] },
@@ -42,7 +44,7 @@ const routes: Routes = [
     // Templates
   { path: 'templates/product', component: ProductTemplateLibraryComponent , canActivate: [AuthGuard] },
   { path: 'templates/process', component: ProcessTemplateLibraryComponent, canActivate: [AuthGuard] },
-    
+
 
   ]},
 ];

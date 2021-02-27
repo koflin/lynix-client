@@ -22,7 +22,6 @@ export class ApiService {
 
     for (const key in queryParams) {
       if (queryParams.hasOwnProperty(key)) {
-        console.log(key);
         query += key + '=' + encodeURIComponent(queryParams[key]) + '&';
       }
     }

@@ -94,7 +94,7 @@
                                         {{row.deliveryDate | date: 'dd.MM.yyyy'}}
                                     </p>
                                     <div *ngIf="windowWidth<=566">
-                                        <div *ngIf="role.premissions.includes(permissionView); else elseTemplate">
+                                        <div *ngIf="currentUser.permissions.includes(permissionView); else elseTemplate">
                                             <app-single-multiple-choice [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
                                         </div>
                                         <ng-template #elseTemplate>
@@ -115,7 +115,7 @@
                                 <!-- assignee -->
                                 <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=190 name="Assignee" prop="assignedUser" [comparator]="userNameSort" [cellClass]="getCellClass" >
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                    <div *ngIf="role.premissions.includes(permissionView); else elseTemplate">
+                                    <div *ngIf="currentUser.permissions.includes(permissionView); else elseTemplate">
                                         <app-single-multiple-choice [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
                                     </div>
                                     <ng-template #elseTemplate>

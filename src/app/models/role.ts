@@ -1,7 +1,7 @@
 export interface Role {
   id: string;
   name: string;
-  premissions: Permission[];
+  permissions: Permission[];
 }
 
 export enum Permission {

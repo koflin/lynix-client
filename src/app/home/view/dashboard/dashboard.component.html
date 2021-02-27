@@ -1,13 +1,13 @@
-<div 
+<div
 class=" header pb-6 pt-6 d-flex align-items-center"
   style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover; background-position: center center;">
-  <span class=" mask bg-gradient-primary opacity-6"> </span>  
-  <div class=" container-fluid">
+  <span class=" mask bg-gradient-primary opacity-6"> </span>
+  <div class=" container-fluid" *ngIf="stats">
       <div class=" header-body">
-          
+
         <div class="justify-content-space-around row">
-          
-  
+
+
           <div class=" col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class=" card card-stats">
               <div class=" card-body pl-5">
@@ -21,7 +21,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                         <span class="text-muted h5 mb-0 text-uppercase"> In progress </span>
                       </div>
                       <div class="col-3 pr-0">
-                        <span class="mb-0 text-uppercase"> 3 </span>
+                        <span class="mb-0 text-uppercase">{{ stats.overall.inProgress }}</span>
                       </div>
                     </div>
                     <div class="row">
@@ -29,11 +29,11 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                         <span class="text-muted h5 mb-0 text-uppercase"> Finished </span>
                       </div>
                       <div class="col-3 pr-0">
-                        <span class="mb-0 text-uppercase"> 3 </span>
+                        <span class="mb-0 text-uppercase">{{ stats.overall.finished }}</span>
                       </div>
                     </div>
                   </div>
-  
+
                   <div class=" col-3 px-0 d-flex justify-content-end">
                     <div
                       class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding"
@@ -42,12 +42,12 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                     </div>
                   </div>
                 </div>
-  
-                
+
+
               </div>
             </div>
           </div>
-  
+
           <div class=" col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class=" card card-stats">
               <div class=" card-body pl-5">
@@ -61,7 +61,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                         <span class="text-muted h5 mb-0 text-uppercase"> In progress </span>
                       </div>
                       <div class="col-3 pr-0">
-                        <span class="mb-0 text-uppercase"> 3 </span>
+                        <span class="mb-0 text-uppercase">{{ stats.assigned.inProgress }}</span>
                       </div>
                     </div>
                     <div class="row">
@@ -69,11 +69,11 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                         <span class="text-muted h5 mb-0 text-uppercase"> Finished </span>
                       </div>
                       <div class="col-3 pr-0">
-                        <span class="mb-0 text-uppercase"> 3 </span>
+                        <span class="mb-0 text-uppercase">{{ stats.assigned.finished }}</span>
                       </div>
                     </div>
                   </div>
-  
+
                   <div class=" col-3 px-0 d-flex justify-content-end">
                     <div
                       class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding"
@@ -82,11 +82,11 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                     </div>
                   </div>
                 </div>
-  
+
               </div>
             </div>
           </div>
-  
+
           <div class=" col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class=" card card-stats">
               <div class=" card-body pl-5">
@@ -99,9 +99,9 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                       <div class="col-9 pr-0">
                         <span class="text-muted h5 mb-0 text-uppercase"> Work Order Draft </span>
                       </div>
-                      
+
                       <div class="col-3 pr-0">
-                        <span class="mb-0 text-uppercase"> 3 </span>
+                        <span class="mb-0 text-uppercase">{{ stats.orders.drafts }}</span>
                       </div>
                     </div>
                     <div class="row">
@@ -109,11 +109,11 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                         <span class="text-muted h5 mb-0 text-uppercase"> Not assigned </span>
                       </div>
                       <div class="col-3 pr-0">
-                        <span class="mb-0 text-uppercase"> 3 </span>
+                        <span class="mb-0 text-uppercase">{{ stats.orders.notStarted }}</span>
                       </div>
                     </div>
                   </div>
-  
+
                   <div class=" col-3 px-0 d-flex justify-content-end">
                     <div
                       class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding"
@@ -136,7 +136,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/order.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
-              
+
             <h5 class="h3 mb-0 z-index-1 text-white text-uppercase">Order</h5>
             <div class="z-index-1">
               <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
@@ -153,7 +153,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                         <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/orders/draft'"> <span>Create New</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
                       </ul>
                     </div>
-                    
+
                 </a>
             </div>
         </div>
@@ -164,7 +164,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/process.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
-              
+
             <h5 class="h3 mb-0 z-index-1 text-white text-uppercase">Process</h5>
             <div class="z-index-1">
               <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
@@ -180,7 +180,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                         <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/processes/overview'"><span>Overview</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
                       </ul>
                     </div>
-                    
+
                 </a>
             </div>
         </div>
@@ -190,7 +190,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/template.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
-              
+
             <h5 class="h3 mb-0 z-index-1 text-white text-uppercase">Template</h5>
             <div class="z-index-1">
               <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
@@ -205,11 +205,11 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                       <ul class="list-group container-fluid pl-0 pr-0">
                         <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/templates/product'"><span>Product</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
                         <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/templates/process'"><span>Process</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
-                        <li class="list-group-item zooming d-flex justify-content-between"><span>Tools</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
+                        <!--<li class="list-group-item zooming d-flex justify-content-between"><span>Tools</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>-->
 
                       </ul>
                     </div>
-                    
+
                 </a>
             </div>
         </div>
@@ -219,7 +219,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/admin.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
-              
+
             <h5 class="h3 mb-0 z-index-1 text-white text-uppercase">Administration</h5>
             <div class="z-index-1">
               <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
@@ -233,10 +233,10 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                     <div class=" d-flex justify-content-between">
                       <ul class="list-group container-fluid pl-0 pr-0">
                         <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/users'"><span>Users</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/users'"><span>Roles</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/roles'"><span>Roles</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
                       </ul>
                     </div>
-                    
+
                 </a>
             </div>
         </div>
@@ -246,7 +246,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
-              
+
             <h5 class="h3 mb-0 z-index-1 text-white text-uppercase">Testing</h5>
             <div class="z-index-1">
               <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
@@ -262,10 +262,10 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                         <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/test/storage'"><span>Storage</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
                         <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/test/storage'"><span>Dialog</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
 
-                      
+
                       </ul>
                     </div>
-                    
+
                 </a>
             </div>
         </div>
@@ -278,11 +278,11 @@ class=" header pb-6 pt-6 d-flex align-items-center"
 
           <h5 class=" h3 mb-0">Product comparison</h5>
         </div>
-        <app-chart-bar-staked></app-chart-bar-staked>        
+        <app-chart-bar-staked></app-chart-bar-staked>
       </div>
     </div> -->
-    
+
 
   </div>
-  
+
 </div>

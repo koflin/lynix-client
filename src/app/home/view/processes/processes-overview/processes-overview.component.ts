@@ -11,6 +11,7 @@ import { RolesService } from 'src/app/core/roles/roles.service';
 import { Permission, Role } from 'src/app/models/role';
 import { SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
 import { AuthService } from 'src/app/auth/auth.service';
+import { LocalUser } from 'src/app/models/localUser';
 
 @Component({
   selector: 'app-processes-overview',
@@ -51,8 +52,7 @@ export class ProcessesOverviewComponent implements OnInit {
     }
   ];
   temp: ProcessNode[]
-  currentUser:User
-  role:Role
+  currentUser:LocalUser
   potentialAssignees:SingleMultiChoiceItem[]
   @HostListener('window:resize', ['$event'])
   onResize(event) {

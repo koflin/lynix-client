@@ -18,6 +18,7 @@ import { GuideGuard } from './view/guide/guide.guard';
 import { ProductTemplateLibraryComponent } from './view/templates/product-template-library/product-template-library.component';
 import { ProcessTemplateLibraryComponent } from './view/templates/process-template-library/process-template-library.component';
 import { RouterModule } from '@angular/router';
+import { RolesOverviewComponent } from './view/roles/roles-overview/roles-overview.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { RouterModule } from '@angular/router';
     GuideComponent,
     ProductTemplateLibraryComponent,
     ProcessTemplateLibraryComponent,
-    StatusPipe
+    StatusPipe,
+    RolesOverviewComponent
   ],
   imports: [
     HomeRoutingModule,
