@@ -7,6 +7,8 @@ import { Order } from 'src/app/models/order';
 import { v4 as uuidv4 } from 'uuid';
 import { ProductTemplatesService } from '../productTemplates/product-tempaltes.service';
 import { EditOrderDto } from 'src/app/dto/order/editOrderDto';
+import { EventsService } from '../events/events.service';
+import { Socket } from 'ngx-socket-io';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +20,14 @@ export class OrdersService {
 
   constructor(
     private api: ApiService,
+    private socket: Socket,
     private prodService: ProductTemplatesService,
     private procService: ProcessesService,
   ) {
     this.ordersChange = new BehaviorSubject(null);
-    this.onOrdersChange = this.ordersChange.asObservable();
+
+    //this.onOrdersChange = this.socket.fromEvent<Order>('ORDER_CREATE');
+    console.log('TEST');
   }
 
   save(order: Order){

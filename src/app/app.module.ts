@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './home/home.module';
-import { StatusPipe } from './pipes/status.pipe';
+import { SocketIoModule } from 'ngx-socket-io';
 
 
 @NgModule({
@@ -21,7 +21,10 @@ import { StatusPipe } from './pipes/status.pipe';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    HomeModule
+    HomeModule,
+    SocketIoModule.forRoot({
+      url: 'ws://localhost:3001'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
