@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { Router } from '@angular/router';
+import { EventsService } from 'src/app/core/events/events.service';
+import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 
 @Component({
   selector: 'app-testing',
@@ -10,12 +11,15 @@ import { Router } from '@angular/router';
 export class TestingComponent implements OnInit {
   breadCrumbs: BreadCrumbInfo[]=[{name:"Test", url: this.router.url },];
 
+  count = 0;
+
   constructor(
     private router: Router,
-
+    private eventsService: EventsService
   ) { }
 
   ngOnInit(): void {
+    this.eventsService.onEvent<string>('message').subscribe((msg) => alert(msg));
   }
   populate() {
     /*sessionStorage.setItem('orders', '[{"companyId":"c0","id":"b842f317-88be-44e4-8e90-8df4f4a46c16","name":"Test Order","description":"","products":[{"quantity":1,"template":{"companyId":"c0","id":"87e50189-3e11-4dbb-b667-c677bc5aa8b1","name":"Test Product","processTemplates":[{"companyId":"c0","id":"f8462039-ed62-4901-8cfb-0db66ced2798","name":"Test Process","estimatedTime":null,"mainTasks":[],"stepTemplates":[{"title":"Unnamed Step0","keyMessage":null,"tasks":null,"materials":[],"toolIds":[],"pictureUris":[],"videoUris":[]},{"title":"Unnamed Step1","keyMessage":null,"tasks":null,"materials":[],"toolIds":[],"pictureUris":[],"videoUris":[]}],"previousComments":null}],"processTemplateIds":["f8462039-ed62-4901-8cfb-0db66ced2798"]},"templateId":"87e50189-3e11-4dbb-b667-c677bc5aa8b1"}],"status":"released"},{"companyId":"c0","id":"555ca905-5f6b-49fc-9cb4-e45f77d967d6","name":"Boat Order","description":"","products":[{"quantity":1,"template":{"companyId":"c0","id":"1102858f-449b-43c5-ab3b-72f8786386a0","name":"Boat 3000","processTemplates":[{"companyId":"c0","id":"fc6dfe06-4aac-453d-849f-ba9765b9a7e2","name":"Sail","estimatedTime":5400,"mainTasks":["Cut","Sew"],"stepTemplates":[{"title":"Cut","keyMessage":null,"tasks":null,"materials":["Cloth"],"toolIds":["Scissor"],"pictureUris":[],"videoUris":[]},{"title":"Sew","keyMessage":null,"tasks":null,"materials":["String"],"toolIds":["Sewing machine"],"pictureUris":[],"videoUris":[]},{"title":"Visual Inspection","keyMessage":null,"tasks":null,"materials":[],"toolIds":[],"pictureUris":[],"videoUris":[]}],"previousComments":null},{"companyId":"c0","id":"f887b5ce-eaaa-4f37-aed5-3e6101fff549","name":"Rudder","estimatedTime":9000,"mainTasks":["Craft"],"stepTemplates":[{"title":"Gather materials","keyMessage":null,"tasks":null,"materials":["Wood"],"toolIds":[],"pictureUris":[],"videoUris":[]},{"title":"Craft","keyMessage":null,"tasks":null,"materials":[],"toolIds":["Chisel","Saw"],"pictureUris":[],"videoUris":[]}],"previousComments":null}],"processTemplateIds":["fc6dfe06-4aac-453d-849f-ba9765b9a7e2","f887b5ce-eaaa-4f37-aed5-3e6101fff549"]},"templateId":"1102858f-449b-43c5-ab3b-72f8786386a0"}],"status":"in_preparation"}]');
@@ -38,5 +42,8 @@ export class TestingComponent implements OnInit {
     sessionStorage.clear();
   }
 
-
+  send() {
+    this.eventsService.emit('message', this.count);
+    this.count++;
+  }
 }

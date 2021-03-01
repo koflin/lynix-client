@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { Process } from 'src/app/models/process';
-import { Step } from 'src/app/models/step';
-import { User } from 'src/app/models/user';
-import { ProcessTemplatesService } from '../processTemplates/process-templates.service';
-import { RolesService } from '../roles/roles.service';
-import { v4 as uuidv4 } from 'uuid';
-import * as _ from 'lodash'
-import { Order } from 'src/app/models/order';
-import { ApiService } from '../api/api.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { EditProcessDto } from 'src/app/dto/process/editProcessDto';
 import { CreateProcessDto } from 'src/app/dto/process/createProcessDto';
+import { EditProcessDto } from 'src/app/dto/process/editProcessDto';
+import { Order } from 'src/app/models/order';
+import { Process } from 'src/app/models/process';
+
+import { ApiService } from '../api/api.service';
+
 @Injectable({
   providedIn: 'root'
 })

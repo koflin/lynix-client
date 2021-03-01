@@ -1,14 +1,11 @@
-import { LocalUser } from './../models/localUser';
-import { UsersService } from 'src/app/core/users/users.service';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { JwtHelperService } from "@auth0/angular-jwt";
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { ApiService } from '../core/api/api.service';
 import { catchError, map } from 'rxjs/operators';
+
+import { ApiService } from '../core/api/api.service';
 import { User } from '../models/user';
-
-
+import { LocalUser } from './../models/localUser';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +18,7 @@ export class AuthService {
   public onLocalUserChange: Observable<LocalUser>;
 
   constructor(
-    private http: HttpClient,
-    private api: ApiService,
-    private usersService: UsersService
+    private api: ApiService
     ) {
       this.localUserChange = new BehaviorSubject(this.getLocalUser());
       this.onLocalUserChange = this.localUserChange.asObservable();

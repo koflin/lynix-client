@@ -1,10 +1,11 @@
-import { OrdersService } from './../../../../core/orders/orders.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { OrdersService } from 'src/app/core/orders/orders.service';
 import { OrderNode } from 'src/app/models/ui';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
-import { OrdersOverviewService } from './orders-overview.service';
 import { SelectionType } from 'src/app/models/ui/table';
+
+import { OrdersOverviewService } from './orders-overview.service';
 
 @Component({
   selector: 'app-orders-overview',

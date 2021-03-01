@@ -21,10 +21,7 @@ import { SocketIoModule } from 'ngx-socket-io';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    HomeModule,
-    SocketIoModule.forRoot({
-      url: 'ws://localhost:3001'
-    })
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

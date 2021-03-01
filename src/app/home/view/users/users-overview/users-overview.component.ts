@@ -1,12 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsersService } from 'src/app/core/users/users.service';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { UserRowNode } from 'src/app/models/ui/userRowNode';
-import { UsersOverviewService } from '../users-overview.service';
-import List from "list.js";
 import swal from 'sweetalert2';
-import { clone, cloneDeep } from 'lodash';
+
+import { UsersOverviewService } from '../users-overview.service';
 
 @Component({
   selector: 'app-users-overview',
@@ -27,7 +25,6 @@ export class UsersOverviewComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private usersService: UsersService,
     private usersOverviewService: UsersOverviewService
   ) { }
 
