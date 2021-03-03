@@ -16,7 +16,7 @@ export class EventsService {
     private authService: AuthService
   ) {
     console.log("Connect");
-    this.socket = io(this.webSocketRoot);
+    this.socket = io(this.webSocketRoot, { auth: { token: localStorage.getItem('access_token') }});
   }
 
   onEvent<T>(type: string): Observable<T> {
