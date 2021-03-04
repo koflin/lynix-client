@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CreateProcessDto } from 'src/app/dto/process/createProcessDto';
 import { EditProcessDto } from 'src/app/dto/process/editProcessDto';
+import { Event } from 'src/app/models/event';
 import { Order } from 'src/app/models/order';
 import { Process } from 'src/app/models/process';
 
 import { ApiService } from '../api/api.service';
+import { EventsService } from '../events/events.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +20,14 @@ export class ProcessesService {
 
   constructor(
     private api: ApiService,
+    private events: EventsService
   ) {
     this.processChange = new BehaviorSubject(null);
-    this.onProcessChange = this.processChange.asObservable();
+    this.onProcessChange = merge(
+      this.events.onEvents<Process>(Event.PROCESS_CREATE, Event.PROCESS_UPDATE).pipe(map(process => process.id)),
+      this.events.onEvent<string>(Event.PROCESS_DELETE),
+      this.processChange.asObservable()
+    );
   }
 
   getAll() {
@@ -61,27 +68,27 @@ export class ProcessesService {
   }
 
   enter(id: string) {
-    this.api.put('processes/' + id + '/enter').subscribe(() => this.processChange.next(id));
+    this.api.patch('processes/' + id + '/enter').subscribe(() => this.processChange.next(id));
   }
 
   exit(id: string) {
-    return this.api.put<void>('processes/' + id + '/exit');
+    return this.api.patch<void>('processes/' + id + '/exit');
   }
 
   start(id: string, userId: string) {
-    this.api.put('processes/' + id + '/start', { userId }).subscribe(() => this.processChange.next(id));
+    this.api.patch('processes/' + id + '/start', { userId }).subscribe(() => this.processChange.next(id));
   }
 
   stop(id: string) {
-    this.api.put('processes/' + id + '/stop').subscribe(() => this.processChange.next(id));
+    this.api.patch('processes/' + id + '/stop').subscribe(() => this.processChange.next(id));
   }
 
   assign(processId: string, assigneeId: string) {
-    this.api.put('processes/' + processId + '/assign', { assigneeId }).subscribe(() => this.processChange.next(processId));
+    this.api.patch('processes/' + processId + '/assign', { assigneeId }).subscribe(() => this.processChange.next(processId));
   }
 
   finish(id: string) {
-    this.api.put('processes/' + id + '/finish').subscribe(() => this.processChange.next(id));
+    this.api.patch('processes/' + id + '/finish').subscribe(() => this.processChange.next(id));
   }
 
   createForOrder(order: Order) {
