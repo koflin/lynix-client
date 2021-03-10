@@ -1,5 +1,5 @@
 import { Order } from 'src/app/models/order';
-import { ProcessTemplate } from './processTemplate';
+
 import { CompanyBase } from './companyBase';
 import { Step } from './step';
 
@@ -18,7 +18,7 @@ export interface Process extends CompanyBase {
   timeTaken: number;
   currentStepIndex: number;
   status: 'in_preparation' | 'released' | 'in_progress' | 'completed' | 'assistance_required';
-  isOccupied: boolean;
+  occupiedBy: string;
   isRunning: boolean;
 
   assignedUserId: string;

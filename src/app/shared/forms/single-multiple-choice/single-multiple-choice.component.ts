@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+
 import { InputOutputValue, SingleMultiChoiceItem } from '../../models/InputOutputValue';
 
 @Component({

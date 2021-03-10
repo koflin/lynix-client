@@ -1,17 +1,20 @@
-import { Component, HostListener, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProcessGroupNode, ProcessNode } from 'src/app/models/ui';
-import { ProcessesOverviewService } from '../processes-overview.service';
-import { ProcessesService } from 'src/app/core/processes/processes.service';
 import * as moment from 'moment';
-import { UsersService } from 'src/app/core/users/users.service';
-import { User } from 'src/app/models/user';
-import { RolesService } from 'src/app/core/roles/roles.service';
-import { Permission, Role } from 'src/app/models/role';
-import { SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
 import { AuthService } from 'src/app/auth/auth.service';
+import { EventsService } from 'src/app/core/events/events.service';
+import { ProcessesService } from 'src/app/core/processes/processes.service';
+import { RolesService } from 'src/app/core/roles/roles.service';
+import { UsersService } from 'src/app/core/users/users.service';
+import { Event } from 'src/app/models/event';
 import { LocalUser } from 'src/app/models/localUser';
+import { Permission } from 'src/app/models/role';
+import { ProcessGroupNode, ProcessNode } from 'src/app/models/ui';
+import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
+import { UserActivity } from 'src/app/models/user';
+import { SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
+
+import { ProcessesOverviewService } from '../processes-overview.service';
 
 @Component({
   selector: 'app-processes-overview',
@@ -51,7 +54,7 @@ export class ProcessesOverviewComponent implements OnInit {
       nodes: []
     }
   ];
-  temp: ProcessNode[]
+  temp: ProcessNode[];
   currentUser:LocalUser
   potentialAssignees:SingleMultiChoiceItem[]
   @HostListener('window:resize', ['$event'])
@@ -64,7 +67,8 @@ export class ProcessesOverviewComponent implements OnInit {
     private processesService: ProcessesService ,
     private usersService: UsersService,
     private authService: AuthService,
-    private rolesService: RolesService
+    private rolesService: RolesService,
+    private event: EventsService
   ) {
 
   }
@@ -77,6 +81,17 @@ export class ProcessesOverviewComponent implements OnInit {
       this.processNodeGroups.forEach((group) => {
         group.nodes = [];
         group.nodes.push(...nodes.filter((node) => node.status === group.status));
+      });
+    });
+
+    this.processesOverviewService.onProcessNodeTick.subscribe((event) => {
+      console.log(event);
+      this.processNodeGroups.forEach((group) => {
+        const node = group.nodes.find(node => node.id == event.processId);
+
+        if (node) {
+          node.timeTaken = event.timeTaken;
+        }
       });
     });
 
@@ -168,8 +183,8 @@ export class ProcessesOverviewComponent implements OnInit {
       }
   }
   start(processId){
-    this.processesService.enter(processId);
-    this.router.navigate(['guide/' + processId]);
+    this.event.emit(Event.ACTIVITY_CHANGE, UserActivity.GUIDE);
+    this.processesService.enter(processId).subscribe(() => this.router.navigate(['guide/' + processId]));
   }
 
 }

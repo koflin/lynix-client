@@ -1,16 +1,14 @@
+import { Injectable } from '@angular/core';
+import { merge, Observable } from 'rxjs';
+import { filter, map, mergeMap, switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { UsersService } from 'src/app/core/users/users.service';
-import { ProcessTemplatesService } from './../../../core/processTemplates/process-templates.service';
-import { OrdersService } from './../../../core/orders/orders.service';
+import { ProcesssGuideTickEvent } from 'src/app/models/events/processGuideTick.event';
+import { UserRowNode } from 'src/app/models/ui/userRowNode';
+
 import { ProcessesService } from './../../../core/processes/processes.service';
 import { ProcessNode } from './../../../models/ui/processNode';
-import { Injectable, OnInit } from '@angular/core';
-import { ProcessGroupNode } from 'src/app/models/ui/processGroupNode';
-import { map, mergeMap, switchMap } from 'rxjs/operators';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { Process } from 'src/app/models/process';
-import { UserRowNode } from 'src/app/models/ui/userRowNode';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +16,23 @@ import { UserRowNode } from 'src/app/models/ui/userRowNode';
 export class ProcessesOverviewService {
 
   public onProcessNodeChange: Observable<ProcessNode[]>;
+  public onProcessNodeTick: Observable<ProcesssGuideTickEvent>;
 
   constructor(private processesService: ProcessesService,
               private usersService: UsersService,
               private rolesService: RolesService,
               private authService: AuthService) {
-    this.onProcessNodeChange = processesService.onProcessChange.pipe(switchMap((id) => {
-      return this.getAll();
-    }));
+
+    this.onProcessNodeChange = merge(
+      processesService.onProcessChange,
+      processesService.onProcessGuideTick.pipe(
+        filter(data => data.timeTaken % 60 == 0)
+      )
+    ).pipe(
+      switchMap(() => this.getAll())
+    );
+
+    this.onProcessNodeTick = processesService.onProcessGuideTick;
   }
 
   getAll() {
@@ -36,7 +43,7 @@ export class ProcessesOverviewService {
           name: process.name,
           status: process.status,
           timeTaken: process.timeTaken,
-          isOccupied: process.isOccupied,
+          occupiedBy: process.occupiedBy,
           canExecute: process.assignedUserId === this.authService.getLocalUser().id,
           assignedUser: process.assignedUserId ? await this.usersService.getById(process.assignedUserId).toPromise() : null,
           selected: false,

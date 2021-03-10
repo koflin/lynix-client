@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { CreateProcessDto } from 'src/app/dto/process/createProcessDto';
 import { EditProcessDto } from 'src/app/dto/process/editProcessDto';
 import { Event } from 'src/app/models/event';
+import { ProcesssGuideTickEvent } from 'src/app/models/events/processGuideTick.event';
 import { Order } from 'src/app/models/order';
 import { Process } from 'src/app/models/process';
 
@@ -18,6 +19,8 @@ export class ProcessesService {
   private processChange: BehaviorSubject<string>;
   public onProcessChange: Observable<string>;
 
+  public onProcessGuideTick: Observable<ProcesssGuideTickEvent>;
+
   constructor(
     private api: ApiService,
     private events: EventsService
@@ -28,6 +31,8 @@ export class ProcessesService {
       this.events.onEvent<string>(Event.PROCESS_DELETE),
       this.processChange.asObservable()
     );
+
+    this.onProcessGuideTick = this.events.onEvent(Event.PROCESS_GUIDE_TICK);
   }
 
   getAll() {
@@ -68,7 +73,7 @@ export class ProcessesService {
   }
 
   enter(id: string) {
-    this.api.patch('processes/' + id + '/enter').subscribe(() => this.processChange.next(id));
+    return this.api.patch('processes/' + id + '/enter');
   }
 
   exit(id: string) {
@@ -76,11 +81,11 @@ export class ProcessesService {
   }
 
   start(id: string, userId: string) {
-    this.api.patch('processes/' + id + '/start', { userId }).subscribe(() => this.processChange.next(id));
+    return this.api.patch('processes/' + id + '/start', { userId });
   }
 
   stop(id: string) {
-    this.api.patch('processes/' + id + '/stop').subscribe(() => this.processChange.next(id));
+    return this.api.patch('processes/' + id + '/stop');
   }
 
   assign(processId: string, assigneeId: string) {
@@ -89,6 +94,10 @@ export class ProcessesService {
 
   finish(id: string) {
     this.api.patch('processes/' + id + '/finish').subscribe(() => this.processChange.next(id));
+  }
+
+  switch(id: string, stepIndex: number) {
+    this.api.patch('processes/' + id + '/switch', { stepIndex }).subscribe();
   }
 
   createForOrder(order: Order) {

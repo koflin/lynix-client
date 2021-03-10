@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ProcessesService } from 'src/app/core/processes/processes.service';
@@ -15,16 +15,24 @@ export class GuideGuard implements CanActivate {
     private processesService: ProcessesService,
     private authService: AuthService) {
   }
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.processesService.canWorkOn(state.root.paramMap.get('id'), this.authService.getLocalUser().id)) {
-      return true;
-    }
+    return new Promise(async (resolve) => {
 
-    this.router.navigate(['processes/overview']);
-    return false;
+      const process = await this.processesService.getById(next.paramMap.get('id')).toPromise();
+      const localUser = this.authService.getLocalUser();
+
+      if (process && process.assignedUserId === localUser.id && process.occupiedBy === localUser.id) {
+        resolve(true);
+        return;
+      }
+
+      this.router.navigate(['home/processes/overview']);
+      console.log('REDIRECT OVERVIEW');
+      resolve(false);
+    });
   }
-
 }

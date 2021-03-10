@@ -23,11 +23,16 @@ export class EventsService {
 
       if (user) {
         this.socket = io(this.webSocketRoot, { transports: ['websocket'], auth: { token: localStorage.getItem('access_token') }});
+      } else {
+        if (this.socket) {
+          this.socket.disconnect();
+          this.socket = null;
+        }
       }
     });
   }
 
-  onEvent<T>(type: Event): Observable<T> {
+  onEvent<T = any>(type: Event): Observable<T> {
     return new Observable((observer) => {
       this.socket.on(type.valueOf().toString(), (data: T) => {
         observer.next(data);

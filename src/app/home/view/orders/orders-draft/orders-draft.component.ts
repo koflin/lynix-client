@@ -1,17 +1,16 @@
-import { ProcessesService } from './../../../../core/processes/processes.service';
+import { animate, group, query, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { OrdersService } from 'src/app/core/orders/orders.service';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
+import { ProductTemplatesService } from 'src/app/core/productTemplates/product-tempaltes.service';
 import { Order } from 'src/app/models/order';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
-import { trigger, transition, query, style, animate, group } from '@angular/animations';
-import { InputOutputValue } from 'src/app/shared/models/InputOutputValue';
+import { deletingDataInformation } from 'src/app/models/ui/deletingData';
 import swal from 'sweetalert2';
-import {deletingDataInformation} from 'src/app/models/ui/deletingData'
-import { ProductTemplatesService } from 'src/app/core/productTemplates/product-tempaltes.service';
-import moment from 'moment';
-import { AuthService } from 'src/app/auth/auth.service';
+
+import { ProcessesService } from './../../../../core/processes/processes.service';
 
 const left = [
   query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
@@ -187,7 +186,7 @@ export class OrdersDraftComponent implements OnInit {
 
   discardDraft() {
     // Ask if really want to discard changes
-    this.router.navigate(['orders/overview']);
+    this.router.navigate(['home/orders/overview']);
   }
 
   saveDraft(dontFireModal:boolean=false) {
@@ -217,7 +216,7 @@ export class OrdersDraftComponent implements OnInit {
     this.ordersService.delete(this.orderDraft.id);
     this.saveDraft();
 
-    this.router.navigate(['orders/overview']);
+    this.router.navigate(['home/orders/overview']);
     //after deleting app should save()
   }
 
@@ -225,7 +224,7 @@ export class OrdersDraftComponent implements OnInit {
     this.orderDraft.status = 'released';
     this.saveDraft(true);
     this.processService.createForOrder(this.orderDraft);
-    this.router.navigate(['orders/overview']);
+    this.router.navigate(['home/orders/overview']);
   }
 
   defContainer(){
@@ -272,7 +271,7 @@ export class OrdersDraftComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
           // Show confirmation
-          this.router.navigate(['orders/overview']);
+          this.router.navigate(['hopme/orders/overview']);
       }
     })
     }
