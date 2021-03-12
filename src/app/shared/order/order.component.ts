@@ -1,7 +1,8 @@
-import { Component, Input,EventEmitter, OnInit, Output, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import moment from 'moment';
 import { ProductTemplatesService } from 'src/app/core/productTemplates/product-tempaltes.service';
 import { Order } from 'src/app/models/order';
+
 import { InputOutputValue, SingleMultiChoiceItem } from '../models/InputOutputValue';
 
 @Component({
@@ -107,7 +108,7 @@ export class OrderComponent implements OnInit {
               name: $e.label,
               processes: [],
             }
-          );
+          ).subscribe((product) => this.order.products[index].template = product);
           this.orderChange.emit(this.order)
         }
 

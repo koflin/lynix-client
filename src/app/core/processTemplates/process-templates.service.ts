@@ -1,9 +1,9 @@
-import { EditProcessTemplateDto } from './../../dto/processTemplate/editProcessTemplateDto';
 import { Injectable } from '@angular/core';
-import { ProcessTemplate } from 'src/app/models/processTemplate';
-import { v4 as uuidv4 } from 'uuid';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ProcessTemplate } from 'src/app/models/processTemplate';
+
 import { ApiService } from '../api/api.service';
+import { EditProcessTemplateDto } from './../../dto/processTemplate/editProcessTemplateDto';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class ProcessTemplatesService {
   }
 
   create(templateDraft: ProcessTemplate) {
-    this.api.post<ProcessTemplate>('templates/process', templateDraft).subscribe(template => this.processTemplatesChange.next(template.id));
+    return this.api.post<ProcessTemplate>('templates/process', templateDraft);
   }
 
   delete(id: string) {

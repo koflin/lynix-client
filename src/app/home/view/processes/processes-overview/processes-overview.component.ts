@@ -1,3 +1,4 @@
+import { group } from '@angular/animations';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
@@ -76,23 +77,29 @@ export class ProcessesOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authService.getLocalUser();
 
-    this.processesOverviewService.onProcessNodeChange.subscribe((nodes) => {
-      this.nodesAreEmpty = nodes.length < 1 ? true : false;
-      this.processNodeGroups.forEach((group) => {
-        group.nodes = [];
-        group.nodes.push(...nodes.filter((node) => node.status === group.status));
-      });
+    this.fetch();
+
+    // Change
+    this.processesOverviewService.onProcessNodeChange.subscribe((changedNode) => {
+      for (let group of this.processNodeGroups) {
+        const node = group.nodes.find(candidate => candidate.id === changedNode.id);
+
+        if (node.status != changedNode.status) {
+          this.removeNode(node.id);
+          this.addNode(changedNode);
+          break;
+        }
+      }
     });
 
-    this.processesOverviewService.onProcessNodeTick.subscribe((event) => {
-      console.log(event);
-      this.processNodeGroups.forEach((group) => {
-        const node = group.nodes.find(node => node.id == event.processId);
+    // Add
+    this.processesOverviewService.onProcessNodeAdd.subscribe((newNode) => {
+      this.addNode(newNode);
+    });
 
-        if (node) {
-          node.timeTaken = event.timeTaken;
-        }
-      });
+    // Remove
+    this.processesOverviewService.onProcessNodeRemove.subscribe((id) => {
+      this.removeNode(id);
     });
 
     this.processesOverviewService.getPotentialAssignees().subscribe(candidates => {
@@ -103,6 +110,26 @@ export class ProcessesOverviewComponent implements OnInit {
     this.windowWidth = window.innerWidth
 
   }
+
+  addNode(node: ProcessNode) {
+    for (let group of this.processNodeGroups) {
+      if (group.status === node.status) {
+        group.nodes.push(node);
+        break;
+      }
+    }
+  }
+
+  removeNode(id: string) {
+    for (let group of this.processNodeGroups) {
+      const index = group.nodes.findIndex(candidate => candidate.id === id);
+
+      if (index != -1) {
+        group.nodes.splice(index, 1);
+      }
+    }
+  }
+
   onSelect(id: string) {
     this.processNodeGroups.forEach((group) => {
       group.nodes.forEach((node) => {
@@ -132,7 +159,7 @@ export class ProcessesOverviewComponent implements OnInit {
     table.rowDetail.toggleExpandRow(row);
   }
 
-  update() {
+  fetch() {
     this.processesOverviewService.getAll().subscribe((processNodes) => {
       this.nodesAreEmpty = processNodes.length < 1 ? true : false;
       this.processNodeGroups.forEach((group) => {

@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
-import { isNullOrUndefined } from '@swimlane/ngx-datatable';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
 import { ProductTemplate } from 'src/app/models/productTemplate';
+
 import { InputOutputValue, SingleMultiChoiceItem } from '../models/InputOutputValue';
 
 @Component({
@@ -52,7 +52,7 @@ export class ProductComponent implements OnInit {
               mainTasks: [],
               stepTemplates: [],
               previousComments: [],
-            }),
+            }).subscribe((process) => this.productTemplate.processes[index].template = process),
 
           this.productTemplateChange.emit(this.productTemplate)
         }

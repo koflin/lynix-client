@@ -79,8 +79,8 @@ export class GuideComponent implements OnInit, OnDestroy {
 
         this.update();
 
-        this.processesService.onProcessChange.subscribe((changedId) => {
-          if (changedId && changedId === this.id) {
+        this.processesService.onProcessChange.subscribe((changed) => {
+          if (changed.id === this.id) {
             this.update();
           }
         });
@@ -145,18 +145,19 @@ export class GuideComponent implements OnInit, OnDestroy {
 
   onStart() {
     this.process.currentStepIndex = 0;
+    this.processesService.switch(this.process.id, this.process.currentStepIndex).subscribe();
     this.onJump();
   }
 
   onSwitch() {
     if (this.stepToggleId !== 0) {
       this.process.currentStepIndex = this.stepToggleId - 1;
-      this.processesService.switch(this.process.id, this.process.currentStepIndex);
+      this.processesService.switch(this.process.id, this.process.currentStepIndex).subscribe();
     }
   }
 
   onFinish() {
-    this.processesService.finish(this.process.id);
+    this.processesService.finish(this.process.id).subscribe();
     this.router.navigate(['home/processes/overview']);
   }
 

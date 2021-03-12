@@ -1,13 +1,11 @@
-import { BehaviorSubject, Observable } from 'rxjs';
-import { ApiService } from './../api/api.service';
-import { AuthService } from './../../auth/auth.service';
-import { RolesService } from 'src/app/core/roles/roles.service';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { CreateUserDto } from 'src/app/dto/user/createUserDto';
+import { EditUserDto } from 'src/app/dto/user/editUserDto';
 import { Permission } from 'src/app/models/role';
 import { User } from 'src/app/models/user';
-import { v4 as uuidv4 } from 'uuid';
-import { EditUserDto } from 'src/app/dto/user/editUserDto';
-import { CreateUserDto } from 'src/app/dto/user/createUserDto';
+
+import { ApiService } from './../api/api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,15 +36,11 @@ export class UsersService {
     });
   }
 
-  /*getWithPermissions(...permissions: Permission[]): User[] {
-    return this.users.filter(user => {
-      let role = this.rolesService.getById(user.roleId);
-
-      return permissions.every(permission => {
-        return role.premissions.indexOf(permission) !== -1;
-      });
+  getWithPermissions(...permissions: Permission[]) {
+    return this.api.get<User[]>('users', {
+      permissions
     });
-  }*/
+  }
 
   createUser(userDraft: User) {
     this.api.post<User>('users', new CreateUserDto(userDraft)).subscribe(user => this.usersChange.next(user.id));

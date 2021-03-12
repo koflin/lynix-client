@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { merge, Observable } from 'rxjs';
-import { filter, map, mergeMap, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { UsersService } from 'src/app/core/users/users.service';
 import { ProcesssGuideTickEvent } from 'src/app/models/events/processGuideTick.event';
+import { Process } from 'src/app/models/process';
+import { Permission } from 'src/app/models/role';
 import { UserRowNode } from 'src/app/models/ui/userRowNode';
 
 import { ProcessesService } from './../../../core/processes/processes.service';
@@ -15,7 +17,10 @@ import { ProcessNode } from './../../../models/ui/processNode';
 })
 export class ProcessesOverviewService {
 
-  public onProcessNodeChange: Observable<ProcessNode[]>;
+  public onProcessNodeChange: Observable<ProcessNode>;
+  public onProcessNodeAdd: Observable<ProcessNode>;
+  public onProcessNodeRemove: Observable<string>;
+
   public onProcessNodeTick: Observable<ProcesssGuideTickEvent>;
 
   constructor(private processesService: ProcessesService,
@@ -23,16 +28,32 @@ export class ProcessesOverviewService {
               private rolesService: RolesService,
               private authService: AuthService) {
 
-    this.onProcessNodeChange = merge(
-      processesService.onProcessChange,
-      processesService.onProcessGuideTick.pipe(
-        filter(data => data.timeTaken % 60 == 0)
-      )
-    ).pipe(
-      switchMap(() => this.getAll())
-    );
+    this.onProcessNodeChange = processesService.onProcessChange.pipe(
+      switchMap(node => this.compose(node))
+    )
 
+    this.onProcessNodeAdd = processesService.onProcessCreate.pipe(
+      switchMap(node => this.compose(node))
+    )
+
+    this.onProcessNodeRemove = processesService.onProcessDelete;
     this.onProcessNodeTick = processesService.onProcessGuideTick;
+  }
+
+  async compose(process: Process) {
+    const { id, name, status, timeTaken, occupiedBy, assignedUserId, order } = process;
+
+    return {
+      id,
+      name,
+      status,
+      timeTaken,
+      occupiedBy,
+      canExecute: assignedUserId === this.authService.getLocalUser().id,
+      assignedUser: assignedUserId ? await this.usersService.getById(assignedUserId).toPromise() : null,
+      selected: false,
+      deliveryDate: order.deliveryDate,
+    };
   }
 
   getAll() {
@@ -54,23 +75,15 @@ export class ProcessesOverviewService {
   }
 
   getPotentialAssignees() {
-    /*return this.usersService.getWithPermissions('execute').map((user): UserRowNode => {
-      return {
-        id: user.id,
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        role: this.rolesService.getById(user.roleId),
-      };
-    });*/
-    return this.usersService.getAll().pipe<UserRowNode[]>(map(users => {
+    return this.usersService.getWithPermissions(Permission.EXECUTE).pipe<UserRowNode[]>(map(users => {
       return users.map(user => {
+        const { id, username, firstName, lastName, role } = user;
         return {
-          id: user.id,
-          username: user.username,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          role: user.role,
+          id,
+          username,
+          firstName,
+          lastName,
+          role,
         };
       });
     }));
