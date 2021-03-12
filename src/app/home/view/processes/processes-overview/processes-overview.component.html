@@ -93,15 +93,6 @@
                                     <p class="">
                                         {{row.deliveryDate | date: 'dd.MM.yyyy'}}
                                     </p>
-                                    <div *ngIf="windowWidth<=566">
-                                        <div *ngIf="currentUser.permissions.includes(permissionView); else elseTemplate">
-                                            <app-single-multiple-choice [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
-                                        </div>
-                                        <ng-template #elseTemplate>
-                                            {{ (row.assignedUser) ? row.assignedUser.username : 'none'+ row.id }}
-                                        </ng-template>
-                                    </div>
-
                                     </ng-template>
                                 </ngx-datatable-column>
                                 <!-- Time -->
@@ -115,29 +106,29 @@
                                 <!-- assignee -->
                                 <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=190 name="Assignee" prop="assignedUser" [comparator]="userNameSort" [cellClass]="getCellClass" >
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                    <div *ngIf="currentUser.permissions.includes(permissionView); else elseTemplate">
+                                    <div [hideIfUnauthorized]="permissions.ASSIGN"  #test>
                                         <app-single-multiple-choice [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
                                     </div>
-                                    <ng-template #elseTemplate>
-                                        {{ (row.assignedUser) ? row.assignedUser.username : 'none'+ row.id }}
-                                    </ng-template>
+                                    <div [showIfUnauthorized]="permissions.ASSIGN">
+                                      {{ (row.assignedUser) ? row.assignedUser.username : 'none' }}
+                                    </div>
                                     </ng-template>
                                 </ngx-datatable-column>
                                 <!-- Actions -->
                                 <ngx-datatable-column [maxWidth]=160 [minWidth]=0 name="" prop="status" [sortable]="false" [cellClass]="paddingClass" >
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" *ngIf="row.status === 'assistance_required'" >
+                                        <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" [hideIfUnauthorized]="permissions.EXECUTE" *ngIf="row.status === 'assistance_required'" >
                                             <span class="btn-inner--icon"><i class="fas fa-headset"></i></span>
 
                                           </button>
-                                          <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" *ngIf="row.status === 'in_preparation'" >
+                                          <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" [hideIfUnauthorized]="permissions.EDIT" *ngIf="row.status === 'in_preparation'" >
                                             <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
                                           </button>
-                                          <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" (click)="start(row.id)" type="button" *ngIf="row.canExecute && !row.isOccupied && (row.status === 'released' || row.status === 'in_progress')" >
+                                          <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" (click)="start(row.id)" type="button" [hideIfUnauthorized]="permissions.EXECUTE" *ngIf="row.canExecute && !row.isOccupied && (row.status === 'released' || row.status === 'in_progress')" >
                                             <span class="btn-inner--icon"><i class="fas fa-play"></i></span>
 
                                           </button>
-                                          <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" *ngIf="row.status === 'completed'" >
+                                          <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" [hideIfUnauthorized]="permissions.EDIT" *ngIf="row.status === 'completed'" >
                                             <span class="btn-inner--icon"><i class="fas fa-archive"></i></span>
 
                                           </button>

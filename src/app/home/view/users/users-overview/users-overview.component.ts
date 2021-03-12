@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Permission } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { UserRowNode } from 'src/app/models/ui/userRowNode';
 import swal from 'sweetalert2';
@@ -12,6 +13,8 @@ import { UsersOverviewService } from '../users-overview.service';
   styleUrls: ['./users-overview.component.scss']
 })
 export class UsersOverviewComponent implements OnInit {
+  permissions = Permission;
+
   entries: number = 10;
   searchValue:string= ""
   breadCrumbs: BreadCrumbInfo[]=[{name:"Users Overview", url: this.router.url },];

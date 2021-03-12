@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 import { ApiService } from '../core/api/api.service';
 import { User } from '../models/user';
 import { LocalUser } from './../models/localUser';
+import { Permission } from './../models/role';
 
 @Injectable({
   providedIn: 'root'
@@ -66,5 +67,20 @@ export class AuthService {
     }
 
     return null;
+  }
+
+  hasPermissions(...requiredPermissions: Permission[]) {
+
+    const localUser = this.getLocalUser();
+
+    if (requiredPermissions) {
+      for (let permission of requiredPermissions) {
+        if (!localUser.permissions.includes(permission)) {
+          return false;
+        }
+      }
+    }
+
+    return true;
   }
 }

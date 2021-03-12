@@ -157,8 +157,7 @@ export class GuideComponent implements OnInit, OnDestroy {
   }
 
   onFinish() {
-    this.processesService.finish(this.process.id).subscribe();
-    this.router.navigate(['home/processes/overview']);
+    this.processesService.finish(this.process.id).subscribe(() => this.router.navigate(['home/processes/overview']));
   }
 
   async exit() {

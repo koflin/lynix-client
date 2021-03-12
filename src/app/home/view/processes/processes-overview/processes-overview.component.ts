@@ -23,7 +23,7 @@ import { ProcessesOverviewService } from '../processes-overview.service';
   styleUrls: ['./processes-overview.component.scss']
 })
 export class ProcessesOverviewComponent implements OnInit {
-  permissionView = Permission.VIEW;
+  permissions = Permission;
 
   breadCrumbs: BreadCrumbInfo[]=[{name:"Process Overview", url: this.router.url },];
   nodesAreEmpty:boolean = undefined;

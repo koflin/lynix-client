@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrdersService } from 'src/app/core/orders/orders.service';
+import { Permission } from 'src/app/models/role';
 import { OrderNode } from 'src/app/models/ui';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { SelectionType } from 'src/app/models/ui/table';
@@ -13,6 +14,8 @@ import { OrdersOverviewService } from './orders-overview.service';
   styleUrls: ['./orders-overview.component.scss']
 })
 export class OrdersOverviewComponent implements OnInit {
+  permissions = Permission;
+
   orderNodes: OrderNode[];
   breadCrumbs: BreadCrumbInfo[]=[{name:"Order Overview", url: this.router.url },];
   entries: number = 10;
