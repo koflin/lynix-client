@@ -9,7 +9,7 @@ import { Event } from 'src/app/models/event';
 })
 export class EventsService {
 
-  private webSocketRoot = 'ws://localhost:3001';
+  private webSocketRoot = 'wss://gateway.lynix.ch';
 
   private socket: Socket;
 

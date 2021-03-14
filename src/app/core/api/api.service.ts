@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ApiService {
 
-  private apiRoot = 'http://localhost:3000/v0/';
+  private apiRoot = 'https://api.lynix.ch/v0/';
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
