@@ -153,7 +153,6 @@ export class ProcessesOverviewComponent implements OnInit {
     if (assignedUser != userId) {
       this.processesService.assign(process.id, userId);
     }
-    //console.log(process, userId)
   }
   toggleExpandRow(table, row) {
     table.rowDetail.toggleExpandRow(row);

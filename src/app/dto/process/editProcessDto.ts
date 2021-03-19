@@ -1,4 +1,4 @@
-import { Process } from "src/app/models/process";
+import { Process } from 'src/app/models/process';
 
 export class EditProcessDto {
   currentStepIndex: number;
@@ -6,6 +6,7 @@ export class EditProcessDto {
   isOccupied: boolean;
   isRunning: boolean;
 
+  deliveryDate: Date;
   assignedUserId: string;
 
   constructor(process: Process) {

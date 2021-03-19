@@ -7,125 +7,129 @@ class=" header pb-6 pt-6 d-flex align-items-center"
 
         <div class="justify-content-space-around row">
 
-
           <div class=" col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-            <div class=" card card-stats">
-              <div class=" card-body pl-5">
-                <div class=" row">
-                  <div class=" col-9 px-0">
-                    <h4 class=" card-title text-uppercase pb-2 mb-0">
-                      Overall process
-                    </h4>
-                    <div class="row">
-                      <div class="col-9 pr-0">
-                        <span class="text-muted h5 mb-0 text-uppercase"> In progress </span>
+            <a class="" [routerLink]="'/home/processes/overview'">
+              <div class=" card card-stats zooming">
+                <div class=" card-body pl-5">
+                  <div class=" row">
+                    <div class=" col-9 px-0">
+                      <h4 class=" card-title text-uppercase pb-2 mb-0">
+                        Overall process
+                      </h4>
+                      <div class="row">
+                        <div class="col-9 pr-0">
+                          <span class="text-muted h5 mb-0 text-uppercase"> In progress </span>
+                        </div>
+                        <div class="col-3 pr-0">
+                          <span class="mb-0 text-uppercase">{{ stats.overall.inProgress }}</span>
+                        </div>
                       </div>
-                      <div class="col-3 pr-0">
-                        <span class="mb-0 text-uppercase">{{ stats.overall.inProgress }}</span>
+                      <div class="row">
+                        <div class="col-9 pr-0">
+                          <span class="text-muted h5 mb-0 text-uppercase"> Finished </span>
+                        </div>
+                        <div class="col-3 pr-0">
+                          <span class="mb-0 text-uppercase">{{ stats.overall.finished }}</span>
+                        </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-9 pr-0">
-                        <span class="text-muted h5 mb-0 text-uppercase"> Finished </span>
-                      </div>
-                      <div class="col-3 pr-0">
-                        <span class="mb-0 text-uppercase">{{ stats.overall.finished }}</span>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class=" col-3 px-0 d-flex justify-content-end">
-                    <div
-                      class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding"
-                    >
-                      <i class=" icon icon-edit-curves icon-big"> </i>
+                    <div class=" col-3 px-0 d-flex justify-content-end">
+                      <div
+                        class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding"
+                      >
+                        <i class=" icon icon-edit-curves icon-big"> </i>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-
               </div>
-            </div>
+            </a>
           </div>
 
           <div class=" col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-            <div class=" card card-stats">
-              <div class=" card-body pl-5">
-                <div class=" row">
-                  <div class=" col-9 px-0">
-                    <h4 class=" card-title text-uppercase pb-2 mb-0">
-                      process assigned to you
-                    </h4>
-                    <div class="row">
-                      <div class="col-9 pr-0">
-                        <span class="text-muted h5 mb-0 text-uppercase"> In progress </span>
+            <a [routerLink]="'/home/processes/overview'">
+              <div class=" card card-stats zooming">
+                <div class=" card-body pl-5">
+                  <div class=" row">
+                    <div class=" col-9 px-0">
+                      <h4 class=" card-title text-uppercase pb-2 mb-0">
+                        process assigned to you
+                      </h4>
+                      <div class="row">
+                        <div class="col-9 pr-0">
+                          <span class="text-muted h5 mb-0 text-uppercase"> In progress </span>
+                        </div>
+                        <div class="col-3 pr-0">
+                          <span class="mb-0 text-uppercase">{{ stats.assigned.inProgress }}</span>
+                        </div>
                       </div>
-                      <div class="col-3 pr-0">
-                        <span class="mb-0 text-uppercase">{{ stats.assigned.inProgress }}</span>
+                      <div class="row">
+                        <div class="col-9 pr-0">
+                          <span class="text-muted h5 mb-0 text-uppercase"> Finished </span>
+                        </div>
+                        <div class="col-3 pr-0">
+                          <span class="mb-0 text-uppercase">{{ stats.assigned.finished }}</span>
+                        </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-9 pr-0">
-                        <span class="text-muted h5 mb-0 text-uppercase"> Finished </span>
-                      </div>
-                      <div class="col-3 pr-0">
-                        <span class="mb-0 text-uppercase">{{ stats.assigned.finished }}</span>
+
+                    <div class=" col-3 px-0 d-flex justify-content-end">
+                      <div
+                        class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding"
+                      >
+                        <i class="icon icon-payee icon-big"></i>
                       </div>
                     </div>
                   </div>
 
-                  <div class=" col-3 px-0 d-flex justify-content-end">
-                    <div
-                      class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding"
-                    >
-                      <i class="icon icon-payee icon-big"></i>
-                    </div>
-                  </div>
                 </div>
-
               </div>
-            </div>
+            </a>
           </div>
 
           <div class=" col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-            <div class=" card card-stats">
-              <div class=" card-body pl-5">
-                <div class=" row">
-                  <div class=" col-9 px-0">
-                    <h4 class=" card-title text-uppercase pb-2 mb-0">
-                      Drafts
-                    </h4>
-                    <div class="row">
-                      <div class="col-9 pr-0">
-                        <span class="text-muted h5 mb-0 text-uppercase"> Work Order Draft </span>
-                      </div>
+            <a [routerLink]="'/home/orders/overview'">
+              <div class=" card card-stats zooming">
+                <div class=" card-body pl-5">
+                  <div class=" row">
+                    <div class=" col-9 px-0">
+                      <h4 class=" card-title text-uppercase pb-2 mb-0">
+                        Drafts
+                      </h4>
+                      <div class="row">
+                        <div class="col-9 pr-0">
+                          <span class="text-muted h5 mb-0 text-uppercase"> Work Order Draft </span>
+                        </div>
 
-                      <div class="col-3 pr-0">
-                        <span class="mb-0 text-uppercase">{{ stats.orders.drafts }}</span>
+                        <div class="col-3 pr-0">
+                          <span class="mb-0 text-uppercase">{{ stats.orders.drafts }}</span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-9 pr-0">
+                          <span class="text-muted h5 mb-0 text-uppercase"> Not assigned </span>
+                        </div>
+                        <div class="col-3 pr-0">
+                          <span class="mb-0 text-uppercase">{{ stats.orders.notStarted }}</span>
+                        </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-9 pr-0">
-                        <span class="text-muted h5 mb-0 text-uppercase"> Not assigned </span>
-                      </div>
-                      <div class="col-3 pr-0">
-                        <span class="mb-0 text-uppercase">{{ stats.orders.notStarted }}</span>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class=" col-3 px-0 d-flex justify-content-end">
-                    <div
-                      class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding"
-                    >
-                      <i class="icon icon-data-settings icon-big"></i>
+                    <div class=" col-3 px-0 d-flex justify-content-end">
+                      <div
+                        class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding"
+                      >
+                        <i class="icon icon-data-settings icon-big"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
+
       </div>
   </div>
 </div>

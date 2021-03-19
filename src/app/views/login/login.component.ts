@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   showPassword=false
   error=false
   constructor(private authService: AuthService, private router: Router ) { }
- 
+
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent){
     if (event.key != undefined) {
@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
   }
 
   signIn(){
-    //this.authService.login()
     if (this.password && this.user) {
       this.authService.login(this.user, this.password).then((result:boolean) => {
           this.error = !result

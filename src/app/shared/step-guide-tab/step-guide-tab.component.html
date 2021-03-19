@@ -14,17 +14,26 @@
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
-            <ng-container  *ngIf="process.currentStepIndex !== null && process.steps[stepIndex] as currentStep">
-                <p>
-                   <span class="h4"> Time Spend on current step:</span>  {{ getFullTime(currentStep.timeTaken) }}
-                </p>
-            </ng-container>
-
-
-            <p> <span class="h4"> Total time: </span> {{ getFullTime(process.timeTaken) }} </p>
+            <div class="row">
+              <div class="col">
+                <ng-container  *ngIf="process.currentStepIndex !== null && process.steps[stepIndex] as currentStep">
+                  <p>
+                     <span class="h4"> Time Taken:</span>  {{ getFullTime(currentStep.timeTaken) }}
+                  </p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p> <span class="h4"> Total Time Taken: </span> {{ getFullTime(process.timeTaken) }} </p>
+              </div>
+              <div class="col">
+                <p> <span class="h4"> Total Estimated Time: </span> {{ getFullTime(process.estimatedTime) }} </p>
+              </div>
+            </div>
         </div>
     </div>
-    <div class="col-12 col-sm" *ngIf="process.steps[stepIndex].materials.length>0">
+    <div class="col-12 col-sm">
         <div class=" card shadow-card-stronger p-3 " >
             <div class="container-fluid">
                 <div class="row">
@@ -44,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-sm" *ngIf="process.steps[stepIndex].materials.length>0">
+    <div class="col-12 col-sm">
         <div class=" card shadow-card-stronger p-3 " >
             <div class="container-fluid">
                 <div class="row">
@@ -64,8 +73,8 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <ng-container *ngIf="process.steps[stepIndex].keyMessage" >
-                <ng-container *ngIf="!checkIfTextAreaIsEmpty(process.steps[stepIndex].keyMessage)">
+            <ng-container>
+                <ng-container>
                     <div class="col-sm-12 col-md">
                         <div class=" card shadow-card-stronger p-3 " >
                             <div class="container-fluid">
@@ -84,8 +93,8 @@
 
                 </ng-container>
             </ng-container>
-            <ng-container *ngIf="process.steps[stepIndex].tasks " >
-                <ng-container *ngIf="!checkIfTextAreaIsEmpty(process.steps[stepIndex].tasks)">
+            <ng-container>
+                <ng-container>
                     <div class="col-sm-12 col-md">
                         <div class=" card shadow-card-stronger p-3 " >
                             <div class="container-fluid">
@@ -110,8 +119,8 @@
     <div class="container-fluid">
 
         <div class="row">
-            <ng-container *ngIf="process.steps[stepIndex].pictureUris">
-                <div class="col-sm-12 col-md"  *ngIf="process.steps[stepIndex].pictureUris.length !== 0">
+            <ng-container>
+                <div class="col-sm-12 col-md">
                     <div class=" card shadow-card-stronger p-3 ">
                         <div class="container-fluid">
                             <div class="row">
@@ -131,9 +140,9 @@
                     </div>
                 </div>
             </ng-container>
-            <ng-container *ngIf="process.steps[stepIndex].videoUris">
+            <ng-container>
 
-                <div class="col" *ngIf="process.steps[stepIndex].videoUris.length !== 0">
+                <div class="col">
                     <div class=" card shadow-card-stronger p-3 " >
                         <div class="container-fluid">
                             <div class="row">

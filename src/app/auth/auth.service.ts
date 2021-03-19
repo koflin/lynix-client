@@ -46,6 +46,7 @@ export class AuthService {
       map((result) => {
 
         localStorage.setItem('access_token', result.access_token);
+        this.api.setToken(result.access_token);
         this.localUserChange.next(this.getLocalUser());
 
         return true;

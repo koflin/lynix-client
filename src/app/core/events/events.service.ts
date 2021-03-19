@@ -3,13 +3,14 @@ import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Event } from 'src/app/models/event';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
 
-  private webSocketRoot = 'ws://localhost:3001';
+  private webSocketRoot = environment.gatewayHost;
 
   private socket: Socket;
 

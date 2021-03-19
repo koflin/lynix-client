@@ -36,8 +36,8 @@ const routes: Routes = [
     {
       path: 'orders/overview', component: OrdersOverviewComponent, canActivate: [AuthGuard], data: { permissions: [Permission.VIEW]}
     },
-    { path: 'orders/draft', component: OrdersDraftComponent, canActivate: [AuthGuard], data: { permissions: [Permission.EDIT]} },
-    { path: 'orders/draft/:id', component: OrdersDraftComponent, canActivate: [AuthGuard], data: { permissions: [Permission.EDIT]}},
+    { path: 'orders/draft', component: OrdersDraftComponent, canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.EDIT]} },
+    { path: 'orders/draft/:id', component: OrdersDraftComponent, canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.EDIT]}},
     { path: 'users', component: UsersOverviewComponent, canActivate: [AuthGuard], data: { permissions: [Permission.VIEW]}  },
     { path: 'users/:id', component: UserDetailComponent , canActivate: [AuthGuard ], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.EDIT]}  },
     { path: 'roles', component: RolesOverviewComponent, canActivate: [AuthGuard], data: { permissions: [Permission.VIEW]} },

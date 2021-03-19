@@ -73,7 +73,12 @@ export class OrderComponent implements OnInit {
   addProduct() {
     this.order.products.push({
       quantity: 1,
-      template: null,
+      template: {
+        companyId: undefined,
+        id: undefined,
+        name: '',
+        processes: []
+      },
     });
   }
 
@@ -101,14 +106,7 @@ export class OrderComponent implements OnInit {
         }
       }else{
         if ($e.label) {
-          this.productTemplatesService.create(
-            {
-              companyId: undefined,
-              id: undefined,
-              name: $e.label,
-              processes: [],
-            }
-          ).subscribe((product) => this.order.products[index].template = product);
+          this.order.products[index].template.name = $e.label;
           this.orderChange.emit(this.order)
         }
 

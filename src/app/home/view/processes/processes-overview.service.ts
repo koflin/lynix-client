@@ -41,19 +41,21 @@ export class ProcessesOverviewService {
   }
 
   async compose(process: Process) {
-    const { id, name, status, timeTaken, occupiedBy, assignedUserId, order } = process;
+    const { id, name, status, timeTaken, occupiedBy, assignedUserId, order, estimatedTime, deliveryDate } = process;
 
     return {
       id,
       name,
       status,
       timeTaken,
+      estimatedTime,
       occupiedBy,
       canExecute: assignedUserId === this.authService.getLocalUser().id,
       assignedUser: assignedUserId ? await this.usersService.getById(assignedUserId).toPromise() : null,
       selected: false,
-      deliveryDate: order.deliveryDate,
-    };
+      orderDeliveryDate: order.deliveryDate,
+      processDeliveryDate: deliveryDate,
+    } as ProcessNode;
   }
 
   getAll() {
@@ -64,11 +66,13 @@ export class ProcessesOverviewService {
           name: process.name,
           status: process.status,
           timeTaken: process.timeTaken,
+          estimatedTime: process.estimatedTime,
           occupiedBy: process.occupiedBy,
           canExecute: process.assignedUserId === this.authService.getLocalUser().id,
           assignedUser: process.assignedUserId ? await this.usersService.getById(process.assignedUserId).toPromise() : null,
           selected: false,
-          deliveryDate: process.order.deliveryDate,
+          orderDeliveryDate: process.order.deliveryDate,
+          processDeliveryDate: process.deliveryDate
         } as ProcessNode;
       }))
     ));

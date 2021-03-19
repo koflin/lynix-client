@@ -84,19 +84,32 @@
                                     </ng-template>
                                 </ngx-datatable-column>
 
-                                <!-- Date -->
-                                <ngx-datatable-column [minWidth]="(windowWidth<=566) ? 220 : 50"  [width]=150 name="delivery date" prop="deliveryDate" [sortable]="true" >
+                                <!-- Order Delivery Date -->
+                                <ngx-datatable-column [minWidth]="(windowWidth<=566) ? 220 : 50"  [width]=150 name="Order Delivery Date" prop="orderDeliveryDate" [sortable]="true" >
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <p class="h3 text-default" *ngIf="windowWidth<=843">
-                                            {{row.name}}
-                                        </p>
                                     <p class="">
-                                        {{row.deliveryDate | date: 'dd.MM.yyyy'}}
+                                        {{row.orderDeliveryDate | date: 'dd.MM.yyyy'}}
                                     </p>
                                     </ng-template>
                                 </ngx-datatable-column>
-                                <!-- Time -->
-                                <ngx-datatable-column *ngIf="windowWidth>966" [width]=125 [maxWidth]=125 name="Execution Time" prop="timeTaken" [sortable]="true" >
+                                <!-- Process Delivery Date -->
+                                <ngx-datatable-column [minWidth]="(windowWidth<=566) ? 220 : 50"  [width]=150 name="Process Delivery Date" prop="processDeliveryDate" [sortable]="true" >
+                                  <ng-template let-row="row" ngx-datatable-cell-template>
+                                  <p class="">
+                                      {{row.processDeliveryDate | date: 'dd.MM.yyyy'}}
+                                  </p>
+                                  </ng-template>
+                              </ngx-datatable-column>
+                                <!-- Estimated Time -->
+                                <ngx-datatable-column *ngIf="windowWidth>966" [width]=150 [maxWidth]=150 name="Estimated Time" prop="estimatedTime" [sortable]="true" >
+                                  <ng-template let-value="value" ngx-datatable-cell-template>
+                                  <p class="">
+                                      {{ getFullTime(value) }}
+                                  </p>
+                                  </ng-template>
+                              </ngx-datatable-column>
+                                <!-- Time Taken -->
+                                <ngx-datatable-column *ngIf="windowWidth>966" [width]=125 [maxWidth]=125 name="Time Taken" prop="timeTaken" [sortable]="true" >
                                     <ng-template let-value="value" ngx-datatable-cell-template>
                                     <p class="">
                                         {{ getFullTime(value) }}
@@ -110,7 +123,9 @@
                                         <app-single-multiple-choice [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
                                     </div>
                                     <div [showIfUnauthorized]="permissions.ASSIGN">
-                                      {{ (row.assignedUser) ? row.assignedUser.username : 'none' }}
+                                      <p class="">
+                                        {{ (row.assignedUser) ? row.assignedUser.username : 'none' }}
+                                      </p>
                                     </div>
                                     </ng-template>
                                 </ngx-datatable-column>
