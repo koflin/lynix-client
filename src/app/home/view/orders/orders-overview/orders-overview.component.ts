@@ -65,7 +65,11 @@ export class OrdersOverviewComponent implements OnInit {
   }
 
   delte(id: string) {
-    this.ordersService.delete(id);
+    this.ordersService.delete(id).subscribe(() => {
+      const index = this.temp.findIndex(order => order.workOderId == id)
+      this.temp.splice(index, 1);
+      this.orderNodes.splice(index, 1);
+    });
   }
 
   onActivate($event){

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+
 import { InputOutputValue } from '../../models/InputOutputValue';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-single-date-picker',
@@ -39,9 +39,11 @@ export class SingleDatePickerComponent implements OnInit {
     this.requiredError = false
     this.formatError = false
     this.error = false
+
     if (!this.userHasTyped) {
       this.userHasTyped = userHasTyped
     }
+
     if (this.result!=='' && this.result!=undefined) {
       if (this.result == 'Invalid Date') {
         this.formatError = true
@@ -60,9 +62,11 @@ export class SingleDatePickerComponent implements OnInit {
     if (this.errorMessage) {
       this.fieldInformation.error = true
     }
-    this.resultChange.emit(this.result)
     this.fieldInformationChange.emit(this.fieldInformation)
 
+    if (userHasTyped) {
+      this.resultChange.emit(this.result);
+    }
   }
 
 

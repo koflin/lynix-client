@@ -14,6 +14,7 @@ export interface Process extends CompanyBase {
   previousComments?: string[];
 
   estimatedTime: number | undefined;
+  deliveryDate: Date;
 
   timeTaken: number;
   currentStepIndex: number;

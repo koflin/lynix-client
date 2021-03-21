@@ -47,14 +47,15 @@ export class OrderComponent implements OnInit {
 
   }
   setIgnoreProductOptions(){
-    this.productTemplatesService.getAll().subscribe((products) => {
-      this.ignoreOptions = products.filter((product) => {
-        return this.order.products.findIndex(productUsed => productUsed.template && productUsed.template.id === product.id) !== -1;
-      }).map((t)=> {
-        return {value: t.id, label:t.name}
-      })
-    });
-
+    if (this.order) {
+      this.productTemplatesService.getAll().subscribe((products) => {
+        this.ignoreOptions = products.filter((product) => {
+          return this.order.products.findIndex(productUsed => productUsed.template && productUsed.template.id === product.id) !== -1;
+        }).map((t)=> {
+          return {value: t.id, label:t.name}
+        })
+      });
+    }
   }
 
   setInputFields(){
@@ -73,7 +74,12 @@ export class OrderComponent implements OnInit {
   addProduct() {
     this.order.products.push({
       quantity: 1,
-      template: null,
+      template: {
+        companyId: undefined,
+        id: undefined,
+        name: '',
+        processes: []
+      },
     });
   }
 
@@ -101,14 +107,7 @@ export class OrderComponent implements OnInit {
         }
       }else{
         if ($e.label) {
-          this.productTemplatesService.create(
-            {
-              companyId: undefined,
-              id: undefined,
-              name: $e.label,
-              processes: [],
-            }
-          ).subscribe((product) => this.order.products[index].template = product);
+          this.order.products[index].template.name = $e.label;
           this.orderChange.emit(this.order)
         }
 

@@ -33,7 +33,7 @@ export class OrdersService {
   }
 
   delete(id: string) {
-    this.api.delete('orders/' + id).subscribe(() => this.ordersChange.next(id));
+    return this.api.delete('orders/' + id);
   }
 
   getAll() {

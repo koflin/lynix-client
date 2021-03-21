@@ -25,7 +25,7 @@ export class ProductTemplatesService {
   }
 
   create(templateDraft: ProductTemplate) {
-    return this.api.post<ProductTemplate>('templates/product', templateDraft);
+    return this.api.post<ProductTemplate>('templates/product', new EditProductTemplateDto(templateDraft));
   }
 
   delete(id: string) {

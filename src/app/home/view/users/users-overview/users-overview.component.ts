@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/core/users/users.service';
 import { Permission } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { UserRowNode } from 'src/app/models/ui/userRowNode';
@@ -28,7 +29,8 @@ export class UsersOverviewComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private usersOverviewService: UsersOverviewService
+    private usersOverviewService: UsersOverviewService,
+    private usersService: UsersService,
   ) { }
 
   ngOnInit(): void {
@@ -62,7 +64,7 @@ export class UsersOverviewComponent implements OnInit {
     }).map((u)=>{
       return u.id
     })
-    console.log(this.showArray)
+
     for (let index = 0; index < this.userRows.length; index++) {
       let element = this.userRows[index];
       let row = document.getElementById(element.id)
@@ -85,7 +87,7 @@ export class UsersOverviewComponent implements OnInit {
   removeUser(id: string) {
     let a = document.getElementById(id)
     a.remove()
-    //this.usersService.deleteUser(id);
+    this.usersService.deleteUser(id);
     this.refresh();
 
   }

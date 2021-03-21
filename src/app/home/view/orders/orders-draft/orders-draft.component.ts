@@ -1,6 +1,7 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth/auth.service';
 import { OrdersService } from 'src/app/core/orders/orders.service';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
@@ -8,6 +9,7 @@ import { ProductTemplatesService } from 'src/app/core/productTemplates/product-t
 import { Order } from 'src/app/models/order';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { deletingDataInformation } from 'src/app/models/ui/deletingData';
+import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
 import swal from 'sweetalert2';
 
 import { ProcessesService } from './../../../../core/processes/processes.service';
@@ -47,7 +49,7 @@ const right = [
     ]),
   ],
 })
-export class OrdersDraftComponent implements OnInit {
+export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   _orderDraft: Order;
   get orderDraft():Order{
     return this._orderDraft;
@@ -119,8 +121,7 @@ export class OrdersDraftComponent implements OnInit {
     this.processToggleId=undefined
   }
 
-
-  isEdited: false;
+  isEdited = false;
 
   constructor(
     private router: Router,
@@ -129,8 +130,17 @@ export class OrdersDraftComponent implements OnInit {
     private processTemplatesService: ProcessTemplatesService,
     private productTemplatesService: ProductTemplatesService,
     private authService: AuthService,
-    private processService: ProcessesService
+    private processService: ProcessesService,
+    private toastr: ToastrService,
   ) { }
+
+  hasUnsavedData(): boolean {
+    return this.isEdited;
+  }
+
+  detectChange() {
+    this.isEdited = true;
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -148,10 +158,9 @@ export class OrdersDraftComponent implements OnInit {
           status: 'in_preparation',
           deliveryDate: new Date()
         };
-        //this.insertDummyData();
-      }
 
-      //this.productsNames=['d', 'd', 'd', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd','d', 'd']
+        this.isEdited = false;
+      }
 
     });
 
@@ -165,6 +174,27 @@ export class OrdersDraftComponent implements OnInit {
   getOrder(id: string) {
     this.ordersService.getById(id).subscribe(draft => {
       this.orderDraft = draft;
+      this.isEdited = false;
+
+      this.route.fragment.subscribe((fragment) => {
+        if (fragment) {
+          const frag0 = fragment[0] ? parseInt(fragment[0]) : undefined;
+          const frag1 = fragment[1] ? parseInt(fragment[1]) : undefined;
+          const frag2 = fragment[2] ? parseInt(fragment[2]) : undefined;
+
+          if (frag0 == undefined || this.orderDraft.products.length > frag0) {
+            this.productToggleId = frag0;
+          }
+
+          if (frag1 == undefined || this.orderDraft.products[frag0].template.processes.length > frag1) {
+            this.processToggleId = frag1;
+          }
+
+          if (frag2 == undefined ||this.orderDraft.products[frag0].template.processes[frag1].template.stepTemplates.length > frag2) {
+            this.stepToggleId = frag2;
+          }
+        }
+      });
     });
   }
 
@@ -189,42 +219,82 @@ export class OrdersDraftComponent implements OnInit {
     this.router.navigate(['home/orders/overview']);
   }
 
-  saveDraft(dontFireModal:boolean=false) {
-    for (const product of this.orderDraft.products) {
-      if (product.template) {
-        for (const process of product.template.processes) {
-          if (process.template) {
-            this.processTemplatesService.save(process.template);
-          }
-        }
+  async saveDraft(dontFireToastr:boolean=false) {
+    for (let i = 0; i < this.orderDraft.products.length; i++) {
+      const product = this.orderDraft.products[i];
 
+      for (let j = 0; j < product.template.processes.length; j++) {
+        const process = product.template.processes[j];
+
+        if (process.template.id) {
+          this.processTemplatesService.save(process.template);
+        } else {
+          process.template = await this.processTemplatesService.create(process.template).toPromise();
+        }
+      }
+
+      if (product.template.id) {
         this.productTemplatesService.save(product.template);
+      } else {
+        product.template = await this.productTemplatesService.create(product.template).toPromise();
       }
     }
 
     if (this.orderDraft && this.orderDraft.id) {
       this.ordersService.save(this.orderDraft);
     } else {
-      this.ordersService.create(this.orderDraft).subscribe(id => this.router.navigate(['orders/draft/' + id]));
+      const fragment = (this.productToggleId ? this.productToggleId : '') + '' +
+      (this.processToggleId ? this.processToggleId : '') +
+      (this.stepToggleId ? this.stepToggleId : '');
+
+      this.ordersService.create(this.orderDraft).subscribe(id => this.router.navigate(['orders/draft/' + id], { fragment }));
+    }
+
+    if (!dontFireToastr) {
+      this.toastr.show(
+        '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">Success</span> <span>Saved</span></div>',
+        '',
+        {
+          timeOut: 1500,
+          closeButton: true,
+          enableHtml: true,
+          tapToDismiss: false,
+          titleClass: 'alert-title',
+          positionClass: 'toast-top-center',
+          toastClass: "ngx-toastr alert alert-dismissible alert-success alert-notify",
+        }
+      );
     }
 
     this.isEdited = false;
-    this.saveModal(dontFireModal)
   }
 
   deleteDraft() {
-    this.ordersService.delete(this.orderDraft.id);
-    this.saveDraft();
-
-    this.router.navigate(['home/orders/overview']);
+    this.ordersService.delete(this.orderDraft.id).subscribe(() => this.router.navigate(['home/orders/overview']));
     //after deleting app should save()
   }
 
   publishDraft() {
     this.orderDraft.status = 'released';
-    this.saveDraft(true);
-    this.processService.createForOrder(this.orderDraft);
-    this.router.navigate(['home/orders/overview']);
+    this.saveDraft(true).then(() => {
+      this.processService.createForOrder(this.orderDraft).then(() => {
+        this.toastr.show(
+          '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">Success</span> <span>Published</span></div>',
+          '',
+          {
+            timeOut: 1500,
+            closeButton: true,
+            enableHtml: true,
+            tapToDismiss: false,
+            titleClass: 'alert-title',
+            positionClass: 'toast-top-center',
+            toastClass: "ngx-toastr alert alert-dismissible alert-success alert-notify",
+          }
+        );
+
+        this.router.navigate(['home/orders/overview']);
+      });
+    });
   }
 
   defContainer(){
@@ -239,7 +309,7 @@ export class OrdersDraftComponent implements OnInit {
     }
   }
   cancelModal(){
-    swal.fire({
+    /*swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
       type: 'warning',
@@ -252,11 +322,33 @@ export class OrdersDraftComponent implements OnInit {
       if (result.value) {
           // Show confirmation
           this.discardDraft()
+          this.isEdited = false;
       }
-  })
+    })*/
+
+    if (this.hasUnsavedData()) {
+      swal.fire({
+        title: 'You have unsaved data',
+        text: "Are you sure, you want to leave this page?",
+        type: 'warning',
+        showCancelButton: true,
+        buttonsStyling: false,
+        confirmButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Yes, cancel!',
+        cancelButtonClass: 'btn btn-secondary'
+      }).then((result) => {
+        if (result.value) {
+            // Show confirmation
+            this.discardDraft()
+            this.isEdited = false;
+        }
+      })
+    } else {
+      this.discardDraft()
+    }
   }
   saveModal(dontFireModal:boolean=false){
-    if (!dontFireModal) {
+    /*if (!dontFireModal) {
       swal.fire({
         title: 'Back to overview?',
         text: 'Do you want go to overview of order? Please remember you have to publish later in order ...',
@@ -274,7 +366,7 @@ export class OrdersDraftComponent implements OnInit {
           this.router.navigate(['hopme/orders/overview']);
       }
     })
-    }
+    }*/
 
   }
   publishModal(){

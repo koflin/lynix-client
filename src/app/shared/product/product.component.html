@@ -42,7 +42,7 @@
                                         <tr *ngFor="let process of productTemplate.processes; let i=index">
                                             <td scope="row">
 
-                                              <app-single-multiple-choice  [result]="(process.template) ? {'value': process.template.id, 'label' : process.template.name} : ''" (resultChange)=productSelector($event,i) [ignoreOptions]=ignoreOptions  [isMultipleChoice]=false [inputCheckForError]=checkForError  [isSearchable]=true [inputRequired]=true [data]="processOptions" [allowUserCreateOption]="true" [placeholder]="'select a process or type a new processname'"> </app-single-multiple-choice>
+                                              <app-single-multiple-choice  [result]="(process.template) ? {'value': process.template.id, 'label' : process.template.name} : ''" (resultChange)=processSelector($event,i) [ignoreOptions]=ignoreOptions  [isMultipleChoice]=false [inputCheckForError]=checkForError  [isSearchable]=true [inputRequired]=true [data]="processOptions" [allowUserCreateOption]="true" [placeholder]="'select a process or type a new processname'"> </app-single-multiple-choice>
 
                                             </td>
                                             <td scope="row">

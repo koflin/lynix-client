@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, mergeMap } from 'rxjs/operators';
 import { CreateProcessDto } from 'src/app/dto/process/createProcessDto';
 import { EditProcessDto } from 'src/app/dto/process/editProcessDto';
 import { Event } from 'src/app/models/event';
@@ -32,6 +32,10 @@ export class ProcessesService {
 
     this.onProcessChange = merge(
       this.events.onEvent<Process>(Event.PROCESS_UPDATE),
+      this.events.onEvent<ProcesssGuideTickEvent>(Event.PROCESS_GUIDE_TICK).pipe(
+        filter(event => event.timeTaken % 60 == 0),
+        mergeMap(event => this.getById(event.processId))
+      ),
       this.processChange.asObservable()
     );
 
@@ -93,27 +97,18 @@ export class ProcessesService {
     return this.api.patch<Process>('processes/' + id + '/switch', { stepIndex });
   }
 
-  createForOrder(order: Order) {
-    order.products.forEach((product) => {
-      product.template.processes.forEach((process) => {
+  async createForOrder(order: Order) {
+    for (let product of order.products) {
+      for (let process of product.template.processes) {
         const templateId = process.template.id;
-
-        /* CAST QUERY FOR MESSAGE FIELDS
-        if (typeof stepT.keyMessage == 'string') {
-              stepT.keyMessage = {ops:[]}
-            }
-            if (typeof stepT.tasks == 'string') {
-              stepT.tasks = {ops:[]}
-            }
-        */
 
         for (let i = 0; i < product.quantity; i++) {
           for (let j = 0; j < process.quantity; j++) {
-            this.api.post<Process>('processes', new CreateProcessDto(order.id, templateId )).subscribe(process => this.processChange.next(process));
+            await this.api.post<Process>('processes', new CreateProcessDto(order.id, templateId )).toPromise();
           }
         }
-      });
-    });
+      }
+    }
   }
 }
 

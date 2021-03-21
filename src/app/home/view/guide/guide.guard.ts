@@ -31,7 +31,6 @@ export class GuideGuard implements CanActivate {
       }
 
       this.router.navigate(['home/processes/overview']);
-      console.log('REDIRECT OVERVIEW');
       resolve(false);
     });
   }

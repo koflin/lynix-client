@@ -10,7 +10,7 @@
                         <div class="col-12 col-md-6">
                             <label class=" form-control-label">
                                 Estimated Time Total:
-                                
+
                             </label> <br>
                             <p class="pt-2">{{ estimatedTime }}</p>
                         </div>
@@ -22,16 +22,16 @@
             <accordion [isAnimated]="true" [closeOthers]="false">
                 <accordion-group >
                     <div accordion-heading>
-                        <p class="col-auto mb-0 h5 text-primary" >Main Tasks & Challenges  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p> 
-                        <p><small class="text-muted col-12"> Add main tasks</small> </p> 
+                        <p class="col-auto mb-0 h5 text-primary" >Main Tasks & Challenges  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p>
+                        <p><small class="text-muted col-12"> Add main tasks</small> </p>
                     </div>
                     <div class="table align-items-center table-flush">
                         <thead class=" thead-light">
                             <tr>
                                 <th scope="col">Tasks & Challenges</th>
-                  
+
                                 <th scope="col">Operation</th>
-    
+
                             </tr>
                         </thead>
                         <tbody class="list">
@@ -62,18 +62,18 @@
                         </tbody>
 
                     </div>
-                    
-                 
+
+
                 </accordion-group>
               </accordion>
-                
+
         </div>
         <div class="col-12 col-md-6 accordion-card-shaddow">
             <accordion [isAnimated]="true" [closeOthers]="false">
                 <accordion-group >
                     <div accordion-heading>
-                        <p class="col-auto mb-0 h5 text-primary" >Previous Comments  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p> 
-                        <p><small class="text-muted col-12"> Previous commtens conerning the process</small> </p> 
+                        <p class="col-auto mb-0 h5 text-primary" >Previous Comments  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p>
+                        <p><small class="text-muted col-12"> Previous commtens conerning the process</small> </p>
                     </div>
                     <div class="row" *ngFor="let comment of processTemplate.previousComments; let i = index">
                         <p> {{comment}} </p>
@@ -82,74 +82,74 @@
               </accordion>
         </div>
         <div class="col-12 col-md-12 accordion-card-shaddow">
-            
+
             <accordion [isAnimated]="true" [closeOthers]="false">
                 <accordion-group [isOpen]="isFirstOpen">
                     <div accordion-heading>
-                        <p class="col-auto mb-0 h5 text-primary" >Steps  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p> 
-                        <p><small class="text-muted col-12"> Steps to process</small> </p> 
+                        <p class="col-auto mb-0 h5 text-primary" >Steps  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p>
+                        <p><small class="text-muted col-12"> Steps to process</small> </p>
                     </div>
                     <div class="table-responsive">
                         <div class="table align-items-center table-flush">
                             <thead class=" thead-light">
                                 <tr>
                                     <th scope="col">Steps</th>
-                      
+
                                     <th scope="col">Operation</th>
-            
+
                                 </tr>
-                            </thead> 
-                            
-                           
-                            
+                            </thead>
+
+
+
                             <tbody class="list">
                                 <tr>
                                     <td>
-        
+
                                     </td>
-                                    <td> 
-                                        <button class="btn btn-icon btn-3 btn-default" type="button" (click)="addStep(-1)" > 
+                                    <td>
+                                        <button class="btn btn-icon btn-3 btn-default" type="button" (click)="addStep(-1)" >
                                             <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            <span class="btn-inner--text">Add 1. Step</span>
+                                            <!--<span class="btn-inner--text"></span>-->
                                         </button>
                                     </td>
                                 </tr>
                                 <tr *ngFor="let step of processTemplate.stepTemplates ; let i = index">
-                                    
+
                                     <td scope="row">
                                         <div  class="pt-3">
                                             <app-text-field [inputPlaceholder]="'step name'" [(result)]="step.title" [inputRequired]="true"> </app-text-field>
                                         </div>
                                     </td>
                                     <td scope="row">
-                                        <button class="btn btn-icon btn-3 btn-default" type="button" (click)="addStep(i)" > 
+                                        <button class="btn btn-icon btn-3 btn-default" type="button" (click)="addStep(i)" >
                                             <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
                                         </button>
                                         <button class="btn btn-icon btn-3 btn-default" type="button" (click)="selectTab.emit(i)">
                                             <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
                                         </button>
-                                        
+
                                         <button class="btn btn-icon btn-3 btn-danger" type="button" (click)="removeStep(i)">
                                             <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
                                         </button>
                                     </td>
                                 </tr>
-                                
+
                             </tbody>
                         </div>
                     </div>
                 </accordion-group>
               </accordion>
-           
-           
-            
+
+
+
         </div>
     </div>
 
 
-       
-        
-        
-        
+
+
+
+
 </div>
 

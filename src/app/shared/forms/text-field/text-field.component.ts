@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+
 import { InputOutputValue } from '../../models/InputOutputValue';
 
 @Component({
@@ -12,7 +13,7 @@ export class TextFieldComponent implements OnInit {
   @Input() inputCheckForError: boolean = false
   @Input() inputValidation:string="string";
   @Input() inputType:string="text";
-  @Input() result: any 
+  @Input() result: any
   @Output() resultChange= new EventEmitter<any>()
 
 
@@ -37,13 +38,14 @@ export class TextFieldComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.validation_save(false);    
+    this.validation_save(false);
   }
 
   validation_save(userHasTyped:boolean, $e?){
     this.requiredError=false;
     this.error=false;
     this.formatError=false;
+
     if (!this.userHasTyped) {
       this.userHasTyped = userHasTyped
     }
@@ -53,7 +55,7 @@ export class TextFieldComponent implements OnInit {
         this.result = + this.result
       }
     }
-    
+
     if (this.result!=='' && this.result!=undefined) {
       let regexp
       switch (this.inputValidation) {
@@ -109,16 +111,19 @@ export class TextFieldComponent implements OnInit {
         if(this.inputCheckForError || userHasTyped){
           this.requiredError=true;
         }
-        this.error=true;  
+        this.error=true;
     }
     this.fieldInformation.error = this.error
     if (this.errorMessage) {
       this.fieldInformation.error = true
     }
     this.fieldInformationChange.emit(this.fieldInformation)
-    this.resultChange.emit(this.result)
+
+    if (userHasTyped) {
+      this.resultChange.emit(this.result);
+    }
   }
 
-  
+
 
 }

@@ -120,10 +120,11 @@ export class SingleMultipleChoiceComponent implements OnInit {
     }
 
     this.fieldInformationChange.emit(this.fieldInformation)
-    this.resultChange.emit(this.result)
 
 
-
+    if (userHasTyped) {
+      this.resultChange.emit(this.result);
+    }
 
 
 

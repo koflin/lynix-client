@@ -1,6 +1,17 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import Quill from 'quill';
+
 import { InputOutputValue } from '../../models/InputOutputValue';
-import Quill, { DeltaOperation } from 'quill';
 
 
 @Component({
@@ -56,17 +67,17 @@ export class TextAreaComponent implements OnInit {
     });
 
     this.setValue()
-  
+
     this.textChange()
     this.validation_save(false);
     this.cdref.detectChanges();
 
-    
-    //this.elementTextArea.enable(false); 
+
+    //this.elementTextArea.enable(false);
   }
-  
-  
-  
+
+
+
   ngOnChanges(changes: SimpleChanges): void {
     this.setValue()
     this.validation_save(false);
@@ -83,16 +94,17 @@ export class TextAreaComponent implements OnInit {
       this.value = this.elementTextArea.getContents()
       this.result = this.value
       this.validation_save(source == 'user')
-      
-      
+
+
     });
-    
-    
+
+
   }
   validation_save(userHasTyped:boolean){
     let requiredError=false
     this.requiredError=false;
     this.error=false;
+
     if (!this.userHasTyped) {
       this.userHasTyped = userHasTyped
     }
@@ -113,12 +125,12 @@ export class TextAreaComponent implements OnInit {
     if (this.errorMessage) {
       this.fieldInformation.error = true
     }
-    
+
     this.fieldInformationChange.emit(this.fieldInformation)
-    this.resultChange.emit(this.result)
 
-
-    
+    if (userHasTyped) {
+      this.resultChange.emit(this.result);
+    }
   }
 
 }

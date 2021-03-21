@@ -25,7 +25,7 @@ export class ProductComponent implements OnInit {
 
   }
 
-  productSelector($e, index) {
+  processSelector($e, index) {
     if ($e) {
       if ($e.hasOwnProperty('value')) {
         let set = false
@@ -45,14 +45,7 @@ export class ProductComponent implements OnInit {
         }
       }else{
         if ($e.label) {
-          this.processTemplatesService.create({
-              companyId: undefined,
-              id: undefined,
-              name: $e.label,
-              mainTasks: [],
-              stepTemplates: [],
-              previousComments: [],
-            }).subscribe((process) => this.productTemplate.processes[index].template = process),
+          this.productTemplate.processes[index].template.name = $e.label;
 
           this.productTemplateChange.emit(this.productTemplate)
         }
@@ -65,7 +58,14 @@ export class ProductComponent implements OnInit {
   addProcess() {
     this.productTemplate.processes.push({
       quantity: 1,
-      template: null,
+      template: {
+        companyId: undefined,
+        id: undefined,
+        name: '',
+        mainTasks: [],
+        stepTemplates: [],
+        previousComments: [],
+      },
     });
   }
   setProcessOptions(){

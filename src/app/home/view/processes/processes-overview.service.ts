@@ -4,7 +4,6 @@ import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { UsersService } from 'src/app/core/users/users.service';
-import { ProcesssGuideTickEvent } from 'src/app/models/events/processGuideTick.event';
 import { Process } from 'src/app/models/process';
 import { Permission } from 'src/app/models/role';
 import { UserRowNode } from 'src/app/models/ui/userRowNode';
@@ -21,7 +20,6 @@ export class ProcessesOverviewService {
   public onProcessNodeAdd: Observable<ProcessNode>;
   public onProcessNodeRemove: Observable<string>;
 
-  public onProcessNodeTick: Observable<ProcesssGuideTickEvent>;
 
   constructor(private processesService: ProcessesService,
               private usersService: UsersService,
@@ -37,23 +35,24 @@ export class ProcessesOverviewService {
     )
 
     this.onProcessNodeRemove = processesService.onProcessDelete;
-    this.onProcessNodeTick = processesService.onProcessGuideTick;
   }
 
   async compose(process: Process) {
-    const { id, name, status, timeTaken, occupiedBy, assignedUserId, order } = process;
+    const { id, name, status, timeTaken, occupiedBy, assignedUserId, order, estimatedTime, deliveryDate } = process;
 
     return {
       id,
       name,
       status,
       timeTaken,
+      estimatedTime,
       occupiedBy,
       canExecute: assignedUserId === this.authService.getLocalUser().id,
       assignedUser: assignedUserId ? await this.usersService.getById(assignedUserId).toPromise() : null,
       selected: false,
-      deliveryDate: order.deliveryDate,
-    };
+      orderDeliveryDate: order.deliveryDate,
+      processDeliveryDate: deliveryDate,
+    } as ProcessNode;
   }
 
   getAll() {
@@ -64,11 +63,13 @@ export class ProcessesOverviewService {
           name: process.name,
           status: process.status,
           timeTaken: process.timeTaken,
+          estimatedTime: process.estimatedTime,
           occupiedBy: process.occupiedBy,
           canExecute: process.assignedUserId === this.authService.getLocalUser().id,
           assignedUser: process.assignedUserId ? await this.usersService.getById(process.assignedUserId).toPromise() : null,
           selected: false,
-          deliveryDate: process.order.deliveryDate,
+          orderDeliveryDate: process.order.deliveryDate,
+          processDeliveryDate: process.deliveryDate
         } as ProcessNode;
       }))
     ));

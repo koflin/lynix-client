@@ -9,6 +9,7 @@ import { CarouselModule } from 'ngx-bootstrap';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ToastrModule } from 'ngx-toastr';
 
 import { HideIfUnauthorizedDirective } from '../auth/hide-if-unauthorized.directive';
 import { ShowIfUnauthorizedDirective } from '../auth/show-if-unauthorized.directive';
@@ -55,6 +56,7 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
   imports: [
     CommonModule,
     RouterModule,
+    ToastrModule.forRoot(),
     // ngxDatatable für komplizierte Tables
     NgxDatatableModule,
 
