@@ -2,8 +2,8 @@
 // Variables
 //
   $primary-blue: #00A0D2;
-  $lynx-default: #144b96;
-  
+  $lynix-default: #144b96;
+
 
 //
 // Base variables
@@ -85,7 +85,7 @@ $colors: map-merge(
   $colors
 );
 
-$default: $lynx-default !default;
+$default: $lynix-default !default;
 $primary: $primary-blue !default;
 $secondary: #f7fafc !default;
 $success: $green !default;
