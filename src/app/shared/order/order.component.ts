@@ -47,14 +47,15 @@ export class OrderComponent implements OnInit {
 
   }
   setIgnoreProductOptions(){
-    this.productTemplatesService.getAll().subscribe((products) => {
-      this.ignoreOptions = products.filter((product) => {
-        return this.order.products.findIndex(productUsed => productUsed.template && productUsed.template.id === product.id) !== -1;
-      }).map((t)=> {
-        return {value: t.id, label:t.name}
-      })
-    });
-
+    if (this.order) {
+      this.productTemplatesService.getAll().subscribe((products) => {
+        this.ignoreOptions = products.filter((product) => {
+          return this.order.products.findIndex(productUsed => productUsed.template && productUsed.template.id === product.id) !== -1;
+        }).map((t)=> {
+          return {value: t.id, label:t.name}
+        })
+      });
+    }
   }
 
   setInputFields(){

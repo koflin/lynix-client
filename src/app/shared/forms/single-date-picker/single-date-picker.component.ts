@@ -39,9 +39,8 @@ export class SingleDatePickerComponent implements OnInit {
     this.requiredError = false
     this.formatError = false
     this.error = false
-    if (this.userHasTyped) {
-      this.resultChange.emit(this.result)
-    } else {
+
+    if (!this.userHasTyped) {
       this.userHasTyped = userHasTyped
     }
 
@@ -65,6 +64,9 @@ export class SingleDatePickerComponent implements OnInit {
     }
     this.fieldInformationChange.emit(this.fieldInformation)
 
+    if (userHasTyped) {
+      this.resultChange.emit(this.result);
+    }
   }
 
 

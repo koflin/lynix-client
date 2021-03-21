@@ -1,6 +1,7 @@
 import { group } from '@angular/animations';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { cloneDeep } from 'lodash';
 import * as moment from 'moment';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EventsService } from 'src/app/core/events/events.service';
@@ -69,7 +70,8 @@ export class ProcessesOverviewComponent implements OnInit {
     private usersService: UsersService,
     private authService: AuthService,
     private rolesService: RolesService,
-    private event: EventsService
+    private event: EventsService,
+    private cd: ChangeDetectorRef
   ) {
 
   }
@@ -84,9 +86,10 @@ export class ProcessesOverviewComponent implements OnInit {
       for (let group of this.processNodeGroups) {
         const node = group.nodes.find(candidate => candidate.id === changedNode.id);
 
-        if (node.status != changedNode.status) {
+        if (node) {
           this.removeNode(node.id);
           this.addNode(changedNode);
+          this.processNodeGroups = cloneDeep(this.processNodeGroups);
           break;
         }
       }
@@ -146,13 +149,11 @@ export class ProcessesOverviewComponent implements OnInit {
     }
   }
   assignUserToProcess(userId, process:ProcessNode){
-    let assignedUser
-    if (process.assignedUser) {
-      assignedUser = process.assignedUser.id
-    }
-    if (assignedUser != userId) {
+    /*if (process.assignedUser != userId) {
       this.processesService.assign(process.id, userId);
-    }
+    }*/
+
+    this.processesService.assign(process.id, userId);
   }
   toggleExpandRow(table, row) {
     table.rowDetail.toggleExpandRow(row);

@@ -175,6 +175,26 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     this.ordersService.getById(id).subscribe(draft => {
       this.orderDraft = draft;
       this.isEdited = false;
+
+      this.route.fragment.subscribe((fragment) => {
+        if (fragment) {
+          const frag0 = fragment[0] ? parseInt(fragment[0]) : undefined;
+          const frag1 = fragment[1] ? parseInt(fragment[1]) : undefined;
+          const frag2 = fragment[2] ? parseInt(fragment[2]) : undefined;
+
+          if (frag0 == undefined || this.orderDraft.products.length > frag0) {
+            this.productToggleId = frag0;
+          }
+
+          if (frag1 == undefined || this.orderDraft.products[frag0].template.processes.length > frag1) {
+            this.processToggleId = frag1;
+          }
+
+          if (frag2 == undefined ||this.orderDraft.products[frag0].template.processes[frag1].template.stepTemplates.length > frag2) {
+            this.stepToggleId = frag2;
+          }
+        }
+      });
     });
   }
 
@@ -199,7 +219,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     this.router.navigate(['home/orders/overview']);
   }
 
-  async saveDraft(dontFireModal:boolean=false) {
+  async saveDraft(dontFireToastr:boolean=false) {
     for (let i = 0; i < this.orderDraft.products.length; i++) {
       const product = this.orderDraft.products[i];
 
@@ -223,22 +243,28 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     if (this.orderDraft && this.orderDraft.id) {
       this.ordersService.save(this.orderDraft);
     } else {
-      this.ordersService.create(this.orderDraft).subscribe(id => this.router.navigate(['orders/draft/' + id]));
+      const fragment = (this.productToggleId ? this.productToggleId : '') + '' +
+      (this.processToggleId ? this.processToggleId : '') +
+      (this.stepToggleId ? this.stepToggleId : '');
+
+      this.ordersService.create(this.orderDraft).subscribe(id => this.router.navigate(['orders/draft/' + id], { fragment }));
     }
 
-    this.toastr.show(
-      '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">Success</span> <span>Saved</span></div>',
-      '',
-      {
-        timeOut: 1500,
-        closeButton: true,
-        enableHtml: true,
-        tapToDismiss: false,
-        titleClass: 'alert-title',
-        positionClass: 'toast-top-center',
-        toastClass: "ngx-toastr alert alert-dismissible alert-success alert-notify",
-      }
-    );
+    if (!dontFireToastr) {
+      this.toastr.show(
+        '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">Success</span> <span>Saved</span></div>',
+        '',
+        {
+          timeOut: 1500,
+          closeButton: true,
+          enableHtml: true,
+          tapToDismiss: false,
+          titleClass: 'alert-title',
+          positionClass: 'toast-top-center',
+          toastClass: "ngx-toastr alert alert-dismissible alert-success alert-notify",
+        }
+      );
+    }
 
     this.isEdited = false;
   }
@@ -251,7 +277,23 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   publishDraft() {
     this.orderDraft.status = 'released';
     this.saveDraft(true).then(() => {
-      this.processService.createForOrder(this.orderDraft).then(() => this.router.navigate(['home/orders/overview']));
+      this.processService.createForOrder(this.orderDraft).then(() => {
+        this.toastr.show(
+          '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">Success</span> <span>Published</span></div>',
+          '',
+          {
+            timeOut: 1500,
+            closeButton: true,
+            enableHtml: true,
+            tapToDismiss: false,
+            titleClass: 'alert-title',
+            positionClass: 'toast-top-center',
+            toastClass: "ngx-toastr alert alert-dismissible alert-success alert-notify",
+          }
+        );
+
+        this.router.navigate(['home/orders/overview']);
+      });
     });
   }
 
@@ -267,7 +309,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     }
   }
   cancelModal(){
-    swal.fire({
+    /*swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
       type: 'warning',
@@ -282,7 +324,28 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
           this.discardDraft()
           this.isEdited = false;
       }
-    })
+    })*/
+
+    if (this.hasUnsavedData()) {
+      swal.fire({
+        title: 'You have unsaved data',
+        text: "Are you sure, you want to leave this page?",
+        type: 'warning',
+        showCancelButton: true,
+        buttonsStyling: false,
+        confirmButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Yes, cancel!',
+        cancelButtonClass: 'btn btn-secondary'
+      }).then((result) => {
+        if (result.value) {
+            // Show confirmation
+            this.discardDraft()
+            this.isEdited = false;
+        }
+      })
+    } else {
+      this.discardDraft()
+    }
   }
   saveModal(dontFireModal:boolean=false){
     /*if (!dontFireModal) {

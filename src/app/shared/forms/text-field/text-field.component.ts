@@ -46,10 +46,6 @@ export class TextFieldComponent implements OnInit {
     this.error=false;
     this.formatError=false;
 
-    if (userHasTyped) {
-      this.resultChange.emit(this.result);
-    }
-
     if (!this.userHasTyped) {
       this.userHasTyped = userHasTyped
     }
@@ -122,6 +118,10 @@ export class TextFieldComponent implements OnInit {
       this.fieldInformation.error = true
     }
     this.fieldInformationChange.emit(this.fieldInformation)
+
+    if (userHasTyped) {
+      this.resultChange.emit(this.result);
+    }
   }
 
 

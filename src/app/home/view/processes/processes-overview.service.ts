@@ -4,7 +4,6 @@ import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { UsersService } from 'src/app/core/users/users.service';
-import { ProcesssGuideTickEvent } from 'src/app/models/events/processGuideTick.event';
 import { Process } from 'src/app/models/process';
 import { Permission } from 'src/app/models/role';
 import { UserRowNode } from 'src/app/models/ui/userRowNode';
@@ -21,7 +20,6 @@ export class ProcessesOverviewService {
   public onProcessNodeAdd: Observable<ProcessNode>;
   public onProcessNodeRemove: Observable<string>;
 
-  public onProcessNodeTick: Observable<ProcesssGuideTickEvent>;
 
   constructor(private processesService: ProcessesService,
               private usersService: UsersService,
@@ -37,7 +35,6 @@ export class ProcessesOverviewService {
     )
 
     this.onProcessNodeRemove = processesService.onProcessDelete;
-    this.onProcessNodeTick = processesService.onProcessGuideTick;
   }
 
   async compose(process: Process) {

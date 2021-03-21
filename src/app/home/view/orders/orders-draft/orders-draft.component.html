@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="" >
                 <label (click)="overallInformation()" class="nav-link-tab bg-white" style="padding-bottom: 13px;" role="button">
-                     <h1 class="text-default"> {{orderDraft != undefined ? orderDraft.name : 'Unnamed Order'}} <i class="fa fa-angle-down p-2"></i> </h1>
+                     <h1 class="text-default"> {{(orderDraft != undefined ? orderDraft.name : 'Unnamed Order') + (this.isEdited ? '*' : '')}} <i class="fa fa-angle-down p-2"></i> </h1>
 
                 </label>
 
@@ -20,10 +20,10 @@
                 <div class="col-12 pt-1">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-1 d-flex align-items-center justify-content-center">
-                                <h2 class="text-default">Products:</h2> <p class="pl-2 mb-0 text-muted" *ngIf="productsNames.length==0">None defined</p>
+                            <div class="col-1 col-xl-1 col-sm-2 d-flex align-items-center justify-content-center">
+                                <h2 class="text-default mb-0">Products:</h2> <!--<p class="pl-2 mb-0 text-muted" *ngIf="productsNames.length==0">None defined</p>-->
                             </div>
-                            <div class="pl-2 col-11 pl-0 pr-0 z-index-1" style="display: inline;">
+                            <div class="pl-2 col-11 col-xl-11 col-sm-10 pl-0 pr-0 z-index-1" style="display: inline;">
                                 <app-tabs [tabsvalue]="productsNames" [(tabsResIndex)]="productToggleId" [bgColorClassNotSelected]="'bg-default'" [setNotUndefined]="processToggleId!=undefined"> </app-tabs>
 
                             </div>
@@ -35,10 +35,10 @@
                 <div class="col-12 pt-1" *ngIf="productToggleId!=undefined">
                     <div class="container-fluid">
                         <div class="row" [@animSlider]="productToggleId">
-                            <div class="pl-4 col-1 d-flex align-items-center justify-content-center" [ngClass]="{'none-defined-padding': processesNames.length==0}">
-                                <h3 class="text-default">Processes:</h3> <p class="pl-2 pb-1 mb-0 text-muted" *ngIf="processesNames.length==0">None defined</p>
+                            <div class="pl-4 col-1 col-xl-1 col-sm-2 d-flex align-items-center justify-content-center" [ngClass]="{'none-defined-padding': processesNames.length==0}">
+                                <h3 class="text-default mb-0">Processes:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="processesNames.length==0">None defined</p>-->
                             </div>
-                            <div class="pl-4 col-11 pl-0 pr-0 z-index-1" *ngIf="processesNames.length>0">
+                            <div class="pl-4 col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1" *ngIf="processesNames.length>0">
                                 <app-tabs [tabsvalue]="processesNames" [(tabsResIndex)]="processToggleId" [setNotUndefined]="stepToggleId!=undefined"> </app-tabs>
                             </div>
                         </div>
@@ -49,10 +49,10 @@
                 <div class="col-12 pt-1" *ngIf="productToggleId!=undefined && processToggleId != undefined">
                     <div class="container-fluid">
                         <div class="row" [@animSlider]="processToggleId">
-                            <div class="pl-6 col-1 d-flex align-items-center justify-content-center" [ngClass]="{'none-defined-padding': stepsName.length==0}">
-                                <h3 class="text-default">Steps:</h3> <p class="pl-2 pb-1 mb-0 text-muted" *ngIf="stepsName.length==0">None defined</p>
+                            <div class="pl-6 col-1 col-xl-1 col-sm-2 d-flex align-items-center justify-content-center" [ngClass]="{'none-defined-padding': stepsName.length==0}">
+                                <h3 class="text-default mb-0">Steps:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="stepsName.length==0">None defined</p>-->
                             </div>
-                            <div class="pl-6 col-11 pl-0 pr-0 z-index-1" *ngIf="stepsName.length>0">
+                            <div class="pl-6 col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1" *ngIf="stepsName.length>0">
                                 <app-tabs [tabsvalue]="stepsName" [(tabsResIndex)]="stepToggleId"> </app-tabs>
                             </div>
                         </div>

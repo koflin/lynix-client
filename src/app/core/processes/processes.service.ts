@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, mergeMap } from 'rxjs/operators';
 import { CreateProcessDto } from 'src/app/dto/process/createProcessDto';
 import { EditProcessDto } from 'src/app/dto/process/editProcessDto';
 import { Event } from 'src/app/models/event';
@@ -32,6 +32,10 @@ export class ProcessesService {
 
     this.onProcessChange = merge(
       this.events.onEvent<Process>(Event.PROCESS_UPDATE),
+      this.events.onEvent<ProcesssGuideTickEvent>(Event.PROCESS_GUIDE_TICK).pipe(
+        filter(event => event.timeTaken % 60 == 0),
+        mergeMap(event => this.getById(event.processId))
+      ),
       this.processChange.asObservable()
     );
 

@@ -116,11 +116,20 @@
                                     </p>
                                     </ng-template>
                                 </ngx-datatable-column>
+                                <!-- status -->
+                                <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=125 name="Status" prop="status" >
+                                  <ng-template let-row="row" ngx-datatable-cell-template>
+                                  <p class="">
+                                    {{( row.occupiedBy ? 'Occupied' : 'Free' )}}
+                                  </p>
+                                  </ng-template>
+                                </ngx-datatable-column>
                                 <!-- assignee -->
                                 <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=190 name="Assignee" prop="assignedUser" [comparator]="userNameSort" [cellClass]="getCellClass" >
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                    <div [hideIfUnauthorized]="permissions.ASSIGN"  #test>
-                                        <app-single-multiple-choice [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
+                                    <div  [hideIfUnauthorized]="permissions.ASSIGN"  #test>
+                                      <p class="" *ngIf="row.occupiedBy">{{ (row.assignedUser) ? row.assignedUser.username : 'none' }}</p>
+                                      <app-single-multiple-choice *ngIf="!row.occupiedBy" [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
                                     </div>
                                     <div [showIfUnauthorized]="permissions.ASSIGN">
                                       <p class="">

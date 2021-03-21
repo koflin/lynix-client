@@ -105,10 +105,6 @@ export class TextAreaComponent implements OnInit {
     this.requiredError=false;
     this.error=false;
 
-    if (userHasTyped) {
-      this.resultChange.emit(this.result);
-    }
-
     if (!this.userHasTyped) {
       this.userHasTyped = userHasTyped
     }
@@ -132,8 +128,9 @@ export class TextAreaComponent implements OnInit {
 
     this.fieldInformationChange.emit(this.fieldInformation)
 
-
-
+    if (userHasTyped) {
+      this.resultChange.emit(this.result);
+    }
   }
 
 }
