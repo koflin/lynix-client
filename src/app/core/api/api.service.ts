@@ -10,8 +10,7 @@ export class ApiService {
   private apiRoot = environment.apiHost;
 
   private headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + localStorage.getItem('access_token')
+    'Content-Type': 'application/json'
   });
 
   constructor(

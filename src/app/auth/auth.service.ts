@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { ApiService } from '../core/api/api.service';
-import { User } from '../models/user';
 import { LocalUser } from './../models/localUser';
 import { Permission } from './../models/role';
 
@@ -14,6 +13,7 @@ import { Permission } from './../models/role';
 export class AuthService {
 
   private jwtHelper = new JwtHelperService();
+  private accessToken: string;
 
   private localUserChange: BehaviorSubject<LocalUser>;
   public onLocalUserChange: Observable<LocalUser>;
@@ -21,12 +21,18 @@ export class AuthService {
   constructor(
     private api: ApiService
     ) {
-      this.localUserChange = new BehaviorSubject(this.getLocalUser());
+      this.localUserChange = new BehaviorSubject(null);
       this.onLocalUserChange = this.localUserChange.asObservable();
+
+      const validUntil = localStorage.getItem('validUntil');
+
+      if (validUntil && parseInt(validUntil) > Date.now()) {
+        this.refreshToken().subscribe();
+      }
   }
 
-  private get accessToken() {
-    return localStorage.getItem('access_token');
+  setToken(token: string) {
+    this.accessToken = token;
   }
 
   isLoggedIn(): boolean {
@@ -39,15 +45,17 @@ export class AuthService {
   }
 
   login(username: string, password: string): Promise<boolean> {
-    return this.api.post<{ access_token: string, refresh_token: string, user: User }>('auth/login', {
+    return this.api.post<{ access_token: string, user: LocalUser, refresh_expiration: number }>('auth/login', {
       username,
       password
     }).pipe(
       map((result) => {
-
-        localStorage.setItem('access_token', result.access_token);
-        this.api.setToken(result.access_token);
-        this.localUserChange.next(this.getLocalUser());
+        alert('TEST');
+        console.log('TEST');
+        localStorage.setItem('validUntil', result.refresh_expiration.toString());
+        this.setToken(result.access_token);
+        this.scheduleRefresh();
+        this.localUserChange.next(result.user);
 
         return true;
       }),
@@ -58,7 +66,9 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('access_token');
+    this.accessToken = null;
+    localStorage.setItem('validUntil', '0');
+    this.setToken(null);
     this.localUserChange.next(this.getLocalUser());
   }
 
@@ -83,5 +93,20 @@ export class AuthService {
     }
 
     return true;
+  }
+
+  refreshToken() {
+    return this.api.post<{ access_token: string, user: LocalUser, refresh_expiration: number }>('auth/token').pipe(
+      tap((result) => {
+        localStorage.setItem('validUntil', result.refresh_expiration.toString());
+        this.setToken(result.access_token);
+        this.scheduleRefresh();
+        this.localUserChange.next(result.user);
+      })
+    );
+  }
+
+  private scheduleRefresh() {
+    setTimeout(this.refreshToken, this.jwtHelper.getTokenExpirationDate(this.accessToken).getTime() - Date.now() - 30000);
   }
 }

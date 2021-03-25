@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
   signIn(){
     if (this.password && this.user) {
       this.authService.login(this.user, this.password).then((result:boolean) => {
+          console.log('TEST');
           this.error = !result
           if (this.error == false) {
             this.router.navigate(['home'])
