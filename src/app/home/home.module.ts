@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { CookieModule } from 'ngx-cookie';
 
 import { HasUnsavedDataGuard } from '../core/guard/has-unsaved-data.guard';
 import { SharedModule } from '../shared/shared.module';
@@ -43,7 +44,8 @@ import { UsersOverviewComponent } from './view/users/users-overview/users-overvi
   imports: [
     HomeRoutingModule,
     CommonModule,
-    SharedModule
+    SharedModule,
+    CookieModule.forChild()
   ],
   bootstrap: [],
   providers:[HasUnsavedDataGuard, GuideGuard ]

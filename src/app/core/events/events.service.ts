@@ -23,7 +23,7 @@ export class EventsService {
       }
 
       if (user) {
-        this.socket = io(this.webSocketRoot, { transports: ['websocket'], auth: { token: localStorage.getItem('access_token') }});
+        this.socket = io(this.webSocketRoot, { transports: ['websocket'], auth: { token: authService.getToken() }});
       } else {
         if (this.socket) {
           this.socket.disconnect();

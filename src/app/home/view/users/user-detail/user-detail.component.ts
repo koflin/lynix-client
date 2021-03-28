@@ -1,18 +1,18 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as _ from 'lodash';
+import { AuthService } from 'src/app/auth/auth.service';
+import { MediaService } from 'src/app/core/media/media.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
+import { UsersService } from 'src/app/core/users/users.service';
 import { Role } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
-import { UserDetailNode } from 'src/app/models/ui/userDetailNode';
-import { InputOutputValue, SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
-import * as _ from 'lodash';
-import swal from 'sweetalert2';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
-import { LocationStrategy } from '@angular/common';
-import { UsersService } from 'src/app/core/users/users.service';
+import { UserDetailNode } from 'src/app/models/ui/userDetailNode';
 import { User } from 'src/app/models/user';
-import { v4 as uuidv4 } from 'uuid';
-import { AuthService } from 'src/app/auth/auth.service';
+import { InputOutputValue, SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
+import swal from 'sweetalert2';
+
 import { UsersDetailService } from './user-detail.service';
 
 @Component({
@@ -32,6 +32,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     this.selectedRole = (value.role) ? {'value': value.role.id, 'label': value.role.name} : {'value' : '', 'label': ''}
   }
   orginalUserDetail: UserDetailNode;
+  avatarImage: File;
 
   availableRoles: Role[];
   availabelRolesSelection: SingleMultiChoiceItem[]=[]
@@ -58,7 +59,8 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     private usersDetailService: UsersDetailService ,
     private rolesService: RolesService,
     private usersService: UsersService,
-    private authService: AuthService
+    private authService: AuthService,
+    private mediaService: MediaService
     ) {
       //history.pushState(null, null, window.location.href);
     // check if back or forward button is pressed.
@@ -92,9 +94,14 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
   }
 
 
-  save() {
+  async save() {
     this.checkForError=true
     if (!(this.roleField.error || this.usernameField.error || this.firstname.error || this.lastname.error || this.password.error)) {
+      if (this.avatarImage) {
+        const media = await this.mediaService.upload(this.avatarImage).toPromise();
+        this.userDetail.avatar = media.url;
+      }
+
       if (this.userDetail.id==undefined) {
         let userDraft:User = {...this.userDetail, 'companyId': this.authService.getLocalUser().companyId, 'role': this.userDetail.role }
         this.usersService.createUser(userDraft);
@@ -109,9 +116,11 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
 
   }
 
-  uploadAvatar(event) {
+  selectAvatar(event) {
+    this.avatarImage = event.target.files[0];
+
     const reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
+    reader.readAsDataURL(this.avatarImage);
 
     reader.onload = () => {
       this.userDetail.avatar = reader.result.toString();

@@ -12,13 +12,13 @@
                         <div class="col-sm-12 col-md-4" (click)="s()">
                             <div  class="avatar rounded-circle" style="width: 150px; height: 150px; background-color: aliceblue;">
                                 <img alt="Image placeholder image-fit-round"  class="image-fit-round"
-                                style=""  [src]="(userDetail.avatar) ? userDetail.avatar :  'assets/img/nopicture.png'">
+                                style=""  [src]="userDetail.avatar ? userDetail.avatar :  'assets/img/nopicture.png'">
                                 <span *ngIf="!userDetail.avatar" class="badge badge-warning" style="position: fixed;
                                 margin-top: 40px;">No picture available</span>
                             </div>
                             <form>
                             <div class="custom-file pb-2">
-                                <input type="file" class="custom-file-input" accept="image/png, image/jpeg" (change)="uploadAvatar($event)" #imageInput lang="en">
+                                <input type="file" class="custom-file-input" accept="image/png, image/jpeg" (change)="selectAvatar($event)" #imageInput lang="en">
                                 <label class="custom-file-label" for="customFileLang">Add new Picture</label>
                             </div>
                             </form>

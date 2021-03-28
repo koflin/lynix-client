@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { CookieService } from 'ngx-cookie';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -15,33 +16,23 @@ export class AuthService {
   private jwtHelper = new JwtHelperService();
   private accessToken: string;
 
-  private localUserChange: BehaviorSubject<LocalUser>;
+  private localUser: BehaviorSubject<LocalUser>;
   public onLocalUserChange: Observable<LocalUser>;
 
   constructor(
-    private api: ApiService
+    private readonly api: ApiService,
+    private cookies: CookieService
     ) {
-      this.localUserChange = new BehaviorSubject(null);
-      this.onLocalUserChange = this.localUserChange.asObservable();
-
-      const validUntil = localStorage.getItem('validUntil');
-
-      if (validUntil && parseInt(validUntil) > Date.now()) {
-        this.refreshToken().subscribe();
-      }
+      this.localUser = new BehaviorSubject(null);
+      this.onLocalUserChange = this.localUser.asObservable();
   }
 
-  setToken(token: string) {
-    this.accessToken = token;
+  getToken() {
+    return this.accessToken;
   }
 
   isLoggedIn(): boolean {
-    const accessToken = this.accessToken;
-
-    if (accessToken) {
-      return !this.jwtHelper.isTokenExpired(this.accessToken);
-    }
-    return false;
+    return parseInt(this.cookies.get('logged_in_until')) > Date.now();
   }
 
   login(username: string, password: string): Promise<boolean> {
@@ -50,12 +41,9 @@ export class AuthService {
       password
     }).pipe(
       map((result) => {
-        alert('TEST');
-        console.log('TEST');
-        localStorage.setItem('validUntil', result.refresh_expiration.toString());
-        this.setToken(result.access_token);
+        this.accessToken = result.access_token;
         this.scheduleRefresh();
-        this.localUserChange.next(result.user);
+        this.localUser.next(result.user);
 
         return true;
       }),
@@ -67,14 +55,13 @@ export class AuthService {
 
   logout() {
     this.accessToken = null;
-    localStorage.setItem('validUntil', '0');
-    this.setToken(null);
-    this.localUserChange.next(this.getLocalUser());
+    this.cookies.put('logged_in_until', '0');
+    this.localUser.next(null);
   }
 
   getLocalUser(): LocalUser {
     if (this.isLoggedIn()) {
-      return this.jwtHelper.decodeToken(this.accessToken).user;
+      return this.localUser.value;
     }
 
     return null;
@@ -82,7 +69,11 @@ export class AuthService {
 
   hasPermissions(...requiredPermissions: Permission[]) {
 
-    const localUser = this.getLocalUser();
+    const localUser = this.localUser.value;
+
+    if (!localUser) {
+      return false;
+    }
 
     if (requiredPermissions) {
       for (let permission of requiredPermissions) {
@@ -95,18 +86,26 @@ export class AuthService {
     return true;
   }
 
-  refreshToken() {
-    return this.api.post<{ access_token: string, user: LocalUser, refresh_expiration: number }>('auth/token').pipe(
-      tap((result) => {
-        localStorage.setItem('validUntil', result.refresh_expiration.toString());
-        this.setToken(result.access_token);
-        this.scheduleRefresh();
-        this.localUserChange.next(result.user);
-      })
-    );
+  refreshToken(): Observable<LocalUser> {
+    const validUntil = this.cookies.get('logged_in_until');
+
+    if (validUntil && parseInt(validUntil) > Date.now()) {
+      return this.api.post<{ access_token: string, user: LocalUser, refresh_expiration: number }>('auth/token').pipe(
+        tap((result) => {
+          this.accessToken = result.access_token;
+          this.scheduleRefresh();
+          this.localUser.next(result.user);
+        }),
+        map((result) => {
+          return result.user;
+        })
+      );
+    }
+
+    return of(null);
   }
 
   private scheduleRefresh() {
-    setTimeout(this.refreshToken, this.jwtHelper.getTokenExpirationDate(this.accessToken).getTime() - Date.now() - 30000);
+    setTimeout(this.refreshToken.bind(this), this.jwtHelper.getTokenExpirationDate(this.accessToken).getTime() - Date.now() - 30000);
   }
 }

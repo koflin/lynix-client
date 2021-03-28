@@ -1,9 +1,10 @@
-import { LocalUser } from './../../models/localUser';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UsersService } from 'src/app/core/users/users.service';
 import { User } from 'src/app/models/user';
+
+import { LocalUser } from './../../models/localUser';
 
 @Component({
   selector: 'app-top-navigation',

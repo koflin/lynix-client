@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { MediaService } from 'src/app/helpers/media/media.service';
-import { StepTemplate } from 'src/app/models/stepTemplate';
-import { InputOutputValue } from '../models/InputOutputValue';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CarouselConfig } from 'ngx-bootstrap/carousel';
+import { MediaService } from 'src/app/core/media/media.service';
+import { StepTemplate } from 'src/app/models/stepTemplate';
+
+import { InputOutputValue } from '../models/InputOutputValue';
 
 @Component({
   selector: 'app-step',
@@ -14,7 +15,7 @@ import { CarouselConfig } from 'ngx-bootstrap/carousel';
 })
 export class StepComponent implements OnInit {
 
-  @Input () stepTemplate: StepTemplate 
+  @Input () stepTemplate: StepTemplate
   @Output() stepTemplateChange = new EventEmitter<StepTemplate>();
 
   @Input() checkForError: boolean = false
@@ -66,10 +67,8 @@ export class StepComponent implements OnInit {
   addImage(event) {
     this.imageFile = event.target.files[0];
 
-    this.mediaService.imageToBase64(this.imageFile).then((url: string) => {
-      this.stepTemplate.pictureUris.push(url);
-    }).catch((error) => {
-      alert('Could not upload image, try a different file!');
+    this.mediaService.upload(this.imageFile).subscribe((media) => {
+      this.stepTemplate.pictureUris.push(media.url);
     });
   }
 
@@ -79,6 +78,10 @@ export class StepComponent implements OnInit {
 
   addVideo(event) {
     this.videoFile = event.target.files[0];
+
+    this.mediaService.upload(this.videoFile).subscribe((media) => {
+      this.stepTemplate.videoUris.push(media.url);
+    });
   }
 
   removeVideo(index: number) {

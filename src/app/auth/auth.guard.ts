@@ -17,19 +17,22 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     const requiredPermissions: Permission[] = next.data['permissions'];
-    const localUser = this.authService.getLocalUser();
 
-    // Check if user is logged in
-    if (!localUser) {
-      return this.router.createUrlTree(['/login']);
-    }
+    return new Promise(async (resolve) => {
+      const localUser = await this.authService.refreshToken().toPromise();
 
-    // Check if permissions match
-    if (requiredPermissions && !this.authService.hasPermissions(...requiredPermissions)) {
-      return false;
-    }
+      // Check if user is logged in
+      if (!localUser) {
+        resolve(this.router.createUrlTree(['/login']));
+      }
 
-    return true;
+      // Check if permissions match
+      if (requiredPermissions && !this.authService.hasPermissions(...requiredPermissions)) {
+        resolve(false);
+      }
+
+      resolve(true);
+    });
   }
 
 }
