@@ -99,7 +99,9 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     return this._stepToggleId
   }
   set stepToggleId(value){
-    this._stepToggleId=value
+    console.log('Toggle Step ' + value);
+    this.router.navigateByUrl(this.route.snapshot.url.join('/'), { fragment: this.toFragment(this.productToggleId, this.processToggleId, value) });
+    //this._stepToggleId=value
   }
 
   _processToggleId:number
@@ -107,8 +109,10 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     return this._processToggleId
   }
   set processToggleId(value){
-    this.stepToggleId=undefined
-    this._processToggleId=value
+    console.log('Toggle Process ' + value);
+    this.router.navigateByUrl(this.route.snapshot.url.join('/'), { fragment: this.toFragment(this.productToggleId, value, undefined) });
+    //this.stepToggleId=undefined
+    //this._processToggleId=value
   }
   _productToggleId:number
   get productToggleId(){
@@ -116,9 +120,13 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     return this._productToggleId
   }
   set productToggleId(value){
-    this._productToggleId=value
-    this.stepToggleId=undefined
-    this.processToggleId=undefined
+    console.log('Toggle Product ' + value);
+    console.log(this.route.snapshot.url.join('/'));
+    console.log(this.toFragment(value, undefined, undefined));
+    this.router.navigateByUrl(this.route.snapshot.url.join('/'), { fragment: this.toFragment(value, undefined, undefined) });
+    //this._productToggleId=value
+    //this.stepToggleId=undefined
+    //this.processToggleId=undefined
   }
 
   isEdited = false;
@@ -164,11 +172,41 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
 
     });
 
+    this.route.fragment.subscribe((fragment) => {
+      if (!fragment) {
+        return;
+      }
+
+      const parts = fragment.split('.');
+
+      if (parts.length >= 1) {
+        this._productToggleId = parseInt(parts[0]);
+      }
+
+      if (parts.length >= 2) {
+        this._processToggleId = parseInt(parts[1]);
+      }
+
+      if (parts.length >= 3) {
+        this._stepToggleId = parseInt(parts[2]);
+      }
+    });
+
     this.ordersService.onOrdersChange.subscribe((id) => {
       if (this.orderDraft && this.orderDraft.id === id) {
         this.getOrder(id);
       }
     });
+  }
+
+  toFragment(prod: number, proc: number, step: number) {
+    let frag = '';
+
+    frag += prod != undefined ? prod.toString() : '';
+    frag += proc != undefined ? '.' + proc.toString() : '';
+    frag += step != undefined ? '.' + step.toString() : '';
+
+    return frag;
   }
 
   getOrder(id: string) {

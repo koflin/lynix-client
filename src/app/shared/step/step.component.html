@@ -209,8 +209,12 @@
                     <div class="col-12 pt-5">
                         <form>
                             <div class="custom-file">
-                              <input type="file" class="custom-file-input" accept="image/png, image/jpeg" (change)="addImage($event)" #imageInput lang="en">
+                              <input type="file" class="custom-file-input" accept="image/png,image/jpeg,image/gif" (change)="addImage($event)" #imageInput lang="en">
                               <label class="custom-file-label" for="customFileLang">Add new File</label>
+                            </div>
+                            <div class="custom-file mt-3">
+                              <input type="file" class="custom-file-input" capture="environment" accept="image/png,image/jpeg,image/gif" (change)="addImage($event)" #imageInput lang="en">
+                              <label class="custom-file-label" for="customFileLang">Capture Photo</label>
                             </div>
                           </form>
                     </div>
@@ -229,14 +233,16 @@
                     <div class="col-12">
                         <carousel *ngIf="stepTemplate.videoUris.length > 0; else elseTemplate">
                             <slide *ngFor="let video of stepTemplate.videoUris; let i=index" >
-                                <video width="100%">
-                                    <source [src]="video">
+                                <div>
+                                  <video width="100%" controls>
+                                    <source [src]="video" type="{{ getType(video) }}">
                                   </video>
-                              <div class="carousel-caption d-none d-md-block">
-                                <button class="btn btn-icon btn-2 btn-danger" type="button" (click)="removeVideo(i)">
-                                    <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
-                                </button>
-                              </div>
+                                </div>
+                                <div class="carousel-caption d-none d-md-block">
+                                  <button class="btn btn-icon btn-2 btn-danger" type="button" (click)="removeVideo(i)">
+                                      <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
+                                  </button>
+                                </div>
                             </slide>
                           </carousel>
                           <ng-template #elseTemplate>
@@ -246,8 +252,12 @@
                     <div class="col-12 pt-5">
                         <form>
                             <div class="custom-file">
-                              <input type="file" class="custom-file-input" accept="image/gif video/mp4 .mov .avi .webm" (change)="addImage($event)" #imageInput lang="en">
+                              <input type="file" class="custom-file-input" accept="video/mp4,video/webm,video/ogg" (change)="addVideo($event)" #imageInput lang="en">
                               <label class="custom-file-label" for="customFileLang">Add new File</label>
+                            </div>
+                            <div class="custom-file mt-3">
+                              <input type="file" class="custom-file-input" capture="environment" accept="video/mp4,video/webm,video/ogg" (change)="addVideo($event)" #imageInput lang="en">
+                              <label class="custom-file-label" for="customFileLang">Capture Video</label>
                             </div>
                           </form>
                     </div>

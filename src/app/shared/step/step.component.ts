@@ -114,6 +114,22 @@ export class StepComponent implements OnInit {
     return Math.ceil((seconds - this.getHours(seconds) * 3600) / 60);
   }
 
+  getType(url: string) {
+    if (url.endsWith('.mp4')) {
+      return 'video/mp4';
+    }
+
+    if (url.endsWith('.ogg')) {
+      return 'video/ogg'
+    }
+
+    if (url.endsWith('.webm')) {
+      return 'video/webm'
+    }
+
+    return null;
+  }
+
   private changeEstimatedTime() {
     this.stepTemplate.estimatedTime = this.estimatedTime.hours * 3600 + this.estimatedTime.minutes * 60;
     //this.estimatedTimeChange.emit(this.stepTemplate.estimatedTime);
