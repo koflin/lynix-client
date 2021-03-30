@@ -125,7 +125,7 @@
                                         <button class="btn btn-icon btn-3 btn-default" type="button" (click)="addStep(i)" >
                                             <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
                                         </button>
-                                        <button class="btn btn-icon btn-3 btn-default" type="button" (click)="selectTab.emit(i)">
+                                        <button class="btn btn-icon btn-3 btn-default" type="button" [routerLink]="" fragment="{{ navFragment + '.' + i }}">
                                             <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
                                         </button>
 

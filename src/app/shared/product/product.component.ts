@@ -17,6 +17,9 @@ export class ProductComponent implements OnInit {
   processOptions:SingleMultiChoiceItem[]
   ignoreOptions:SingleMultiChoiceItem[]
   name = new InputOutputValue("name", "Product name", false)
+
+  @Input() navFragment: string;
+
   constructor(private processTemplatesService: ProcessTemplatesService ) { }
 
   ngOnInit(): void {

@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TimeService } from 'src/app/helpers/time/time.service';
 import { ProcessTemplate } from 'src/app/models/processTemplate';
+
 import { InputOutputValue, SingleMultiChoiceItem } from '../models/InputOutputValue';
 
 @Component({
@@ -20,6 +21,8 @@ export class ProcessComponent implements OnInit {
   isFirstOpen:boolean=true
 
   estimatedTime;
+
+  @Input() navFragment: string;
 
 
   constructor(private timeService: TimeService) { }
@@ -54,7 +57,7 @@ export class ProcessComponent implements OnInit {
       videoUris: [],
       estimatedTime: 0,
     })
-    
+
   }
   removeStep(index: number) {
     this.processTemplate.stepTemplates.splice(index, 1);

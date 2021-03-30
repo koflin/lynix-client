@@ -1,4 +1,16 @@
-import {  AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 
 
 @Component({
@@ -7,7 +19,7 @@ import {  AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter,
   styleUrls: ['./tabs.component.scss']
 })
 export class TabsComponent implements OnInit,AfterViewInit {
-  @Input() tabsvalue: string[]= [] 
+  @Input() tabsvalue: string[]= []
   @Input() bgColorClassNotSelected:string = 'bg-default';
   @Input() setNotUndefined:boolean=false
   _tabsResIndex:number
@@ -15,8 +27,10 @@ export class TabsComponent implements OnInit,AfterViewInit {
   @Input() tabsResIndex:number
   @Output() tabsResIndexChange= new EventEmitter<number>()
 
+  @Input() navFragmentBase: string;
+
   @ViewChild("tabContainer") tabs: ElementRef ;
-  
+
   overFlow: boolean = false
   firstVisible:boolean=true
   lastVisible:boolean=false
@@ -27,16 +41,16 @@ export class TabsComponent implements OnInit,AfterViewInit {
   ngOnChanges(changes: SimpleChanges) {
     this.cdref.detectChanges();
 
-    // You can also use categoryId.previousValue and 
+    // You can also use categoryId.previousValue and
     // categoryId.firstChange for comparing old and new values
-    
+
 }
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     this.isTextOverflow()
 
-    
+
   }
 
   @HostListener('window:resize', ['$event'])
@@ -46,7 +60,7 @@ export class TabsComponent implements OnInit,AfterViewInit {
     }
 
   selectTabs(value, $event){
-    (this.tabsResIndex == value && !this.setNotUndefined) ? this.tabsResIndex = undefined : this.tabsResIndex=value 
+    (this.tabsResIndex == value && !this.setNotUndefined) ? this.tabsResIndex = undefined : this.tabsResIndex=value
     this.tabsResIndexChange.emit(this.tabsResIndex)
     if (this.overFlow) {
       if (this.tabs.nativeElement.clientWidth*0.75<=$event.pageX) {
@@ -54,22 +68,26 @@ export class TabsComponent implements OnInit,AfterViewInit {
       }else if(this.tabs.nativeElement.clientWidth*0.25<=$event.pageX){
         this.scrollLeft($event.target.clientWidth*1.25)
       }
-      
+
     }
   }
- 
-  
+
+  toggle(value) {
+    return this.navFragmentBase + ((this.tabsResIndex == value && !this.setNotUndefined) ? '' : (this.navFragmentBase != '' ? '.' : '') + value);
+  }
+
+
     /**
    * Check the element if it is text-overflow
    * @param elementId
    */
   isTextOverflow(): void {
     const elem = this.tabs.nativeElement
-    
+
     let prov:boolean
     if (elem) {
       prov = elem.offsetWidth < elem.scrollWidth
-      
+
     }
     else {
         prov =  false;
@@ -87,7 +105,7 @@ export class TabsComponent implements OnInit,AfterViewInit {
   scrollLeft(scrollPixel?:number) {
     if (!scrollPixel) {
      scrollPixel =  this.tabs.nativeElement.children[1].clientWidth * 4
-     
+
     }
     if (scrollPixel>this.tabs.nativeElement.clientWidth) {
       scrollPixel =this.tabs.nativeElement.clientWidth *0.3
@@ -98,7 +116,7 @@ export class TabsComponent implements OnInit,AfterViewInit {
   scrollRight(scrollPixel?:number) {
     if (!scrollPixel) {
       scrollPixel =  this.tabs.nativeElement.children[1].clientWidth * 4
-      
+
      }
      if (scrollPixel>this.tabs.nativeElement.clientWidth) {
        scrollPixel =this.tabs.nativeElement.clientWidth *0.3
@@ -117,20 +135,20 @@ export class TabsComponent implements OnInit,AfterViewInit {
       if (last) {
         res['margin-btn-right'] = true
       }
-      
+
     }
-    
-    
+
+
     if (index!=this.tabsResIndex) {
       res[this.bgColorClassNotSelected] = true
-      
-      
+
+
     }else{
       res['active']=true
       res['underline']=true
     }
     return res
-    
+
   }
   getNotSelectedClass(){
     if (this.tabsResIndex != undefined) {

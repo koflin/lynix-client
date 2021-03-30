@@ -49,7 +49,7 @@
                                                 <app-text-field [inputType]="'number'" [inputValidation]="'int'"  [result]="process.quantity" (resultChange)="process.quantity = $event ? $event : 1; productTemplateChange.emit(productTemplate)"></app-text-field>
                                             </td>
                                             <td scope="row">
-                                                <button (click)="selectTab.emit(i)" class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button">
+                                                <button [routerLink]="" fragment="{{ navFragment + '.' + i }}"class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button">
                                                     <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
                                                 </button>
                                                 <button (click)="removeProcess(i)" class=" ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-danger" type="button">

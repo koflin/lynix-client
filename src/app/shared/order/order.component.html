@@ -72,7 +72,7 @@
                                             <app-text-field [inputType]="'number'" [inputValidation]="'int'"  [result]="product.quantity" (resultChange)="product.quantity = $event ? $event : 1; orderChange.emit(order)"></app-text-field>
                                         </td>
                                         <td scope="row" class="pt-0">
-                                            <button (click)="selectTab.emit(i)" class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button">
+                                            <button [routerLink]="" fragment="{{ i }}" class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button">
                                                 <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
                                             </button>
                                             <button (click)="removeProduct(i)" class=" ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-danger" type="button">

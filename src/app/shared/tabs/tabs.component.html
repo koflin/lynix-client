@@ -2,9 +2,9 @@
         <button  *ngIf="overFlow" (click)="scrollLeft()" class="btn btn-icon btn-2 btn-secondary floating-left floating-btn card-stronger-shadow z-index-1" [ngClass]="{'lightgray-color': firstVisible}" type="button">
             <span class="btn-inner--icon"><i class="fas fa-chevron-left"></i></span>
           </button>
-        
-        
-        <label (click)="selectTabs(i, $event)" *ngFor="let item of tabsvalue, let i = index let first= first, let last=last" [id]="item" class="nav-link-tab zooming shadow-right mt-1 mb-0"    [ngClass]="calculateClasses(first, last, i)" tabindex="0" role="button">
+
+
+        <label (click)="selectTabs(i, $event)" [routerLink]="" fragment="{{ toggle(i) }}" *ngFor="let item of tabsvalue, let i = index let first= first, let last=last" [id]="item" class="nav-link-tab zooming shadow-right mt-1 mb-0"    [ngClass]="calculateClasses(first, last, i)" tabindex="0" role="button">
             <div class="hover hover-1">
                 {{item}} <i class="fa fa-angle-right p-2" [ngClass]="{'open': i==tabsResIndex}"></i>
                 <span *ngIf="first || last" inViewport  (inViewportAction)="onIntersection($event, first, last)" >
@@ -13,14 +13,14 @@
             </div>
 
         </label>
-            
+
         <button *ngIf="overFlow" (click)="scrollRight()"  class=" btn btn-icon btn-2 btn-secondary floating-right floating-btn card-stronger-shadow z-index-1" [ngClass]="{'lightgray-color': lastVisible}" type="button">
             <span class="btn-inner--icon"><i class="fa fa-chevron-right"></i></span>
-        </button> 
-    
+        </button>
 
-        
 
-    
+
+
+
 </div>
 <div style="height:2px; min-width:100%" [ngClass]="getNotSelectedClass()"></div>

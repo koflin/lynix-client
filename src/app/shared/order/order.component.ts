@@ -21,6 +21,9 @@ export class OrderComponent implements OnInit {
   name:InputOutputValue
   dueDate: InputOutputValue
   description: InputOutputValue
+
+  @Input() navFragment: string;
+
   constructor(
     private cdRef: ChangeDetectorRef,
     private productTemplatesService: ProductTemplatesService

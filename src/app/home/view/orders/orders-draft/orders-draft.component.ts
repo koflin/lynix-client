@@ -98,35 +98,16 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   get stepToggleId(){
     return this._stepToggleId
   }
-  set stepToggleId(value){
-    console.log('Toggle Step ' + value);
-    this.router.navigateByUrl(this.route.snapshot.url.join('/'), { fragment: this.toFragment(this.productToggleId, this.processToggleId, value) });
-    //this._stepToggleId=value
-  }
 
   _processToggleId:number
   get processToggleId(){
     return this._processToggleId
   }
-  set processToggleId(value){
-    console.log('Toggle Process ' + value);
-    this.router.navigateByUrl(this.route.snapshot.url.join('/'), { fragment: this.toFragment(this.productToggleId, value, undefined) });
-    //this.stepToggleId=undefined
-    //this._processToggleId=value
-  }
+
   _productToggleId:number
   get productToggleId(){
 
     return this._productToggleId
-  }
-  set productToggleId(value){
-    console.log('Toggle Product ' + value);
-    console.log(this.route.snapshot.url.join('/'));
-    console.log(this.toFragment(value, undefined, undefined));
-    this.router.navigateByUrl(this.route.snapshot.url.join('/'), { fragment: this.toFragment(value, undefined, undefined) });
-    //this._productToggleId=value
-    //this.stepToggleId=undefined
-    //this.processToggleId=undefined
   }
 
   isEdited = false;
@@ -173,6 +154,10 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     });
 
     this.route.fragment.subscribe((fragment) => {
+      this._productToggleId = undefined;
+        this._processToggleId = undefined;
+        this._stepToggleId = undefined;
+
       if (!fragment) {
         return;
       }
@@ -199,12 +184,12 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     });
   }
 
-  toFragment(prod: number, proc: number, step: number) {
+  toFragment(prod?: number, proc?: number, step?: number) {
     let frag = '';
 
     frag += prod != undefined ? prod.toString() : '';
-    frag += proc != undefined ? '.' + proc.toString() : '';
-    frag += step != undefined ? '.' + step.toString() : '';
+    frag += proc != undefined ? '.' + proc.toString(): '';
+    frag += step != undefined ? '.' + step.toString() + '.' : '';
 
     return frag;
   }
@@ -213,26 +198,6 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     this.ordersService.getById(id).subscribe(draft => {
       this.orderDraft = draft;
       this.isEdited = false;
-
-      this.route.fragment.subscribe((fragment) => {
-        if (fragment) {
-          const frag0 = fragment[0] ? parseInt(fragment[0]) : undefined;
-          const frag1 = fragment[1] ? parseInt(fragment[1]) : undefined;
-          const frag2 = fragment[2] ? parseInt(fragment[2]) : undefined;
-
-          if (frag0 == undefined || this.orderDraft.products.length > frag0) {
-            this.productToggleId = frag0;
-          }
-
-          if (frag1 == undefined || this.orderDraft.products[frag0].template.processes.length > frag1) {
-            this.processToggleId = frag1;
-          }
-
-          if (frag2 == undefined ||this.orderDraft.products[frag0].template.processes[frag1].template.stepTemplates.length > frag2) {
-            this.stepToggleId = frag2;
-          }
-        }
-      });
     });
   }
 
@@ -243,12 +208,6 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     .map((product)=>{
       return product.template.name
     }) */
-  }
-
-  overallInformation(){
-    this.processToggleId=undefined
-    this.productToggleId=undefined
-    this.stepToggleId=undefined
   }
 
 
@@ -451,26 +410,26 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
 
       case 'step':
         if (data.tabId>0) {
-          this.stepToggleId=data.tabId-1
+          //this.stepToggleId=data.tabId-1
         }else{
-          this.processToggleId=data.parentTabId
+          //this.processToggleId=data.parentTabId
         }
         this.orderDraft.products[this.productToggleId].template.processes[this.processToggleId].template.stepTemplates.splice(data.tabId, 1)
         break;
       case 'process':
         if (data.tabId>0) {
-          this.processToggleId=data.tabId-1
+          //this.processToggleId=data.tabId-1
         }else{
-          this.productToggleId=data.parentTabId
+          //this.productToggleId=data.parentTabId
         }
         this.orderDraft.products[this.productToggleId].template.processes.splice(data.tabId, 1)
 
         break;
       case 'product':
           if (data.tabId>0) {
-            this.productToggleId=data.tabId-1
+            //this.productToggleId=data.tabId-1
           }else{
-            this.overallInformation()
+            //this.overallInformation()
           }
           this.orderDraft.products.splice(data.tabId, 1)
 

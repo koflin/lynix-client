@@ -23,7 +23,7 @@ export class StepComponent implements OnInit {
   keyMessage = new InputOutputValue("keymessage", "Key Message", false)
   tasks = new InputOutputValue("tasks", "Tasks", false)
 
-
+  @Input() navFragment: string;
 
   materialToAdd: string;
   toolToAdd: string;
