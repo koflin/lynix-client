@@ -13,6 +13,15 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "de": {
+            "translation": "src/locale/messages.de.xlf",
+            "baseHref": "de"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -73,6 +82,10 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "de": {
+              "localize": ["de"],
+              "main": "src/main.ts"
             }
           }
         },
@@ -84,6 +97,9 @@
           "configurations": {
             "production": {
               "browserTarget": "lynix:build:production"
+            },
+            "de": {
+              "browserTarget": "lynix:build:de"
             }
           }
         },

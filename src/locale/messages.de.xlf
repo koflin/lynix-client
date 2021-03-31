@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="de-CH" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="cc7fde947b1ef938343f68958f958a88feeea967" datatype="html">
+        <source>
+              SMART ASSISTANT SYSTEM
+            </source>
+            <target>SMART ASSISTANT SYSTEM</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/login/login.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <note priority="1" from="description">login title</note>
+      </trans-unit>
+      <trans-unit id="a1de67759aa59272c19e44324b8cff10d9e9e1ca" datatype="html">
+        <source> Sign in </source>
+        <target>Anmeldung</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/login/login.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <note priority="1" from="description">login title</note>
+      </trans-unit>
+      <trans-unit id="fb325a2e692949a9350f46855b461a26d7469daa" datatype="html">
+        <source>username &amp; password not accepted</source>
+        <target>Benutzername &amp; Passwort falsch</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/login/login.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <note priority="1" from="description">login failure</note>
+      </trans-unit>
+      <trans-unit id="4fcb6dbd1b656de4f606e061af0ed606d3fdc547" datatype="html">
+        <source>User Name</source>
+        <target>Benutzername</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/login/login.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+        <note priority="1" from="description">login username</note>
+      </trans-unit>
+      <trans-unit id="c32ef07f8803a223a83ed17024b38e8d82292407" datatype="html">
+        <source>Password</source>
+        <target>Passwort</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/login/login.component.html</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+        <note priority="1" from="description">login password</note>
+      </trans-unit>
+      <trans-unit id="3eb49d60bd859eb2d9d3a6d380cdf4e0b8252333" datatype="html">
+        <source>Remember me</source>
+        <target>Angemeldet bleiben</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/login/login.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+        <note priority="1" from="description">login remember</note>
+      </trans-unit>
+      <trans-unit id="f6d2049024e920e08652999d5c718532c11e3253" datatype="html">
+        <source>
+                  Sign in
+                </source>
+        <target>Anmelden</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/login/login.component.html</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+        <note priority="1" from="description">login button</note>
+      </trans-unit>
+      <trans-unit id="7b51af1205d723c139f8db1d723d80011ff0c06d" datatype="html">
+        <source> Forgot password? </source>
+        <target>Passwort vergessen?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/login/login.component.html</context>
+          <context context-type="linenumber">120</context>
+        </context-group>
+        <note priority="1" from="description">login forgot</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
