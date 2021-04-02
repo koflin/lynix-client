@@ -14,18 +14,18 @@
                                 <img alt="Image placeholder image-fit-round"  class="image-fit-round"
                                 style=""  [src]="userDetail.avatar ? userDetail.avatar :  'assets/img/nopicture.png'">
                                 <span *ngIf="!userDetail.avatar" class="badge badge-warning" style="position: fixed;
-                                margin-top: 40px;">No picture available</span>
+                                margin-top: 40px;" i18n>No picture available</span>
                             </div>
                             <form>
                             <div class="custom-file pb-2">
                                 <input type="file" class="custom-file-input" accept="image/png, image/jpeg" (change)="selectAvatar($event)" #imageInput lang="en">
-                                <label class="custom-file-label" for="customFileLang">Add new Picture</label>
+                                <label class="custom-file-label" for="customFileLang" i18n>Add new Picture</label>
                             </div>
                             </form>
 
                         </div>
                         <div class="col-sm-12 col-md-8">
-                            <app-single-multiple-choice  [(result)]="selectedRole" [(fieldInformation)]=roleField  [isMultipleChoice]=false [inputCheckForError]=checkForError  [isSearchable]=true [inputRequired]=true [data]="availabelRolesSelection" [allowUserCreateOption]="false" [placeholder]="'select a role'"> </app-single-multiple-choice>
+                            <app-single-multiple-choice  [(result)]="selectedRole" [(fieldInformation)]=roleField  [isMultipleChoice]=false [inputCheckForError]=checkForError  [isSearchable]=true [inputRequired]=true [data]="availabelRolesSelection" [allowUserCreateOption]="false" placeholder="select a role" i18n-placeholder> </app-single-multiple-choice>
                             <app-text-field [(result)]=userDetail.username [(fieldInformation)]="usernameField" [inputRequired]=true [inputType]="'text'" [inputCheckForError]=checkForError> </app-text-field>
                             <app-text-field [(result)]=userDetail.firstName [(fieldInformation)]="firstname" [inputRequired]=true [inputType]="'text'" [inputCheckForError]=checkForError> </app-text-field>
                             <app-text-field [(result)]=userDetail.lastName [(fieldInformation)]="lastname" [inputRequired]=true [inputType]="'text'" [inputCheckForError]=checkForError> </app-text-field>
@@ -43,20 +43,20 @@
         <div>
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="cancelModal()">
                 <span class="btn-inner--icon"><i style="font-size: 30px;" class="fas fa-times"></i></span> <br>
-                <span class="btn-inner--text ml-0">Cancel</span>
+                <span class="btn-inner--text ml-0" i18n>Cancel</span>
               </button>
         </div>
         <div>
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="save()">
                 <span class="btn-inner--icon"><i style="font-size: 30px;" class="far fa-save"></i></span> <br>
-                <span class="btn-inner--text ml-0">Save</span>
+                <span class="btn-inner--text ml-0" i18n>Save</span>
               </button>
         </div>
 
         <div *ngIf="userDetail.id != undefined">
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="deleteModal()">
                 <span class="btn-inner--icon"><i style="font-size: 30px;" class="fas fa-trash-alt"></i></span> <br>
-                <span class="btn-inner--text ml-0">Delete</span>
+                <span class="btn-inner--text ml-0" i18n>Delete</span>
               </button>
         </div>
     </div>

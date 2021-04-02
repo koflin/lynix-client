@@ -24,25 +24,19 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
-                                            <h4>
-                                                Order:
-                                            </h4>
+                                            <h4 i18n>Order:</h4>
                                             <p>
                                                 {{process.order.name}}
                                             </p>
                                         </div>
                                         <div class="col">
-                                            <h4>
-                                                Process:
-                                            </h4>
+                                            <h4 i18n>Process:</h4>
                                             <p>
                                                 {{process.name}}
                                             </p>
                                         </div>
                                         <div class="col">
-                                            <h4>
-                                                Assignee:
-                                            </h4>
+                                            <h4 i18n>Assignee:</h4>
                                             <p>
                                                 {{assignee.username}}
                                             </p>
@@ -56,17 +50,13 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col">
-                                                    <h4>
-                                                        Delivery Date:
-                                                    </h4>
+                                                    <h4 i18n>Delivery Date:</h4>
                                                     <p>
                                                         {{process.order.deliveryDate | date: 'dd.MM.yyyy'}}
                                                     </p>
                                                 </div>
                                                 <div class="col">
-                                                    <h4>
-                                                        Estimated Time:
-                                                    </h4>
+                                                    <h4 i18n>Estimated Time:</h4>
                                                     <p>
                                                         {{ getFullTime(process.estimatedTime) }}
                                                     </p>
@@ -82,9 +72,7 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <h4>
-                                                        Main Tasks & Challenges
-                                                    </h4>
+                                                    <h4 i18n>Main Tasks & Challenges</h4>
                                                     <ul class="list-group list-item-no-full-border pt-2 pb-2">
                                                         <ng-container *ngFor="let item of process.mainTasks; let i=index; let first = first; let last = last">
                                                             <li  class="list-group-item list-item-no-sideborder" [ngClass]="{'no-border-top':first, 'no-border-bottom':last}" >{{item}}</li>
@@ -105,9 +93,7 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <h4>
-                                                        Steps
-                                                    </h4>
+                                                    <h4 i18n>Steps</h4>
                                                     <ul class="list-group list-item-no-full-border pt-2 pb-2">
                                                         <ng-container *ngFor="let item of process.steps; let i=index; let first = first; let last = last">
                                                             <li (click)="stepToggleId=i+1" class="list-group-item list-item-no-sideborder zooming d-flex justify-content-between" [ngClass]="{'no-border-top':first, 'no-border-bottom':last}" >
@@ -137,25 +123,19 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
-                                            <h4>
-                                                Order:
-                                            </h4>
+                                            <h4 i18n>Order:</h4>
                                             <p>
                                                 {{process.order.name}}
                                             </p>
                                         </div>
                                         <div class="col">
-                                            <h4>
-                                                Process:
-                                            </h4>
+                                            <h4 i18n>Process:</h4>
                                             <p>
                                                 {{process.name}}
                                             </p>
                                         </div>
                                         <div class="col">
-                                            <h4>
-                                                Assignee:
-                                            </h4>
+                                            <h4 i18n>Assignee:</h4>
                                             <p>
                                                 {{assignee.username}}
                                             </p>
@@ -169,17 +149,13 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
-                                            <h4>
-                                                Delivery Date:
-                                            </h4>
+                                            <h4 i18n>Delivery Date:</h4>
                                             <p>
                                                 {{process.order.deliveryDate | date}}
                                             </p>
                                         </div>
                                         <div class="col">
-                                            <h4>
-                                                Estimated Time:
-                                            </h4>
+                                            <h4 i18n>Estimated Time:</h4>
                                             <p>
                                                 {{ getFullTime(process.estimatedTime) }}
                                             </p>
@@ -196,10 +172,10 @@
                                     <div class="table align-items-center table-flush">
                                         <thead class=" thead-light">
                                             <tr>
-                                                <th scope="col">Steps Number</th>
+                                                <th scope="col" i18n>Steps Number</th>
 
-                                                <th scope="col">Step Name</th>
-                                                <th scope="col">Taken Time</th>
+                                                <th scope="col" i18n>Step Name</th>
+                                                <th scope="col" i18n>Taken Time</th>
 
                                             </tr>
                                         </thead>
@@ -236,63 +212,63 @@
         <div>
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onExit()">
                 <span class="btn-inner--icon"><i style="font-size: 30px;" class="fas fa-times"></i></span> <br>
-                <span class="btn-inner--text ml-0">Exit</span>
+                <span class="btn-inner--text ml-0" i18n>Exit</span>
               </button>
         </div>
         <div>
             <button class="btn btn-icon btn-3 btn-white none-shadow" [disabled]="stepToggleId === 0" type="button" (click)="onPrevious()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="fas fa-step-backward"></i></span> <br>
-                <span class="btn-inner--text ml-0">Previous Step</span>
+                <span class="btn-inner--text ml-0" i18n>Previous Step</span>
               </button>
         </div>
         <div *ngIf="process.isRunning">
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onStop()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="fas fa-pause"></i></span> <br>
-                <span class="btn-inner--text ml-0">Stop</span>
+                <span class="btn-inner--text ml-0" i18n>Stop</span>
               </button>
         </div>
         <div *ngIf="!process.isRunning && process.currentStepIndex !== null && stepToggleId === process.currentStepIndex + 1">
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onResume()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="fas fa-play"></i></span> <br>
-                <span class="btn-inner--text ml-0">Resume</span>
+                <span class="btn-inner--text ml-0" i18n>Resume</span>
               </button>
         </div>
         <div *ngIf="stepToggleId != 0 && stepToggleId != stepNames.length -1 && (process.currentStepIndex === null || stepToggleId !== process.currentStepIndex + 1)">
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onSwitch()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="fas fa-sign-in-alt"></i></span> <br>
-                <span class="btn-inner--text ml-0">Switch step</span>
+                <span class="btn-inner--text ml-0" i18n>Switch step</span>
               </button>
         </div>
         <div *ngIf="stepToggleId == 0 && process.currentStepIndex === null">
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onStart()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="fas fa-play"></i></span> <br>
-                <span class="btn-inner--text ml-0">Start</span>
+                <span class="btn-inner--text ml-0" i18n>Start</span>
               </button>
         </div>
         <div *ngIf="stepToggleId == 0 && process.currentStepIndex !== null">
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onJump()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="fas fa-angle-double-right"></i></span> <br>
-                <span class="btn-inner--text ml-0">Continue Work</span>
+                <span class="btn-inner--text ml-0" i18n>Continue Work</span>
               </button>
         </div>
         <div *ngIf="stepToggleId == stepNames.length-1">
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onFinish()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="far fa-check-circle"></i></span> <br>
-                <span class="btn-inner--text ml-0">Finish</span>
+                <span class="btn-inner--text ml-0" i18n>Finish</span>
               </button>
         </div>
         <div>
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" [disabled]="stepToggleId == stepNames.length-1" (click)="onNext()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="fas fa-step-forward"></i></span> <br>
-                <span class="btn-inner--text ml-0">Next step</span>
+                <span class="btn-inner--text ml-0" i18n>Next step</span>
               </button>
         </div>
 

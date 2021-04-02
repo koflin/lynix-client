@@ -34,7 +34,7 @@
               <li class="nav-item active card menu-card-bottom-margin zooming" (click)="logout()">
                 <a class="nav-link menu-card-a-padding">
                   <div class="d-flex align-items-center">
-                    <i class="icon icon-log-out icon-big item-icon mt--1"></i> <span>Logout</span>
+                    <i class="icon icon-log-out icon-big item-icon mt--1"></i><span i18n>Logout</span>
                   </div>
                 </a>
 
@@ -44,49 +44,49 @@
               <li class="nav-item dropdown card menu-card-bottom-margin zooming ">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('order')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
-                    <i class="icon icon-hierarchy-56 icon-big item-icon mt--1"></i> <span>Order</span>
+                    <i class="icon icon-hierarchy-56 icon-big item-icon mt--1"></i> <span i18n>Order</span>
                   </div>
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('order')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/home/orders/overview" >Overview</a>
-                <a class="dropdown-item h4 zooming" routerLink="/home/orders/draft" >Create New</a>
+                <a class="dropdown-item h4 zooming" routerLink="/home/orders/overview" i18n>Overview</a>
+                <a class="dropdown-item h4 zooming" routerLink="/home/orders/draft" i18n>Create New</a>
 
                 </div>
               </li>
               <li class="nav-item dropdown card menu-card-bottom-margin zooming ">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('process')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
-                    <i class="icon icon-configuration-tool icon-big item-icon mt--1"></i> <span>Process</span>
+                    <i class="icon icon-configuration-tool icon-big item-icon mt--1"></i> <span i18n>Process</span>
                   </div>
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('process')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/home/processes/overview" >Overview</a>
+                <a class="dropdown-item h4 zooming" routerLink="/home/processes/overview" i18n>Overview</a>
 
 
                 </div>
               </li><li class="nav-item dropdown card menu-card-bottom-margin zooming ">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('template')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
-                    <i class="icon icon-web-design-2 icon-big item-icon mt--1"></i> <span>Template</span>
+                    <i class="icon icon-web-design-2 icon-big item-icon mt--1"></i> <span i18n>Template</span>
                   </div>
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('template')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/home/templates/product" >Product</a>
-                <a class="dropdown-item h4 zooming" routerLink="/home/templates/process" >Process</a>
-                <a class="dropdown-item h4 zooming" >Tools</a>
+                <a class="dropdown-item h4 zooming" routerLink="/home/templates/product" i18n>Product</a>
+                <a class="dropdown-item h4 zooming" routerLink="/home/templates/process" i18n>Process</a>
+                <a class="dropdown-item h4 zooming" i18n>Tools</a>
 
 
                 </div>
               </li><li class="nav-item dropdown card menu-card-bottom-margin zooming ">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('admin')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
-                    <i class="icon icon-folder-shared icon-big item-icon mt--1"></i> <span>Administration</span>
+                    <i class="icon icon-folder-shared icon-big item-icon mt--1"></i> <span i18n>Administration</span>
                   </div>
 
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('admin')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/home/users" >Users</a>
-                <a class="dropdown-item h4 zooming" routerLink="/home/roles">Roles</a>
+                <a class="dropdown-item h4 zooming" routerLink="/home/users" i18n>Users</a>
+                <a class="dropdown-item h4 zooming" routerLink="/home/roles" i18n>Roles</a>
 
                 </div>
               </li>

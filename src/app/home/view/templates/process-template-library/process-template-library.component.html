@@ -8,7 +8,7 @@
             <ng-container *ngIf="!templates || templates.length<1; else elseTemplate" >
                 <div>
                     <div class="alert alert-warning" role="alert">
-                        <strong>Warning!</strong> You haven't created Processes yet!
+                        <strong i18n>Warning!</strong><span i18n>You haven't created Processes yet!</span>
                     </div>
                 </div>
             </ng-container>
@@ -36,11 +36,11 @@
                             <div class="container-fluid">
                                 <div class="row pl-2 pr-2">
                                     <div class="col-12">
-                                        <p> <span class="h4"> ID: </span>  {{ row.id }}</p>
+                                        <p> <span class="h4" i18n>ID:</span>  {{ row.id }}</p>
                                     </div>
                                     <div class="col-12">
-                                      <p *ngIf="row.stepNames.length > 0"><span class="h4"> Steps: </span>  {{ row.stepNames.join(', ') }}</p>
-                                      <p *ngIf="row.stepNames.length == 0"><span class="h4"> Steps: </span> None</p>
+                                      <p *ngIf="row.stepNames.length > 0"><span class="h4" i18n>Steps:</span>  {{ row.stepNames.join(', ') }}</p>
+                                      <p *ngIf="row.stepNames.length == 0"><span class="h4" i18n>Steps:</span><span i18n>None</span></p>
                                     </div>
 
                                 </div>
@@ -67,13 +67,14 @@
                                 [class.datatable-icon-up]="!expanded"
                                 [class.datatable-icon-down]="expanded"
                                 title="Expand/Collapse Row"
+                                i18n-title
                                 (click)="toggleExpandRow(row)"
                                 >
                             </a>
                             </ng-template>
                         </ngx-datatable-column>
                          <!-- Name -->
-                         <ngx-datatable-column  name="process name" prop="name" [sortable]="true" >
+                         <ngx-datatable-column  name="process name" i18n-name prop="name" [sortable]="true" >
                             <ng-template let-row="row" ngx-datatable-cell-template>
                             <p class="h3 text-default">
                                 {{row.name}}
@@ -82,7 +83,7 @@
                             </ng-template>
                         </ngx-datatable-column>
                          <!-- Description -->
-                         <ngx-datatable-column  name="description" prop="description" [sortable]="true" >
+                         <ngx-datatable-column  name="description" i18n-name prop="description" [sortable]="true" >
                             <ng-template let-row="row" ngx-datatable-cell-template>
                             <p class="">
                                 {{row.description}}

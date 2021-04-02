@@ -8,10 +8,7 @@
                             <app-text-field [result]="processTemplate.name" (resultChange)="processTemplate.name = $event; processTemplateChange.emit(processTemplate)" [(fieldInformation)]=name  [inputCheckForError]="checkForError" [inputRequired]="true"> </app-text-field>
                         </div>
                         <div class="col-12 col-md-6">
-                            <label class=" form-control-label">
-                                Estimated Time Total:
-
-                            </label> <br>
+                            <label class=" form-control-label" i18n>Estimated Time Total:</label> <br>
                             <p class="pt-2">{{ estimatedTime }}</p>
                         </div>
                     </div>
@@ -22,15 +19,15 @@
             <accordion [isAnimated]="true" [closeOthers]="false">
                 <accordion-group >
                     <div accordion-heading>
-                        <p class="col-auto mb-0 h5 text-primary" >Main Tasks & Challenges  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p>
-                        <p><small class="text-muted col-12"> Add main tasks</small> </p>
+                        <p class="col-auto mb-0 h5 text-primary"><span i18n>Main Tasks & Challenges</span><i class=" float-right pull-right fa fa-angle-down p-2"></i></p>
+                        <p><small class="text-muted col-12" i18n>Add main tasks</small> </p>
                     </div>
                     <div class="table align-items-center table-flush">
                         <thead class=" thead-light">
                             <tr>
-                                <th scope="col">Tasks & Challenges</th>
+                                <th scope="col" i18n>Tasks & Challenges</th>
 
-                                <th scope="col">Operation</th>
+                                <th scope="col" i18n>Operation</th>
 
                             </tr>
                         </thead>
@@ -48,7 +45,7 @@
                             <tr>
                                 <td scope="row">
                                     <div class="pt-3">
-                                        <app-text-field [inputPlaceholder]="'tasks & challenges'" [(result)]="taskToAdd" [inputRequired]="false"> </app-text-field>
+                                        <app-text-field inputPlaceholder="tasks & challenges" i18n-inputPlaceholder [(result)]="taskToAdd" [inputRequired]="false"> </app-text-field>
 
                                     </div>
                                 </td>
@@ -72,8 +69,8 @@
             <accordion [isAnimated]="true" [closeOthers]="false">
                 <accordion-group >
                     <div accordion-heading>
-                        <p class="col-auto mb-0 h5 text-primary" >Previous Comments  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p>
-                        <p><small class="text-muted col-12"> Previous commtens conerning the process</small> </p>
+                        <p class="col-auto mb-0 h5 text-primary"><span i18n>Previous Comments</span><i class=" float-right pull-right fa fa-angle-down p-2"></i></p>
+                        <p><small class="text-muted col-12" i18n>Previous commtens conerning the process</small> </p>
                     </div>
                     <div class="row" *ngFor="let comment of processTemplate.previousComments; let i = index">
                         <p> {{comment}} </p>
@@ -86,16 +83,16 @@
             <accordion [isAnimated]="true" [closeOthers]="false">
                 <accordion-group [isOpen]="isFirstOpen">
                     <div accordion-heading>
-                        <p class="col-auto mb-0 h5 text-primary" >Steps  <i class=" float-right pull-right fa fa-angle-down p-2"></i></p>
-                        <p><small class="text-muted col-12"> Steps to process</small> </p>
+                        <p class="col-auto mb-0 h5 text-primary"><span i18n>Steps</span><i class=" float-right pull-right fa fa-angle-down p-2"></i></p>
+                        <p><small class="text-muted col-12" i18n>Steps to process</small> </p>
                     </div>
                     <div class="table-responsive">
                         <div class="table align-items-center table-flush">
                             <thead class=" thead-light">
                                 <tr>
-                                    <th scope="col">Steps</th>
+                                    <th scope="col" i18n>Steps</th>
 
-                                    <th scope="col">Operation</th>
+                                    <th scope="col" i18n>Operation</th>
 
                                 </tr>
                             </thead>
@@ -118,7 +115,7 @@
 
                                     <td scope="row">
                                         <div  class="pt-3">
-                                            <app-text-field [inputPlaceholder]="'step name'" [(result)]="step.title" [inputRequired]="true"> </app-text-field>
+                                            <app-text-field inputPlaceholder="step name" i18n-inputPlaceholder [(result)]="step.title" [inputRequired]="true"> </app-text-field>
                                         </div>
                                     </td>
                                     <td scope="row">

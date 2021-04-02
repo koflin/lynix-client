@@ -33,11 +33,11 @@
                 <div class="container-fluid card-body">
                     <div class="col-12">
                         <div class="row pt-2 pb-2">
-                            <h4 class="col-12 col-sm-auto pl-3 pb-2">Products</h4>
+                            <h4 class="col-12 col-sm-auto pl-3 pb-2" i18n>Products</h4>
                             <div class="col-12 col-sm-6 mt--2">
                                 <button class="btn btn-icon btn-3 btn-default" type="button" (click)="addProduct()">
                                     <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                    <span class="btn-inner--text" >Add Products to your order</span>
+                                    <span class="btn-inner--text" i18n>Add Products to your order</span>
                                   </button>
                             </div>
 
@@ -47,19 +47,16 @@
                             <table class=" table align-items-center table-flush">
                                 <thead class=" thead-light">
                                     <tr>
-                                        <th scope="col">select or create a Product</th>
+                                        <th scope="col" i18n>select or create a Product</th>
 
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Operation</th>
+                                        <th scope="col" i18n>Quantity</th>
+                                        <th scope="col" i18n>Operation</th>
 
                                     </tr>
                                 </thead>
                                 <tbody class="list">
                                     <tr *ngIf="order.products.length<1; elseTemplate" >
-                                      <th scope="row">
-                                        You haven't added products yet.
-
-                                      </th>
+                                      <th scope="row" i18n>You haven't added products yet.</th>
                                     </tr>
 
                                     <tr #elseTemplate *ngFor="let product of order.products; let i=index">

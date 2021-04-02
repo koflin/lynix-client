@@ -15,6 +15,7 @@
                                   type="search"
                                   class="form-control form-control-sm"
                                   placeholder="Search records"
+                                  i18n-placeholder
                                   aria-controls="datatable"
                                   [(ngModel)]="searchValue"
                                   (keyup)="filterTable()"
@@ -32,8 +33,8 @@
                   <table class=" table align-items-center table-flush" *ngIf="roleRows">
                       <thead class=" thead-light">
                           <tr style="min-height: 50px !important; height:50px">
-                              <th scope="col" class="sort" data-sort="name">Name</th>
-                              <th scope="col" class="sort" data-sort="role">Permissions</th>
+                              <th scope="col" class="sort" data-sort="name" i18n>Name</th>
+                              <th scope="col" class="sort" data-sort="role" i18n>Permissions</th>
 
                           </tr>
                       </thead>
@@ -45,8 +46,16 @@
 
                               </td>
                               <td scope="row" class="permissions">
+
                                 <span *ngFor="let item of role.permissions; let i=index; let first = first; let last = last" class="">
-                                  {{item}} <ng-container *ngIf="!(first && last) && !last" >,</ng-container>
+                                  <ng-container [ngSwitch]="item">
+                                    <span *ngSwitchCase="'view'" i18n>view</span>
+                                    <span *ngSwitchCase="'execute'" i18n>execute</span>
+                                    <span *ngSwitchCase="'edit'" i18n>edit</span>
+                                    <span *ngSwitchCase="'assign'" i18n>assign</span>
+                                    <span *ngSwitchDefault>{{ item }}</span>
+                                  </ng-container>
+                                  <span *ngIf="!(first && last) && !last">,</span>
                                 </span>
                               </td>
                             </tr>
@@ -57,7 +66,7 @@
                   </table>
                   <div class="col-12 p-4" *ngIf="(showArray.length<1 && this.searchValue) || !roleRows || roleRows.length<1">
                       <div class="d-flex justify-content-center">
-                          <p>No roles</p>
+                          <p i18n>No roles</p>
                       </div>
                   </div>
               </div>

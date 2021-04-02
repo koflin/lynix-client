@@ -13,7 +13,7 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
 
             <img style="object-fit: scale-down;" src="assets/img/Logo_Lynix_white.svg">
 
-            <h3 class=" pt-5 h2 text-white" i18n="login title">
+            <h3 class=" pt-5 h2 text-white">
               SMART ASSISTANT SYSTEM
             </h3>
           </div>
@@ -41,7 +41,7 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
         <div class=" card bg-secondary border-0 mb-0">
           <div class=" card-header bg-transparent">
             <div class=" text-muted text-center mt-2 mb-2">
-              <p class="text-primary" i18n="login title"> Sign in </p>
+              <p class="text-primary" i18n>Sign in</p>
             </div>
           </div>
 
@@ -49,7 +49,7 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
 
 
             <form role="form">
-              <label *ngIf="error" class="text-danger" i18n="login failure">username & password not accepted</label>
+              <label *ngIf="error" class="text-danger" i18n>username & password not accepted</label>
               <div
                 class="form-group mb-3"
                 [ngClass]="{ focused: focus === true }"
@@ -60,7 +60,7 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
                     class="form-control"
                     [ngClass]="{'field-error': error === true}"
                     placeholder="User Name"
-                    i18n-placeholder="login username"
+                    i18n-placeholder
                     type="text"
                     (focus)="focus = true"
                     (blur)="focus = false"
@@ -79,7 +79,7 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
                     class="form-control"
                     [ngClass]="{'field-error': error === true}"
                     placeholder="Password"
-                    i18n-placeholder="login password"
+                    i18n-placeholder
                     [type]="showPassword ? 'text' : 'password'"
                     (focus)="focus1 = true"
                     (blur)="focus1 = false"
@@ -102,13 +102,11 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
                   type="checkbox"
                 />
                 <label class="custom-control-label" for=" customCheckLogin">
-                  <span i18n="login remember">Remember me</span>
+                  <span i18n>Remember me</span>
                 </label>
               </div>
               <div class="text-center">
-                <button type="button" class="btn btn-primary my-4" type="submit" (click)="signIn()" i18n="login button">
-                  Sign in
-                </button>
+                <button type="button" class="btn btn-primary my-4" type="submit" (click)="signIn()" i18n>Sign in</button>
               </div>
             </form>
           </div>
@@ -117,7 +115,7 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
         <div class=" row mt-3">
           <div class=" col-12">
             <a class="text-white" href="javascript:void(0)">
-              <small i18n="login forgot"> Forgot password? </small>
+              <small i18n>Forgot password?</small>
             </a>
           </div>
 

@@ -21,7 +21,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-1 col-xl-1 col-sm-2 d-flex align-items-center justify-content-center">
-                                <h2 class="text-default mb-0">Products:</h2> <!--<p class="pl-2 mb-0 text-muted" *ngIf="productsNames.length==0">None defined</p>-->
+                                <h2 class="text-default mb-0" i18n>Products:</h2> <!--<p class="pl-2 mb-0 text-muted" *ngIf="productsNames.length==0">None defined</p>-->
                             </div>
                             <div class="pl-2 col-11 col-xl-11 col-sm-10 pl-0 pr-0 z-index-1" style="display: inline;">
                                 <app-tabs [tabsvalue]="productsNames" [tabsResIndex]="productToggleId" [bgColorClassNotSelected]="'bg-default'" [setNotUndefined]="processToggleId!=undefined" navFragmentBase="{{ toFragment() }}"> </app-tabs>
@@ -36,7 +36,7 @@
                     <div class="container-fluid">
                         <div class="row" [@animSlider]="productToggleId">
                             <div class="pl-4 col-1 col-xl-1 col-sm-2 d-flex align-items-center justify-content-center" [ngClass]="{'none-defined-padding': processesNames.length==0}">
-                                <h3 class="text-default mb-0">Processes:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="processesNames.length==0">None defined</p>-->
+                                <h3 class="text-default mb-0" i18n>Processes:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="processesNames.length==0">None defined</p>-->
                             </div>
                             <div class="pl-4 col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1" *ngIf="processesNames.length>0">
                                 <app-tabs [tabsvalue]="processesNames" [tabsResIndex]="processToggleId" [setNotUndefined]="stepToggleId!=undefined" navFragmentBase="{{ toFragment(productToggleId) }}"> </app-tabs>
@@ -50,7 +50,7 @@
                     <div class="container-fluid">
                         <div class="row" [@animSlider]="processToggleId">
                             <div class="pl-6 col-1 col-xl-1 col-sm-2 d-flex align-items-center justify-content-center" [ngClass]="{'none-defined-padding': stepsName.length==0}">
-                                <h3 class="text-default mb-0">Steps:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="stepsName.length==0">None defined</p>-->
+                                <h3 class="text-default mb-0" i18n>Steps:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="stepsName.length==0">None defined</p>-->
                             </div>
                             <div class="pl-6 col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1" *ngIf="stepsName.length>0">
                                 <app-tabs [tabsvalue]="stepsName" [tabsResIndex]="stepToggleId" navFragmentBase="{{ toFragment(productToggleId, processToggleId) }}"> </app-tabs>
@@ -129,25 +129,25 @@
         <div>
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="cancelModal()">
                 <span class="btn-inner--icon"><i style="font-size: 30px;" class="fas fa-times"></i></span> <br>
-                <span class="btn-inner--text ml-0">Cancel</span>
+                <span class="btn-inner--text ml-0" i18n>Cancel</span>
               </button>
         </div>
         <div>
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="saveDraft()">
                 <span class="btn-inner--icon"><i style="font-size: 30px;" class="far fa-save"></i></span> <br>
-                <span class="btn-inner--text ml-0">Save</span>
+                <span class="btn-inner--text ml-0" i18n>Save</span>
               </button>
         </div>
         <div>
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="publishModal()">
                 <span class="btn-inner--icon"><i style="font-size: 30px;" class="fas fa-check-double"></i></span> <br>
-                <span class="btn-inner--text ml-0">Publish</span>
+                <span class="btn-inner--text ml-0" i18n>Publish</span>
               </button>
         </div>
         <div>
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="deleteModal()">
                 <span class="btn-inner--icon"><i style="font-size: 30px;" class="fas fa-trash-alt"></i></span> <br>
-                <span class="btn-inner--text ml-0">Delete</span>
+                <span class="btn-inner--text ml-0" i18n>Delete</span>
               </button>
         </div>
     </div>

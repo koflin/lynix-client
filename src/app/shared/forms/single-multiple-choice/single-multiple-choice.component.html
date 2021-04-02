@@ -2,7 +2,7 @@
     <div class=" col-md-12 mb-3">
         <div class=" form-group" [ngClass]="{'has-danger': (inputCheckForError || userHasTyped) && fieldInformation.error}">
             <label class=" form-control-label" [for]="fieldInformation.name" [ngClass]="{'text-danger': (inputCheckForError || userHasTyped) && fieldInformation.error}">
-                {{fieldInformation.label}} <span class="text-primary" *ngIf="fieldInformation.label && inputRequired">*</span> 
+                {{fieldInformation.label}} <span class="text-primary" *ngIf="fieldInformation.label && inputRequired">*</span>
             </label>
             <div [class.error]="(inputCheckForError || userHasTyped) && fieldInformation.error">
                 <ng-select #selectr [(ngModel)]="result" [multiple]="isMultipleChoice" [placeholder]="placeholder" [clearable]="true"
@@ -10,13 +10,13 @@
                 [items]="tempData"
                 (change)="validation_save(true)" [bindLabel]="(resultShouldBeOnlyValue)?'label': undefined"
                 [bindValue]="(resultShouldBeOnlyValue) ? 'value': undefined" class="custom" class="custom">
-                    
-                
-                    
-                   
+
+
+
+
                  </ng-select>
             </div>
-            
+
             <!-- <select class=" form-control " #selectr data-toggle="select" data-live-search-placeholder="Search ..." data-placeholder="selecting" data-live-search="false">
                 <option [value]="null"> Select a option </option>
                 <option value="alerts" > Alerts </option>
@@ -32,9 +32,7 @@
                 <option value="modals"> Modals </option>
             </select> -->
             <ng-container  *ngIf="(inputCheckForError || userHasTyped) && fieldInformation.error">
-                <div *ngIf="(inputCheckForError || userHasTyped) && requiredError" class=" ng-invalid-feedback">
-                    Please fill the field.
-                </div>
+                <div *ngIf="(inputCheckForError || userHasTyped) && requiredError" class=" ng-invalid-feedback" i18n>Please fill the field.</div>
                 <div *ngIf="errorMessage" class=" ng-invalid-feedback">
                     {{errorMessage}}
                 </div>

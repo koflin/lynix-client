@@ -11,11 +11,11 @@
               <li class=" breadcrumb-item">
                 <a routerLink="/home/dashboard"> <i class=" fas fa-home " style="font-size: 20px;"> </i> </a>
               </li>
-              
+
               <li *ngFor="let item of breadCrumbs" class=" breadcrumb-item" >
                   <ng-container>
                     <a routerLink="{{item.url}}" [routerLinkActive]="'active-breadcrumbs'"> {{item.name}} </a>
-                  </ng-container>                
+                  </ng-container>
               </li>
             </ol>
           </nav>

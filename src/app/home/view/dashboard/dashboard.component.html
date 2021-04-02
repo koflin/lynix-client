@@ -13,12 +13,10 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                 <div class=" card-body pl-5">
                   <div class=" row">
                     <div class=" col-9 px-0">
-                      <h4 class=" card-title text-uppercase pb-2 mb-0">
-                        Overall process
-                      </h4>
+                      <h4 class=" card-title text-uppercase pb-2 mb-0" i18n>Overall process</h4>
                       <div class="row">
                         <div class="col-9 pr-0">
-                          <span class="text-muted h5 mb-0 text-uppercase"> In progress </span>
+                          <span class="text-muted h5 mb-0 text-uppercase" i18n>In progress</span>
                         </div>
                         <div class="col-3 pr-0">
                           <span class="mb-0 text-uppercase">{{ stats.overall.inProgress }}</span>
@@ -26,7 +24,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                       </div>
                       <div class="row">
                         <div class="col-9 pr-0">
-                          <span class="text-muted h5 mb-0 text-uppercase"> Finished </span>
+                          <span class="text-muted h5 mb-0 text-uppercase" i18n>Finished</span>
                         </div>
                         <div class="col-3 pr-0">
                           <span class="mb-0 text-uppercase">{{ stats.overall.finished }}</span>
@@ -53,12 +51,10 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                 <div class=" card-body pl-5">
                   <div class=" row">
                     <div class=" col-9 px-0">
-                      <h4 class=" card-title text-uppercase pb-2 mb-0">
-                        process assigned to you
-                      </h4>
+                      <h4 class=" card-title text-uppercase pb-2 mb-0" i18n>process assigned to you</h4>
                       <div class="row">
                         <div class="col-9 pr-0">
-                          <span class="text-muted h5 mb-0 text-uppercase"> In progress </span>
+                          <span class="text-muted h5 mb-0 text-uppercase" i18n>In progress</span>
                         </div>
                         <div class="col-3 pr-0">
                           <span class="mb-0 text-uppercase">{{ stats.assigned.inProgress }}</span>
@@ -66,7 +62,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                       </div>
                       <div class="row">
                         <div class="col-9 pr-0">
-                          <span class="text-muted h5 mb-0 text-uppercase"> Finished </span>
+                          <span class="text-muted h5 mb-0 text-uppercase" i18n>Finished</span>
                         </div>
                         <div class="col-3 pr-0">
                           <span class="mb-0 text-uppercase">{{ stats.assigned.finished }}</span>
@@ -94,12 +90,10 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                 <div class=" card-body pl-5">
                   <div class=" row">
                     <div class=" col-9 px-0">
-                      <h4 class=" card-title text-uppercase pb-2 mb-0">
-                        Drafts
-                      </h4>
+                      <h4 class=" card-title text-uppercase pb-2 mb-0" i18n>Drafts</h4>
                       <div class="row">
                         <div class="col-9 pr-0">
-                          <span class="text-muted h5 mb-0 text-uppercase"> Work Order Draft </span>
+                          <span class="text-muted h5 mb-0 text-uppercase" i18n>Work Order Draft</span>
                         </div>
 
                         <div class="col-3 pr-0">
@@ -108,7 +102,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                       </div>
                       <div class="row">
                         <div class="col-9 pr-0">
-                          <span class="text-muted h5 mb-0 text-uppercase"> Not assigned </span>
+                          <span class="text-muted h5 mb-0 text-uppercase" i18n>Not assigned</span>
                         </div>
                         <div class="col-3 pr-0">
                           <span class="mb-0 text-uppercase">{{ stats.orders.notStarted }}</span>
@@ -141,7 +135,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/order.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
 
-            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase">Order</h5>
+            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Order</h5>
             <div class="z-index-1">
               <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
                  <i class="icon icon-hierarchy-56 icon-big"></i>
@@ -153,8 +147,8 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                 <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
                     <div class=" d-flex justify-content-between">
                       <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/orders/overview'"> <span>Overview</span> <span> <i class="fas fa-angle-right text-default"></i> </span> </li>
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/orders/draft'" [hideIfUnauthorized]="permissions.EDIT"> <span>Create New</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/orders/overview'"> <span i18n>Overview</span><i class="fas fa-angle-right text-default"></i></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/orders/draft'" [hideIfUnauthorized]="permissions.EDIT"> <span i18n>Create New</span><i class="fas fa-angle-right text-default"></i></li>
                       </ul>
                     </div>
 
@@ -169,7 +163,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/process.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
 
-            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase">Process</h5>
+            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Process</h5>
             <div class="z-index-1">
               <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
                 <i class=" icon icon-configuration-tool icon-big" > </i>
@@ -181,7 +175,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                 <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
                     <div class=" d-flex justify-content-between">
                       <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/processes/overview'"><span>Overview</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/processes/overview'"><span i18n>Overview</span><i class="fas fa-angle-right text-default"></i></li>
                       </ul>
                     </div>
 
@@ -195,7 +189,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/template.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
 
-            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase">Template</h5>
+            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Template</h5>
             <div class="z-index-1">
               <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
                 <i class=" icon icon-web-design-2 icon-big"> </i>
@@ -207,8 +201,8 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                 <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
                     <div class=" d-flex justify-content-between">
                       <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/templates/product'"><span>Product</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/templates/process'"><span>Process</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/templates/product'"><span i18n>Product</span><i class="fas fa-angle-right text-default"></i></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/templates/process'"><span i18n>Process</span><i class="fas fa-angle-right text-default"></i></li>
                         <!--<li class="list-group-item zooming d-flex justify-content-between"><span>Tools</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>-->
 
                       </ul>
@@ -224,7 +218,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/admin.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
 
-            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase">Administration</h5>
+            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Administration</h5>
             <div class="z-index-1">
               <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
                 <i class=" icon icon-folder-shared icon-big"> </i>
@@ -236,8 +230,8 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                 <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
                     <div class=" d-flex justify-content-between">
                       <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/users'"><span>Users</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/roles'"><span>Roles</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/users'"><span i18n>Users</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/home/roles'"><span i18n>Roles</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
                       </ul>
                     </div>
 

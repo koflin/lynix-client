@@ -2,14 +2,14 @@
     <div class="col-12">
         <div class="card shadow-card-stronger p-3">
             <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="process.currentStepIndex != stepIndex">
-                <span class="alert-inner--text"><strong>Warning!</strong> If you want to start this process step, please switch!</span>
+                <span class="alert-inner--text"><strong i18n>Warning!</strong><span i18n>If you want to start this process step, please switch!</span></span>
                 <button type="button" (click)="showAlert=false" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
               <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="process.currentStepIndex == stepIndex && !process.isRunning ">
 
-                <span class="alert-inner--text"><strong>Warning!</strong> If you want to start this process step, please press "start"!</span>
+                <span class="alert-inner--text"><strong i18n>Warning!</strong><span i18n>If you want to start this process step, please press "start"!</span></span>
                 <button type="button" (click)="showAlert=false" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
@@ -18,17 +18,17 @@
               <div class="col">
                 <ng-container  *ngIf="process.currentStepIndex !== null && process.steps[stepIndex] as currentStep">
                   <p>
-                     <span class="h4"> Time Taken:</span>  {{ getFullTime(currentStep.timeTaken) }}
+                     <span class="h4" i18n>Time Taken:</span>  {{ getFullTime(currentStep.timeTaken) }}
                   </p>
                 </ng-container>
               </div>
             </div>
             <div class="row">
               <div class="col">
-                <p> <span class="h4"> Total Time Taken: </span> {{ getFullTime(process.timeTaken) }} </p>
+                <p> <span class="h4" i18n>Total Time Taken:</span> {{ getFullTime(process.timeTaken) }} </p>
               </div>
               <div class="col">
-                <p> <span class="h4"> Total Estimated Time: </span> {{ getFullTime(process.estimatedTime) }} </p>
+                <p> <span class="h4" i18n>Total Estimated Time:</span> {{ getFullTime(process.estimatedTime) }} </p>
               </div>
             </div>
         </div>
@@ -38,9 +38,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col">
-                        <h4>
-                            Materials
-                        </h4>
+                        <h4 i18n>Materials</h4>
                         <ul class="list-group list-item-no-full-border pt-2 pb-2">
                             <ng-container *ngFor="let item of process.steps[stepIndex].materials ; let i=index; let first = first; let last = last">
                                 <li class="list-group-item list-item-no-sideborder" [ngClass]="{'no-border-top':first, 'no-border-bottom':last}" >{{item}}</li>
@@ -58,8 +56,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12 col-md">
-                        <h4>
-                            Tools
+                        <h4 i18n>Tools
                         </h4>
                         <ul class="list-group list-item-no-full-border pt-2 pb-2">
                             <ng-container *ngFor="let item of process.steps[stepIndex].toolIds ; let i=index; let first = first; let last = last">
@@ -80,9 +77,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col">
-                                        <h4>
-                                            Key Message
-                                        </h4>
+                                        <h4 i18n>Key Message</h4>
                                         <app-text-area [result]="process.steps[stepIndex].keyMessage" [disabled]=true> </app-text-area>
                                     </div>
                                 </div>
@@ -100,9 +95,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col">
-                                        <h4>
-                                            Tasks
-                                        </h4>
+                                        <h4 i18n>Tasks</h4>
                                         <app-text-area [result]="process.steps[stepIndex].tasks" [disabled]=true> </app-text-area>
                                     </div>
                                 </div>
@@ -125,9 +118,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col" >
-                                    <h4>
-                                        Pictures
-                                    </h4>
+                                    <h4 i18n>Pictures</h4>
                                     <carousel>
                                         <slide *ngFor="let picture of process.steps[stepIndex].pictureUris; let i=index" >
                                           <img [src]="picture" alt="first slide" style="display: block;" class="object-fit-cover">
@@ -147,9 +138,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col" >
-                                    <h4>
-                                        Videos
-                                    </h4>
+                                    <h4 i18n>Videos</h4>
                                     <carousel>
                                         <slide *ngFor="let video of process.steps[stepIndex].videoUris; let i=index" >
                                             <video width="100%">

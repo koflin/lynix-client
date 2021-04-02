@@ -8,7 +8,7 @@
             <ng-container *ngIf="!templates || templates.length<1; else elseTemplate" >
                 <div>
                     <div class="alert alert-warning" role="alert">
-                        <strong>Warning!</strong> You haven't created Processes yet!
+                        <strong i18n>Warning!</strong><span i18n>You haven't created Processes yet!</span>
                     </div>
                 </div>
             </ng-container>
@@ -36,7 +36,7 @@
                             <div class="container-fluid">
                                 <div class="row pl-2 pr-2">
                                     <div class="col-12">
-                                        <p> <span class="h4"> ID: </span>  {{ row.id }}</p>
+                                        <p> <span class="h4" i18n>ID:</span>  {{ row.id }}</p>
                                     </div>
 
 
@@ -64,13 +64,14 @@
                                 [class.datatable-icon-up]="!expanded"
                                 [class.datatable-icon-down]="expanded"
                                 title="Expand/Collapse Row"
+                                i18n-title
                                 (click)="toggleExpandRow(row)"
                                 >
                             </a>
                             </ng-template>
                         </ngx-datatable-column>
                          <!-- Name -->
-                         <ngx-datatable-column  name="Product Name" prop="name" [sortable]="true" >
+                         <ngx-datatable-column  name="Product Name" i18n-name prop="name" [sortable]="true" >
                             <ng-template let-row="row" ngx-datatable-cell-template>
                             <p class="h3 text-default">
                                 {{row.name}}
@@ -79,7 +80,7 @@
                             </ng-template>
                         </ngx-datatable-column>
                          <!-- Description -->
-                         <ngx-datatable-column  name="Processes" prop="processes" [sortable]="true" >
+                         <ngx-datatable-column  name="Processes" i18n-name prop="processes" [sortable]="true" >
                             <ng-template let-row="row" ngx-datatable-cell-template>
                             <p *ngFor="let item of row.processes; let i=index; let first = first; let last = last" class="">
                                 {{item.name}} <ng-container *ngIf="!(first && last) && !last" ></ng-container>
@@ -88,7 +89,7 @@
                             </ng-template>
                         </ngx-datatable-column>
                         <!-- Quantity -->
-                        <ngx-datatable-column  name="Quantity" prop="quantity" [sortable]="true" >
+                        <ngx-datatable-column  name="Quantity" i18n-name prop="quantity" [sortable]="true" >
                           <ng-template let-row="row" ngx-datatable-cell-template>
                           <p *ngFor="let item of row.processes; let i=index; let first = first; let last = last" class="">
                               {{item.quantity}} <ng-container *ngIf="!(first && last) && !last" ></ng-container>

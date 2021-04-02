@@ -17,11 +17,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="row pt-2 pb-2">
-                                <h4 class="col-12 col-sm-auto pl-3 pb-2">Processes</h4>
+                                <h4 class="col-12 col-sm-auto pl-3 pb-2" i18n>Processes</h4>
                                 <div class="col-12 col-sm-6 mt--2">
                                     <button class="btn btn-icon btn-3 btn-default" type="button">
                                         <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                        <span class="btn-inner--text" (click)="addProcess()">Add Process to your product</span>
+                                        <span class="btn-inner--text" (click)="addProcess()" i18n>Add Process to your product</span>
                                       </button>
                                 </div>
 
@@ -31,10 +31,10 @@
                                 <table class=" table align-items-center table-flush">
                                     <thead class=" thead-light">
                                         <tr>
-                                            <th scope="col">select or create a Process</th>
+                                            <th scope="col" i18n>select or create a Process</th>
 
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Edit</th>
+                                            <th scope="col" i18n>Quantity</th>
+                                            <th scope="col" i18n>Edit</th>
 
                                         </tr>
                                     </thead>
@@ -42,7 +42,7 @@
                                         <tr *ngFor="let process of productTemplate.processes; let i=index">
                                             <td scope="row">
 
-                                              <app-single-multiple-choice  [result]="(process.template) ? {'value': process.template.id, 'label' : process.template.name} : ''" (resultChange)=processSelector($event,i) [ignoreOptions]=ignoreOptions  [isMultipleChoice]=false [inputCheckForError]=checkForError  [isSearchable]=true [inputRequired]=true [data]="processOptions" [allowUserCreateOption]="true" [placeholder]="'select a process or type a new processname'"> </app-single-multiple-choice>
+                                              <app-single-multiple-choice  [result]="(process.template) ? {'value': process.template.id, 'label' : process.template.name} : ''" (resultChange)=processSelector($event,i) [ignoreOptions]=ignoreOptions  [isMultipleChoice]=false [inputCheckForError]=checkForError  [isSearchable]=true [inputRequired]=true [data]="processOptions" [allowUserCreateOption]="true" placeholder="select a process or type a new processname" i18n-placeholder> </app-single-multiple-choice>
 
                                             </td>
                                             <td scope="row">

@@ -8,7 +8,7 @@
             <ng-container *ngIf="nodesAreEmpty; else elseTemplate" >
                 <div>
                     <div class="alert alert-warning" role="alert">
-                        <strong>Warning!</strong> You are not assigned to any process!
+                        <strong i18n>Warning!</strong><span i18n>You are not assigned to any process!</span>
                     </div>
                 </div>
             </ng-container>
@@ -39,10 +39,10 @@
                                     <div class="container-fluid">
                                         <div class="row pl-2 pr-2">
                                             <div class="col-12">
-                                                <p> <span class="h4"> ID: </span>  {{ row.id }}</p>
+                                                <p> <span class="h4">ID:</span>{{ row.id }}</p>
                                             </div>
                                             <div class="col-12" *ngIf="windowWidth<=966">
-                                                <p> <span class="h4"> Execution time: </span>  {{ getFullTime(row.timeTaken) }}</p>
+                                                <p> <span class="h4" i18n>Execution time:</span>  {{ getFullTime(row.timeTaken) }}</p>
                                             </div>
 
                                         </div>
@@ -69,13 +69,14 @@
                                         [class.datatable-icon-up]="!expanded"
                                         [class.datatable-icon-down]="expanded"
                                         title="Expand/Collapse Row"
+                                        i18n-title
                                         (click)="toggleExpandRow(myTable, row)"
                                         >
                                     </a>
                                     </ng-template>
                                 </ngx-datatable-column>
                                 <!-- Name -->
-                                <ngx-datatable-column *ngIf="windowWidth>843" name="process name" prop="name" [sortable]="true" >
+                                <ngx-datatable-column *ngIf="windowWidth>843" name="process name" i18n-name prop="name" [sortable]="true" >
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                     <p class="h3 text-default">
                                         {{row.name}}
@@ -85,7 +86,7 @@
                                 </ngx-datatable-column>
 
                                 <!-- Order Delivery Date -->
-                                <ngx-datatable-column [minWidth]="(windowWidth<=566) ? 220 : 50"  [width]=150 name="Order Delivery Date" prop="orderDeliveryDate" [sortable]="true" >
+                                <ngx-datatable-column [minWidth]="(windowWidth<=566) ? 220 : 50"  [width]=150 name="Order Delivery Date" i18n-name prop="orderDeliveryDate" [sortable]="true" >
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                     <p class="">
                                         {{row.orderDeliveryDate | date: 'dd.MM.yyyy'}}
@@ -93,7 +94,7 @@
                                     </ng-template>
                                 </ngx-datatable-column>
                                 <!-- Process Delivery Date -->
-                                <ngx-datatable-column [minWidth]="(windowWidth<=566) ? 220 : 50"  [width]=150 name="Process Delivery Date" prop="processDeliveryDate" [sortable]="true" >
+                                <ngx-datatable-column [minWidth]="(windowWidth<=566) ? 220 : 50"  [width]=150 name="Process Delivery Date" i18n-name prop="processDeliveryDate" [sortable]="true" >
                                   <ng-template let-row="row" ngx-datatable-cell-template>
                                   <p class="">
                                       {{row.processDeliveryDate | date: 'dd.MM.yyyy'}}
@@ -101,7 +102,7 @@
                                   </ng-template>
                               </ngx-datatable-column>
                                 <!-- Estimated Time -->
-                                <ngx-datatable-column *ngIf="windowWidth>966" [width]=150 [maxWidth]=150 name="Estimated Time" prop="estimatedTime" [sortable]="true" >
+                                <ngx-datatable-column *ngIf="windowWidth>966" [width]=150 [maxWidth]=150 name="Estimated Time" i18n-name prop="estimatedTime" [sortable]="true" >
                                   <ng-template let-value="value" ngx-datatable-cell-template>
                                   <p class="">
                                       {{ getFullTime(value) }}
@@ -109,7 +110,7 @@
                                   </ng-template>
                               </ngx-datatable-column>
                                 <!-- Time Taken -->
-                                <ngx-datatable-column *ngIf="windowWidth>966" [width]=125 [maxWidth]=125 name="Time Taken" prop="timeTaken" [sortable]="true" >
+                                <ngx-datatable-column *ngIf="windowWidth>966" [width]=125 [maxWidth]=125 name="Time Taken" i18n-name prop="timeTaken" [sortable]="true" >
                                     <ng-template let-value="value" ngx-datatable-cell-template>
                                     <p class="">
                                         {{ getFullTime(value) }}
@@ -117,24 +118,24 @@
                                     </ng-template>
                                 </ngx-datatable-column>
                                 <!-- status -->
-                                <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=125 name="Status" prop="status" >
+                                <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=125 name="Status" i18n-name prop="status" >
                                   <ng-template let-row="row" ngx-datatable-cell-template>
-                                  <p class="">
-                                    {{( row.occupiedBy ? 'Occupied' : 'Free' )}}
-                                  </p>
+                                  <p *ngIf="row.occupiedBy" i18n class="">Occupied</p>
+                                  <p *ngIf="!row.occupiedBy" i18n class="">Free</p>
                                   </ng-template>
                                 </ngx-datatable-column>
                                 <!-- assignee -->
-                                <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=190 name="Assignee" prop="assignedUser" [comparator]="userNameSort" [cellClass]="getCellClass" >
+                                <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=190 name="Assignee" i18n-name prop="assignedUser" [comparator]="userNameSort" [cellClass]="getCellClass" >
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                     <div  [hideIfUnauthorized]="permissions.ASSIGN"  #test>
                                       <p class="" *ngIf="row.occupiedBy">{{ (row.assignedUser) ? row.assignedUser.username : 'none' }}</p>
                                       <app-single-multiple-choice *ngIf="!row.occupiedBy" [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
                                     </div>
                                     <div [showIfUnauthorized]="permissions.ASSIGN">
-                                      <p class="">
-                                        {{ (row.assignedUser) ? row.assignedUser.username : 'none' }}
+                                      <p *ngIf="row.assignedUser" class="">
+                                        {{ row.assignedUser.username }}
                                       </p>
+                                      <p *ngIf="!row.assignedUser" class="" i18n>None</p>
                                     </div>
                                     </ng-template>
                                 </ngx-datatable-column>
