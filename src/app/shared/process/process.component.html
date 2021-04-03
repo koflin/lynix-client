@@ -122,10 +122,15 @@
                                         <button class="btn btn-icon btn-3 btn-default" type="button" (click)="addStep(i)" >
                                             <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
                                         </button>
-                                        <button class="btn btn-icon btn-3 btn-default" type="button" [routerLink]="" fragment="{{ navFragment + '.' + i }}">
-                                            <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
+                                        <button class="btn btn-icon btn-3 btn-default" type="button" (click)="moveUp(i)">
+                                          <span class="btn-inner--icon"><i class="fas fa-arrow-up"></i></span>
                                         </button>
-
+                                        <button class="btn btn-icon btn-3 btn-default" type="button" (click)="moveDown(i)">
+                                          <span class="btn-inner--icon"><i class="fas fa-arrow-down"></i></span>
+                                        </button>
+                                        <button class="btn btn-icon btn-3 btn-default" type="button" [routerLink]="" fragment="{{ navFragment + '.' + i }}">
+                                          <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
+                                        </button>
                                         <button class="btn btn-icon btn-3 btn-danger" type="button" (click)="removeStep(i)">
                                             <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
                                         </button>

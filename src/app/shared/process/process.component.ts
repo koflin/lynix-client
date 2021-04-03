@@ -63,5 +63,23 @@ export class ProcessComponent implements OnInit {
     this.processTemplate.stepTemplates.splice(index, 1);
   }
 
+  moveUp(i: number) {
+    if (i > 0) {
+      const top = this.processTemplate.stepTemplates[i - 1];
+      this.processTemplate.stepTemplates[i - 1] = this.processTemplate.stepTemplates[i];
+      this.processTemplate.stepTemplates[i] = top;
 
+      this.processTemplateChange.emit(this.processTemplate);
+    }
+  }
+
+  moveDown(i: number) {
+    if (i < this.processTemplate.stepTemplates.length - 1) {
+      const bottom = this.processTemplate.stepTemplates[i + 1];
+      this.processTemplate.stepTemplates[i + 1] = this.processTemplate.stepTemplates[i];
+      this.processTemplate.stepTemplates[i] = bottom;
+
+      this.processTemplateChange.emit(this.processTemplate);
+    }
+  }
 }

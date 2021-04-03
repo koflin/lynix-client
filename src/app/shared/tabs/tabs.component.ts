@@ -28,6 +28,7 @@ export class TabsComponent implements OnInit,AfterViewInit {
   @Output() tabsResIndexChange= new EventEmitter<number>()
 
   @Input() navFragmentBase: string;
+  @Input() mark: number;
 
   @ViewChild("tabContainer") tabs: ElementRef ;
 

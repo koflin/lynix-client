@@ -99,6 +99,18 @@ export class GuideComponent implements OnInit, OnDestroy {
         };
       })); */
     });
+
+    this.route.fragment.subscribe((fragment) => {
+      if (!fragment) {
+        return;
+      }
+
+      const parts = fragment.split('.');
+
+      if (parts.length >= 2) {
+        this.stepToggleId = parseInt(parts[1]);
+      }
+    });
   }
 
   update() {

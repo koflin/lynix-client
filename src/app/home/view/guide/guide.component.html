@@ -6,7 +6,7 @@
   <div class=" container-fluid mt--5">
     <div class=" row">
         <div class="col-12">
-            <app-tabs [tabsvalue]="stepNames" [(tabsResIndex)]="stepToggleId" [bgColorClassNotSelected]="'bg-default'"> </app-tabs>
+            <app-tabs [mark]="process.currentStepIndex + 1" [tabsvalue]="stepNames" [(tabsResIndex)]="stepToggleId" [bgColorClassNotSelected]="'bg-default'" navFragmentBase="0"> </app-tabs>
             <div class="pt-4 pb-4 mb-6 container-fluid" [@animSlider]="stepToggleId">
                 <div class="row" >
                     <ng-container *ngFor="let step of process.steps; let i=index" >
@@ -97,7 +97,7 @@
                                                     <ul class="list-group list-item-no-full-border pt-2 pb-2">
                                                         <ng-container *ngFor="let item of process.steps; let i=index; let first = first; let last = last">
                                                             <li (click)="stepToggleId=i+1" class="list-group-item list-item-no-sideborder zooming d-flex justify-content-between" [ngClass]="{'no-border-top':first, 'no-border-bottom':last}" >
-                                                                {{item.title}} <i class="fas fa-angle-right"></i>
+                                                                {{item.title + (i == process.currentStepIndex ? '*' : '')}} <i class="fas fa-angle-right"></i>
                                                             </li>
 
                                                         </ng-container>
@@ -176,7 +176,7 @@
 
                                                 <th scope="col" i18n>Step Name</th>
                                                 <th scope="col" i18n>Taken Time</th>
-
+                                                <th scope="col" i18n>Estimated Time</th>
                                             </tr>
                                         </thead>
                                         <tbody class="list">
@@ -190,7 +190,9 @@
                                                 <td>
                                                     {{ getFullTime(item.timeTaken) }}
                                                 </td>
-
+                                                <td>
+                                                  {{ getFullTime(item.estimatedTime) }}
+                                                </td>
                                             </tr>
                                         </tbody>
 

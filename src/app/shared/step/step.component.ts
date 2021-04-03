@@ -34,7 +34,8 @@ export class StepComponent implements OnInit {
   currentImageIndex: number;
   currentVideoIndex: number;
 
-  constructor(private mediaService: MediaService) { }
+  constructor(private mediaService: MediaService) {
+  }
 
   ngOnInit(): void {
     this.estimatedTime = {

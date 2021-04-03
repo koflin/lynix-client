@@ -189,7 +189,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
 
     frag += prod != undefined ? prod.toString() : '';
     frag += proc != undefined ? '.' + proc.toString(): '';
-    frag += step != undefined ? '.' + step.toString() + '.' : '';
+    frag += step != undefined ? '.' + step.toString(): '';
 
     return frag;
   }
@@ -240,9 +240,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     if (this.orderDraft && this.orderDraft.id) {
       this.ordersService.save(this.orderDraft);
     } else {
-      const fragment = (this.productToggleId ? this.productToggleId : '') + '' +
-      (this.processToggleId ? this.processToggleId : '') +
-      (this.stepToggleId ? this.stepToggleId : '');
+      const fragment = this.toFragment(this.productToggleId, this.processToggleId, this.stepToggleId);
 
       this.ordersService.create(this.orderDraft).subscribe(id => this.router.navigate(['orders/draft/' + id], { fragment }));
     }
@@ -386,6 +384,8 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   deleteModal(){
     let data: deletingDataInformation = this.specificDeleteData()
 
+    console.log(data);
+
     swal.fire({
       title: 'Are you sure to delete ' + data.tabContainerPublicName + ' \'' + data.tabName + "\'?",
       text: "You won't be able to revert this!",
@@ -451,7 +451,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
         deletingData.tabName= this.stepsName[this.stepToggleId]
         deletingData.tabContainerPublicName='step'
         break;
-      case 'processes':
+      case 'process':
         deletingData.parentTabId=this.productToggleId
         deletingData.tabId=this.processToggleId
         deletingData.tabName= this.processesNames[this.processToggleId]

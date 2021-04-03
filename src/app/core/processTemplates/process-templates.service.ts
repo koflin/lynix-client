@@ -21,7 +21,7 @@ export class ProcessTemplatesService {
   }
 
   save(templateDraft: ProcessTemplate){
-    this.api.put<ProcessTemplate>('templates/process/' + templateDraft.id, new EditProcessTemplateDto(templateDraft)).subscribe(template => this.processTemplatesChange.next(template.id));
+    this.api.put<ProcessTemplate>('templates/process/' + templateDraft.id, new EditProcessTemplateDto(templateDraft)).subscribe(/*template => this.processTemplatesChange.next(template.id)*/);
   }
 
   create(templateDraft: ProcessTemplate) {

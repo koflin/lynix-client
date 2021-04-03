@@ -15,13 +15,14 @@
                 </button>
               </div>
             <div class="row">
-              <div class="col">
-                <ng-container  *ngIf="process.currentStepIndex !== null && process.steps[stepIndex] as currentStep">
-                  <p>
-                     <span class="h4" i18n>Time Taken:</span>  {{ getFullTime(currentStep.timeTaken) }}
-                  </p>
-                </ng-container>
-              </div>
+              <ng-container  *ngIf="process.currentStepIndex !== null && process.steps[stepIndex] as currentStep">
+                <div class="col">
+                  <p><span class="h4" i18n>Time Taken:</span>  {{ getFullTime(currentStep.timeTaken) }}</p>
+                </div>
+                <div class="col">
+                  <p> <span class="h4" i18n>Estimated Time:</span> {{ getFullTime(currentStep.estimatedTime) }} </p>
+                </div>
+              </ng-container>
             </div>
             <div class="row">
               <div class="col">

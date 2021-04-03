@@ -12,13 +12,13 @@
                         <div class="col-sm-12 col-md-4" (click)="s()">
                             <div  class="avatar rounded-circle" style="width: 150px; height: 150px; background-color: aliceblue;">
                                 <img alt="Image placeholder image-fit-round"  class="image-fit-round"
-                                style=""  [src]="userDetail.avatar ? userDetail.avatar :  'assets/img/nopicture.png'">
-                                <span *ngIf="!userDetail.avatar" class="badge badge-warning" style="position: fixed;
+                                style=""  [src]="avatarUrl ? avatarUrl :  (userDetail.avatar ? userDetail.avatar : 'assets/img/nopicture.png')">
+                                <span *ngIf="!avatarUrl && !userDetail.avatar" class="badge badge-warning" style="position: fixed;
                                 margin-top: 40px;" i18n>No picture available</span>
                             </div>
                             <form>
                             <div class="custom-file pb-2">
-                                <input type="file" class="custom-file-input" accept="image/png, image/jpeg" (change)="selectAvatar($event)" #imageInput lang="en">
+                                <input type="file" class="custom-file-input" accept="image/png,image/jpeg,image/gif" (change)="selectAvatar($event)" #imageInput lang="en">
                                 <label class="custom-file-label" for="customFileLang" i18n>Add new Picture</label>
                             </div>
                             </form>
@@ -29,7 +29,7 @@
                             <app-text-field [(result)]=userDetail.username [(fieldInformation)]="usernameField" [inputRequired]=true [inputType]="'text'" [inputCheckForError]=checkForError> </app-text-field>
                             <app-text-field [(result)]=userDetail.firstName [(fieldInformation)]="firstname" [inputRequired]=true [inputType]="'text'" [inputCheckForError]=checkForError> </app-text-field>
                             <app-text-field [(result)]=userDetail.lastName [(fieldInformation)]="lastname" [inputRequired]=true [inputType]="'text'" [inputCheckForError]=checkForError> </app-text-field>
-                            <app-text-field [(result)]=userDetail.password [(fieldInformation)]="password" [inputRequired]=true [inputType]="'password'" [inputCheckForError]=checkForError> </app-text-field>
+                            <!--<app-text-field [(result)]=userDetail.password [(fieldInformation)]="password" [inputRequired]=true [inputType]="'password'" [inputCheckForError]=checkForError> </app-text-field>-->
                         </div>
                     </div>
 

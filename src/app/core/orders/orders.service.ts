@@ -22,7 +22,7 @@ export class OrdersService {
   }
 
   save(order: Order){
-    this.api.put<Order>('orders/' + order.id, new EditOrderDto(order)).subscribe(order => this.ordersChange.next(order.id));
+    this.api.put<Order>('orders/' + order.id, new EditOrderDto(order)).subscribe(/*order => this.ordersChange.next(order.id)*/);
   }
 
   create(orderDraft: Order) {

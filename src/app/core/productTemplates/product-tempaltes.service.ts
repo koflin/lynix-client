@@ -21,7 +21,7 @@ export class ProductTemplatesService {
   }
 
   save(templateDraft: ProductTemplate){
-    this.api.put<ProductTemplate>('templates/product/' + templateDraft.id, new EditProductTemplateDto(templateDraft)).subscribe(template => this.productTemplatesChange.next(template.id));
+    this.api.put<ProductTemplate>('templates/product/' + templateDraft.id, new EditProductTemplateDto(templateDraft)).subscribe(/*template => this.productTemplatesChange.next(template.id)*/);
   }
 
   create(templateDraft: ProductTemplate) {

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth/auth.service';
 import { MediaService } from 'src/app/core/media/media.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
@@ -33,6 +34,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
   }
   orginalUserDetail: UserDetailNode;
   avatarImage: File;
+  avatarUrl: string;
 
   availableRoles: Role[];
   availabelRolesSelection: SingleMultiChoiceItem[]=[]
@@ -60,7 +62,8 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     private rolesService: RolesService,
     private usersService: UsersService,
     private authService: AuthService,
-    private mediaService: MediaService
+    private mediaService: MediaService,
+    private toastr: ToastrService,
     ) {
       //history.pushState(null, null, window.location.href);
     // check if back or forward button is pressed.
@@ -101,7 +104,6 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
         const media = await this.mediaService.upload(this.avatarImage).toPromise();
         this.userDetail.avatar = media.url;
       }
-
       if (this.userDetail.id==undefined) {
         let userDraft:User = {...this.userDetail, 'companyId': this.authService.getLocalUser().companyId, 'role': this.userDetail.role }
         this.usersService.createUser(userDraft);
@@ -110,10 +112,21 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
 
       }
       this.orginalUserDetail = _.cloneDeep(this.userDetail)
-      //this.refresh();
-      this.saveModal()
     }
 
+    this.toastr.show(
+      '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">Success</span> <span>Saved</span></div>',
+      '',
+      {
+        timeOut: 1500,
+        closeButton: true,
+        enableHtml: true,
+        tapToDismiss: false,
+        titleClass: 'alert-title',
+        positionClass: 'toast-top-center',
+        toastClass: "ngx-toastr alert alert-dismissible alert-success alert-notify",
+      }
+    );
   }
 
   selectAvatar(event) {
@@ -123,13 +136,14 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     reader.readAsDataURL(this.avatarImage);
 
     reader.onload = () => {
-      this.userDetail.avatar = reader.result.toString();
+      this.avatarUrl = reader.result.toString();
     };
   }
 
-  /* clearAvatar() {
-    this.userDetail.avatar = this.userDetail.avatar;
-  } */
+  clearAvatar() {
+    this.avatarUrl = null;
+    this.avatarImage = null;
+  }
 
   async refresh() {
 

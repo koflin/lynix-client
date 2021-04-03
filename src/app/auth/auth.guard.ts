@@ -21,7 +21,6 @@ export class AuthGuard implements CanActivate {
     return new Promise(async (resolve) => {
       const localUser = await this.authService.refreshToken().toPromise();
 
-      console.log(localUser);
       // Check if user is logged in
       if (!localUser) {
         resolve(this.router.createUrlTree(['/login']));
