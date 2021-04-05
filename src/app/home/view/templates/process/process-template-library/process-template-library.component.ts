@@ -1,7 +1,9 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Permission } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { ProcessTemplateNode } from 'src/app/models/ui/processTemplateNode';
+
 import { ProcessTemplateLibraryService } from './process-template-library.service';
 
 @Component({
@@ -13,6 +15,11 @@ export class ProcessTemplateLibraryComponent implements OnInit {
   breadCrumbs: BreadCrumbInfo[]=[{name:"Template Process Overview", url: this.router.url },];
   templates: ProcessTemplateNode[];
   windowWidth:number
+
+  permissions = Permission;
+
+  searchValue:string=""
+
   @ViewChild('myTable') table: any;
 
   @HostListener('window:resize', ['$event'])
@@ -26,6 +33,15 @@ export class ProcessTemplateLibraryComponent implements OnInit {
     this.processTemplateLibraryService.getAll().subscribe(templates => this.templates = templates);
     this.windowWidth = window.innerWidth
   }
+
+  edit(id: string) {
+    this.router.navigate(['templates/process/' + id]);
+  }
+
+  delet(id: string) {
+
+  }
+
   onActivate($event){
     if ($event.type=="click") {
       this.toggleExpandRow($event.row)
@@ -39,5 +55,4 @@ export class ProcessTemplateLibraryComponent implements OnInit {
       'pl-0': true,
       }
   }
-
 }

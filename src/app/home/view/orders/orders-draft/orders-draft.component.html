@@ -1,8 +1,8 @@
 <div class=" header bg-default pb-7"  style="background-image: url(assets/img/theme/order.jpg); background-size: cover; background-position: center center;">
     <span class=" mask bg-gradient-primary opacity-7"> </span>
-    <app-breadcrumb-header [breadCrumbs]=breadCrumbs (click)="s()" ></app-breadcrumb-header>
+    <app-breadcrumb-header [breadCrumbs]=breadCrumbs></app-breadcrumb-header>
   </div>
-<div class=" container-fluid mt--7 ">
+<div class=" container-fluid mt--7" *ngIf="orderDraft; else spinner">
     <div class=" row">
 
         <div class="col-12">
@@ -15,7 +15,7 @@
 
             </div>
         </div>
-        <div class=" col-12 mt--4 pt-1 mb-0" *ngIf="orderDraft">
+        <div class=" col-12 mt--4 pt-1 mb-0">
             <div class="card pt-0 mb-0 shadow-right no-bottom-radius">
                 <div class="col-12 pt-1">
                     <div class="container-fluid">
@@ -124,6 +124,9 @@
 
     </div>
 </div>
+<ng-template #spinner>
+  <app-spinner></app-spinner>
+</ng-template>
 <app-bottom-navigation-order-draft>
     <div class="d-flex justify-content-between" style="width: 100%;">
         <div>

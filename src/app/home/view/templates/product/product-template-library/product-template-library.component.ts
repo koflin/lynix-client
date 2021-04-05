@@ -1,7 +1,9 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Permission } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { ProductTemplateNode } from 'src/app/models/ui/productTemplateNode';
+
 import { ProductTemplateLibraryService } from './product-template-library.service';
 
 @Component({
@@ -14,6 +16,10 @@ export class ProductTemplateLibraryComponent implements OnInit {
   windowWidth:number
   @ViewChild('myTable') table: any;
   breadCrumbs: BreadCrumbInfo[]=[{name:"Template Product Overview", url: this.router.url },];
+
+  permissions = Permission;
+
+  searchValue:string=""
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -48,4 +54,11 @@ export class ProductTemplateLibraryComponent implements OnInit {
       }
   }
 
+  edit(id: string) {
+
+  }
+
+  delet(id: string) {
+
+  }
 }

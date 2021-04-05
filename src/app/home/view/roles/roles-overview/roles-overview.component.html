@@ -2,7 +2,7 @@
   <span class=" mask bg-gradient-primary opacity-7"> </span>
   <app-breadcrumb-header [breadCrumbs]=breadCrumbs ></app-breadcrumb-header>
 </div>
-<div class=" container-fluid mt--6">
+<div class=" container-fluid mt--6" *ngIf="roleRows; else spinner">
   <div class=" row">
       <div class=" col">
           <div class="card">
@@ -55,7 +55,7 @@
                                     <span *ngSwitchCase="'assign'" i18n>assign</span>
                                     <span *ngSwitchDefault>{{ item }}</span>
                                   </ng-container>
-                                  <span *ngIf="!(first && last) && !last">,</span>
+                                  <span *ngIf="!(first && last) && !last">, </span>
                                 </span>
                               </td>
                             </tr>
@@ -75,3 +75,6 @@
       </div>
   </div>
 </div>
+<ng-template #spinner>
+  <app-spinner></app-spinner>
+</ng-template>

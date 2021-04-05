@@ -13,11 +13,17 @@ import { OrdersOverviewComponent } from './view/orders/orders-overview/orders-ov
 import { ProcessesOverviewComponent } from './view/processes/processes-overview/processes-overview.component';
 import { RolesOverviewComponent } from './view/roles/roles-overview/roles-overview.component';
 import {
+  ProcessTemplateDetailComponent,
+} from './view/templates/process/process-template-detail/process-template-detail.component';
+import {
   ProcessTemplateLibraryComponent,
-} from './view/templates/process-template-library/process-template-library.component';
+} from './view/templates/process/process-template-library/process-template-library.component';
+import {
+  ProductTemplateDetailComponent,
+} from './view/templates/product/product-template-detail/product-template-detail.component';
 import {
   ProductTemplateLibraryComponent,
-} from './view/templates/product-template-library/product-template-library.component';
+} from './view/templates/product/product-template-library/product-template-library.component';
 import { TestingComponent } from './view/testing/testing.component';
 import { UserDetailComponent } from './view/users/user-detail/user-detail.component';
 import { UsersOverviewComponent } from './view/users/users-overview/users-overview.component';
@@ -47,10 +53,10 @@ const routes: Routes = [
     // Guide
     { path: 'guide/:id', component: GuideComponent, canActivate: [AuthGuard, GuideGuard], data: { permissions: [Permission.EXECUTE]} },
     // Templates
-  { path: 'templates/product', component: ProductTemplateLibraryComponent , canActivate: [AuthGuard], data: { permissions: [Permission.EDIT]} },
-  { path: 'templates/process', component: ProcessTemplateLibraryComponent, canActivate: [AuthGuard], data: { permissions: [Permission.EDIT]} },
-
-
+    { path: 'templates/product', component: ProductTemplateLibraryComponent , canActivate: [AuthGuard], data: { permissions: [Permission.EDIT]} },
+    { path: 'templates/product/:id', component: ProductTemplateDetailComponent , canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.EDIT]} },
+    { path: 'templates/process', component: ProcessTemplateLibraryComponent, canActivate: [AuthGuard], data: { permissions: [Permission.EDIT]} },
+    { path: 'templates/process/:id', component: ProcessTemplateDetailComponent, canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.EDIT]} },
   ]},
 ];
 

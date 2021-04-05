@@ -177,11 +177,11 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
       }
     });
 
-    this.ordersService.onOrdersChange.subscribe((id) => {
+    /*this.ordersService.onOrdersChange.subscribe((id) => {
       if (this.orderDraft && this.orderDraft.id === id) {
         this.getOrder(id);
       }
-    });
+    });*/
   }
 
   toFragment(prod?: number, proc?: number, step?: number) {
@@ -472,12 +472,5 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     }
     return deletingData
   }
-  s(){
-    console.log(this.orderDraft)
-  }
-
-
-
-
 }
 

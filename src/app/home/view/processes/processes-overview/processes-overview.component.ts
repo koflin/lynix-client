@@ -28,6 +28,7 @@ export class ProcessesOverviewComponent implements OnInit {
 
   breadCrumbs: BreadCrumbInfo[]=[{name:"Process Overview", url: this.router.url },];
   nodesAreEmpty:boolean = undefined;
+  loaded = false;
   windowWidth:number
   processNodeGroups: ProcessGroupNode [] = [
     {
@@ -162,10 +163,13 @@ export class ProcessesOverviewComponent implements OnInit {
   fetch() {
     this.processesOverviewService.getAll().subscribe((processNodes) => {
       this.nodesAreEmpty = processNodes.length < 1 ? true : false;
-      this.processNodeGroups.forEach((group) => {
+
+      for (let group of this.processNodeGroups) {
         group.nodes = [];
         group.nodes.push(...processNodes.filter((node) => node.status === group.status));
-      });
+      }
+
+      this.loaded = true;
     });
 
   }

@@ -27,6 +27,7 @@ import { OrderComponent } from './order/order.component';
 import { ProcessNodeComponent } from './process-node/process-node.component';
 import { ProcessComponent } from './process/process.component';
 import { ProductComponent } from './product/product.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 import { StepGuideTabComponent } from './step-guide-tab/step-guide-tab.component';
 import { StepComponent } from './step/step.component';
 import { TabsComponent } from './tabs/tabs.component';
@@ -51,6 +52,7 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     PieChartComponent,
     HideIfUnauthorizedDirective,
     ShowIfUnauthorizedDirective,
+    SpinnerComponent,
 
      ],
   imports: [
@@ -100,6 +102,7 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     PieChartComponent,
     HideIfUnauthorizedDirective,
     ShowIfUnauthorizedDirective,
+    SpinnerComponent
   ]
 
 })

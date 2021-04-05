@@ -24,6 +24,7 @@ export class OrdersOverviewComponent implements OnInit {
   SelectionType = SelectionType;
   _showReleased: boolean=false;
   searchValue:string=""
+
   get showReleased(): boolean {
       return this._showReleased;
   }

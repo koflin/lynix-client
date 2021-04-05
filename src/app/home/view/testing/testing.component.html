@@ -26,8 +26,11 @@
                             </button>
                     </div>
                     <div class="col-12">
-                      <p>Image</p>
-                      <img src="http://localhost:3000/v0/media/6060575c36da323f3c87a236" >
+                      <p>Spinner</p>
+                      <button class="btn btn-3 btn-default" type="button" (click)="showSpinner = !showSpinner">
+                        <span class="btn-inner--text">Toggle</span>
+                      </button>
+                      <app-spinner *ngIf="showSpinner"></app-spinner>
                   </div>
                   <div>
                 </div>

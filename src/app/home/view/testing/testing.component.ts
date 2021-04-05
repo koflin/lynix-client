@@ -13,6 +13,8 @@ export class TestingComponent implements OnInit {
 
   count = 0;
 
+  showSpinner = false;
+
   constructor(
     private router: Router,
     private eventsService: EventsService

@@ -2,7 +2,7 @@
     <span class=" mask bg-gradient-primary opacity-7"> </span>
     <app-breadcrumb-header [breadCrumbs]=breadCrumbs ></app-breadcrumb-header>
 </div>
-<div class=" container-fluid mt--6">
+<div class=" container-fluid mt--6" *ngIf="userRows; else spinner">
     <div class=" row">
         <div class=" col">
             <div class="card">
@@ -26,10 +26,8 @@
                                     (mouseup)="filterTable()"
                                   />
                                 </label>
-                              </div>
+                            </div>
                         </div>
-
-
                     </div>
                 </div>
 
@@ -92,3 +90,6 @@
         </div>
     </div>
 </div>
+<ng-template #spinner>
+  <app-spinner></app-spinner>
+</ng-template>
