@@ -128,7 +128,7 @@
                                         <button class="btn btn-icon btn-3 btn-default" type="button" (click)="moveDown(i)">
                                           <span class="btn-inner--icon"><i class="fas fa-arrow-down"></i></span>
                                         </button>
-                                        <button class="btn btn-icon btn-3 btn-default" type="button" [routerLink]="" fragment="{{ navFragment + '.' + i }}">
+                                        <button class="btn btn-icon btn-3 btn-default" type="button" [routerLink]="" fragment="{{ (navFragment != '' ? navFragment + '.' + i : i) }}">
                                           <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
                                         </button>
                                         <button class="btn btn-icon btn-3 btn-danger" type="button" (click)="removeStep(i)">

@@ -43,7 +43,7 @@
         <div class=" col-12 mt--8 pt-2">
             <div *ngFor="let actualStep of processTemplate.stepTemplates, let i = index">
                 <div class=" card pb-8 pt-2  no-top-radius shadow-right" *ngIf="stepToggleId == i">
-                     <app-step [stepTemplate]="actualStep" (stepTemplateChange)="detectChange()"> </app-step>
+                     <app-step [stepTemplate]="actualStep" (stepTemplateChange)="detectChange()" navFragment=""> </app-step>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
       <ng-template #overview>
         <div class=" col-12 mt--8 pt-2">
           <div class=" card pb-8 pt-2 pl-2 pr-2 no-top-radius shadow-right">
-              <app-process [(processTemplate)]="processTemplate" (processTemplateChange)="detectChange()"></app-process>
+              <app-process [(processTemplate)]="processTemplate" (processTemplateChange)="detectChange()" navFragment=""></app-process>
           </div>
       </div>
       </ng-template>
