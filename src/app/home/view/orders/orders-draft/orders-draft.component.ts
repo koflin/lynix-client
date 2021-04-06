@@ -176,12 +176,6 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
         this._stepToggleId = parseInt(parts[2]);
       }
     });
-
-    /*this.ordersService.onOrdersChange.subscribe((id) => {
-      if (this.orderDraft && this.orderDraft.id === id) {
-        this.getOrder(id);
-      }
-    });*/
   }
 
   toFragment(prod?: number, proc?: number, step?: number) {
@@ -213,7 +207,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
 
   discardDraft() {
     // Ask if really want to discard changes
-    this.router.navigate(['home/orders/overview']);
+    this.router.navigate(['orders/overview']);
   }
 
   async saveDraft(dontFireToastr:boolean=false) {
@@ -265,7 +259,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   }
 
   deleteDraft() {
-    this.ordersService.delete(this.orderDraft.id).subscribe(() => this.router.navigate(['home/orders/overview']));
+    this.ordersService.delete(this.orderDraft.id).subscribe(() => this.router.navigate(['orders/overview']));
     //after deleting app should save()
   }
 
@@ -287,7 +281,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
           }
         );
 
-        this.router.navigate(['home/orders/overview']);
+        this.router.navigate(['orders/overview']);
       });
     });
   }

@@ -162,7 +162,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
       }
     }
     this.orginalUserDetail = _.cloneDeep(this.userDetail)
-    this.breadCrumbs = [{name:"Users Overview", url: "/home/users" },
+    this.breadCrumbs = [{name:"Users Overview", url: "/users" },
       {name:(this.userDetail.id)? this.userDetail.username : 'New', url:this.router.url}]
 
 
@@ -173,29 +173,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     })
   }
   cancelModal(){
-    /* if (! _.isEqual(this.userDetail, this.orginalUserDetail)) {
-      swal.fire({
-        title: 'Cancel without saving?',
-        text: "You won't be able to revert this!",
-        type: 'warning',
-        showCancelButton: true,
-        buttonsStyling: false,
-        confirmButtonClass: 'btn btn-danger',
-        confirmButtonText: 'Yes, cancel!',
-        cancelButtonClass: 'btn btn-secondary',
-        cancelButtonText:"No!"
-      }).then((result) => {
-        if (result.value) {
-            // Show confirmation
-            this.router.navigate(['home/users']);
-        }else{
-          this.router.navigate(['home/users/new'])
-        }
-      })
-    }else{
-      this.router.navigate(['home/users']);
-    } */
-    this.router.navigate(['home/users']);
+    this.router.navigate(['users']);
 
   }
   deleteModal(){
@@ -214,7 +192,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
 
           if (this.userDetail.id) {
             this.usersService.deleteUser(this.userDetail.id);
-            this.router.navigate(['home/users'])
+            this.router.navigate(['users'])
           }
           // Show confirmation
           //this.deleteDraft()
@@ -237,10 +215,10 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     }).then((result) => {
       if (result.value) {
           // Show confirmation
-          this.router.navigate(['home/users']);
+          this.router.navigate(['users']);
       }else{
         this.usersService.getByUserName(this.userDetail.username).subscribe(user => {
-          this.router.navigate(['home/users/' + user.id])
+          this.router.navigate(['users/' + user.id])
         });
       }
     })

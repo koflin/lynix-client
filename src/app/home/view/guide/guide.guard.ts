@@ -30,7 +30,7 @@ export class GuideGuard implements CanActivate {
         return;
       }
 
-      this.router.navigate(['home/processes/overview']);
+      this.router.navigate(['processes/overview']);
       resolve(false);
     });
   }

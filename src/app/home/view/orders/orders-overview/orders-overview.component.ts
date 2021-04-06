@@ -62,7 +62,7 @@ export class OrdersOverviewComponent implements OnInit {
   }
 
   edit(id: string) {
-    this.router.navigate(['home/orders/draft/' + id]);
+    this.router.navigate(['orders/draft/' + id]);
   }
 
   delte(id: string) {

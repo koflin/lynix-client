@@ -82,7 +82,7 @@ export class UsersOverviewComponent implements OnInit {
     });
   }
   editUser(i){
-    this.router.navigate(['home/users/'+i])
+    this.router.navigate(['users/'+i])
   }
   removeUser(id: string) {
     let a = document.getElementById(id)

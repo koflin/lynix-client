@@ -55,7 +55,7 @@ export class ProductTemplateLibraryComponent implements OnInit {
   }
 
   edit(id: string) {
-
+    this.router.navigate(['templates/product/' + id]);
   }
 
   delet(id: string) {

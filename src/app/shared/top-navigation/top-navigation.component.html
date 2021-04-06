@@ -1,7 +1,7 @@
 <!-- Desktop View -->
 <nav class="navbar navbar-expand-lg sticky desktop_nav navigation_bar">
     <div class="d-flex justify-content-between" style="width: 100%;">
-      <a class="navbar-brand" routerLink="/home/dashboard"><img style="object-fit: scale-down;" src="assets/img/Logo_Lynix_RGB.svg"></a>
+      <a class="navbar-brand" routerLink="/dashboard"><img style="object-fit: scale-down;" src="assets/img/Logo_Lynix_RGB.svg"></a>
 
       <p class="d-none d-lg-block text-default" style="padding-top:10px"> SMART ASSISTANT SYSTEM </p>
 
@@ -48,8 +48,8 @@
                   </div>
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('order')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/home/orders/overview" i18n>Overview</a>
-                <a class="dropdown-item h4 zooming" routerLink="/home/orders/draft" i18n>Create New</a>
+                <a class="dropdown-item h4 zooming" routerLink="/orders/overview" i18n>Overview</a>
+                <a class="dropdown-item h4 zooming" routerLink="/orders/draft" i18n>Create New</a>
 
                 </div>
               </li>
@@ -60,7 +60,7 @@
                   </div>
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('process')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/home/processes/overview" i18n>Overview</a>
+                <a class="dropdown-item h4 zooming" routerLink="/processes/overview" i18n>Overview</a>
 
 
                 </div>
@@ -71,8 +71,8 @@
                   </div>
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('template')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/home/templates/product" i18n>Product</a>
-                <a class="dropdown-item h4 zooming" routerLink="/home/templates/process" i18n>Process</a>
+                <a class="dropdown-item h4 zooming" routerLink="/templates/product" i18n>Product</a>
+                <a class="dropdown-item h4 zooming" routerLink="/templates/process" i18n>Process</a>
                 <a class="dropdown-item h4 zooming" i18n>Tools</a>
 
 
@@ -85,8 +85,8 @@
 
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('admin')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/home/users" i18n>Users</a>
-                <a class="dropdown-item h4 zooming" routerLink="/home/roles" i18n>Roles</a>
+                <a class="dropdown-item h4 zooming" routerLink="/users" i18n>Users</a>
+                <a class="dropdown-item h4 zooming" routerLink="/roles" i18n>Roles</a>
 
                 </div>
               </li>

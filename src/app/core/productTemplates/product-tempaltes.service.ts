@@ -29,7 +29,7 @@ export class ProductTemplatesService {
   }
 
   delete(id: string) {
-    this.api.delete('templates/product' + id).subscribe(() => this.productTemplatesChange.next(id));
+    return this.api.delete('templates/product' + id);
   }
 
   getAll() {
