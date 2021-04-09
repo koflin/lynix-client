@@ -84,8 +84,11 @@
               ]
             },
             "de": {
-              "localize": ["de"],
-              "main": "src/main.ts"
+              "aot": true,
+              "outputPath": "dist/lynix-de",
+              "i18nFile": "src/locale/messages.de.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de"
             }
           }
         },
@@ -149,6 +152,21 @@
           "configurations": {
             "production": {
               "devServerTarget": "lynix:serve:production"
+            }
+          }
+        },
+        "xliffmerge": {
+          "builder": "@ngx-i18nsupport/tooling:xliffmerge",
+          "options": {
+            "xliffmergeOptions": {
+              "i18nFormat": "xlf",
+              "srcDir": "src/locale",
+              "genDir": "src/locale",
+              "defaultLanguage": "en",
+              "languages": [
+                "en",
+                "de"
+              ]
             }
           }
         }
