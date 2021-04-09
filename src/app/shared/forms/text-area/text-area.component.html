@@ -1,11 +1,11 @@
 <div class=" form-row">
     <div class=" col-md-12 mb-3">
         <div class=" form-group" [ngClass]="{'has-danger': (inputCheckForError || userHasTyped) && fieldInformation.error}">
-            <label class=" form-control-label" [for]="fieldInformation.name" [ngClass]="{'text-danger': (inputCheckForError || userHasTyped) && fieldInformation.error}">
+            <label class="form-control-label" [for]="fieldInformation.name" [ngClass]="{'text-danger': (inputCheckForError || userHasTyped) && fieldInformation.error}">
                 {{fieldInformation.label}} <span class="text-primary" *ngIf="fieldInformation.label && inputRequired">*</span>
             </label>
             <div [class.error]="(inputCheckForError || userHasTyped) && fieldInformation.error" [class.disabled]="disabled">
-                <div #textArea data-toggle="quill">
+                <div #textArea class="real-strong" data-toggle="quill">
 
                 </div>
             </div>

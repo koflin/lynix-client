@@ -135,6 +135,7 @@ export class ProductTemplateDetailComponent implements OnInit {
         companyId: this.authService.getLocalUser().companyId,
         id: undefined,
         name: 'Unnamed',
+        description: undefined,
         processes: [],
       };
     }

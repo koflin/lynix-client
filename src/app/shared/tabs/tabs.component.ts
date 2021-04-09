@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  Attribute,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -7,6 +8,7 @@ import {
   HostListener,
   Input,
   OnInit,
+  Optional,
   Output,
   SimpleChanges,
   ViewChild,
@@ -30,12 +32,20 @@ export class TabsComponent implements OnInit,AfterViewInit {
   @Input() navFragmentBase: string;
   @Input() mark: number;
 
+  @Output() tabAdd = new EventEmitter<void>()
+  addable: boolean;
+
   @ViewChild("tabContainer") tabs: ElementRef ;
 
   overFlow: boolean = false
   firstVisible:boolean=true
   lastVisible:boolean=false
-  constructor(private cdref: ChangeDetectorRef) { }
+  constructor(
+    private cdref: ChangeDetectorRef,
+    @Optional() @Attribute('addable') addable: any
+  ) {
+    this.addable = addable != undefined;
+  }
 
   ngOnInit(): void {
   }

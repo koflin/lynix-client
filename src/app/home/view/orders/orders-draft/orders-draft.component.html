@@ -53,7 +53,7 @@
                                 <h3 class="text-default mb-0" i18n>Steps:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="stepsName.length==0">None defined</p>-->
                             </div>
                             <div class="pl-6 col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1" *ngIf="stepsName.length>0">
-                                <app-tabs [tabsvalue]="stepsName" [tabsResIndex]="stepToggleId" navFragmentBase="{{ toFragment(productToggleId, processToggleId) }}"> </app-tabs>
+                                <app-tabs [tabsvalue]="stepsName" [tabsResIndex]="stepToggleId" navFragmentBase="{{ toFragment(productToggleId, processToggleId) }}" addable (tabAdd)="addStep()"> </app-tabs>
                             </div>
                         </div>
 

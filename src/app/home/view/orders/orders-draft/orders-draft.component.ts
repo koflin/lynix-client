@@ -466,5 +466,19 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     }
     return deletingData
   }
+
+  addStep() {
+    const steps = this.orderDraft.products[this.productToggleId].template.processes[this.processToggleId].template.stepTemplates;
+    steps.push({
+      title: 'Unnamed Step ' + (steps.length+1),
+      keyMessage: null,
+      tasks: null,
+      materials: [],
+      toolIds: [],
+      pictureUris: [],
+      videoUris: [],
+      estimatedTime: 0,
+    });
+  }
 }
 

@@ -116,6 +116,7 @@ export class StepComponent implements OnInit {
   }
 
   getType(url: string) {
+    url = url.toLowerCase();
     if (url.endsWith('.mp4')) {
       return 'video/mp4';
     }

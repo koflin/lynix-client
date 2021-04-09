@@ -81,6 +81,7 @@ export class OrderComponent implements OnInit {
         companyId: undefined,
         id: undefined,
         name: '',
+        description: undefined,
         processes: []
       },
     });

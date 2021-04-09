@@ -17,6 +17,7 @@ export class ProductComponent implements OnInit {
   processOptions:SingleMultiChoiceItem[]
   ignoreOptions:SingleMultiChoiceItem[]
   name = new InputOutputValue("name", "Product name", false)
+  description = new InputOutputValue("description", "Description", false)
 
   @Input() navFragment: string;
 

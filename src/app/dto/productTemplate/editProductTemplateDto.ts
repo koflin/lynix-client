@@ -1,6 +1,8 @@
 import { ProductTemplate } from 'src/app/models/productTemplate';
+
 export class EditProductTemplateDto {
   name: string;
+  description: string;
   processes: {
       templateId: string;
       quantity: number;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UsersService } from 'src/app/core/users/users.service';
 import { User } from 'src/app/models/user';
@@ -30,6 +30,14 @@ export class TopNavigationComponent implements OnInit {
     this.authService.onLocalUserChange.subscribe(localUser => {
       if (localUser) {
         this.usersService.getById(localUser.id).subscribe(user => this.user = user);
+      }
+    });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (this.navBar) {
+          this.closeOverlay();
+        }
       }
     });
   }
