@@ -35,8 +35,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.user, this.password).then((result:boolean) => {
           this.error = !result
           if (this.error == false) {
-            this.router.navigate(['home'])
-
+            this.router.navigate(['/'])
           }
       })
     }else{

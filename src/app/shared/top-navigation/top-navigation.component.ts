@@ -49,8 +49,7 @@ export class TopNavigationComponent implements OnInit {
 
   }
   logout() {
-    this.authService.logout();
-    this.router.navigate(['login']);
+    this.authService.logout().then(() => this.router.navigate(['login']));
   }
 
   isActive(item) {

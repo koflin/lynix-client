@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CookieModule } from 'ngx-cookie';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +22,7 @@ import { LoginComponent } from './views/login/login.component';
     HttpClientModule,
     FormsModule,
     HomeModule,
-    CookieModule.forRoot()
+    //CookieModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

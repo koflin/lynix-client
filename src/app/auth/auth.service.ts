@@ -32,7 +32,8 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return parseInt(this.cookies.get('logged_in_until')) > Date.now();
+    return parseInt(localStorage.getItem('logged_in_until')) > Date.now();
+    //return parseInt(this.cookies.get('logged_in_until')) > Date.now();
   }
 
   login(username: string, password: string): Promise<boolean> {
@@ -44,6 +45,7 @@ export class AuthService {
         this.accessToken = result.access_token;
         this.scheduleRefresh();
         this.localUser.next(result.user);
+        localStorage.setItem('logged_in_until', result.refresh_expiration.toString());
 
         return true;
       }),
@@ -54,9 +56,14 @@ export class AuthService {
   }
 
   logout() {
-    this.accessToken = null;
-    this.cookies.put('logged_in_until', '0');
-    this.localUser.next(null);
+    return this.api.delete('auth/logout').pipe(
+      map(() => {
+        this.accessToken = null;
+        localStorage.setItem('logged_in_until', '0');
+        this.localUser.next(null);
+        return;
+      })
+    ).toPromise();
   }
 
   getLocalUser(): LocalUser {
@@ -87,7 +94,8 @@ export class AuthService {
   }
 
   refreshToken(): Observable<LocalUser> {
-    const validUntil = this.cookies.get('logged_in_until');
+    //const validUntil = this.cookies.get('logged_in_until');
+    const validUntil = localStorage.getItem('logged_in_until');
 
     if (validUntil && parseInt(validUntil) > Date.now()) {
       return this.api.post<{ access_token: string, user: LocalUser, refresh_expiration: number }>('auth/token').pipe(

@@ -4,6 +4,7 @@ import { Permission } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { ProductTemplateNode } from 'src/app/models/ui/productTemplateNode';
 
+import { ProductTemplatesService } from './../../../../../core/productTemplates/product-tempaltes.service';
 import { ProductTemplateLibraryService } from './product-template-library.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class ProductTemplateLibraryComponent implements OnInit {
     this.windowWidth = event.target.innerWidth
   }
   constructor(private router: Router,
-    private productTemplateLibraryService: ProductTemplateLibraryService) { }
+    private productTemplateLibraryService: ProductTemplateLibraryService,
+    private productTemplateService: ProductTemplatesService) { }
 
   ngOnInit(): void {
     this.productTemplateLibraryService.getAll().subscribe(templates => this.templates = templates);
@@ -59,6 +61,7 @@ export class ProductTemplateLibraryComponent implements OnInit {
   }
 
   delet(id: string) {
-
+    this.productTemplateService.delete(id);
+    this.templates.splice(this.templates.findIndex(t => t.id === id), 1);
   }
 }

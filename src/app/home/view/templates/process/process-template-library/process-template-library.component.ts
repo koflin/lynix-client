@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
 import { Permission } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { ProcessTemplateNode } from 'src/app/models/ui/processTemplateNode';
@@ -27,7 +28,8 @@ export class ProcessTemplateLibraryComponent implements OnInit {
     this.windowWidth = event.target.innerWidth
   }
   constructor(private router: Router,
-    private processTemplateLibraryService: ProcessTemplateLibraryService ) { }
+    private processTemplateLibraryService: ProcessTemplateLibraryService,
+    private processTemplateService: ProcessTemplatesService) { }
 
   ngOnInit(): void {
     this.processTemplateLibraryService.getAll().subscribe(templates => this.templates = templates);
@@ -39,7 +41,8 @@ export class ProcessTemplateLibraryComponent implements OnInit {
   }
 
   delet(id: string) {
-
+    this.processTemplateService.delete(id);
+    this.templates.splice(this.templates.findIndex(t => t.id === id), 1);
   }
 
   onActivate($event){
