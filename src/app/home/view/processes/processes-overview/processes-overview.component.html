@@ -42,7 +42,7 @@
                                               <p> <span class="h4">ID:</span>{{ row.id }}</p>
                                           </div>
                                           <div class="col-12" *ngIf="windowWidth<=966">
-                                              <p> <span class="h4" i18n>Execution time:</span>  {{ getFullTime(row.timeTaken) }}</p>
+                                              <p> <span class="h4" i18n>Execution time:</span>  {{ row.timeTaken | duration }}</p>
                                           </div>
 
                                       </div>
@@ -105,7 +105,7 @@
                               <ngx-datatable-column *ngIf="windowWidth>966" [width]=150 [maxWidth]=150 name="Estimated Time" i18n-name prop="estimatedTime" [sortable]="true" >
                                 <ng-template let-value="value" ngx-datatable-cell-template>
                                 <p class="">
-                                    {{ getFullTime(value) }}
+                                    {{ value | duration }}
                                 </p>
                                 </ng-template>
                             </ngx-datatable-column>
@@ -113,7 +113,7 @@
                               <ngx-datatable-column *ngIf="windowWidth>966" [width]=125 [maxWidth]=125 name="Time Taken" i18n-name prop="timeTaken" [sortable]="true" >
                                   <ng-template let-value="value" ngx-datatable-cell-template>
                                   <p class="">
-                                      {{ getFullTime(value) }}
+                                      {{ value | duration }}
                                   </p>
                                   </ng-template>
                               </ngx-datatable-column>

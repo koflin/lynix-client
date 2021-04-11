@@ -21,7 +21,7 @@
             />
             <ng-container  *ngIf="(inputCheckForError || userHasTyped) && fieldInformation.error">
                 <div *ngIf="(inputCheckForError || userHasTyped) && requiredError" class=" invalid-feedback" i18n>Please fill the field.</div>
-                <div *ngIf="formatError" class=" invalid-feedback" i18n>Please check the format. It has to look like: 03/30/2021</div>
+                <div *ngIf="formatError" class=" invalid-feedback" i18n>Please check the format. It has to be: 03/30/2021</div>
                 <div *ngIf="errorMessage" class=" invalid-feedback">
                     {{errorMessage}}
                 </div>

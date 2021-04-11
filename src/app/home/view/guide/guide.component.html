@@ -6,7 +6,7 @@
   <div class=" container-fluid mt--5">
     <div class=" row">
         <div class="col-12">
-            <app-tabs [mark]="process.currentStepIndex + 1" [tabsvalue]="stepNames" [(tabsResIndex)]="stepToggleId" [bgColorClassNotSelected]="'bg-default'" navFragmentBase="0"> </app-tabs>
+            <app-tabs [mark]="process.currentStepIndex + 1" [tabsvalue]="stepNames" [(tabsResIndex)]="stepToggleId" [bgColorClassNotSelected]="'bg-default'" [navFragmentBase]="[0]"> </app-tabs>
             <div class="pt-4 pb-4 mb-6 container-fluid" [@animSlider]="stepToggleId">
                 <div class="row" >
                     <ng-container *ngFor="let step of process.steps; let i=index" >
@@ -58,7 +58,7 @@
                                                 <div class="col">
                                                     <h4 i18n>Estimated Time:</h4>
                                                     <p>
-                                                        {{ getFullTime(process.estimatedTime) }}
+                                                        {{ process.estimatedTime | duration }}
                                                     </p>
                                                 </div>
                                             </div>
@@ -157,7 +157,7 @@
                                         <div class="col">
                                             <h4 i18n>Estimated Time:</h4>
                                             <p>
-                                                {{ getFullTime(process.estimatedTime) }}
+                                                {{ process.estimatedTime | duration }}
                                             </p>
                                         </div>
                                     </div>
@@ -188,10 +188,10 @@
                                                     {{item.title}}
                                                 </td>
                                                 <td>
-                                                    {{ getFullTime(item.timeTaken) }}
+                                                    {{ item.timeTaken | duration }}
                                                 </td>
                                                 <td>
-                                                  {{ getFullTime(item.estimatedTime) }}
+                                                  {{ item.estimatedTime | duration }}
                                                 </td>
                                             </tr>
                                         </tbody>

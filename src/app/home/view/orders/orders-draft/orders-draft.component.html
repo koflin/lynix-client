@@ -7,7 +7,7 @@
 
         <div class="col-12">
             <div class="" >
-                <label [routerLink]="" fragment="{{ toFragment() }}" class="nav-link-tab bg-white" style="padding-bottom: 13px;" role="button">
+                <label [routerLink]="" fragment="{{ [] | tabFragment }}" class="nav-link-tab bg-white" style="padding-bottom: 13px;" role="button">
                      <h1 class="text-default"> {{(orderDraft != undefined ? orderDraft.name : 'Unnamed Order') + (this.isEdited ? '*' : '')}} <i class="fa fa-angle-down p-2"></i> </h1>
 
                 </label>
@@ -24,7 +24,7 @@
                                 <h2 class="text-default mb-0" i18n>Products:</h2> <!--<p class="pl-2 mb-0 text-muted" *ngIf="productsNames.length==0">None defined</p>-->
                             </div>
                             <div class="pl-2 col-11 col-xl-11 col-sm-10 pl-0 pr-0 z-index-1" style="display: inline;">
-                                <app-tabs [tabsvalue]="productsNames" [tabsResIndex]="productToggleId" [bgColorClassNotSelected]="'bg-default'" [setNotUndefined]="processToggleId!=undefined" navFragmentBase="{{ toFragment() }}"> </app-tabs>
+                                <app-tabs [tabsvalue]="productsNames" [tabsResIndex]="productToggleId" [bgColorClassNotSelected]="'bg-default'" [setNotUndefined]="processToggleId!=undefined" [navFragmentBase]="[]"> </app-tabs>
 
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                                 <h3 class="text-default mb-0" i18n>Processes:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="processesNames.length==0">None defined</p>-->
                             </div>
                             <div class="pl-4 col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1" *ngIf="processesNames.length>0">
-                                <app-tabs [tabsvalue]="processesNames" [tabsResIndex]="processToggleId" [setNotUndefined]="stepToggleId!=undefined" navFragmentBase="{{ toFragment(productToggleId) }}"> </app-tabs>
+                                <app-tabs [tabsvalue]="processesNames" [tabsResIndex]="processToggleId" [setNotUndefined]="stepToggleId!=undefined" [navFragmentBase]="[productToggleId]"> </app-tabs>
                             </div>
                         </div>
 
@@ -53,7 +53,7 @@
                                 <h3 class="text-default mb-0" i18n>Steps:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="stepsName.length==0">None defined</p>-->
                             </div>
                             <div class="pl-6 col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1" *ngIf="stepsName.length>0">
-                                <app-tabs [tabsvalue]="stepsName" [tabsResIndex]="stepToggleId" navFragmentBase="{{ toFragment(productToggleId, processToggleId) }}" addable (tabAdd)="addStep()"> </app-tabs>
+                                <app-tabs [tabsvalue]="stepsName" [tabsResIndex]="stepToggleId" [navFragmentBase]="[productToggleId, processToggleId]" addable (tabAdd)="addStep()"> </app-tabs>
                             </div>
                         </div>
 
@@ -81,7 +81,7 @@
                 <div class=" col-12 mt--8 pt-2" [@animSlider]="stepToggleId">
                     <div *ngFor="let actualStep of orderDraft.products[productToggleId].template.processes[this.processToggleId].template.stepTemplates, let i = index">
                         <div class=" card pb-8 pt-2  no-top-radius shadow-right" *ngIf="stepToggleId == i">
-                             <app-step [stepTemplate]="actualStep" (stepTemplateChange)="detectChange()" navFragment="{{ toFragment(productToggleId, processToggleId, stepToggleId) }}"> </app-step>
+                             <app-step [stepTemplate]="actualStep" (stepTemplateChange)="detectChange()" navFragment="{{ [productToggleId, processToggleId, stepToggleId] | tabFragment }}"> </app-step>
 
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                 <div class=" col-12 mt--8 pt-2" [@animSlider]="processToggleId">
                     <div *ngFor="let process of orderDraft.products[productToggleId].template.processes, let i = index">
                         <div class=" card pb-8 pt-2  no-top-radius shadow-right" *ngIf="processToggleId == i">
-                            <app-process [(processTemplate)]="process.template" (processTemplateChange)="detectChange()" navFragment="{{ toFragment(productToggleId, processToggleId) }}"></app-process>
+                            <app-process [(processTemplate)]="process.template" (processTemplateChange)="detectChange()" navFragment="{{ [productToggleId, processToggleId] | tabFragment }}"></app-process>
                         </div>
                     </div>
 
@@ -102,7 +102,7 @@
                 <div class=" col-12 mt--8 pt-2" [@animSlider]="productToggleId">
                     <div *ngFor="let product of orderDraft.products, let i = index">
                         <div class=" card pb-8 pt-2 no-top-radius shadow-right pl-3 pr-2" *ngIf="productToggleId == i">
-                            <app-product [(productTemplate)]=product.template (productTemplateChange)="detectChange()" navFragment="{{ toFragment(productToggleId) }}"> </app-product>
+                            <app-product [(productTemplate)]=product.template (productTemplateChange)="detectChange()" navFragment="{{ [productToggleId] | tabFragment }}"> </app-product>
                         </div>
                     </div>
 
@@ -112,7 +112,7 @@
                 <div class=" col-12 mt--8 pt-2">
                     <div class=" card pb-8 pt-2 pl-2 pr-2 no-top-radius shadow-right">
 
-                        <app-order [(order)]="orderDraft" (orderChange)="detectChange()" navFragment="{{ toFragment() }}"> </app-order>
+                        <app-order [(order)]="orderDraft" (orderChange)="detectChange()" navFragment="{{ [] | tabFragment }}"> </app-order>
 
 
 

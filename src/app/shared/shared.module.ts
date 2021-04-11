@@ -13,6 +13,10 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { HideIfUnauthorizedDirective } from '../auth/hide-if-unauthorized.directive';
 import { ShowIfUnauthorizedDirective } from '../auth/show-if-unauthorized.directive';
+import { DurationPipe } from '../pipes/duration/duration.pipe';
+import { VideoTypePipe } from '../pipes/media-type/media-type.pipe';
+import { TabFragmentPipe } from '../pipes/tab-fragment/tab-fragment.pipe';
+import { TabIndicesPipe } from '../pipes/tab-indices/tab-indices.pipe';
 import {
   BottomNavigationOrderDraftComponent,
 } from './bottom-navigation-order-draft/bottom-navigation-order-draft.component';
@@ -34,6 +38,10 @@ import { TabsComponent } from './tabs/tabs.component';
 import { TopNavigationComponent } from './top-navigation/top-navigation.component';
 
 @NgModule({
+  providers: [
+    TabFragmentPipe,
+    TabIndicesPipe
+  ],
   declarations: [TopNavigationComponent,
     TabsComponent,
     BreadcrumbHeaderComponent,
@@ -53,7 +61,10 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     HideIfUnauthorizedDirective,
     ShowIfUnauthorizedDirective,
     SpinnerComponent,
-
+    DurationPipe,
+    VideoTypePipe,
+    TabFragmentPipe,
+    TabIndicesPipe,
      ],
   imports: [
     CommonModule,
@@ -102,7 +113,11 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     PieChartComponent,
     HideIfUnauthorizedDirective,
     ShowIfUnauthorizedDirective,
-    SpinnerComponent
+    SpinnerComponent,
+    DurationPipe,
+    VideoTypePipe,
+    TabFragmentPipe,
+    TabIndicesPipe,
   ]
 
 })

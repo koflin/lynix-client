@@ -10,6 +10,8 @@ import { Order } from 'src/app/models/order';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { deletingDataInformation } from 'src/app/models/ui/deletingData';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
+import { TabFragmentPipe } from 'src/app/pipes/tab-fragment/tab-fragment.pipe';
+import { TabIndicesPipe } from 'src/app/pipes/tab-indices/tab-indices.pipe';
 import swal from 'sweetalert2';
 
 import { ProcessesService } from './../../../../core/processes/processes.service';
@@ -121,6 +123,8 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     private authService: AuthService,
     private processService: ProcessesService,
     private toastr: ToastrService,
+    private fragPipe: TabFragmentPipe,
+    private indicesPipe: TabIndicesPipe
   ) { }
 
   hasUnsavedData(): boolean {
@@ -162,30 +166,20 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
         return;
       }
 
-      const parts = fragment.split('.');
+      const parts = this.indicesPipe.transform(fragment);
 
       if (parts.length >= 1) {
-        this._productToggleId = parseInt(parts[0]);
+        this._productToggleId = parts[0];
       }
 
       if (parts.length >= 2) {
-        this._processToggleId = parseInt(parts[1]);
+        this._processToggleId = parts[1];
       }
 
       if (parts.length >= 3) {
-        this._stepToggleId = parseInt(parts[2]);
+        this._stepToggleId = parts[2];
       }
     });
-  }
-
-  toFragment(prod?: number, proc?: number, step?: number) {
-    let frag = '';
-
-    frag += prod != undefined ? prod.toString() : '';
-    frag += proc != undefined ? '.' + proc.toString(): '';
-    frag += step != undefined ? '.' + step.toString(): '';
-
-    return frag;
   }
 
   getOrder(id: string) {
@@ -234,7 +228,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     if (this.orderDraft && this.orderDraft.id) {
       this.ordersService.save(this.orderDraft);
     } else {
-      const fragment = this.toFragment(this.productToggleId, this.processToggleId, this.stepToggleId);
+      const fragment = this.fragPipe.transform([this.productToggleId, this.processToggleId, this.stepToggleId]);
 
       this.ordersService.create(this.orderDraft).subscribe(id => this.router.navigate(['orders/draft/' + id], { fragment }));
     }

@@ -6,6 +6,7 @@ import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-t
 import { ProcessTemplate } from 'src/app/models/processTemplate';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
+import { TabIndicesPipe } from 'src/app/pipes/tab-indices/tab-indices.pipe';
 import swal from 'sweetalert2';
 
 @Component({
@@ -31,6 +32,7 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
     private authService: AuthService,
     private processTemplateService: ProcessTemplatesService,
     private toastr: ToastrService,
+    private indiciesPipe: TabIndicesPipe
   ) { }
 
   ngOnInit(): void {
@@ -45,8 +47,10 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
         return;
       }
 
-      if (fragment.length >= 1) {
-        this.stepToggleId = parseInt(fragment[0]);
+      const tabs = this.indiciesPipe.transform(fragment);
+
+      if (tabs.length >= 1) {
+        this.stepToggleId = tabs[0];
       }
     });
   }

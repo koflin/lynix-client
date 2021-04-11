@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   // bis hierhin nicht standard
   user:string=""
   password:string=""
+  remember: boolean = false;
+
   showPassword=false
   error=false
   constructor(private authService: AuthService, private router: Router ) { }
@@ -32,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   signIn(){
     if (this.password && this.user) {
-      this.authService.login(this.user, this.password).then((result:boolean) => {
+      this.authService.login(this.user, this.password, this.remember).then((result:boolean) => {
           this.error = !result
           if (this.error == false) {
             this.router.navigate(['/'])

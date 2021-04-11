@@ -8,7 +8,7 @@
                             <app-text-field [result]="processTemplate.name" (resultChange)="processTemplate.name = $event; processTemplateChange.emit(processTemplate)" [(fieldInformation)]=name  [inputCheckForError]="checkForError" [inputRequired]="true"> </app-text-field>
                         </div>
                         <div class="col-12 col-md-6">
-                            <label class=" form-control-label" i18n>Estimated Time Total:</label> <br>
+                            <label class=" form-control-label" i18n>Total estimated time:</label> <br>
                             <p class="pt-2">{{ estimatedTime }}</p>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                 <accordion-group >
                     <div accordion-heading>
                         <p class="col-auto mb-0 h5 text-primary"><span i18n>Previous Comments</span><i class=" float-right pull-right fa fa-angle-down p-2"></i></p>
-                        <p><small class="text-muted col-12" i18n>Previous commtens conerning the process</small> </p>
+                        <p><small class="text-muted col-12" i18n>Previous comments concerning the process</small> </p>
                     </div>
                     <div class="row" *ngFor="let comment of processTemplate.previousComments; let i = index">
                         <p> {{comment}} </p>

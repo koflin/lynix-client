@@ -8,6 +8,7 @@ import { ProductTemplatesService } from 'src/app/core/productTemplates/product-t
 import { ProductTemplate } from 'src/app/models/productTemplate';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { deletingDataInformation } from 'src/app/models/ui/deletingData';
+import { TabIndicesPipe } from 'src/app/pipes/tab-indices/tab-indices.pipe';
 import swal from 'sweetalert2';
 
 const left = [
@@ -91,6 +92,7 @@ export class ProductTemplateDetailComponent implements OnInit {
     private productTemplateService: ProductTemplatesService,
     private processTemplateService: ProcessTemplatesService,
     private toastr: ToastrService,
+    private indicesPipe: TabIndicesPipe
   ) { }
 
   ngOnInit(): void {
@@ -107,14 +109,14 @@ export class ProductTemplateDetailComponent implements OnInit {
         return;
       }
 
-      const parts = fragment.split('.');
+      const parts = this.indicesPipe.transform(fragment);
 
       if (parts.length >= 1) {
-        this._processToggleId = parseInt(parts[0]);
+        this._processToggleId = parts[0];
       }
 
       if (parts.length >= 2) {
-        this._stepToggleId = parseInt(parts[1]);
+        this._stepToggleId = parts[1];
       }
     });
   }
@@ -183,15 +185,6 @@ export class ProductTemplateDetailComponent implements OnInit {
 
   cancle() {
     this.router.navigate(['templates/product']);
-  }
-
-  toFragment(proc?: number, step?: number) {
-    let frag = '';
-
-    frag += proc != undefined ? proc.toString(): '';
-    frag += step != undefined ? '.' + step.toString(): '';
-
-    return frag;
   }
 
   defContainer(){

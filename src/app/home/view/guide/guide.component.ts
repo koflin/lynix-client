@@ -1,7 +1,6 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as moment from 'moment';
 import { EventsService } from 'src/app/core/events/events.service';
 import { OrdersService } from 'src/app/core/orders/orders.service';
 import { ProcessesService } from 'src/app/core/processes/processes.service';
@@ -11,6 +10,7 @@ import { Order } from 'src/app/models/order';
 import { Process } from 'src/app/models/process';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { User, UserActivity } from 'src/app/models/user';
+import swal from 'sweetalert2';
 
 const left = [
   query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
@@ -168,7 +168,23 @@ export class GuideComponent implements OnInit, OnDestroy {
     }
   }
 
-  onFinish() {
+  async onFinish() {
+    if (this.process.steps.some(step => step.timeTaken == 0)) {
+      const { value } = await swal.fire({
+        title: 'Steps not started',
+        text: "Are you sure, you want to finish this process? Some steps haven't been started yet.",
+        type: 'warning',
+        showCancelButton: true,
+        buttonsStyling: false,
+        confirmButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Yes, finish!',
+        cancelButtonClass: 'btn btn-secondary'
+      });
+
+      if (!value) {
+        return;
+      }
+    }
     this.processesService.finish(this.process.id).subscribe(() => this.router.navigate(['processes/overview']));
   }
 
@@ -176,19 +192,6 @@ export class GuideComponent implements OnInit, OnDestroy {
     this.event.emit(Event.ACTIVITY_CHANGE, UserActivity.IDLE);
 
     await this.processesService.exit(this.process.id).toPromise();
-  }
-
-  getEstimatedHours(seconds: number) {
-    return Math.floor(seconds / 3600);
-  }
-
-  getEstimatedMinutes(seconds: number) {
-    return Math.floor((seconds - this.getEstimatedHours(seconds) * 3600) / 60);
-  }
-
-  getFullTime(seconds: number) {
-    const duration = moment.duration(seconds, 'seconds');
-    return Math.floor(duration.asHours()) + 'h ' + duration.minutes() + 'm ' + duration.seconds() + 's';
   }
 
 }

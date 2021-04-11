@@ -1,10 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Step } from 'src/app/models/step';
-import * as moment from 'moment';
-import { Process } from 'src/app/models/process';
-import { TextArea } from '../models/InputOutputValue';
+import { Component, Input, OnInit } from '@angular/core';
 import { CarouselConfig } from 'ngx-bootstrap/carousel';
-import { MediaService } from 'src/app/helpers/media/media.service';
+import { Process } from 'src/app/models/process';
+
+import { TextArea } from '../models/InputOutputValue';
 
 @Component({
   selector: 'app-step-guide-tab',
@@ -20,14 +18,10 @@ export class StepGuideTabComponent implements OnInit {
   showAlert:boolean=true;
   currentImageIndex: number;
   currentVideoIndex: number;
-  constructor(private mediaService: MediaService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-  }
-  getFullTime(seconds: number) {
-    const duration = moment.duration(seconds, 'seconds');
-    return Math.floor(duration.asHours()) + 'h ' + duration.minutes() + 'm ' + duration.seconds() + 's';
   }
 
   isString(val): boolean { return typeof val === 'string'}

@@ -10,9 +10,11 @@ import {
   OnInit,
   Optional,
   Output,
+  Renderer2,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { TabFragmentPipe } from 'src/app/pipes/tab-fragment/tab-fragment.pipe';
 
 
 @Component({
@@ -29,7 +31,7 @@ export class TabsComponent implements OnInit,AfterViewInit {
   @Input() tabsResIndex:number
   @Output() tabsResIndexChange= new EventEmitter<number>()
 
-  @Input() navFragmentBase: string;
+  @Input() navFragmentBase: number[];
   @Input() mark: number;
 
   @Output() tabAdd = new EventEmitter<void>()
@@ -41,7 +43,9 @@ export class TabsComponent implements OnInit,AfterViewInit {
   firstVisible:boolean=true
   lastVisible:boolean=false
   constructor(
+    private renderer: Renderer2,
     private cdref: ChangeDetectorRef,
+    private fragPipe: TabFragmentPipe,
     @Optional() @Attribute('addable') addable: any
   ) {
     this.addable = addable != undefined;
@@ -84,7 +88,11 @@ export class TabsComponent implements OnInit,AfterViewInit {
   }
 
   toggle(value) {
-    return this.navFragmentBase + ((this.tabsResIndex == value && !this.setNotUndefined) ? '' : (this.navFragmentBase != '' ? '.' : '') + value);
+    if (this.tabsResIndex == value && !this.setNotUndefined) {
+      return this.fragPipe.transform(this.navFragmentBase);
+    }
+
+    return this.fragPipe.transform([...this.navFragmentBase, value]);
   }
 
 
@@ -121,6 +129,7 @@ export class TabsComponent implements OnInit,AfterViewInit {
     if (scrollPixel>this.tabs.nativeElement.clientWidth) {
       scrollPixel =this.tabs.nativeElement.clientWidth *0.3
     }
+
     this.tabs.nativeElement.scrollTo({ left: (this.tabs.nativeElement.scrollLeft - scrollPixel), behavior: 'smooth' });
   }
 
@@ -132,6 +141,7 @@ export class TabsComponent implements OnInit,AfterViewInit {
      if (scrollPixel>this.tabs.nativeElement.clientWidth) {
        scrollPixel =this.tabs.nativeElement.clientWidth *0.3
      }
+
     this.tabs.nativeElement.scrollTo({ left: (this.tabs.nativeElement.scrollLeft + scrollPixel), behavior: 'smooth' });
   }
   calculateClasses(first, last, index) {
@@ -139,7 +149,7 @@ export class TabsComponent implements OnInit,AfterViewInit {
     if (this.slimTab) {
       res['slim-tab'] = true
     }
-    if (this.overFlow) {
+    /*if (this.overFlow) {
       if (first) {
         res['margin-btn-left'] = true
       }
@@ -147,7 +157,7 @@ export class TabsComponent implements OnInit,AfterViewInit {
         res['margin-btn-right'] = true
       }
 
-    }
+    }*/
 
 
     if (index!=this.tabsResIndex) {

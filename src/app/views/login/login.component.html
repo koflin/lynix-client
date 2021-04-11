@@ -100,6 +100,8 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
                   class="custom-control-input"
                   id=" customCheckLogin"
                   type="checkbox"
+                  [checked]="remember"
+                  (change)="remember = !remember"
                 />
                 <label class="custom-control-label" for=" customCheckLogin">
                   <span i18n>Remember me</span>

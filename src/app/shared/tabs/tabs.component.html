@@ -1,4 +1,4 @@
-<div id="product-toggles" #tabContainer class="scrollable-but-hide" style="white-space: nowrap; overflow-x: overlay;">
+<div id="product-toggles" #tabContainer class="scrollable-but-hide" style="white-space: nowrap; overflow-x: auto;">
         <button  *ngIf="overFlow" (click)="scrollLeft()" class="btn btn-icon btn-2 btn-secondary floating-left floating-btn card-stronger-shadow z-index-1" [ngClass]="{'lightgray-color': firstVisible}" type="button">
             <span class="btn-inner--icon"><i class="fas fa-chevron-left"></i></span>
           </button>
@@ -7,7 +7,7 @@
         <label (click)="selectTabs(i, $event)" [routerLink]="" fragment="{{ toggle(i) }}" *ngFor="let item of tabsvalue, let i = index let first= first, let last=last" [id]="item" class="nav-link-tab zooming shadow-right mt-1 mb-0"    [ngClass]="calculateClasses(first, false, i)" tabindex="0" role="button">
             <div class="hover hover-1">
                 {{item + (i == mark ? '*' : '')}} <i class="fa fa-angle-right p-2" [ngClass]="{'open': i==tabsResIndex}"></i>
-                <span *ngIf="first || last" inViewport  (inViewportAction)="onIntersection($event, first, last)" >
+                <span *ngIf="first || last" inViewport  (inViewportAction)="onIntersection($event, first, false)" >
 
                 </span>
             </div>
@@ -17,13 +17,13 @@
         <label *ngIf="addable" (click)="tabAdd.emit()" [id]="tabsvalue.length" class="nav-link-tab zooming shadow-right mt-1 mb-0"    [ngClass]="calculateClasses(tabsvalue.length === 0, true, tabsvalue.length)" tabindex="0" role="button">
           <div class="hover hover-1">
               <i class="fas fa-plus p-2"></i>
-              <span inViewport  (inViewportAction)="onIntersection($event, true, undefined)" >
+              <span inViewport  (inViewportAction)="onIntersection($event, tabsvalue.length == 0, true)" >
 
               </span>
           </div>
         </label>
 
-        <button *ngIf="overFlow" (click)="scrollRight()"  class=" btn btn-icon btn-2 btn-secondary floating-right floating-btn card-stronger-shadow z-index-1" [ngClass]="{'lightgray-color': lastVisible}" type="button">
+        <button *ngIf="overFlow" (click)="scrollRight()" class=" btn btn-icon btn-2 btn-secondary floating-right floating-btn card-stronger-shadow z-index-1" [ngClass]="{'lightgray-color': lastVisible}" type="button">
             <span class="btn-inner--icon"><i class="fa fa-chevron-right"></i></span>
         </button>
 

@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card shadow-card-stronger p-3">
             <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="process.currentStepIndex != stepIndex">
-                <span class="alert-inner--text"><strong i18n>Warning!</strong><span i18n>If you want to start this process step, please switch!</span></span>
+                <span class="alert-inner--text"><strong i18n>Warning!</strong><span i18n>If you want to start this process step, please press "switch"!</span></span>
                 <button type="button" (click)="showAlert=false" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
@@ -17,19 +17,19 @@
             <div class="row">
               <ng-container  *ngIf="process.currentStepIndex !== null && process.steps[stepIndex] as currentStep">
                 <div class="col">
-                  <p><span class="h4" i18n>Time Taken:</span>  {{ getFullTime(currentStep.timeTaken) }}</p>
+                  <p><span class="h4" i18n>Time Taken:</span>  {{ currentStep.timeTaken | duration }}</p>
                 </div>
                 <div class="col">
-                  <p> <span class="h4" i18n>Estimated Time:</span> {{ getFullTime(currentStep.estimatedTime) }} </p>
+                  <p> <span class="h4" i18n>Estimated Time:</span> {{ currentStep.estimatedTime | duration }} </p>
                 </div>
               </ng-container>
             </div>
             <div class="row">
               <div class="col">
-                <p> <span class="h4" i18n>Total Time Taken:</span> {{ getFullTime(process.timeTaken) }} </p>
+                <p> <span class="h4" i18n>Total Time Taken:</span> {{ process.timeTaken | duration }} </p>
               </div>
               <div class="col">
-                <p> <span class="h4" i18n>Total Estimated Time:</span> {{ getFullTime(process.estimatedTime) }} </p>
+                <p> <span class="h4" i18n>Total Estimated Time:</span> {{ process.estimatedTime | duration }} </p>
               </div>
             </div>
         </div>
@@ -142,8 +142,8 @@
                                     <h4 i18n>Videos</h4>
                                     <carousel>
                                         <slide *ngFor="let video of process.steps[stepIndex].videoUris; let i=index" >
-                                            <video width="100%">
-                                                <source [src]="video">
+                                            <video width="100%" controls>
+                                                <source [src]="video" type="{{ video | videoType }}">
                                             </video>
                                         </slide>
                                     </carousel>

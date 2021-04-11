@@ -36,10 +36,11 @@ export class AuthService {
     //return parseInt(this.cookies.get('logged_in_until')) > Date.now();
   }
 
-  login(username: string, password: string): Promise<boolean> {
+  login(username: string, password: string, persist: boolean): Promise<boolean> {
     return this.api.post<{ access_token: string, user: LocalUser, refresh_expiration: number }>('auth/login', {
       username,
-      password
+      password,
+      persist
     }).pipe(
       map((result) => {
         this.accessToken = result.access_token;

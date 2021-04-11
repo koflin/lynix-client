@@ -18,17 +18,13 @@ export class EventsService {
     private authService: AuthService
   ) {
     this.authService.onLocalUserChange.subscribe((user) => {
-      if (this.socket && this.socket.active) {
-        this.socket.close();
+
+      if (this.socket && this.socket.connected) {
+        this.socket.disconnect();
       }
 
       if (user) {
         this.socket = io(this.webSocketRoot, { transports: ['websocket'], auth: { token: authService.getToken() }});
-      } else {
-        if (this.socket) {
-          this.socket.disconnect();
-          this.socket = null;
-        }
       }
     });
   }

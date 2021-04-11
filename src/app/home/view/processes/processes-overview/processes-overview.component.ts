@@ -2,7 +2,6 @@ import { group } from '@angular/animations';
 import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { cloneDeep } from 'lodash';
-import * as moment from 'moment';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EventsService } from 'src/app/core/events/events.service';
 import { ProcessesService } from 'src/app/core/processes/processes.service';
@@ -172,11 +171,6 @@ export class ProcessesOverviewComponent implements OnInit {
       this.loaded = true;
     });
 
-  }
-
-  getFullTime(seconds: number) {
-    const duration = moment.duration(seconds, 'seconds');
-    return Math.floor(duration.asHours()) + 'h ' + duration.minutes() + 'm ';
   }
 
   userNameSort(valueA, valueB, rowA, rowB, sort){
