@@ -7,6 +7,7 @@ export const environment = {
   apiHost: 'http://localhost:3000/v0/',
   gatewayHost: 'ws://localhost:3001',
   domain: 'localhost',
+  clientHost: 'http://localhost:4200/'
 };
 
 /*

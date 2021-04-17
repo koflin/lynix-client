@@ -1,0 +1,92 @@
+<div class=" main-content full-height"
+style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover; background-position: center top;">
+<span class="mask bg-gradient-primary opacity-6">
+
+</span>
+
+
+  <div class=" header  py-5 py-lg-8 pt-lg-9">
+    <div class=" container">
+      <div class=" header-body text-center mb-0">
+        <div class=" row justify-content-center">
+          <div class=" col-xl-5 col-lg-6 col-md-8 px-7">
+
+            <img style="object-fit: scale-down;" src="assets/img/Logo_Lynix_white.svg">
+
+            <h3 class=" pt-5 h2 text-white">
+              SMART ASSISTANT SYSTEM
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class=" container mt--5 pb-5">
+    <div class=" row justify-content-center">
+      <div class=" col-lg-5 col-md-7">
+        <div class=" card bg-secondary border-0 mb-0">
+          <div class=" card-header bg-transparent">
+            <div class=" text-muted text-center mt-2 mb-2">
+              <p class="text-primary" i18n>Account Activation</p>
+            </div>
+          </div>
+
+          <div *ngIf="userId" class=" card-body px-lg-5 py-lg-5">
+
+
+            <form role="form">
+              <label *ngIf="error" class="text-danger">{{ error }}</label>
+              <div class="form-group" [ngClass]="{ focused: focus1 === true }">
+                <div class="input-group input-group">
+
+                  <input
+                    class="form-control"
+                    [ngClass]="{'field-error': error}"
+                    placeholder="New Password"
+                    i18n-placeholder
+                    [type]="showPassword ? 'text' : 'password'"
+                    (focus)="focus1 = true"
+                    (blur)="focus1 = false"
+                    name="password"
+                    [(ngModel)]="password"
+                    required="true"
+                  />
+                  <div class="input-group-append">
+                      <span class="input-group-text text-primary" [ngClass]="{'field-error': error}" (click)="showPassword = !showPassword"
+                        ><i [ngClass]="showPassword ? 'far fa-eye' : 'far fa-eye-slash'"></i></span>
+                    </div>
+                </div>
+              </div>
+              <div class="form-group" [ngClass]="{ focused: focus1 === true }">
+                <div class="input-group input-group">
+
+                  <input
+                    class="form-control"
+                    [ngClass]="{'field-error': error}"
+                    placeholder="New Password Check"
+                    i18n-placeholder
+                    [type]="showPassword ? 'text' : 'password'"
+                    (focus)="focus1 = true"
+                    (blur)="focus1 = false"
+                    name="password"
+                    [(ngModel)]="passwordCheck"
+                    required="true"
+                  />
+                  <div class="input-group-append">
+                      <span class="input-group-text text-primary" [ngClass]="{'field-error': error}" (click)="showPassword = !showPassword"
+                        ><i [ngClass]="showPassword ? 'far fa-eye' : 'far fa-eye-slash'"></i></span>
+                    </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-primary my-4" type="submit" (click)="activate()" i18n>Change password</button>
+              </div>
+            </form>
+          </div>
+          <p *ngIf="!userId" i18n>Invalid account activation link</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

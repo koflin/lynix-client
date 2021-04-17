@@ -19,9 +19,7 @@ export class AuthGuard implements CanActivate {
     const requiredPermissions: Permission[] = next.data['permissions'];
 
     return new Promise(async (resolve) => {
-      console.log('GUARD');
       const localUser = await this.authService.refreshToken().toPromise();
-      console.log(localUser);
 
       // Check if user is logged in
       if (!localUser) {

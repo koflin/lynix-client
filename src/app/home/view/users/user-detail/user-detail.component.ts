@@ -3,15 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ActivationService } from 'src/app/core/activation/activation.service';
 import { MediaService } from 'src/app/core/media/media.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { UsersService } from 'src/app/core/users/users.service';
+import { Activation } from 'src/app/models/activation';
 import { Role } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
 import { UserDetailNode } from 'src/app/models/ui/userDetailNode';
 import { User } from 'src/app/models/user';
 import { InputOutputValue, SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
+import { environment } from 'src/environments/environment';
 import swal from 'sweetalert2';
 
 import { UsersDetailService } from './user-detail.service';
@@ -44,7 +47,8 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
   usernameField:InputOutputValue=new InputOutputValue('Username', 'username', false)
   firstname:InputOutputValue=new InputOutputValue('firstname', 'First name', false)
   lastname:InputOutputValue=new InputOutputValue('lastname', 'Last name', false)
-  password:InputOutputValue=new InputOutputValue('password', 'Password', false)
+
+  activation: Activation;
 
   _selectedRole:SingleMultiChoiceItem=undefined
   get selectedRole():SingleMultiChoiceItem{
@@ -64,6 +68,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     private authService: AuthService,
     private mediaService: MediaService,
     private toastr: ToastrService,
+    private activationService: ActivationService
     ) {
       //history.pushState(null, null, window.location.href);
     // check if back or forward button is pressed.
@@ -99,7 +104,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
 
   async save() {
     this.checkForError=true
-    if (!(this.roleField.error || this.usernameField.error || this.firstname.error || this.lastname.error || this.password.error)) {
+    if (!(this.roleField.error || this.usernameField.error || this.firstname.error || this.lastname.error)) {
       if (this.avatarImage) {
         const media = await this.mediaService.upload(this.avatarImage).toPromise();
         this.userDetail.avatar = media.url;
@@ -145,10 +150,29 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     this.avatarImage = null;
   }
 
+  copyLink() {
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = environment.clientHost + '/activation/' + this.activation.id + '?code=' + this.activation.code;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
+
   async refresh() {
 
     if (this.userId!= 'undefined') {
       this.userDetail = await this.usersDetailService.getDetail(this.userId).toPromise();
+
+      if (!this.userDetail.activatedAt) {
+        this.activation = await this.activationService.getByUserId(this.userId).toPromise();
+        console.log(this.activation);
+      }
     }else{
       this.userDetail = {
         role: undefined,

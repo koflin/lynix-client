@@ -1,9 +1,9 @@
-import { switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { CompaniesService } from 'src/app/core/companies/companies.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { UsersService } from 'src/app/core/users/users.service';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { CompaniesService } from 'src/app/core/companies/companies.service';
 import { UserDetailNode } from 'src/app/models/ui/userDetailNode';
 
 @Injectable({
@@ -36,7 +36,8 @@ export class UsersDetailService {
         lastName: user.lastName,
         avatar: user.avatar,
         role: user.role,
-        company: await this.companiesService.getById(user.companyId).toPromise()
+        company: await this.companiesService.getById(user.companyId).toPromise(),
+        activatedAt: user.activatedAt
       };
     }));
   }
@@ -49,7 +50,8 @@ export class UsersDetailService {
       avatar: userDetail.avatar,
       firstName: userDetail.firstName,
       lastName: userDetail.lastName,
-      role: userDetail.role
+      role: userDetail.role,
+      activatedAt: userDetail.activatedAt
     });
   }
 }

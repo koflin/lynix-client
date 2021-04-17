@@ -10,6 +10,7 @@ export interface User extends CompanyBase {
   lastName?: string;
   role?: Role;
   avatar?: string;
+  activatedAt?: Date;
 }
 
 export enum UserStatus {
