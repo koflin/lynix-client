@@ -32,8 +32,8 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return parseInt(localStorage.getItem('logged_in_until')) > Date.now();
-    //return parseInt(this.cookies.get('logged_in_until')) > Date.now();
+    const validUntil = this.getLoggedInUntil();
+    return validUntil ? parseInt(validUntil) > Date.now() : false;
   }
 
   login(username: string, password: string, persist: boolean): Promise<boolean> {
@@ -46,7 +46,8 @@ export class AuthService {
         this.accessToken = result.access_token;
         this.scheduleRefresh();
         this.localUser.next(result.user);
-        localStorage.setItem('logged_in_until', result.refresh_expiration.toString());
+
+        this.setLoggedInUntil(result.refresh_expiration, persist);
 
         return true;
       }),
@@ -60,7 +61,7 @@ export class AuthService {
     return this.api.delete('auth/logout').pipe(
       map(() => {
         this.accessToken = null;
-        localStorage.setItem('logged_in_until', '0');
+        this.clearLoggedInUntil();
         this.localUser.next(null);
         return;
       })
@@ -95,15 +96,16 @@ export class AuthService {
   }
 
   refreshToken(): Observable<LocalUser> {
-    //const validUntil = this.cookies.get('logged_in_until');
-    const validUntil = localStorage.getItem('logged_in_until');
+    const validUntil = this.getLoggedInUntil();
 
     if (validUntil && parseInt(validUntil) > Date.now()) {
-      return this.api.post<{ access_token: string, user: LocalUser, refresh_expiration: number }>('auth/token').pipe(
+      return this.api.post<{ access_token: string, user: LocalUser, refresh_expiration: number, persist: boolean }>('auth/token').pipe(
         tap((result) => {
           this.accessToken = result.access_token;
           this.scheduleRefresh();
           this.localUser.next(result.user);
+
+          this.setLoggedInUntil(result.refresh_expiration, result.persist);
         }),
         map((result) => {
           return result.user;
@@ -115,5 +117,30 @@ export class AuthService {
 
   private scheduleRefresh() {
     setTimeout(this.refreshToken.bind(this), this.jwtHelper.getTokenExpirationDate(this.accessToken).getTime() - Date.now() - 30000);
+  }
+
+  private getLoggedInUntil() {
+    const validUntil = localStorage.getItem('logged_in_until');
+
+    if (!validUntil) {
+      return sessionStorage.getItem('logged_in_until');
+    }
+
+    return validUntil;
+  }
+
+  private setLoggedInUntil(value: number, persist: boolean) {
+    if (persist) {
+      localStorage.setItem('logged_in_until', value.toString());
+      sessionStorage.removeItem('logged_in_until');
+    } else {
+      sessionStorage.setItem('logged_in_until', value.toString());
+      localStorage.removeItem('logged_in_until');
+    }
+  }
+
+  private clearLoggedInUntil() {
+    localStorage.removeItem('logged_in_until');
+      sessionStorage.removeItem('logged_in_until');
   }
 }
