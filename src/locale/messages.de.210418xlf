@@ -56,7 +56,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="5704ec2049d007c5f5fb495a5d8b607e68d58081" datatype="html">
-        <source>Order</source><target state="new">Aufträge</target>
+        <source>Order</source><target state="new">Auftrag</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context>
           <context context-type="linenumber">47</context>
@@ -86,7 +86,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="fb8c3bdc1fa9d7ab1f70d4e9e57046cbf11b0401" datatype="html">
-        <source>Create New</source><target state="new">Neu</target>
+        <source>Create New</source><target state="new">Erstellen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context>
           <context context-type="linenumber">52</context>
@@ -97,7 +97,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="6b6a341244987842b9a398da39530352bb9dab9f" datatype="html">
-        <source>Process</source><target state="new">Prozesse</target>
+        <source>Process</source><target state="new">Prozess</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context>
           <context context-type="linenumber">59</context>
@@ -116,7 +116,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="467bff8643ae9525e0477374f132a6b19bedbfd5" datatype="html">
-        <source>Template</source><target state="new">Vorlagen</target>
+        <source>Template</source><target state="new">Vorlage</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context>
           <context context-type="linenumber">70</context>
@@ -127,7 +127,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="d3cbff754f1c148f3fec696edd246993aea35b01" datatype="html">
-        <source>Product</source><target state="new">Produkte</target>
+        <source>Product</source><target state="new">Produkt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context>
           <context context-type="linenumber">74</context>
@@ -210,7 +210,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="2b2fe20f37ece1329704906bab863e5aae3ed897" datatype="html">
-        <source>a phone.</source><target state="new">eine Telefonnummer.</target>
+        <source>a phone.</source><target state="new">ein Telefonnummer.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/forms/text-field/text-field.component.html</context>
           <context context-type="linenumber">25</context>
@@ -257,7 +257,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="cb5874a4748c25733b169d21945db5ebd328f853" datatype="html">
-        <source>Add Products to your order</source><target state="new">Hinzufügen</target>
+        <source>Add Products to your order</source><target state="new">Füge dem Auftrag Produkte hinzu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/order/order.component.html</context>
           <context context-type="linenumber">40</context>
@@ -339,7 +339,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="5735265a1ba7ca2e46e002f3dd4611b1c78b55d2" datatype="html">
-        <source>Add Process to your product</source><target state="new">Prozess hinzufügen</target>
+        <source>Add Process to your product</source><target state="new">Füge dem Produkt einen Prozess hinzu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/product/product.component.html</context>
           <context context-type="linenumber">33</context>
@@ -367,14 +367,14 @@
         </context-group>
       </trans-unit>
       <trans-unit id="782ef7ad9c095347dfb3de26fcd3a101978eb968" datatype="html">
-        <source>Estimated Time Total:</source><target state="new">Vorgabezeit gesamt:</target>
+        <source>Estimated Time Total:</source><target state="new">Geschätzte totale Zeit:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/process/process.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="072e75b48e767c214bc09a81b54adac84d11c188" datatype="html">
-        <source>Main Tasks &amp; Challenges</source><target state="new">Zu beachten &amp; </target>
+        <source>Main Tasks &amp; Challenges</source><target state="new">Haupttätigkeiten &amp; Herausforderungen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/process/process.component.html</context>
           <context context-type="linenumber">22</context>
@@ -385,21 +385,21 @@
         </context-group>
       </trans-unit>
       <trans-unit id="48a7a24e76fb071b582a4bcd9289efa0a12a4bfa" datatype="html">
-        <source>Add main tasks</source><target state="new">Hinzufügen</target>
+        <source>Add main tasks</source><target state="new">Füge eine Haupttätigkeit hinzu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/process/process.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7718415639470cffeb16bebef2936464dc6e3376" datatype="html">
-        <source>Tasks &amp; Challenges</source><target state="new">Aufgaben &amp; Herausforderungen</target>
+        <source>Tasks &amp; Challenges</source><target state="new">Tätigkeiten &amp; Herausforderungen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/process/process.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="78677a45c5038d5c56dc52d9f643bbb2c6d0737f" datatype="html">
-        <source>tasks &amp; challenges</source><target state="new">Aufgaben &amp; Herausforderungen</target>
+        <source>tasks &amp; challenges</source><target state="new">Tätigkeiten &amp; Herausforderungen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/process/process.component.html</context>
           <context context-type="linenumber">48</context>
@@ -413,14 +413,14 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ed31ca92e9919baf9beaa528175c2f3b5ad57c04" datatype="html">
-        <source>Previous commtens conerning the process</source><target state="new">Anzeigen</target>
+        <source>Previous commtens conerning the process</source><target state="new">Bisherige Kommentare zum Prozess</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/process/process.component.html</context>
           <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="02f8ee7117d0f306f5726d1c578a9f18c4ba5b6d" datatype="html">
-        <source>Steps</source><target state="new">Arbeitsschritte</target>
+        <source>Steps</source><target state="new">Schritte</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/process/process.component.html</context>
           <context context-type="linenumber">86</context>
@@ -435,21 +435,21 @@
         </context-group>
       </trans-unit>
       <trans-unit id="3fa4575109e3387e9cf014fb815c0d10eb0edd8d" datatype="html">
-        <source>Steps to process</source><target state="new">Hinzufügen</target>
+        <source>Steps to process</source><target state="new">Schritte zum Prozess</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/process/process.component.html</context>
           <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b77dc9e32192bbeb7cfb81031ed091259697d353" datatype="html">
-        <source>step name</source><target state="new">Bezeichnung</target>
+        <source>step name</source><target state="new">Schrittbezeichnung</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/process/process.component.html</context>
           <context context-type="linenumber">118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7c62bcd2e341407691959c569a8462557660038a" datatype="html">
-        <source>Estimated Time</source><target state="new">Zeit</target>
+        <source>Estimated Time</source><target state="new">Geschätzte Zeit</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step/step.component.html</context>
           <context context-type="linenumber">12</context>
@@ -489,14 +489,14 @@
         </context-group>
       </trans-unit>
       <trans-unit id="0dcc7518e5eb34a48d362c65a0c259ab6348956d" datatype="html">
-        <source>Key messages of the process step</source><target state="new">Hinzufügen</target>
+        <source>Key messages of the process step</source><target state="new">Wichtiges zum Prozessschritt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step/step.component.html</context>
           <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="586a5fd72602b5b14ec0c55f84814de47bb21e3a" datatype="html">
-        <source>Tasks</source><target state="new">Aufgaben</target>
+        <source>Tasks</source><target state="new">Tätigkeiten</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step/step.component.html</context>
           <context context-type="linenumber">56</context>
@@ -507,7 +507,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="f7cc3f1c2071f19fad1c0fa60ad3fa4f8f550cc5" datatype="html">
-        <source>Tasks of the process step</source><target state="new">Hinzufügen</target>
+        <source>Tasks of the process step</source><target state="new">Tätigkeiten zum Prozessschritt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step/step.component.html</context>
           <context context-type="linenumber">57</context>
@@ -525,7 +525,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="07fea39bbf90ec48d6ad3b0a416749a0ac7f0a7c" datatype="html">
-        <source>Add materials</source><target state="new">Hinzufügen</target>
+        <source>Add materials</source><target state="new">Füge Materialien hinz</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step/step.component.html</context>
           <context context-type="linenumber">72</context>
@@ -546,7 +546,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="5af0101b92fab6e4dffc29269c0a5dffa7ca2d11" datatype="html">
-        <source>Add tools</source><target state="new">Hinzufügen</target>
+        <source>Add tools</source><target state="new">Füge Werkzeuge hinzu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step/step.component.html</context>
           <context context-type="linenumber">133</context>
@@ -578,7 +578,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="66c29d261489349267d75fa36b588810878b582c" datatype="html">
-        <source>Add pictrue</source><target state="new">Hinzufügen</target>
+        <source>Add pictrue</source><target state="new">Füge Bilder hinzu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step/step.component.html</context>
           <context context-type="linenumber">192</context>
@@ -592,7 +592,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="237fa20ed2a8d68d330fa14aaa6216e61811fbf0" datatype="html">
-        <source>Add new File</source><target state="new">Hinzufügen</target>
+        <source>Add new File</source><target state="new">Füge ein neues Dokument hinzu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step/step.component.html</context>
           <context context-type="linenumber">213</context>
@@ -621,7 +621,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="b7481de53dc763027c2f78edc7331ba9bd88d350" datatype="html">
-        <source>Add video</source><target state="new">Hinzufügen</target>
+        <source>Add video</source><target state="new">Füge einen Video hinzu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step/step.component.html</context>
           <context context-type="linenumber">231</context>
@@ -672,21 +672,21 @@
         </context-group>
       </trans-unit>
       <trans-unit id="9376010144f26a916202895e8eb9d090d5da4108" datatype="html">
-        <source>If you want to start this process step, please press "start"!</source><target state="new"> Um diesen Prozess zu starten, drücke "Fortsetzen"!</target>
+        <source>If you want to start this process step, please press "start"!</source><target state="new">Um diesen Prozess zu starten, drücke "Start"!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step-guide-tab/step-guide-tab.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7d5c1ab758913cd16ef10cc9b562c63c1fd1a35f" datatype="html">
-        <source>Time Taken:</source><target state="new">Zeit:</target>
+        <source>Time Taken:</source><target state="new">Benötigte Zeit:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step-guide-tab/step-guide-tab.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9104ffed83be71836cb99bdd8783c7e76d51b96a" datatype="html">
-        <source>Estimated Time:</source><target state="new">Vorgabezeit:</target>
+        <source>Estimated Time:</source><target state="new">Geschätzte Zeit:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step-guide-tab/step-guide-tab.component.html</context>
           <context context-type="linenumber">23</context>
@@ -701,14 +701,14 @@
         </context-group>
       </trans-unit>
       <trans-unit id="83c383f9a8e5cceeda2fd07fa92f6180fab78b7d" datatype="html">
-        <source>Total Time Taken:</source><target state="new">Gesamtzeit:</target>
+        <source>Total Time Taken:</source><target state="new">Total benötigte Zeit:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step-guide-tab/step-guide-tab.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="46337235e007b18cb5ffef979a0382f0255f6a59" datatype="html">
-        <source>Total Estimated Time:</source><target state="new">Vorgabezeit gesamt:</target>
+        <source>Total Estimated Time:</source><target state="new">Total geschätzte Zeit:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step-guide-tab/step-guide-tab.component.html</context>
           <context context-type="linenumber">32</context>
@@ -724,7 +724,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="2ac17b27a06d9ff9fe468eb8c5c9e5e212d24fed" datatype="html">
-        <source>Overall process</source><target state="new">Übersicht Prozesse:</target>
+        <source>Overall process</source><target state="new">Übersicht aller Prozesse:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context>
           <context context-type="linenumber">16</context>
@@ -767,7 +767,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="980785ef7308a83c36e92f993a81b2073156100a" datatype="html">
-        <source>Work Order Draft</source><target state="new">Arbeitsaufträge</target>
+        <source>Work Order Draft</source><target state="new">Arbeitsauftrag Entwurf</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context>
           <context context-type="linenumber">96</context>
@@ -817,14 +817,14 @@
         </context-group>
       </trans-unit>
       <trans-unit id="36096115d6c8d5f470a1358009102c7cc2e438a6" datatype="html">
-        <source>Add new order</source><target state="new">Neuen Arbeitsauftrag</target>
+        <source>Add new order</source><target state="new">Neuen Arbeitsauftrag hinzufügen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.html</context>
           <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8d356de0bf42cf758037cba7a71f81870665c1c4" datatype="html">
-        <source>Delivery Date:</source><target state="new">Termin:</target>
+        <source>Delivery Date:</source><target state="new">Lieferdatum:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.html</context>
           <context context-type="linenumber">84</context>
@@ -876,7 +876,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="8fc5487bd87cf164dfd72489d6595d12713865f6" datatype="html">
-        <source>Steps:</source><target state="new">Arbeitsschritte:</target>
+        <source>Steps:</source><target state="new">Schritte:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.html</context>
           <context context-type="linenumber">53</context>
@@ -1030,7 +1030,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="1bf1635dd8f141ae4182cbd5b75a70dfb85e5b69" datatype="html">
-        <source>Execution time:</source><target state="new">Zeit:</target>
+        <source>Execution time:</source><target state="new">Ausführungszeit:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.html</context>
           <context context-type="linenumber">45</context>
@@ -1048,7 +1048,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="e22310a16c0a2782a5d17c760e54085e43a79b73" datatype="html">
-        <source>Order Delivery Date</source><target state="new">Termin</target>
+        <source>Order Delivery Date</source><target state="new">Auftragslieferdatum</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.html</context>
           <context context-type="linenumber">89</context>
@@ -1062,7 +1062,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="df3382ef982a783a6206bea522a705e1b8ce4872" datatype="html">
-        <source>Time Taken</source><target state="new">Zeit</target>
+        <source>Time Taken</source><target state="new">Benötigte Zeit</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.html</context>
           <context context-type="linenumber">113</context>
@@ -1108,7 +1108,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="49e8977ccc2eb1acd62ced2d988707d61ed590c6" datatype="html">
-        <source>Order:</source><target state="new">Aufträge:</target>
+        <source>Order:</source><target state="new">Auftrag:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/guide/guide.component.html</context>
           <context context-type="linenumber">27</context>
@@ -1119,8 +1119,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="50beded67c7994024c5dc95b557bcac859f4e306" datatype="html">
-        <source>Process:</source><target state="new">Prozesse
-        :</target>
+        <source>Process:</source><target state="new">Prozess:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/guide/guide.component.html</context>
           <context context-type="linenumber">33</context>
@@ -1142,21 +1141,21 @@
         </context-group>
       </trans-unit>
       <trans-unit id="834da8c4f8998d8a77e1f114e4c5e0b93f66b7d6" datatype="html">
-        <source>Steps Number</source><target state="new">Nummer</target>
+        <source>Steps Number</source><target state="new">Schrittnummer</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/guide/guide.component.html</context>
           <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="32949a1901c0d7ef633b5a0af08223ee3b0257f8" datatype="html">
-        <source>Step Name</source><target state="new">Arbeitsschritt</target>
+        <source>Step Name</source><target state="new">Schrittbezeichnung</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/guide/guide.component.html</context>
           <context context-type="linenumber">177</context>
         </context-group>
       </trans-unit>
       <trans-unit id="51621fdcc6a81a5f8fa8ef00204bac9684875f6e" datatype="html">
-        <source>Taken Time</source><target state="new">Zeit</target>
+        <source>Taken Time</source><target state="new">Benötigte Zeit</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/guide/guide.component.html</context>
           <context context-type="linenumber">178</context>
