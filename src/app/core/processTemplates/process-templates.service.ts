@@ -29,7 +29,7 @@ export class ProcessTemplatesService {
   }
 
   delete(id: string) {
-    this.api.delete('templates/process/' + id).subscribe(() => this.processTemplatesChange.next(id));
+    return this.api.delete('templates/process/' + id);
   }
 
   getAll() {

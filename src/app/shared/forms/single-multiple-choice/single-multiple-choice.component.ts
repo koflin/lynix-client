@@ -64,7 +64,6 @@ export class SingleMultipleChoiceComponent implements OnInit {
   }
 
   validation_save(userHasTyped:boolean, option?){
-
     this.error= false
     this.requiredError = false
     let requiredError = false

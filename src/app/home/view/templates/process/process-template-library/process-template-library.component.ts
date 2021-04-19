@@ -4,6 +4,7 @@ import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-t
 import { Permission } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { ProcessTemplateNode } from 'src/app/models/ui/processTemplateNode';
+import swal from 'sweetalert2';
 
 import { ProcessTemplateLibraryService } from './process-template-library.service';
 
@@ -40,11 +41,6 @@ export class ProcessTemplateLibraryComponent implements OnInit {
     this.router.navigate(['templates/process/' + id]);
   }
 
-  delet(id: string) {
-    this.processTemplateService.delete(id);
-    this.templates.splice(this.templates.findIndex(t => t.id === id), 1);
-  }
-
   onActivate($event){
     if ($event.type=="click") {
       this.toggleExpandRow($event.row)
@@ -57,5 +53,23 @@ export class ProcessTemplateLibraryComponent implements OnInit {
     return{
       'pl-0': true,
       }
+  }
+
+  deleteModal(process: ProcessTemplateNode){
+    swal.fire({
+      title: 'Are you sure to delete process ' + ' \'' + process.name + "\'?",
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      buttonsStyling: false,
+      confirmButtonClass: 'btn btn-default',
+      confirmButtonText: 'Yes, delete!',
+      cancelButtonClass: 'btn btn-secondary'
+    }).then((result) => {
+      if (result.value) {
+        this.processTemplateService.delete(process.id);
+        this.templates.splice(this.templates.findIndex(t => t.id === process.id), 1);
+      }
+    })
   }
 }

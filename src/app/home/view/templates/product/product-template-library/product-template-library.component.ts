@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Permission } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { ProductTemplateNode } from 'src/app/models/ui/productTemplateNode';
+import swal from 'sweetalert2';
 
 import { ProductTemplatesService } from './../../../../../core/productTemplates/product-tempaltes.service';
 import { ProductTemplateLibraryService } from './product-template-library.service';
@@ -60,8 +61,21 @@ export class ProductTemplateLibraryComponent implements OnInit {
     this.router.navigate(['templates/product/' + id]);
   }
 
-  delet(id: string) {
-    this.productTemplateService.delete(id);
-    this.templates.splice(this.templates.findIndex(t => t.id === id), 1);
+  deleteModal(product: ProductTemplateNode){
+    swal.fire({
+      title: 'Are you sure to delete product ' + ' \'' + product.name + "\'?",
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      buttonsStyling: false,
+      confirmButtonClass: 'btn btn-default',
+      confirmButtonText: 'Yes, delete!',
+      cancelButtonClass: 'btn btn-secondary'
+    }).then((result) => {
+      if (result.value) {
+        this.productTemplateService.delete(product.id);
+        this.templates.splice(this.templates.findIndex(t => t.id === product.id), 1);
+      }
+    })
   }
 }

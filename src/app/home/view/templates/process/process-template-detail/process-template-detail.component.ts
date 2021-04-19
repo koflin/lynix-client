@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
 import { ProcessTemplate } from 'src/app/models/processTemplate';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
+import { deletingDataInformation } from 'src/app/models/ui/deletingData';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
 import { TabIndicesPipe } from 'src/app/pipes/tab-indices/tab-indices.pipe';
 import swal from 'sweetalert2';
@@ -82,10 +83,10 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
   }
 
   deleteModal(){
-    const step = this.processTemplate.stepTemplates[this.stepToggleId];
+    let data: deletingDataInformation = this.specificDeleteData()
 
     swal.fire({
-      title: 'Are you sure to delete step' + ' \'' + step.title + "\'?",
+      title: 'Are you sure to delete ' + data.tabContainerPublicName + ' \'' + data.tabName + "\'?",
       text: "You won't be able to revert this!",
       type: 'warning',
       showCancelButton: true,
@@ -95,8 +96,7 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
       cancelButtonClass: 'btn btn-secondary'
     }).then((result) => {
       if (result.value) {
-        this.processTemplate.stepTemplates.splice(this.stepToggleId, 1);
-        this.detectChange();
+          this.deleting(data)
       }
     })
   }
@@ -130,5 +130,50 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
 
   cancle() {
     this.router.navigate(['templates/process']);
+  }
+
+  specificDeleteData(): deletingDataInformation{
+    let container= this.defContainer()
+    let deletingData:deletingDataInformation={'parentTabId':undefined,
+      'tabId': undefined, 'tabName': undefined, 'tabContainerPublicName':undefined}
+    switch (container) {
+      case 'step':
+        deletingData.parentTabId=0
+        deletingData.tabId=this.stepToggleId
+        deletingData.tabName= this.stepsName[this.stepToggleId]
+        deletingData.tabContainerPublicName='step'
+        break;
+      default:
+        deletingData.parentTabId=0
+        deletingData.tabId=0
+        deletingData.tabName= this.processTemplate.name
+        deletingData.tabContainerPublicName='process'
+        break;
+    }
+    return deletingData
+  }
+
+  deleting(data: deletingDataInformation){
+    switch (data.tabContainerPublicName ) {
+
+      case 'step':
+        this.processTemplate.stepTemplates.splice(data.tabId, 1)
+        break;
+      default:
+        this.deleteProcess()
+        break;
+    }
+  }
+
+  defContainer(){
+    if (this.stepToggleId!=undefined) {
+      return 'step'
+    } else {
+      return 'process'
+    }
+  }
+
+  deleteProcess() {
+    this.processTemplateService.delete(this.processId).subscribe(() => this.router.navigate(['templates/process']));
   }
 }

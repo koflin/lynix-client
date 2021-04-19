@@ -5,6 +5,7 @@ import { Permission } from 'src/app/models/role';
 import { OrderNode } from 'src/app/models/ui';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { SelectionType } from 'src/app/models/ui/table';
+import swal from 'sweetalert2';
 
 import { OrdersOverviewService } from './orders-overview.service';
 
@@ -65,14 +66,6 @@ export class OrdersOverviewComponent implements OnInit {
     this.router.navigate(['orders/draft/' + id]);
   }
 
-  delte(id: string) {
-    this.ordersService.delete(id).subscribe(() => {
-      const index = this.temp.findIndex(order => order.workOderId == id)
-      this.temp.splice(index, 1);
-      this.orderNodes.splice(index, 1);
-    });
-  }
-
   onActivate($event){
     if ($event.type=="click") {
       this.toggleExpandRow($event.row)
@@ -109,4 +102,24 @@ export class OrdersOverviewComponent implements OnInit {
     this.table.rowDetail.toggleExpandRow(row);
   }
 
+  deleteModal(order: OrderNode){
+    swal.fire({
+      title: 'Are you sure to delete order ' + ' \'' + order.name + "\'?",
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      buttonsStyling: false,
+      confirmButtonClass: 'btn btn-default',
+      confirmButtonText: 'Yes, delete!',
+      cancelButtonClass: 'btn btn-secondary'
+    }).then((result) => {
+      if (result.value) {
+        this.ordersService.delete(order.workOderId).subscribe(() => {
+          const index = this.temp.findIndex(o => order.workOderId == o.workOderId)
+          this.temp.splice(index, 1);
+          this.orderNodes.splice(index, 1);
+        });
+      }
+    })
+  }
 }
