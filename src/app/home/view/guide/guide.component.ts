@@ -171,14 +171,15 @@ export class GuideComponent implements OnInit, OnDestroy {
   async onFinish() {
     if (this.process.steps.some(step => step.timeTaken == 0)) {
       const { value } = await swal.fire({
-        title: 'Steps not started',
-        text: "Are you sure, you want to finish this process? Some steps haven't been started yet.",
+        title: $localize `Steps not started`,
+        text: $localize `Are you sure, you want to finish this process? Some steps haven't been started yet.`,
         type: 'warning',
         showCancelButton: true,
         buttonsStyling: false,
         confirmButtonClass: 'btn btn-danger',
-        confirmButtonText: 'Yes, finish!',
-        cancelButtonClass: 'btn btn-secondary'
+        confirmButtonText: $localize `Yes, finish!`,
+        cancelButtonClass: 'btn btn-secondary',
+        cancelButtonText: $localize `Cancle`
       });
 
       if (!value) {

@@ -374,7 +374,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="072e75b48e767c214bc09a81b54adac84d11c188" datatype="html">
-        <source>Main Tasks &amp; Challenges</source><target state="new">Zu beachten &amp; </target>
+        <source>Main Tasks &amp; Challenges</source><target state="new">Zu beachten</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/process/process.component.html</context>
           <context context-type="linenumber">22</context>
@@ -413,7 +413,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ed31ca92e9919baf9beaa528175c2f3b5ad57c04" datatype="html">
-        <source>Previous commtens conerning the process</source><target state="new">Anzeigen</target>
+        <source>Previous comments concerning the process</source><target state="new">Anzeigen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/process/process.component.html</context>
           <context context-type="linenumber">73</context>

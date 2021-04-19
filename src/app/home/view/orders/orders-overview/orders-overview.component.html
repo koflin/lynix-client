@@ -23,7 +23,7 @@
                             <option value="10" [selected]="entries == 10">10</option>
                             <option value="25" [selected]="entries == 25">25</option>
                             <option value="50" [selected]="entries == 50">50</option>
-                            <option value="-1" [selected]="entries == -1">All</option>
+                            <option value="-1" [selected]="entries == -1" i18n>All</option>
                           </select>
                           <span i18n>entries</span>
                         </label>
@@ -137,17 +137,17 @@
                 </ng-template>
               </ngx-datatable-column>
                     <!-- Name -->
-                    <ngx-datatable-column name="name" [sortable]="true" >
-                      <ng-template let-value="value" ngx-datatable-cell-template>
+                    <ngx-datatable-column name="name" i18n-name [sortable]="true" >
+                      <ng-template let-row="row" ngx-datatable-cell-template>
                         <p class="h3 text-default">
-                          {{value}}
+                          {{row.name}}
                         </p>
                       </ng-template>
                     </ngx-datatable-column>
                     <!-- Product -->
-                    <ngx-datatable-column name="products" [sortable]="false">
-                        <ng-template let-value="value" ngx-datatable-cell-template>
-                          <div *ngFor="let item of value let last = last ">
+                    <ngx-datatable-column name="products" i18n-name [sortable]="false">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <div *ngFor="let item of row.products let last = last ">
                             <p>
                               {{ item.quantity }}x{{item.name}}<ng-container *ngIf="!last"></ng-container>
                             </p>
@@ -156,24 +156,24 @@
                         </ng-template>
                       </ngx-datatable-column>
                     <!-- Status -->
-                    <ngx-datatable-column name="status" [sortable]="true" >
-                      <ng-template let-value="value" ngx-datatable-cell-template>
+                    <ngx-datatable-column name="status" i18n-name [sortable]="true" >
+                      <ng-template let-row="row" ngx-datatable-cell-template>
                         <p class="h3 text-default">
-                          {{value | status }}
+                          {{ row.status | status }}
                         </p>
                       </ng-template>
                     </ngx-datatable-column>
                     <!-- Delivery Date -->
-                    <ngx-datatable-column name="delivery date" [sortable]="true" >
-                      <ng-template let-value="value" ngx-datatable-cell-template>
+                    <ngx-datatable-column name="delivery date" i18n-name [sortable]="true" >
+                      <ng-template let-row="row" ngx-datatable-cell-template>
                         <p class="h3 text-default">
-                          {{ value | date: "dd.MM.yyyy" }}
+                          {{ row.deliveryDate | date: "dd.MM.yyyy" }}
                         </p>
                       </ng-template>
                     </ngx-datatable-column>
                     <!-- Edit -->
 
-                    <ngx-datatable-column name="edit" [sortable]="true">
+                    <ngx-datatable-column name="edit" i18n-name [sortable]="true">
                         <ng-template let-row="row" ngx-datatable-cell-template>
 
                           <div [hideIfUnauthorized]="permissions.EDIT">

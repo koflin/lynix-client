@@ -14,7 +14,7 @@ import { ProcessTemplateLibraryService } from './process-template-library.servic
   styleUrls: ['./process-template-library.component.scss']
 })
 export class ProcessTemplateLibraryComponent implements OnInit {
-  breadCrumbs: BreadCrumbInfo[]=[{name:"Template Process Overview", url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Template Process Overview`, url: this.router.url },];
   templates: ProcessTemplateNode[];
   windowWidth:number
 
@@ -57,14 +57,15 @@ export class ProcessTemplateLibraryComponent implements OnInit {
 
   deleteModal(process: ProcessTemplateNode){
     swal.fire({
-      title: 'Are you sure to delete process ' + ' \'' + process.name + "\'?",
-      text: "You won't be able to revert this!",
+      title: $localize `Are you sure to delete process '${process.name}'?`,
+      text: $localize `You won't be able to revert this!`,
       type: 'warning',
       showCancelButton: true,
       buttonsStyling: false,
       confirmButtonClass: 'btn btn-default',
-      confirmButtonText: 'Yes, delete!',
-      cancelButtonClass: 'btn btn-secondary'
+      confirmButtonText: $localize `Yes, delete!`,
+      cancelButtonClass: 'btn btn-secondary',
+      cancelButtonText: $localize `Cancle`
     }).then((result) => {
       if (result.value) {
         this.processTemplateService.delete(process.id);

@@ -18,7 +18,7 @@ export class UsersOverviewComponent implements OnInit {
 
   entries: number = 10;
   searchValue:string= ""
-  breadCrumbs: BreadCrumbInfo[]=[{name:"Users Overview", url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Users Overview`, url: this.router.url },];
   userRows: UserRowNode[];
   options = {
     valueNames: [ 'user-name', 'name' ]
@@ -94,14 +94,15 @@ export class UsersOverviewComponent implements OnInit {
   deleteModal(id:string){
 
     swal.fire({
-      title: 'Are you sure to delete?',
-      text: "You won't be able to revert this!",
+      title: $localize `Are you sure to delete?`,
+      text: $localize `You won't be able to revert this!`,
       type: 'warning',
       showCancelButton: true,
       buttonsStyling: false,
       confirmButtonClass: 'btn btn-default',
-      confirmButtonText: 'Yes, delete!',
-      cancelButtonClass: 'btn btn-secondary'
+      confirmButtonText: $localize `Yes, delete!`,
+      cancelButtonClass: 'btn btn-secondary',
+      cancelButtonText: $localize `Cancle`
     }).then((result) => {
       if (result.value) {
         let a = document.getElementById(id)

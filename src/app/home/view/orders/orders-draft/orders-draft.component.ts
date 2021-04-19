@@ -61,7 +61,10 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     this.setProductNames()
 
   }
-  breadCrumbs: BreadCrumbInfo[] = [{name:"Order Overview", url: "/orders/overview"}, {name:"Order Draft", url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[] = [
+    {name: $localize `Order Overview`, url: "/orders/overview"},
+    {name: $localize `Order Draft`, url: this.router.url },
+  ];
 
   //productsNames:string[]=[]
   get productsNames():string[]{
@@ -145,7 +148,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
         this.orderDraft = {
           companyId: this.authService.getLocalUser().companyId,
           id: undefined,
-          name: 'Unnamed',
+          name: $localize `Unnamed Order`,
           description: undefined,
           products: [],
           status: 'in_preparation',
@@ -292,33 +295,17 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     }
   }
   cancelModal(){
-    /*swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      type: 'warning',
-      showCancelButton: true,
-      buttonsStyling: false,
-      confirmButtonClass: 'btn btn-danger',
-      confirmButtonText: 'Yes, cancel!',
-      cancelButtonClass: 'btn btn-secondary'
-    }).then((result) => {
-      if (result.value) {
-          // Show confirmation
-          this.discardDraft()
-          this.isEdited = false;
-      }
-    })*/
-
     if (this.hasUnsavedData()) {
       swal.fire({
-        title: 'You have unsaved data',
-        text: "Are you sure, you want to leave this page?",
+        title: $localize `You have unsaved data`,
+        text: $localize `Are you sure, you want to leave this page?`,
         type: 'warning',
         showCancelButton: true,
         buttonsStyling: false,
         confirmButtonClass: 'btn btn-danger',
-        confirmButtonText: 'Yes, cancel!',
-        cancelButtonClass: 'btn btn-secondary'
+        confirmButtonText: $localize `Yes, cancel!`,
+        cancelButtonClass: 'btn btn-secondary',
+        cancelButtonText: $localize `Cancle`
       }).then((result) => {
         if (result.value) {
             // Show confirmation
@@ -330,38 +317,17 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
       this.discardDraft()
     }
   }
-  saveModal(dontFireModal:boolean=false){
-    /*if (!dontFireModal) {
-      swal.fire({
-        title: 'Back to overview?',
-        text: 'Do you want go to overview of order? Please remember you have to publish later in order ...',
-        type: 'success',
-        showCancelButton: true,
-        showConfirmButton:true,
-        buttonsStyling: false,
-        confirmButtonText: 'Yes',
-        cancelButtonClass: 'btn btn-secondary',
-        confirmButtonClass: 'btn btn-default',
-        cancelButtonText:'No'
-    }).then((result) => {
-      if (result.value) {
-          // Show confirmation
-          this.router.navigate(['hopme/orders/overview']);
-      }
-    })
-    }*/
-
-  }
   publishModal(){
     swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to edit this order!",
+      title: $localize `Are you sure?`,
+      text: $localize `You won't be able to edit this order!`,
       type: 'warning',
       showCancelButton: true,
       buttonsStyling: false,
       confirmButtonClass: 'btn btn-default',
-      confirmButtonText: 'Yes, publish!',
-      cancelButtonClass: 'btn btn-secondary'
+      confirmButtonText: $localize `Yes, publish!`,
+      cancelButtonClass: 'btn btn-secondary',
+      cancelButtonText: $localize `Cancle`
     }).then((result) => {
       if (result.value) {
           // Show confirmation
@@ -372,17 +338,16 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   deleteModal(){
     let data: deletingDataInformation = this.specificDeleteData()
 
-    console.log(data);
-
     swal.fire({
-      title: 'Are you sure to delete ' + data.tabContainerPublicName + ' \'' + data.tabName + "\'?",
-      text: "You won't be able to revert this!",
+      title: $localize `Are you sure to delete ${data.tabContainerDisplayname} '${data.tabName}'?`,
+      text: $localize `You won't be able to revert this!`,
       type: 'warning',
       showCancelButton: true,
       buttonsStyling: false,
       confirmButtonClass: 'btn btn-default',
-      confirmButtonText: 'Yes, delete!',
-      cancelButtonClass: 'btn btn-secondary'
+      confirmButtonText: $localize `Yes, delete!`,
+      cancelButtonClass: 'btn btn-secondary',
+      cancelButtonText: $localize `Cancle`
     }).then((result) => {
       if (result.value) {
           this.deleting(data)
@@ -394,7 +359,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   }
 
   deleting(data: deletingDataInformation){
-    switch (data.tabContainerPublicName ) {
+    switch (data.tabContainerName ) {
 
       case 'step':
         if (data.tabId>0) {
@@ -431,31 +396,34 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   specificDeleteData(): deletingDataInformation{
     let container= this.defContainer()
     let deletingData:deletingDataInformation={'parentTabId':undefined,
-      'tabId': undefined, 'tabName': undefined, 'tabContainerPublicName':undefined}
+      'tabId': undefined, 'tabName': undefined, 'tabContainerName':undefined, 'tabContainerDisplayname': undefined}
     switch (container) {
       case 'step':
         deletingData.parentTabId=this.processToggleId
         deletingData.tabId=this.stepToggleId
         deletingData.tabName= this.stepsName[this.stepToggleId]
-        deletingData.tabContainerPublicName='step'
+        deletingData.tabContainerName='step'
+        deletingData.tabContainerDisplayname = $localize `step`
         break;
       case 'process':
         deletingData.parentTabId=this.productToggleId
         deletingData.tabId=this.processToggleId
         deletingData.tabName= this.processesNames[this.processToggleId]
-        deletingData.tabContainerPublicName='process'
+        deletingData.tabContainerName='process'
+        deletingData.tabContainerDisplayname = $localize `process`
         break;
       case 'product':
         deletingData.parentTabId=0
         deletingData.tabId=this.productToggleId
         deletingData.tabName= this.productsNames[this.productToggleId]
-        deletingData.tabContainerPublicName='product'
+        deletingData.tabContainerName='product'
+        deletingData.tabContainerDisplayname = $localize `product`
         break;
       default:
         deletingData.parentTabId=undefined
         deletingData.tabId=0
         deletingData.tabName= this.orderDraft.name
-        deletingData.tabContainerPublicName='order'
+        deletingData.tabContainerName='order'
         break;
     }
     return deletingData
@@ -464,7 +432,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   addStep() {
     const steps = this.orderDraft.products[this.productToggleId].template.processes[this.processToggleId].template.stepTemplates;
     steps.push({
-      title: 'Unnamed Step ' + (steps.length+1),
+      title: $localize `Unnamed Step` + ' ' + (steps.length+1),
       keyMessage: null,
       tasks: null,
       materials: [],

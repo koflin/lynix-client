@@ -136,7 +136,7 @@ export class ProductTemplateDetailComponent implements OnInit {
       this.productTemplate = {
         companyId: this.authService.getLocalUser().companyId,
         id: undefined,
-        name: 'Unnamed',
+        name: $localize `Unnamed Product Template`,
         description: undefined,
         processes: [],
       };
@@ -201,14 +201,15 @@ export class ProductTemplateDetailComponent implements OnInit {
     let data: deletingDataInformation = this.specificDeleteData()
 
     swal.fire({
-      title: 'Are you sure to delete ' + data.tabContainerPublicName + ' \'' + data.tabName + "\'?",
-      text: "You won't be able to revert this!",
+      title: $localize `Are you sure to delete ${data.tabContainerDisplayname} '${data.tabName}'?`,
+      text: $localize `You won't be able to revert this!`,
       type: 'warning',
       showCancelButton: true,
       buttonsStyling: false,
       confirmButtonClass: 'btn btn-default',
-      confirmButtonText: 'Yes, delete!',
-      cancelButtonClass: 'btn btn-secondary'
+      confirmButtonText: $localize `Yes, delete!`,
+      cancelButtonClass: 'btn btn-secondary',
+      cancelButtonText: $localize `Cancle`
     }).then((result) => {
       if (result.value) {
           this.deleting(data)
@@ -222,25 +223,28 @@ export class ProductTemplateDetailComponent implements OnInit {
   specificDeleteData(): deletingDataInformation{
     let container= this.defContainer()
     let deletingData:deletingDataInformation={'parentTabId':undefined,
-      'tabId': undefined, 'tabName': undefined, 'tabContainerPublicName':undefined}
+      'tabId': undefined, 'tabName': undefined, 'tabContainerName':undefined, 'tabContainerDisplayname':undefined}
     switch (container) {
       case 'step':
         deletingData.parentTabId=this.processToggleId
         deletingData.tabId=this.stepToggleId
         deletingData.tabName= this.stepsName[this.stepToggleId]
-        deletingData.tabContainerPublicName='step'
+        deletingData.tabContainerName='step',
+        deletingData.tabContainerDisplayname = $localize `step`
         break;
       case 'process':
         deletingData.parentTabId=0
         deletingData.tabId=this.processToggleId
         deletingData.tabName= this.processesNames[this.processToggleId]
-        deletingData.tabContainerPublicName='process'
+        deletingData.tabContainerName='process'
+        deletingData.tabContainerDisplayname = $localize `process`
         break;
       default:
         deletingData.parentTabId=0
         deletingData.tabId=0
         deletingData.tabName= this.productTemplate.name
-        deletingData.tabContainerPublicName='product'
+        deletingData.tabContainerName='product'
+        deletingData.tabContainerDisplayname = $localize `product`
         break;
     }
     return deletingData
@@ -249,14 +253,15 @@ export class ProductTemplateDetailComponent implements OnInit {
   cancelModal(){
     if (this.hasUnsavedData()) {
       swal.fire({
-        title: 'You have unsaved data',
-        text: "Are you sure, you want to leave this page?",
+        title: $localize `You have unsaved data`,
+        text: $localize `Are you sure, you want to leave this page?`,
         type: 'warning',
         showCancelButton: true,
         buttonsStyling: false,
         confirmButtonClass: 'btn btn-danger',
-        confirmButtonText: 'Yes, cancel!',
-        cancelButtonClass: 'btn btn-secondary'
+        confirmButtonText: $localize `Yes, cancel!`,
+        cancelButtonClass: 'btn btn-secondary',
+        cancelButtonText: $localize `Cancle`
       }).then((result) => {
         if (result.value) {
             // Show confirmation
@@ -275,7 +280,7 @@ export class ProductTemplateDetailComponent implements OnInit {
   }
 
   deleting(data: deletingDataInformation){
-    switch (data.tabContainerPublicName ) {
+    switch (data.tabContainerName ) {
 
       case 'step':
         this.productTemplate.processes[this.processToggleId].template.stepTemplates.splice(data.tabId, 1)

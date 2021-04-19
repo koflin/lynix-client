@@ -19,9 +19,9 @@ export class StepComponent implements OnInit {
   @Output() stepTemplateChange = new EventEmitter<StepTemplate>();
 
   @Input() checkForError: boolean = false
-  name = new InputOutputValue("name", "Step name", false)
-  keyMessage = new InputOutputValue("keymessage", "Key Message", false)
-  tasks = new InputOutputValue("tasks", "Tasks", false)
+  name = new InputOutputValue("name", $localize `Step name`, false)
+  keyMessage = new InputOutputValue("keymessage", $localize `Key Message`, false)
+  tasks = new InputOutputValue("tasks", $localize `Tasks`, false)
 
   @Input() navFragment: string;
 

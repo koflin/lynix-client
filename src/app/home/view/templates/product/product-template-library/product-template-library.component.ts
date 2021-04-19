@@ -17,7 +17,7 @@ export class ProductTemplateLibraryComponent implements OnInit {
   templates: ProductTemplateNode[];
   windowWidth:number
   @ViewChild('myTable') table: any;
-  breadCrumbs: BreadCrumbInfo[]=[{name:"Template Product Overview", url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: `Template Product Overview`, url: this.router.url },];
 
   permissions = Permission;
 
@@ -63,14 +63,15 @@ export class ProductTemplateLibraryComponent implements OnInit {
 
   deleteModal(product: ProductTemplateNode){
     swal.fire({
-      title: 'Are you sure to delete product ' + ' \'' + product.name + "\'?",
-      text: "You won't be able to revert this!",
+      title: $localize `Are you sure to delete product '${product.name}'?`,
+      text: $localize `You won't be able to revert this!`,
       type: 'warning',
       showCancelButton: true,
       buttonsStyling: false,
       confirmButtonClass: 'btn btn-default',
-      confirmButtonText: 'Yes, delete!',
-      cancelButtonClass: 'btn btn-secondary'
+      confirmButtonText: $localize `Yes, delete!`,
+      cancelButtonClass: 'btn btn-secondary',
+      cancelButtonText: $localize `Cancle`
     }).then((result) => {
       if (result.value) {
         this.productTemplateService.delete(product.id);

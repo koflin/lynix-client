@@ -14,14 +14,15 @@ export class HasUnsavedDataGuard implements CanDeactivate<unknown> {
 
         return new Promise(async (resolve) => {
           swal.fire({
-            title: 'You have unsaved data',
-            text: "Are you sure, you want to leave this page?",
+            title: $localize `You have unsaved data`,
+            text: $localize `Are you sure, you want to leave this page?`,
             type: 'warning',
             showCancelButton: true,
             buttonsStyling: false,
             confirmButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Yes, cancel!',
-            cancelButtonClass: 'btn btn-secondary'
+            confirmButtonText: $localize `Yes, cancel!`,
+            cancelButtonClass: 'btn btn-secondary',
+            cancelButtonText: $localize `Cancel`
           }).then((result) => {
             if (result.value) {
                 resolve(true);

@@ -9,7 +9,7 @@ import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
   styleUrls: ['./testing.component.scss']
 })
 export class TestingComponent implements OnInit {
-  breadCrumbs: BreadCrumbInfo[]=[{name:"Test", url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: "Test", url: this.router.url },];
 
   count = 0;
 

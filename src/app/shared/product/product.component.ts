@@ -16,8 +16,8 @@ export class ProductComponent implements OnInit {
   @Output() selectTab = new EventEmitter<number>()
   processOptions:SingleMultiChoiceItem[]
   ignoreOptions:SingleMultiChoiceItem[]
-  name = new InputOutputValue("name", "Product name", false)
-  description = new InputOutputValue("description", "Description", false)
+  name = new InputOutputValue("name", $localize `Product name`, false)
+  description = new InputOutputValue("description", $localize `Description`, false)
 
   @Input() navFragment: string;
 

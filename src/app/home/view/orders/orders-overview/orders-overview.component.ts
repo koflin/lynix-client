@@ -18,7 +18,7 @@ export class OrdersOverviewComponent implements OnInit {
   permissions = Permission;
 
   orderNodes: OrderNode[];
-  breadCrumbs: BreadCrumbInfo[]=[{name:"Order Overview", url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{ name: $localize `Order Overview`, url: this.router.url },];
   entries: number = 10;
   temp: OrderNode[] = [];
   rows: any[] = []
@@ -104,14 +104,15 @@ export class OrdersOverviewComponent implements OnInit {
 
   deleteModal(order: OrderNode){
     swal.fire({
-      title: 'Are you sure to delete order ' + ' \'' + order.name + "\'?",
-      text: "You won't be able to revert this!",
+      title: $localize `Are you sure to delete order '${order.name}'?`,
+      text: $localize `You won't be able to revert this!`,
       type: 'warning',
       showCancelButton: true,
       buttonsStyling: false,
       confirmButtonClass: 'btn btn-default',
-      confirmButtonText: 'Yes, delete!',
-      cancelButtonClass: 'btn btn-secondary'
+      confirmButtonText: $localize `Yes, delete!`,
+      cancelButtonClass: 'btn btn-secondary',
+      cancelButtonText: $localize `Cancle`
     }).then((result) => {
       if (result.value) {
         this.ordersService.delete(order.workOderId).subscribe(() => {

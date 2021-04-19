@@ -16,7 +16,7 @@ export class ProcessComponent implements OnInit {
   @Input() checkForError
   processOptions:SingleMultiChoiceItem[]
   ignoreOptions:SingleMultiChoiceItem[]
-  name = new InputOutputValue("name", "Process name", false)
+  name = new InputOutputValue("name", $localize `Process name`, false)
   taskToAdd: string;
   isFirstOpen:boolean=true
 
@@ -48,7 +48,7 @@ export class ProcessComponent implements OnInit {
   }
   addStep(index:number=this.processTemplate.stepTemplates.length-1) {
     this.processTemplate.stepTemplates.splice(index+1, 0, {
-      title: 'Unnamed Step ' + (index+1),
+      title: $localize `Unnamed Step` + ' ' + (index+1),
       keyMessage: null,
       tasks: null,
       materials: [],

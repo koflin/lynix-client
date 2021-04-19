@@ -19,13 +19,13 @@ export class SingleMultipleChoiceComponent implements OnInit {
   @Input() isMultipleChoice:boolean=false
   @Input() isSearchable:boolean = false
   @Input() allowUserCreateOption:boolean =false
-  @Input() placeholder:string = "selecting a option..."
+  @Input() placeholder:string = $localize `selecting a option...`
   @Input() ignoreOptions: any[]
   _data: SingleMultiChoiceItem[] = []
   @Input() data:SingleMultiChoiceItem[] = [];
 
   tempData: SingleMultiChoiceItem[]
-  @Input() addTagText:string= "press enter to create a new option"
+  @Input() addTagText:string= $localize `press enter to create a new option`
 
   requiredError:boolean = false
   error:boolean = false

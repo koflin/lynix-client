@@ -62,9 +62,9 @@ export class OrderComponent implements OnInit {
   }
 
   setInputFields(){
-    this.name = new InputOutputValue("name", "Work order name", false)
-    this.dueDate = new InputOutputValue("duedate", "Delivery Date", false)
-    this.description = new InputOutputValue("description", "Description", false)
+    this.name = new InputOutputValue("name", $localize `Work order name`, false)
+    this.dueDate = new InputOutputValue("duedate", $localize `Delivery Date`, false)
+    this.description = new InputOutputValue("description", $localize `Description`, false)
 
   }
 

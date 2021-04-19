@@ -71,7 +71,7 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
       this.processTemplate = {
         companyId: this.authService.getLocalUser().companyId,
         id: undefined,
-        name: 'Unnamed',
+        name: $localize `Unnamed Process Template`,
         stepTemplates: [],
         mainTasks: [],
         previousComments: []
@@ -86,14 +86,15 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
     let data: deletingDataInformation = this.specificDeleteData()
 
     swal.fire({
-      title: 'Are you sure to delete ' + data.tabContainerPublicName + ' \'' + data.tabName + "\'?",
-      text: "You won't be able to revert this!",
+      title: $localize `Are you sure to delete ${data.tabContainerDisplayname} '${data.tabName}'?`,
+      text: $localize `You won't be able to revert this!`,
       type: 'warning',
       showCancelButton: true,
       buttonsStyling: false,
       confirmButtonClass: 'btn btn-default',
-      confirmButtonText: 'Yes, delete!',
-      cancelButtonClass: 'btn btn-secondary'
+      confirmButtonText: $localize `Yes, delete!`,
+      cancelButtonClass: 'btn btn-secondary',
+      cancelButtonText: $localize `Cancle`
     }).then((result) => {
       if (result.value) {
           this.deleting(data)
@@ -135,26 +136,28 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
   specificDeleteData(): deletingDataInformation{
     let container= this.defContainer()
     let deletingData:deletingDataInformation={'parentTabId':undefined,
-      'tabId': undefined, 'tabName': undefined, 'tabContainerPublicName':undefined}
+      'tabId': undefined, 'tabName': undefined, 'tabContainerName':undefined, 'tabContainerDisplayname':undefined}
     switch (container) {
       case 'step':
         deletingData.parentTabId=0
         deletingData.tabId=this.stepToggleId
         deletingData.tabName= this.stepsName[this.stepToggleId]
-        deletingData.tabContainerPublicName='step'
+        deletingData.tabContainerName='step'
+        deletingData.tabContainerDisplayname= $localize `step`
         break;
       default:
         deletingData.parentTabId=0
         deletingData.tabId=0
         deletingData.tabName= this.processTemplate.name
-        deletingData.tabContainerPublicName='process'
+        deletingData.tabContainerName='process'
+        deletingData.tabContainerDisplayname= $localize `process`
         break;
     }
     return deletingData
   }
 
   deleting(data: deletingDataInformation){
-    switch (data.tabContainerPublicName ) {
+    switch (data.tabContainerName ) {
 
       case 'step':
         this.processTemplate.stepTemplates.splice(data.tabId, 1)

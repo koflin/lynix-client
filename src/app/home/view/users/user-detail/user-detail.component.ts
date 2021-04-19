@@ -43,10 +43,10 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
   availabelRolesSelection: SingleMultiChoiceItem[]=[]
   isEditing = false;
   checkForError= false
-  roleField:InputOutputValue=new InputOutputValue('role', 'Role', false)
-  usernameField:InputOutputValue=new InputOutputValue('Username', 'username', false)
-  firstname:InputOutputValue=new InputOutputValue('firstname', 'First name', false)
-  lastname:InputOutputValue=new InputOutputValue('lastname', 'Last name', false)
+  roleField:InputOutputValue=new InputOutputValue('role', $localize `Role`, false)
+  usernameField:InputOutputValue=new InputOutputValue('Username', $localize `username`, false)
+  firstname:InputOutputValue=new InputOutputValue('firstname', $localize `First name`, false)
+  lastname:InputOutputValue=new InputOutputValue('lastname', $localize `Last name`, false)
 
   activation: Activation;
 
@@ -203,14 +203,15 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
   deleteModal(){
 
     swal.fire({
-      title: 'Are you sure to delete?',
-      text: "You won't be able to revert this!",
+      title: $localize `Are you sure to delete?`,
+      text: $localize `You won't be able to revert this!`,
       type: 'warning',
       showCancelButton: true,
       buttonsStyling: false,
       confirmButtonClass: 'btn btn-default',
-      confirmButtonText: 'Yes, delete!',
-      cancelButtonClass: 'btn btn-secondary'
+      confirmButtonText: $localize `Yes, delete!`,
+      cancelButtonClass: 'btn btn-secondary',
+      cancelButtonText: $localize `Cancle`
     }).then((result) => {
       if (result.value) {
 
@@ -226,16 +227,16 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
   saveModal(dontFireModal:boolean=false){
     if (!dontFireModal) {
       swal.fire({
-        title: 'Back to overview?',
+        title: $localize `Back to overview?`,
         text: '',
         type: 'success',
         showCancelButton: true,
         showConfirmButton:true,
         buttonsStyling: false,
-        confirmButtonText: 'Yes',
+        confirmButtonText: $localize `Yes`,
         cancelButtonClass: 'btn btn-secondary',
         confirmButtonClass: 'btn btn-default',
-        cancelButtonText:'No'
+        cancelButtonText: $localize `No`
     }).then((result) => {
       if (result.value) {
           // Show confirmation
