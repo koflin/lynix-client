@@ -179,7 +179,7 @@ export class GuideComponent implements OnInit, OnDestroy {
         confirmButtonClass: 'btn btn-danger',
         confirmButtonText: $localize `Yes, finish!`,
         cancelButtonClass: 'btn btn-secondary',
-        cancelButtonText: $localize `Cancle`
+        cancelButtonText: $localize `Cancel`
       });
 
       if (!value) {

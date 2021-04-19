@@ -94,7 +94,7 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
       confirmButtonClass: 'btn btn-default',
       confirmButtonText: $localize `Yes, delete!`,
       cancelButtonClass: 'btn btn-secondary',
-      cancelButtonText: $localize `Cancle`
+      cancelButtonText: $localize `Cancel`
     }).then((result) => {
       if (result.value) {
           this.deleting(data)

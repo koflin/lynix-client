@@ -112,7 +112,7 @@ export class OrdersOverviewComponent implements OnInit {
       confirmButtonClass: 'btn btn-default',
       confirmButtonText: $localize `Yes, delete!`,
       cancelButtonClass: 'btn btn-secondary',
-      cancelButtonText: $localize `Cancle`
+      cancelButtonText: $localize `Cancel`
     }).then((result) => {
       if (result.value) {
         this.ordersService.delete(order.workOderId).subscribe(() => {

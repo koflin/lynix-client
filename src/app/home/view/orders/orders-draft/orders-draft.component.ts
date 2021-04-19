@@ -305,7 +305,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
         confirmButtonClass: 'btn btn-danger',
         confirmButtonText: $localize `Yes, cancel!`,
         cancelButtonClass: 'btn btn-secondary',
-        cancelButtonText: $localize `Cancle`
+        cancelButtonText: $localize `Cancel`
       }).then((result) => {
         if (result.value) {
             // Show confirmation
@@ -327,7 +327,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
       confirmButtonClass: 'btn btn-default',
       confirmButtonText: $localize `Yes, publish!`,
       cancelButtonClass: 'btn btn-secondary',
-      cancelButtonText: $localize `Cancle`
+      cancelButtonText: $localize `Cancel`
     }).then((result) => {
       if (result.value) {
           // Show confirmation
@@ -347,7 +347,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
       confirmButtonClass: 'btn btn-default',
       confirmButtonText: $localize `Yes, delete!`,
       cancelButtonClass: 'btn btn-secondary',
-      cancelButtonText: $localize `Cancle`
+      cancelButtonText: $localize `Cancel`
     }).then((result) => {
       if (result.value) {
           this.deleting(data)

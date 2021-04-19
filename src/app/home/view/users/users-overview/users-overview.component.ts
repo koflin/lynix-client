@@ -102,7 +102,7 @@ export class UsersOverviewComponent implements OnInit {
       confirmButtonClass: 'btn btn-default',
       confirmButtonText: $localize `Yes, delete!`,
       cancelButtonClass: 'btn btn-secondary',
-      cancelButtonText: $localize `Cancle`
+      cancelButtonText: $localize `Cancel`
     }).then((result) => {
       if (result.value) {
         let a = document.getElementById(id)
