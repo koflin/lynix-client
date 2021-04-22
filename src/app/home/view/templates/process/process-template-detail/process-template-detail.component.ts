@@ -112,7 +112,8 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
 
     if (!dontFireToastr) {
       this.toastr.show(
-        '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">Success</span> <span>Saved</span></div>',
+        '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">'
+        + $localize `Success` + '</span> <span>' + $localize `Saved` + '</span></div>',
         '',
         {
           timeOut: 1500,

@@ -18,7 +18,7 @@ export interface Process extends CompanyBase {
 
   timeTaken: number;
   currentStepIndex: number;
-  status: 'in_preparation' | 'released' | 'in_progress' | 'completed' | 'assistance_required';
+  status: ProcessStatus;
   occupiedBy: string;
   isRunning: boolean;
 
@@ -26,3 +26,5 @@ export interface Process extends CompanyBase {
 
   steps: Step[];
 }
+
+export type ProcessStatus = 'in_preparation' | 'released' | 'in_progress' | 'completed' | 'assistance_required';

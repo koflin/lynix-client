@@ -43,7 +43,7 @@ export class UsersService {
   }
 
   createUser(userDraft: User) {
-    this.api.post<User>('users', new CreateUserDto(userDraft)).subscribe(user => this.usersChange.next(user.id));
+    return this.api.post<User>('users', new CreateUserDto(userDraft));
   }
 
   save(user: User) {

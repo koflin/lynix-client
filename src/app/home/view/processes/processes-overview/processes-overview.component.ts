@@ -31,27 +31,27 @@ export class ProcessesOverviewComponent implements OnInit {
   windowWidth:number
   processNodeGroups: ProcessGroupNode [] = [
     {
-      title: 'Assistance Required',
+      title: $localize `Assistance Required`,
       status: 'assistance_required',
       nodes: []
     },
     {
-      title: 'In Preparation',
+      title: $localize `In Preparation`,
       status: 'in_preparation',
       nodes: []
     },
     {
-      title: 'Released',
+      title: $localize `Released`,
       status: 'released',
       nodes: []
     },
     {
-      title: 'Work in progress',
+      title: $localize `In progress`,
       status: 'in_progress',
       nodes: []
     },
     {
-      title: 'Completed',
+      title: $localize `Completed`,
       status: 'completed',
       nodes: []
     }

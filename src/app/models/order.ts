@@ -5,7 +5,7 @@ import { ProductTemplate } from './productTemplate';
 export interface Order extends CompanyBase {
   id: string;
 
-  status: 'in_preparation' | 'released' | 'in_progress' | 'completed';
+  status: OrderStatus;
   name: string;
   description: string;
   deliveryDate: Date;
@@ -15,3 +15,5 @@ export interface Order extends CompanyBase {
     quantity: number;
   }[];
 }
+
+export type OrderStatus = 'in_preparation' | 'released' | 'in_progress' | 'completed';

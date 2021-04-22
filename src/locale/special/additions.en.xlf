@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="1131797318257792040" datatype="html">
+        <source>Key Message</source><target state="final">Key Message</target>
+      </trans-unit>
+      <trans-unit id="1420440660896866320" datatype="html">
+        <source>Are you sure, you want to leave this page?</source><target state="final">Are you sure, you want to leave this page?</target>
+      </trans-unit>
+      <trans-unit id="1761525932233485405" datatype="html">
+        <source>Users Overview</source><target state="final">Users Overview</target>
+      </trans-unit>
+      <trans-unit id="1810825962216333199" datatype="html">
+        <source>Yes, publish!</source><target state="final">Yes, publish!</target>
+      </trans-unit>
+      <trans-unit id="1857811008791982049" datatype="html">
+        <source>KBack to overview?</source><target state="final">KBack to overview?</target>
+      </trans-unit>
+      <trans-unit id="193324215946023286" datatype="html">
+        <source>username</source><target state="final">username</target>
+      </trans-unit>
+      <trans-unit id="1991094545238006106" datatype="html">
+        <source>Order Overview</source><target state="final">Order Overview</target>
+      </trans-unit>
+      <trans-unit id="2159130950882492111" datatype="html">
+        <source>Cancel</source><target state="final">Cancel</target>
+      </trans-unit>
+      <trans-unit id="2171592054451692104" datatype="html">
+        <source>Step name</source><target state="final">Step name</target>
+      </trans-unit>
+      <trans-unit id="2442684248379706708" datatype="html">
+        <source>You won't be able to edit this order!</source><target state="final">You won't be able to edit this order!</target>
+      </trans-unit>
+      <trans-unit id="268563843519645044" datatype="html">
+        <source>step</source><target state="final">step</target>
+      </trans-unit>
+      <trans-unit id="2807800733729323332" datatype="html">
+        <source>Yes</source><target state="final">Yes</target>
+      </trans-unit>
+      <trans-unit id="3208993982906517533" datatype="html">
+        <source>process</source><target state="final">process</target>
+      </trans-unit>
+      <trans-unit id="3523944670748812973" datatype="html">
+        <source>Work order name</source><target state="final">Work order name</target>
+      </trans-unit>
+      <trans-unit id="3542042671420335679" datatype="html">
+        <source>No</source><target state="final">No</target>
+      </trans-unit>
+      <trans-unit id="3584333943624577182" datatype="html">
+        <source>selecting a option...</source><target state="final">selecting a option...</target>
+      </trans-unit>
+      <trans-unit id="3586674587150281199" datatype="html">
+        <source>Last name</source><target state="final">Last name</target>
+      </trans-unit>
+      <trans-unit id="3596999469695059491" datatype="html">
+        <source>Steps not started</source><target state="final">Steps not started</target>
+      </trans-unit>
+      <trans-unit id="3878021919777931414" datatype="html">
+        <source>Delivery Date</source><target state="final">Delivery Date</target>
+      </trans-unit>
+      <trans-unit id="4145496584631696119" datatype="html">
+        <source>Role</source><target state="final">Role</target>
+      </trans-unit>
+      <trans-unit id="4634746302235254764" datatype="html">
+        <source>Process name</source><target state="final">Process name</target>
+      </trans-unit>
+      <trans-unit id="4696587297744409785" datatype="html">
+        <source>You won't be able to revert this!</source><target state="final">You won't be able to revert this!</target>
+      </trans-unit>
+      <trans-unit id="4898793840630668320" datatype="html">
+        <source>Yes, cancel!</source><target state="final">Yes, cancel!</target>
+      </trans-unit>
+      <trans-unit id="4902817035128594900" datatype="html">
+        <source>Description</source><target state="final">Description</target>
+      </trans-unit>
+      <trans-unit id="5031343019627316230" datatype="html">
+        <source>Are you sure to delete?</source><target state="final">Are you sure to delete?</target>
+      </trans-unit>
+      <trans-unit id="5242903681712782100" datatype="html">
+        <source>Unnamed Product Template</source><target state="final">Unnamed Product Template</target>
+      </trans-unit>
+      <trans-unit id="5342432350421167093" datatype="html">
+        <source>First name</source><target state="final">First name</target>
+      </trans-unit>
+      <trans-unit id="5438639113882362419" datatype="html">
+        <source>Template Process Overview</source><target state="final">Template Process Overview</target>
+      </trans-unit>
+      <trans-unit id="5522744029409612185" datatype="html">
+        <source>Are you sure to delete <x id="PH"/> '<x id="PH_1"/>'?</source><target state="final">Are you sure to delete <x id="PH"/> '<x id="PH_1"/>'?</target>
+      </trans-unit>
+      <trans-unit id="5526006990252644049" datatype="html">
+        <source>press enter to create a new option</source><target state="final">press enter to create a new option</target>
+      </trans-unit>
+      <trans-unit id="5612044817510700346" datatype="html">
+        <source>Are you sure to delete process '<x id="PH"/>'?</source><target state="final">Are you sure to delete process '<x id="PH"/>'?</target>
+      </trans-unit>
+      <trans-unit id="588284100849805066" datatype="html">
+        <source>Product name</source><target state="final">Product name</target>
+      </trans-unit>
+      <trans-unit id="6278898165775718204" datatype="html">
+        <source>Are you sure, you want to finish this process? Some steps haven't been started yet.</source><target state="final">Are you sure, you want to finish this process? Some steps haven't been started yet.</target>
+      </trans-unit>
+      <trans-unit id="6565045598593417189" datatype="html">
+        <source>Yes, delete!</source><target state="final">Yes, delete!</target>
+      </trans-unit>
+      <trans-unit id="6904866445262015585" datatype="html">
+        <source>Tasks</source><target state="final">Tasks</target>
+      </trans-unit>
+      <trans-unit id="7032658064825100689" datatype="html">
+        <source>Process Overview</source><target state="final">Process Overview</target>
+      </trans-unit>
+      <trans-unit id="7380746425400381171" datatype="html">
+        <source>Unnamed Process Template</source><target state="final">Unnamed Process Template</target>
+      </trans-unit>
+      <trans-unit id="7444566424879008904" datatype="html">
+        <source>Order Draft</source><target state="final">Order Draft</target>
+      </trans-unit>
+      <trans-unit id="7515883357904500238" datatype="html">
+        <source>Are you sure?</source><target state="final">Are you sure?</target>
+      </trans-unit>
+      <trans-unit id="7755892718002611115" datatype="html">
+        <source>Yes, finish!</source><target state="final">Yes, finish!</target>
+      </trans-unit>
+      <trans-unit id="776785241867401546" datatype="html">
+        <source>product</source><target state="final">product</target>
+      </trans-unit>
+      <trans-unit id="7842852794443170215" datatype="html">
+        <source>Unnamed Step</source><target state="final">Unnamed Step</target>
+      </trans-unit>
+      <trans-unit id="8284960361240259495" datatype="html">
+        <source>Roles Overview</source><target state="final">Roles Overview</target>
+      </trans-unit>
+      <trans-unit id="8748559190977994028" datatype="html">
+        <source>Are you sure to delete order '<x id="PH"/>'?</source><target state="final">Are you sure to delete order '<x id="PH"/>'?</target>
+      </trans-unit>
+      <trans-unit id="8818981479150242665" datatype="html">
+        <source>You have unsaved data</source><target state="final">You have unsaved data</target>
+      </trans-unit>
+      <trans-unit id="8924478549814863797" datatype="html">
+        <source>Are you sure to delete product '<x id="PH"/>'?</source><target state="final">Are you sure to delete product '<x id="PH"/>'?</target>
+      </trans-unit>
+      <trans-unit id="9050851721740039731" datatype="html">
+        <source>Unnamed Order</source><target state="final">Unnamed Order</target>
+      </trans-unit>
+      <trans-unit id="7984118290801257585" datatype="html">
+        <source>in preparation</source><target state="new">in preparation</target>
+      </trans-unit>
+      <trans-unit id="5045954964545843238" datatype="html">
+        <source>released</source><target state="new">released</target>
+      </trans-unit>
+      <trans-unit id="3247153808694041723" datatype="html">
+        <source>in progress</source><target state="new">in progress</target>
+      </trans-unit>
+      <trans-unit id="7510279840486540181" datatype="html">
+        <source>completed</source><target state="new">completed</target>
+      </trans-unit>
+      <trans-unit id="6788138373623109694" datatype="html">
+        <source>Assistance Required</source><target state="new">Assistance Required</target>
+      </trans-unit>
+      <trans-unit id="7639225633265427455" datatype="html">
+        <source>In Preparation</source><target state="new">In Preparation</target>
+      </trans-unit>
+      <trans-unit id="7879546973853685748" datatype="html">
+        <source>Released</source><target state="new">Released</target>
+      </trans-unit>
+      <trans-unit id="3307214558906712688" datatype="html">
+        <source>In progress</source><target state="new">In progress</target>
+      </trans-unit>
+      <trans-unit id="1161299114153631702" datatype="html">
+        <source>Completed</source><target state="new">Completed</target>
+      </trans-unit>
+      <trans-unit id="4648900870671159218" datatype="html">
+        <source>Success"</source><target state="new">Success</target>
+      </trans-unit>
+      <trans-unit id="6333335057236774263" datatype="html">
+        <source>Saved</source><target state="new">Saved</target>
+      </trans-unit>
+      <trans-unit id="4058575476871566236" datatype="html">
+        <source>Published</source><target state="new">Published</target>
+      </trans-unit>
+      <trans-unit id="2115592966120408375" datatype="html">
+        <source>Copied</source><target state="new">Copied</target>
+      </trans-unit>
+      <trans-unit id="2400362719050540518" datatype="html">
+        <source>view</source><target state="new">view</target>
+      </trans-unit>
+      <trans-unit id="9095134843628689709" datatype="html">
+        <source>edit</source><target state="new">edit</target>
+      </trans-unit>
+      <trans-unit id="4238828029954346941" datatype="html">
+        <source>execute</source><target state="new">execute</target>
+      </trans-unit>
+      <trans-unit id="1096991618429294196" datatype="html">
+        <source>assign</source><target state="new">assign</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

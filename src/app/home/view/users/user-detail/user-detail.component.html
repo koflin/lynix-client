@@ -10,8 +10,8 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 alert alert-warning alert-dismissible fade show" role="alert" *ngIf="activation">
-                          <span class="alert-inner--text"><strong i18n>Warning!</strong><span i18n>This user is not activated yet. Copy the activation link and send it to the user.</span></span>
-                          <button  class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button" (click)="copyLink()">
+                          <span class="alert-inner--text"><strong i18n>Warning!</strong><span>&nbsp;</span><span i18n>This user is not activated yet. Copy the activation link and send it to the user.</span></span>
+                          <button  class="ml-3 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button" (click)="copyLink()">
                             <span class="btn-inner--icon"><i class="far fa-copy"></i></span>
                           </button>
                         </div>
@@ -19,7 +19,7 @@
                             <div  class="avatar rounded-circle" style="width: 150px; height: 150px; background-color: aliceblue;">
                                 <img alt="Image placeholder image-fit-round"  class="image-fit-round"
                                 style=""  [src]="avatarUrl ? avatarUrl :  (userDetail.avatar ? userDetail.avatar : 'assets/img/nopicture.png')">
-                                <span *ngIf="!avatarUrl && !userDetail.avatar" class="badge badge-warning" style="position: fixed;
+                                <span *ngIf="!avatarUrl && !userDetail.avatar" class="badge badge-warning" style="position: absolute;
                                 margin-top: 40px;" i18n>No picture available</span>
                             </div>
                             <form>

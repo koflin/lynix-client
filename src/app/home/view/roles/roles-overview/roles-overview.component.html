@@ -48,13 +48,7 @@
                               <td scope="row" class="permissions">
 
                                 <span *ngFor="let item of role.permissions; let i=index; let first = first; let last = last" class="">
-                                  <ng-container [ngSwitch]="item">
-                                    <span *ngSwitchCase="'view'" i18n>view</span>
-                                    <span *ngSwitchCase="'execute'" i18n>execute</span>
-                                    <span *ngSwitchCase="'edit'" i18n>edit</span>
-                                    <span *ngSwitchCase="'assign'" i18n>assign</span>
-                                    <span *ngSwitchDefault>{{ item }}</span>
-                                  </ng-container>
+                                  {{ item | permission }}
                                   <span *ngIf="!(first && last) && !last">, </span>
                                 </span>
                               </td>

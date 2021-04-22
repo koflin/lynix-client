@@ -7,15 +7,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
-import { LoginComponent } from './views/login/login.component';
 import { ActivationComponent } from './views/activation/activation.component';
+import { LoginComponent } from './views/login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ActivationComponent
+    ActivationComponent,
   ],
   imports: [
     AppRoutingModule,

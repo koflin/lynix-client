@@ -111,7 +111,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
       }
       if (this.userDetail.id==undefined) {
         let userDraft:User = {...this.userDetail, 'companyId': this.authService.getLocalUser().companyId, 'role': this.userDetail.role }
-        this.usersService.createUser(userDraft);
+        this.usersService.createUser(userDraft).subscribe((user) => this.router.navigate(['users/' + user.id]));
       }else{
         this.usersDetailService.updateDetail(this.userDetail);
 
@@ -120,7 +120,8 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     }
 
     this.toastr.show(
-      '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">Success</span> <span>Saved</span></div>',
+      '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">'
+      + $localize `Success` + '</span> <span>' + $localize `Saved` + '</span></div>',
       '',
       {
         timeOut: 1500,
@@ -162,6 +163,21 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+
+    this.toastr.show(
+      '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">'
+      + $localize `Success` + '</span> <span>' + $localize `Copied` + '</span></div>',
+      '',
+      {
+        timeOut: 1500,
+        closeButton: true,
+        enableHtml: true,
+        tapToDismiss: false,
+        titleClass: 'alert-title',
+        positionClass: 'toast-top-center',
+        toastClass: "ngx-toastr alert alert-dismissible alert-success alert-notify",
+      }
+    );
   }
 
   async refresh() {
