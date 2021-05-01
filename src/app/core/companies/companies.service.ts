@@ -16,8 +16,4 @@ export class CompaniesService {
   getById(id: string) {
     return this.api.get<Company>('companies/' + id);
   }
-
-  create(name: string) {
-    return this.api.post<Company>('companies', new CreateCompanyDto(name)).pipe(map((company) => company.id));
-  }
 }

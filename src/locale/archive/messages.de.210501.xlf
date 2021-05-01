@@ -595,7 +595,7 @@
           <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit><trans-unit id="c648889391b76acac6870869f928f33920241c76" datatype="html">
-        <source>Add picture</source><target state="new">Hinzufügen</target>
+        <source>Add picture</source><target state="new">Add picture</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step/step.component.html</context>
           <context context-type="linenumber">192</context>
@@ -667,7 +667,7 @@
 
 
       <context-group purpose="location"><context context-type="sourcefile">src/app/shared/step-guide-tab/step-guide-tab.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/step-guide-tab/step-guide-tab.component.html</context><context context-type="linenumber">12</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.html</context><context context-type="linenumber">11</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.html</context><context context-type="linenumber">11</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.html</context><context context-type="linenumber">11</context></context-group></trans-unit><trans-unit id="4a8e1516ff821076f6403b2702b43f7f99044c50" datatype="html">
-        <source>If you want to start this process step, please press "switch"!</source><target state="new"> Um diesen Prozess zu starten, drücke "Schritt wechseln"!</target>
+        <source>If you want to start this process step, please press "switch"!</source><target state="new">Um diesen Prozess zu starten, drücke "Schritt wechseln"!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/step-guide-tab/step-guide-tab.component.html</context>
           <context context-type="linenumber">5</context>
@@ -797,7 +797,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="d560b92d1ebf41374fc0c648c2984826c8f25191" datatype="html">
-        <source>entries</source><target state="new"></target>
+        <source>entries</source><target state="new">Eingaben</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.html</context>
           <context context-type="linenumber">28</context>
@@ -826,7 +826,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="36096115d6c8d5f470a1358009102c7cc2e438a6" datatype="html">
-        <source>Add new order</source><target state="new">Arbeitsauftrag</target>
+        <source>Add new order</source><target state="new">Neuen Arbeitsauftrag</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.html</context>
           <context context-type="linenumber">60</context>
@@ -1225,7 +1225,7 @@
 
       <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.html</context><context context-type="linenumber">11</context></context-group></trans-unit>
       <trans-unit id="86059d7e477eab3217f6a9eff6f33fba3e4dd838" datatype="html">
-        <source>New Product Template</source><target state="new">Produktvorlage</target>
+        <source>New Product Template</source><target state="new">Neue Produktvorlage</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.html</context>
           <context context-type="linenumber">23</context>
@@ -1250,7 +1250,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ad16762c4678d90b5b0949f194c138bde2a07183" datatype="html">
-        <source>New Process Template</source><target state="new">Prozessvorlage</target>
+        <source>New Process Template</source><target state="new">Neue Prozessvorlage</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.html</context>
           <context context-type="linenumber">23</context>
@@ -1378,7 +1378,7 @@
         <source>Yes, delete!</source><target state="new">Ja, löschen!</target>
       </trans-unit>
       <trans-unit id="6904866445262015585" datatype="html">
-        <source>Tasks</source><target state="new">Aufgaben</target>
+        <source>Tasks</source><target state="new">Tasks</target>
       </trans-unit>
       <trans-unit id="7032658064825100689" datatype="html">
         <source>Process Overview</source><target state="new">Prozess Übersicht</target>
@@ -1444,13 +1444,13 @@
         <source>Completed</source><target state="new">Abgeschlossen</target>
       </trans-unit>
       <trans-unit id="4648900870671159218" datatype="html">
-        <source>Success"</source><target state="new">Erfolgreich</target>
+        <source>Success"</source><target state="new">Erfolg</target>
       </trans-unit>
       <trans-unit id="6333335057236774263" datatype="html">
-        <source>Saved</source><target state="new">gespeichert</target>
+        <source>Saved</source><target state="new">Gespeichert</target>
       </trans-unit>
       <trans-unit id="4058575476871566236" datatype="html">
-        <source>Published</source><target state="new">veröffentlicht</target>
+        <source>Published</source><target state="new">Veröffentlicht</target>
       </trans-unit>
       <trans-unit id="2115592966120408375" datatype="html">
         <source>Copied</source><target state="new">Kopiert</target>
