@@ -784,20 +784,20 @@
         </context-group>
       </trans-unit>
       <trans-unit id="2aba1e87039819aca3b70faa9aa848c12bf139ca" datatype="html">
-        <source>Show</source><target state="new">Anzeigen</target>
+        <source>Show</source><target state="new">Zeige</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit><trans-unit id="dfc3c34e182ea73c5d784ff7c8135f087992dac1" datatype="html">
-        <source>All</source><target state="new">All</target>
+        <source>All</source><target state="new">Alle</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.html</context>
           <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d560b92d1ebf41374fc0c648c2984826c8f25191" datatype="html">
-        <source>entries</source><target state="new"></target>
+        <source>entries</source><target state="new">Eingaben</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.html</context>
           <context context-type="linenumber">28</context>
