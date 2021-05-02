@@ -1,9 +1,10 @@
-import { switchMap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserRowNode } from './../../../models/ui/userRowNode';
+import { switchMap } from 'rxjs/operators';
+
 import { RolesService } from './../../../core/roles/roles.service';
 import { UsersService } from './../../../core/users/users.service';
-import { Injectable } from '@angular/core';
+import { UserRowNode } from './../../../models/ui/userRowNode';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class UsersOverviewService {
       Promise.all(users.map(async (user) => {
         return {
           id: user.id,
-          username: user.username,
+          displayName: user.displayName,
           firstName: user.firstName,
           lastName: user.lastName,
           role: user.role,

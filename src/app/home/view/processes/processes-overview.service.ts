@@ -78,10 +78,11 @@ export class ProcessesOverviewService {
   getPotentialAssignees() {
     return this.usersService.getWithPermissions(Permission.EXECUTE).pipe<UserRowNode[]>(map(users => {
       return users.map(user => {
-        const { id, username, firstName, lastName, role } = user;
+        const { id, email, displayName, firstName, lastName, role } = user;
         return {
           id,
-          username,
+          email,
+          displayName,
           firstName,
           lastName,
           role,

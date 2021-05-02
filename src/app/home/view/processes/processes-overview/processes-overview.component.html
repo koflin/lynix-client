@@ -128,12 +128,12 @@
                               <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=190 name="Assignee" i18n-name prop="assignedUser" [comparator]="userNameSort" [cellClass]="getCellClass" >
                                   <ng-template let-row="row" ngx-datatable-cell-template>
                                   <div  [hideIfUnauthorized]="permissions.ASSIGN"  #test>
-                                    <p class="" *ngIf="row.occupiedBy">{{ (row.assignedUser) ? row.assignedUser.username : 'none' }}</p>
+                                    <p class="" *ngIf="row.occupiedBy">{{ (row.assignedUser) ? row.assignedUser.firstName : 'none' }}</p>
                                     <app-single-multiple-choice *ngIf="!row.occupiedBy" [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
                                   </div>
                                   <div [showIfUnauthorized]="permissions.ASSIGN">
                                     <p *ngIf="row.assignedUser" class="">
-                                      {{ row.assignedUser.username }}
+                                      {{ row.assignedUser.firstName + row.assignedUser.lastName }}
                                     </p>
                                     <p *ngIf="!row.assignedUser" class="" i18n>None</p>
                                   </div>

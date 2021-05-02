@@ -3,6 +3,6 @@ import { Permission } from './role';
 
 export interface LocalUser extends CompanyBase {
   id: string;
-  username: string;
+  email: string;
   permissions: Permission[];
 }

@@ -107,7 +107,7 @@ export class ProcessesOverviewComponent implements OnInit {
 
     this.processesOverviewService.getPotentialAssignees().subscribe(candidates => {
       this.potentialAssignees = candidates.map((d)=>{
-        return {'value': d.id, 'label':d.username}
+        return {'value': d.id, 'label':d.firstName + ' ' + d.lastName}
       })
     });
     this.windowWidth = window.innerWidth
@@ -185,10 +185,10 @@ export class ProcessesOverviewComponent implements OnInit {
     }else if(rowB.assigniedUser == undefined){
       return a
     }
-    if (rowA.assiginedUser.username.toLowerCase() < rowB.assiginedUser.username.toLowerCase()) {
+    if (rowA.assiginedUser.displayName.toLowerCase() < rowB.assiginedUser.displayName.toLowerCase()) {
       return b;
     }
-    if (rowA.assiginedUser.username.toLowerCase() > rowB.assiginedUser.username.toLowerCase()) {
+    if (rowA.assiginedUser.displayName.toLowerCase() > rowB.assiginedUser.displayName.toLowerCase()) {
       return a;
     }
   }
