@@ -62,7 +62,7 @@
                                     <tr #elseTemplate *ngFor="let product of order.products; let i=index">
                                         <td scope="row">
 
-                                          <app-single-multiple-choice [result]="(product.template) ? {'value': product.template.id, 'label' : product.template.name} : ''" (resultChange)=productSelector($event,i) [ignoreOptions]=ignoreOptions  [isMultipleChoice]=false [inputCheckForError]=checkForError  [isSearchable]=true [inputRequired]=true [data]="productOptions" [allowUserCreateOption]="true" [placeholder]="'select a product or type a new productname'"> </app-single-multiple-choice>
+                                          <app-single-multiple-choice [result]="(product.template) ? {'value': product.template.id, 'label' : product.template.name} : ''" (resultChange)=productSelector($event,i) [ignoreOptions]=ignoreOptions  [isMultipleChoice]=false [inputCheckForError]=checkForError  [isSearchable]=true [inputRequired]=true [data]="productOptions" [allowUserCreateOption]="true" placeholder="select a product or type a new productname" i18n-placeholder> </app-single-multiple-choice>
 
                                         </td>
                                         <td scope="row">

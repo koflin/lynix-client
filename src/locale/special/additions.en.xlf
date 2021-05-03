@@ -194,6 +194,21 @@
       <trans-unit id="1096991618429294196" datatype="html">
         <source>assign</source><target state="new">assign</target>
       </trans-unit>
+      <trans-unit id="7685454296261333540" datatype="html">
+        <source>Process Guide</source><target state="new">Process Guide</target>
+      </trans-unit>
+      <trans-unit id="1138167779248419361" datatype="html">
+        <source>Process:</source><target state="new">Process:</target>
+      </trans-unit>
+      <trans-unit id="2614607010577950577" datatype="html">
+        <source>Overview</source><target state="new">Overview</target>
+      </trans-unit>
+      <trans-unit id="65984904390749158" datatype="html">
+        <source>Finish</source><target state="new">Finish</target>
+      </trans-unit>
+      <trans-unit id="340430316261570792" datatype="html">
+        <source>Finished</source><target state="new">Finished</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

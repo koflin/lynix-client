@@ -358,6 +358,13 @@
           <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="ad0ab37396e5b30b3ee3d0e92bbea1aa2cb54d2e" datatype="html">
+        <source>select a product or type a new productname</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/order/order.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="8502c13aca172810aa5e3614edbb5d6f01be0431" datatype="html">
         <source>Processes</source>
         <context-group purpose="location">

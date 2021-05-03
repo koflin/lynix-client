@@ -1,6 +1,7 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { EventsService } from 'src/app/core/events/events.service';
 import { OrdersService } from 'src/app/core/orders/orders.service';
 import { ProcessesService } from 'src/app/core/processes/processes.service';
@@ -63,7 +64,9 @@ export class GuideComponent implements OnInit, OnDestroy {
     private processesService: ProcessesService,
     private ordersService: OrdersService,
     private usersService: UsersService,
-    private event: EventsService) { }
+    private event: EventsService,
+    private toastr: ToastrService
+    ) { }
 
 
   ngOnDestroy(): void {
@@ -119,12 +122,12 @@ export class GuideComponent implements OnInit, OnDestroy {
 
       this.assignee = await this.usersService.getById(this.process.assignedUserId).toPromise();
 
-      this.breadCrumbs=[{name:"Process Overview", url: "/processes/overview" }, {name:'Process: ' + this.process.name , url: this.router.url},];
+      this.breadCrumbs=[{name: $localize `Process Guide`, url: "/processes/overview" }, {name: $localize `Process:` + ' ' + this.process.name , url: this.router.url},];
       this.stepNames = this.process.steps.map((s)=>{
         return s.title
       })
-      this.stepNames.unshift("Overview")
-      this.stepNames.push("Finish")
+      this.stepNames.unshift($localize `Overview`)
+      this.stepNames.push($localize `Finish`)
     });
   }
 
@@ -186,7 +189,24 @@ export class GuideComponent implements OnInit, OnDestroy {
         return;
       }
     }
-    this.processesService.finish(this.process.id).subscribe(() => this.router.navigate(['processes/overview']));
+    this.processesService.finish(this.process.id).subscribe(() => {
+      this.toastr.show(
+        '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">'
+        + $localize `Success` + '</span> <span>' + $localize `Finished` + '</span></div>',
+        '',
+        {
+          timeOut: 1500,
+          closeButton: true,
+          enableHtml: true,
+          tapToDismiss: false,
+          titleClass: 'alert-title',
+          positionClass: 'toast-top-center',
+          toastClass: "ngx-toastr alert alert-dismissible alert-success alert-notify",
+        }
+      );
+
+      this.router.navigate(['processes/overview']);
+    });
   }
 
   async exit() {

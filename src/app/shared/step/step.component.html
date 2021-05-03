@@ -192,7 +192,7 @@
                         <p><small class="text-muted col-12" i18n>Add picture</small> </p>
                     </div>
                     <div class="col-12">
-                        <carousel *ngIf="stepTemplate.pictureUris.length !== 0; else elseTemplate">
+                        <carousel *ngIf="stepTemplate.pictureUris.length !== 0; else noImages">
                             <slide *ngFor="let picture of stepTemplate.pictureUris; let i=index" >
                               <img [src]="picture" alt="first slide" style="display: block;" class="object-fit-cover">
                               <div class="carousel-caption d-none d-md-block">
@@ -202,7 +202,7 @@
                               </div>
                             </slide>
                           </carousel>
-                          <ng-template #elseTemplate>
+                          <ng-template #noImages>
                             <p class="text-default" i18n>There are no images yet</p>
                           </ng-template>
                     </div>
@@ -231,7 +231,7 @@
                         <p><small class="text-muted col-12" i18n>Add video</small> </p>
                     </div>
                     <div class="col-12">
-                        <carousel *ngIf="stepTemplate.videoUris.length > 0; else elseTemplate">
+                        <carousel *ngIf="stepTemplate.videoUris.length > 0; else noVideos">
                             <slide *ngFor="let video of stepTemplate.videoUris; let i=index" >
                                 <div>
                                   <video width="100%" controls>
@@ -245,7 +245,7 @@
                                 </div>
                             </slide>
                           </carousel>
-                          <ng-template #elseTemplate>
+                          <ng-template #noVideos>
                             <p class="text-default" i18n>There are no videos yet</p>
                           </ng-template>
                     </div>

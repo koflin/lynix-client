@@ -340,6 +340,12 @@
           <context context-type="sourcefile">src/app/shared/order/order.component.html</context>
           <context context-type="linenumber">59</context>
         </context-group>
+      </trans-unit><trans-unit id="ad0ab37396e5b30b3ee3d0e92bbea1aa2cb54d2e" datatype="html">
+        <source>select a product or type a new productname</source><target state="final">select a product or type a new productname</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/order/order.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="8502c13aca172810aa5e3614edbb5d6f01be0431" datatype="html">
         <source>Processes</source><target state="final">Processes</target>
@@ -601,7 +607,6 @@
           <context context-type="linenumber">192</context>
         </context-group>
       </trans-unit>
-
       <trans-unit id="675e87f9d2a95d3454d44987d18a975c008a31d2" datatype="html">
         <source>There are no images yet</source><target state="final">There are no images yet</target>
         <context-group purpose="location">
@@ -1465,6 +1470,21 @@
       </trans-unit>
       <trans-unit id="1096991618429294196" datatype="html">
         <source>assign</source><target state="new">assign</target>
+      </trans-unit>
+      <trans-unit id="7685454296261333540" datatype="html">
+        <source>Process Guide</source><target state="new">Process Guide</target>
+      </trans-unit>
+      <trans-unit id="1138167779248419361" datatype="html">
+        <source>Process:</source><target state="new">Process:</target>
+      </trans-unit>
+      <trans-unit id="2614607010577950577" datatype="html">
+        <source>Overview</source><target state="new">Overview</target>
+      </trans-unit>
+      <trans-unit id="65984904390749158" datatype="html">
+        <source>Finish</source><target state="new">Finish</target>
+      </trans-unit>
+      <trans-unit id="340430316261570792" datatype="html">
+        <source>Finished</source><target state="new">Finished</target>
       </trans-unit>
     </body>
   </file>
