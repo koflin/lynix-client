@@ -18,7 +18,7 @@ export class OrdersOverviewComponent implements OnInit {
   permissions = Permission;
 
   orderNodes: OrderNode[];
-  breadCrumbs: BreadCrumbInfo[]=[{ name: $localize `Order Overview`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{ name: $localize `Orders`, url: this.router.url },];
   entries: number = 10;
   temp: OrderNode[] = [];
   rows: any[] = []

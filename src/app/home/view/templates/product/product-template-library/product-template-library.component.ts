@@ -17,7 +17,7 @@ export class ProductTemplateLibraryComponent implements OnInit {
   templates: ProductTemplateNode[];
   windowWidth:number
   @ViewChild('myTable') table: any;
-  breadCrumbs: BreadCrumbInfo[]=[{name: `Template Product Overview`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Product Templates`, url: this.router.url },];
 
   permissions = Permission;
 

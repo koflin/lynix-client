@@ -14,7 +14,7 @@ import { ProcessTemplateLibraryService } from './process-template-library.servic
   styleUrls: ['./process-template-library.component.scss']
 })
 export class ProcessTemplateLibraryComponent implements OnInit {
-  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Template Process Overview`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Process Templates`, url: this.router.url },];
   templates: ProcessTemplateNode[];
   windowWidth:number
 

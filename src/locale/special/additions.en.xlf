@@ -209,6 +209,27 @@
       <trans-unit id="340430316261570792" datatype="html">
         <source>Finished</source><target state="new">Finished</target>
       </trans-unit>
+      <trans-unit id="139651487721336451" datatype="html">
+        <source>Processes</source><target state="new">Processes</target>
+      </trans-unit>
+      <trans-unit id="6575195871133210332" datatype="html">
+        <source>Orders</source><target state="new">Orders</target>
+      </trans-unit>
+      <trans-unit id="5280218112746407598" datatype="html">
+        <source>New</source><target state="new">New</target>
+      </trans-unit>
+      <trans-unit id="4555457172864212828" datatype="html">
+        <source>Users</source><target state="new">Users</target>
+      </trans-unit>
+      <trans-unit id="795890916060309463" datatype="html">
+        <source>Roles</source><target state="new">Roles</target>
+      </trans-unit>
+      <trans-unit id="5266753995399107581" datatype="html">
+        <source>Process Templates</source><target state="new">Process Templates</target>
+      </trans-unit>
+      <trans-unit id="6672994033224734739" datatype="html">
+        <source>Product Templates</source><target state="new">Product Templates</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -122,7 +122,7 @@ export class GuideComponent implements OnInit, OnDestroy {
 
       this.assignee = await this.usersService.getById(this.process.assignedUserId).toPromise();
 
-      this.breadCrumbs=[{name: $localize `Process Guide`, url: "/processes/overview" }, {name: $localize `Process:` + ' ' + this.process.name , url: this.router.url},];
+      this.breadCrumbs=[{name: $localize `Processes`, url: "/processes/overview" }, {name: this.process.name , url: this.router.url},];
       this.stepNames = this.process.steps.map((s)=>{
         return s.title
       })

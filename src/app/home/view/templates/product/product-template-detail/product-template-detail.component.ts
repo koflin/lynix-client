@@ -142,8 +142,8 @@ export class ProductTemplateDetailComponent implements OnInit {
       };
     }
 
-    this.breadCrumbs = [{name:"Product Template", url: "/templates/product" },
-      {name:(this.productTemplate.id)? this.productTemplate.name : 'New', url: this.router.url}]
+    this.breadCrumbs = [{name: $localize `Product Templates`, url: "/templates/product" },
+      {name:(this.productTemplate.id)? this.productTemplate.name : $localize `New`, url: this.router.url}]
   }
 
   async saveDraft(dontFireToastr:boolean=false) {

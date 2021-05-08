@@ -14,7 +14,7 @@ export class RolesOverviewComponent implements OnInit {
 
   entries: number = 10;
   searchValue:string= ""
-  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Roles Overview`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Roles`, url: this.router.url },];
   roleRows: Role[];
   options = {
     valueNames: [ 'name' ]

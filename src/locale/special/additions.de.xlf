@@ -60,7 +60,7 @@
         <source>Delivery Date</source><target state="new">Termin</target>
       </trans-unit>
       <trans-unit id="4145496584631696119" datatype="html">
-        <source>Role</source><target state="new">Role</target>
+        <source>Role</source><target state="new">Rolle</target>
       </trans-unit>
       <trans-unit id="4634746302235254764" datatype="html">
         <source>Process name</source><target state="new">Prozess</target>
@@ -208,6 +208,27 @@
       </trans-unit>
       <trans-unit id="340430316261570792" datatype="html">
         <source>Finished</source><target state="new">Erledigt</target>
+      </trans-unit>
+      <trans-unit id="139651487721336451" datatype="html">
+        <source>Processes</source><target state="new">Prozesse</target>
+      </trans-unit>
+      <trans-unit id="6575195871133210332" datatype="html">
+        <source>Orders</source><target state="new">Aufträge</target>
+      </trans-unit>
+      <trans-unit id="5280218112746407598" datatype="html">
+        <source>New</source><target state="new">Neu</target>
+      </trans-unit>
+      <trans-unit id="4555457172864212828" datatype="html">
+        <source>Users</source><target state="new">Nutzer</target>
+      </trans-unit>
+      <trans-unit id="795890916060309463" datatype="html">
+        <source>Roles</source><target state="new">Rollen</target>
+      </trans-unit>
+      <trans-unit id="5266753995399107581" datatype="html">
+        <source>Process Templates</source><target state="new">Prozess Vorlagen</target>
+      </trans-unit>
+      <trans-unit id="6672994033224734739" datatype="html">
+        <source>Product Templates</source><target state="new">Produkt Vorlagen</target>
       </trans-unit>
     </body>
   </file>

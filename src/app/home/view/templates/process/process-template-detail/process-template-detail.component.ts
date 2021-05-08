@@ -78,8 +78,8 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
       };
     }
 
-    this.breadCrumbs = [{name:"Process Template", url: "/templates/process" },
-      {name:(this.processTemplate.id)? this.processTemplate.name : 'New', url:this.router.url}]
+    this.breadCrumbs = [{name: $localize `Process Templates`, url: "/templates/process" },
+      {name:(this.processTemplate.id)? this.processTemplate.name : $localize `New`, url:this.router.url}]
   }
 
   deleteModal(){

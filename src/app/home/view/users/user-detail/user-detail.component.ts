@@ -202,8 +202,8 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
       }
     }
     this.orginalUserDetail = _.cloneDeep(this.userDetail)
-    this.breadCrumbs = [{name:"Users Overview", url: "/users" },
-      {name:(this.userDetail.id)? this.userDetail.username : 'New', url:this.router.url}]
+    this.breadCrumbs = [{name: $localize `Users`, url: "/users" },
+      {name:(this.userDetail.id)? this.userDetail.username : $localize `New`, url:this.router.url}]
 
 
     this.availableRoles = await this.rolesService.getAll().toPromise();

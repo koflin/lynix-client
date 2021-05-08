@@ -18,7 +18,7 @@ export class UsersOverviewComponent implements OnInit {
 
   entries: number = 10;
   searchValue:string= ""
-  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Users Overview`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Users`, url: this.router.url },];
   userRows: UserRowNode[];
   options = {
     valueNames: [ 'user-name', 'name' ]

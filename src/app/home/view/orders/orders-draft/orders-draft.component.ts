@@ -53,18 +53,19 @@ const right = [
 })
 export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   _orderDraft: Order;
+  breadCrumbs: BreadCrumbInfo[]
   get orderDraft():Order{
     return this._orderDraft;
   }
   set orderDraft(value:Order){
     this._orderDraft = value;
     this.setProductNames()
+    this.breadCrumbs = [
+      {name: $localize `Orders`, url: "/orders/overview"},
+      {name: this.orderDraft?.name ? this.orderDraft.name : $localize `New`, url: this.router.url },
+    ];
 
   }
-  breadCrumbs: BreadCrumbInfo[] = [
-    {name: $localize `Order Overview`, url: "/orders/overview"},
-    {name: $localize `Order Draft`, url: this.router.url },
-  ];
 
   //productsNames:string[]=[]
   get productsNames():string[]{

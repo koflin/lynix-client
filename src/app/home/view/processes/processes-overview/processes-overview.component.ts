@@ -25,7 +25,7 @@ import { ProcessesOverviewService } from '../processes-overview.service';
 export class ProcessesOverviewComponent implements OnInit {
   permissions = Permission;
 
-  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Process Overview`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Processes`, url: this.router.url },];
   nodesAreEmpty:boolean = undefined;
   loaded = false;
   windowWidth:number
