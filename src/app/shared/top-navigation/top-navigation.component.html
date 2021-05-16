@@ -90,6 +90,18 @@
 
                 </div>
               </li>
+              <li class="nav-item dropdown card menu-card-bottom-margin zooming ">
+                <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('statistics')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="d-flex align-items-center">
+                    <i class="icon icon-folder-shared icon-big item-icon mt--1"></i> <span i18n>Statistics</span>
+                  </div>
+
+                </a>
+                <div class="dropdown-menu" [class.show]="isActive('statistics')" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item h4 zooming" routerLink="/statistics/overview" i18n>Overview</a>
+
+                </div>
+              </li>
 
 
               </ul>
