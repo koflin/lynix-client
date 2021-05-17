@@ -49,7 +49,7 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
 
 
             <form role="form">
-              <label *ngIf="error" class="text-danger" i18n>username & password not accepted</label>
+              <label *ngIf="error" class="text-danger" i18n>email & password not accepted</label>
               <div
                 class="form-group mb-3"
                 [ngClass]="{ focused: focus === true }"
@@ -59,7 +59,7 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
                   <input
                     class="form-control"
                     [ngClass]="{'field-error': error === true}"
-                    placeholder="User Name"
+                    placeholder="E-Mail"
                     i18n-placeholder
                     type="text"
                     (focus)="focus = true"

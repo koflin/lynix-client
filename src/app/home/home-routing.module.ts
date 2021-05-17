@@ -12,6 +12,7 @@ import { OrdersDraftComponent } from './view/orders/orders-draft/orders-draft.co
 import { OrdersOverviewComponent } from './view/orders/orders-overview/orders-overview.component';
 import { ProcessesOverviewComponent } from './view/processes/processes-overview/processes-overview.component';
 import { RolesOverviewComponent } from './view/roles/roles-overview/roles-overview.component';
+import { StatisticsOverviewComponent } from './view/statistics/statistics-overview/statistics-overview.component';
 import {
   ProcessTemplateDetailComponent,
 } from './view/templates/process/process-template-detail/process-template-detail.component';
@@ -57,6 +58,8 @@ const routes: Routes = [
     { path: 'templates/product/:id', component: ProductTemplateDetailComponent , canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.EDIT]} },
     { path: 'templates/process', component: ProcessTemplateLibraryComponent, canActivate: [AuthGuard], data: { permissions: [Permission.EDIT]} },
     { path: 'templates/process/:id', component: ProcessTemplateDetailComponent, canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.EDIT]} },
+    // Statistics
+    { path: 'statistics/overview', component: StatisticsOverviewComponent , canActivate: [AuthGuard], data: { permissions: [Permission.VIEW]} },
   ]},
 ];
 

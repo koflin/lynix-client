@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-sm-12 col-md-8">
                             <app-single-multiple-choice  [(result)]="selectedRole" [(fieldInformation)]=roleField  [isMultipleChoice]=false [inputCheckForError]=checkForError  [isSearchable]=true [inputRequired]=true [data]="availabelRolesSelection" [allowUserCreateOption]="false" placeholder="select a role" i18n-placeholder> </app-single-multiple-choice>
-                            <app-text-field [(result)]=userDetail.username [(fieldInformation)]="usernameField" [inputRequired]=true [inputType]="'text'" [inputCheckForError]=checkForError> </app-text-field>
+                            <app-text-field [(result)]=userDetail.email [(fieldInformation)]="email" [inputRequired]=true [inputType]="'text'" [inputCheckForError]=checkForError> </app-text-field>
                             <app-text-field [(result)]=userDetail.firstName [(fieldInformation)]="firstname" [inputRequired]=true [inputType]="'text'" [inputCheckForError]=checkForError> </app-text-field>
                             <app-text-field [(result)]=userDetail.lastName [(fieldInformation)]="lastname" [inputRequired]=true [inputType]="'text'" [inputCheckForError]=checkForError> </app-text-field>
                             <!--<app-text-field [(result)]=userDetail.password [(fieldInformation)]="password" [inputRequired]=true [inputType]="'password'" [inputCheckForError]=checkForError> </app-text-field>-->

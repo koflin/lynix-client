@@ -36,16 +36,16 @@ export class AuthService {
     return validUntil ? parseInt(validUntil) > Date.now() : false;
   }
 
-  login(username: string, password: string, persist: boolean): Promise<boolean> {
-    return this.api.post<{ access_token: string, user: LocalUser, refresh_expiration: number }>('auth/login', {
-      username,
+  login(email: string, password: string, persist: boolean): Promise<boolean> {
+    return this.api.post<{ access_token: string, account: LocalUser, refresh_expiration: number }>('auth/login', {
+      email,
       password,
       persist
     }).pipe(
       map((result) => {
         this.accessToken = result.access_token;
         this.scheduleRefresh();
-        this.localUser.next(result.user);
+        this.localUser.next(result.account);
 
         this.setLoggedInUntil(result.refresh_expiration, persist);
 
@@ -99,16 +99,16 @@ export class AuthService {
     const validUntil = this.getLoggedInUntil();
 
     if (validUntil && parseInt(validUntil) > Date.now()) {
-      return this.api.post<{ access_token: string, user: LocalUser, refresh_expiration: number, persist: boolean }>('auth/token').pipe(
+      return this.api.post<{ access_token: string, account: LocalUser, refresh_expiration: number, persist: boolean }>('auth/token').pipe(
         tap((result) => {
           this.accessToken = result.access_token;
           this.scheduleRefresh();
-          this.localUser.next(result.user);
+          this.localUser.next(result.account);
 
           this.setLoggedInUntil(result.refresh_expiration, result.persist);
         }),
         map((result) => {
-          return result.user;
+          return result.account;
         })
       );
     }

@@ -29,6 +29,7 @@ import {
 import { TestingComponent } from './view/testing/testing.component';
 import { UserDetailComponent } from './view/users/user-detail/user-detail.component';
 import { UsersOverviewComponent } from './view/users/users-overview/users-overview.component';
+import { StatisticsOverviewComponent } from './view/statistics/statistics-overview/statistics-overview.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { UsersOverviewComponent } from './view/users/users-overview/users-overvi
     StatusPipe,
     RolesOverviewComponent,
     ProductTemplateDetailComponent,
-    ProcessTemplateDetailComponent
+    ProcessTemplateDetailComponent,
+    StatisticsOverviewComponent
   ],
   imports: [
     HomeRoutingModule,

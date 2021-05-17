@@ -1,8 +1,8 @@
-import { User } from "src/app/models/user";
+import { User } from 'src/app/models/user';
 
 export class CreateUserDto {
   companyId: string;
-  username: string;
+  email: string;
   firstName?: string;
   lastName?: string;
   roleId?: string;
