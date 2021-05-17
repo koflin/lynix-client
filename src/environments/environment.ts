@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiHost: 'http://localhost:3000/v0/',
-  gatewayHost: 'ws://localhost:3001',
+  apiHost: 'http://localhost:80/v0/',
+  gatewayHost: 'ws://localhost:80',
   domain: 'localhost',
   clientHost: 'http://localhost:4200/'
 };
