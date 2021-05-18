@@ -44,7 +44,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
   isEditing = false;
   checkForError= false
   roleField:InputOutputValue=new InputOutputValue('role', $localize `Role`, false)
-  usernameField:InputOutputValue=new InputOutputValue('Username', $localize `username`, false)
+  email:InputOutputValue=new InputOutputValue('email', $localize `E-Mail`, false)
   firstname:InputOutputValue=new InputOutputValue('firstname', $localize `First name`, false)
   lastname:InputOutputValue=new InputOutputValue('lastname', $localize `Last name`, false)
 
@@ -104,7 +104,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
 
   async save() {
     this.checkForError=true
-    if (!(this.roleField.error || this.usernameField.error || this.firstname.error || this.lastname.error)) {
+    if (!(this.roleField.error || this.email.error || this.firstname.error || this.lastname.error)) {
       if (this.avatarImage) {
         const media = await this.mediaService.upload(this.avatarImage).toPromise();
         this.userDetail.avatar = media.url;
@@ -157,7 +157,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    selBox.value = environment.clientHost + 'activation/' + this.activation.id + '?code=' + this.activation.code;
+    selBox.value = environment.clientHost + '/activation/' + this.activation.id + '?code=' + this.activation.code;
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
@@ -194,16 +194,16 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
         role: undefined,
         company:undefined,
         id: undefined,
-        password: "",
-        username:"",
+        email:"",
+        displayName: undefined,
         firstName:"",
         lastName:"",
         avatar: undefined
       }
     }
     this.orginalUserDetail = _.cloneDeep(this.userDetail)
-    this.breadCrumbs = [{name: $localize `Users`, url: "/users" },
-      {name:(this.userDetail.id)? this.userDetail.username : $localize `New`, url:this.router.url}]
+    this.breadCrumbs = [{name:"Users Overview", url: "/users" },
+      {name:(this.userDetail.id)? this.userDetail.displayName : 'New', url:this.router.url}]
 
 
     this.availableRoles = await this.rolesService.getAll().toPromise();
@@ -258,7 +258,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
           // Show confirmation
           this.router.navigate(['users']);
       }else{
-        this.usersService.getByUserName(this.userDetail.username).subscribe(user => {
+        this.usersService.getByEmail(this.userDetail.email).subscribe(user => {
           this.router.navigate(['users/' + user.id])
         });
       }

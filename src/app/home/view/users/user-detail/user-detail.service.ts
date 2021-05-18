@@ -31,7 +31,8 @@ export class UsersDetailService {
     return this.usersService.getById(id).pipe(switchMap(async (user) => {
       return {
         id: user.id,
-        username: user.username,
+        email: user.email,
+        displayName: user.displayName,
         firstName: user.firstName,
         lastName: user.lastName,
         avatar: user.avatar,
@@ -46,7 +47,8 @@ export class UsersDetailService {
     this.usersService.save({
       companyId: userDetail.company.id,
       id: userDetail.id,
-      username: userDetail.username,
+      email: userDetail.email,
+      displayName: userDetail.displayName,
       avatar: userDetail.avatar,
       firstName: userDetail.firstName,
       lastName: userDetail.lastName,

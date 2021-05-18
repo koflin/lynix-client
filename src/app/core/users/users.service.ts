@@ -30,9 +30,9 @@ export class UsersService {
     return this.api.get<User>('users/' + id);
   }
 
-  getByUserName(username: string) {
+  getByEmail(email: string) {
     return this.api.get<User>('users', {
-      username
+      email
     });
   }
 
