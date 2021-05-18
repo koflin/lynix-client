@@ -12,6 +12,11 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
 
   breadCrumbs: BreadCrumbInfo[]=[{ name: $localize `Statistics Overview`, url: this.router.url },];
   stats: any = {};
+  users = [
+    { name: "Colin Pfingstl", status: "Online", role: "Developer" },
+    { name: "Lars Streit", status: "Offline", role: "Process Admin" },
+    { name: "Dominik Koster", status: "Offline", role: "Process Admin" },
+  ];
 
   orderNowChart: Chart;
   orderHistoryChart: Chart;
@@ -41,7 +46,7 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
         ],
         datasets: [{
           label: 'Orders Now',
-          data: [300, 50, 100],
+          data: [200, 60, 120],
           backgroundColor: [
             '#2C3E50',
             '#3498DB',
@@ -132,12 +137,12 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
         datasets: [
           {
             label: 'Open',
-            data: [75, 55, 78, 80, 83, 83, 86, 84, 80, 90, 91, 90],
+            data: [73, 20, 67, 70, 85, 70, 77, 88, 82, 89, 93, 40],
             backgroundColor: '#2C3E50',
           },
           {
             label: 'Finished',
-            data: [30, 24, 30, 36, 40, 45, 40, 43, 40, 47, 56, 54],
+            data: [35, 8, 33, 40, 42, 38, 47, 30, 33, 40, 60, 20],
             backgroundColor: '#2ECC71',
           },
         ]

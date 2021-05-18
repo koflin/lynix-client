@@ -34,18 +34,18 @@
                             </thead>
 
                             <tbody class=" list">
-                              <tr>
+                              <tr *ngFor="let user of users">
                                 <th scope="row">
                                   <div class=" media align-items-center">
                                     <div class=" media-body">
                                       <span class=" name mb-0 text-sm">
-                                        Name
+                                        {{ user.name }}
                                       </span>
                                     </div>
                                   </div>
                                 </th>
-                                <td>Online</td>
-                                <td>Role</td>
+                                <td>{{ user.status }}</td>
+                                <td>{{ user.role }}</td>
                               </tr>
                             </tbody>
                           </table>
