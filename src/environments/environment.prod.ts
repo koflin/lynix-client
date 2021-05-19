@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  apiHost: 'http://api.lynix.ch/v0/',
-  gatewayHost: 'ws://gateway.lynix.ch',
+  apiHost: 'http://api.testing.lynix.ch/v0/',
+  gatewayHost: 'ws://gateway.testing.lynix.ch',
   domain: 'lynix.ch',
   clientHost: 'http://testing.lynix.ch/'
 };
