@@ -21,7 +21,6 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
       </div>
     </div>
   </div>
-
   <div class=" container mt--5 pb-5">
     <div class=" row justify-content-center">
       <div class=" col-lg-5 col-md-7">
@@ -32,10 +31,9 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
             </div>
           </div>
 
-          <div *ngIf="userId" class=" card-body px-lg-5 py-lg-5">
-
-
+          <div *ngIf="activation" class=" card-body px-lg-5 py-lg-5">
             <form role="form">
+              <p>{{ activation?.user.displayName }}</p>
               <label *ngIf="error" class="text-danger">{{ error }}</label>
               <div class="form-group" [ngClass]="{ focused: focus1 === true }">
                 <div class="input-group input-group">
@@ -60,7 +58,6 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
               </div>
               <div class="form-group" [ngClass]="{ focused: focus1 === true }">
                 <div class="input-group input-group">
-
                   <input
                     class="form-control"
                     [ngClass]="{'field-error': error}"
@@ -84,7 +81,7 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
               </div>
             </form>
           </div>
-          <p *ngIf="!userId" i18n>Invalid account activation link</p>
+          <p *ngIf="!activation" i18n>Invalid account activation link</p>
         </div>
       </div>
     </div>

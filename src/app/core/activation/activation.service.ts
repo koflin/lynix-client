@@ -18,7 +18,7 @@ export class ActivationService {
   }
 
   verify(id: string, code: string) {
-    return this.api.post<{userId: string}>('activation/verify/' + id, { code });
+    return this.api.post<Activation>('activation/verify/' + id, { code });
   }
 
   activate(id: string, code: string, password: string) {

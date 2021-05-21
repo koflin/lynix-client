@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActivationService } from 'src/app/core/activation/activation.service';
+import { Activation } from 'src/app/models/activation';
 
 @Component({
   selector: 'app-activation',
@@ -21,7 +22,7 @@ export class ActivationComponent implements OnInit {
   activationId: string;
   code: string;
 
-  userId: string;
+  activation: Activation;
 
   constructor(
     private activationService: ActivationService,
@@ -52,12 +53,12 @@ export class ActivationComponent implements OnInit {
 
   changeActivation() {
     if (!this.activationId || !this.code) {
-      this.userId = null;
+      this.activation = null;
       return;
     }
 
-    this.activationService.verify(this.activationId, this.code).toPromise().then((result) => {
-      this.userId = result.userId;
+    this.activationService.verify(this.activationId, this.code).toPromise().then((activation) => {
+      this.activation = activation;
     });
   }
 

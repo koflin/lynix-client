@@ -157,7 +157,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    selBox.value = environment.clientHost + '/activation/' + this.activation.id + '?code=' + this.activation.code;
+    selBox.value = environment.clientHost + 'activation/' + this.activation.id + '?code=' + this.activation.code;
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
