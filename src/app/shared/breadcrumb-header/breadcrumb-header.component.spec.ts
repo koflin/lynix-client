@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { BreadcrumbHeaderComponent } from './breadcrumb-header.component';
 
@@ -6,7 +6,7 @@ describe('BreadcrumbHeaderComponent', () => {
   let component: BreadcrumbHeaderComponent;
   let fixture: ComponentFixture<BreadcrumbHeaderComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BreadcrumbHeaderComponent ]
     })
