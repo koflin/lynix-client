@@ -5,9 +5,9 @@ import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { InViewportModule } from 'ng-in-viewport';
-import { CarouselModule } from 'ngx-bootstrap';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ToastrModule } from 'ngx-toastr';
 
