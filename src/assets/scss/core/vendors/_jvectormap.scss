@@ -34,3 +34,7 @@
 .jvectormap-zoomout {
   bottom: 2rem;
 }
+
+#chartdiv g[aria-labelledby^="id-"] g{
+  display: none;
+}

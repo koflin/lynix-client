@@ -54,7 +54,8 @@
             ],
             "allowedCommonJsDependencies": [
               "lodash",
-              "chart.js"
+              "chart.js",
+              "socket.io-client"
             ]
           },
           "configurations": {

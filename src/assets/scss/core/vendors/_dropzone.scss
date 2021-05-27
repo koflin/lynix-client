@@ -46,6 +46,16 @@
   }
 }
 
+.dropzone-single,
+.dropzone-multiple{
+ .dz-message .dz-button{
+    background: transparent;
+    border: none;
+    color: $gray-600;
+    font-size: 1rem;
+  }
+}
+
 .dz-preview-single {
   position: absolute;
   top: 0;
