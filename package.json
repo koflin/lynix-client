@@ -8,7 +8,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "extract-i18n": "ng xi18n lynix --format xlf --output-path src/locale",
     "merge-i18n": "ng run lynix:xliffmerge",
     "start-de": "ng serve --configuration=de"
   },

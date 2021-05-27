@@ -56,7 +56,8 @@
               "lodash",
               "chart.js",
               "socket.io-client"
-            ]
+            ],
+            "i18nMissingTranslation": "warning"
           },
           "configurations": {
             "production": {
@@ -88,10 +89,7 @@
             },
             "de": {
               "aot": true,
-              "outputPath": "dist/lynix-de",
-              "i18nFile": "src/locale/messages.de.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "de"
+              "localize": ["de"]
             },
             "demo": {
               "fileReplacements": [
