@@ -31,6 +31,8 @@ export class SingleMultipleChoiceComponent implements OnInit {
   error:boolean = false
   @Input() errorMessage:string=""
 
+  @Input() readonly: boolean = false;
+
   @ViewChild("selectr") selectr: ElementRef ;
 
 

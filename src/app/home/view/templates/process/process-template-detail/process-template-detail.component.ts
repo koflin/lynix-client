@@ -7,6 +7,7 @@ import { ProcessTemplate } from 'src/app/models/processTemplate';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { deletingDataInformation } from 'src/app/models/ui/deletingData';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
+import { TabFragmentPipe } from 'src/app/pipes/tab-fragment/tab-fragment.pipe';
 import { TabIndicesPipe } from 'src/app/pipes/tab-indices/tab-indices.pipe';
 import swal from 'sweetalert2';
 
@@ -27,13 +28,18 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
     return this.processTemplate.stepTemplates.map(step => step.title);
   }
 
+  private getBaseUrl() {
+    return '/templates/process/' + this.processId;
+  }
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
     private processTemplateService: ProcessTemplatesService,
     private toastr: ToastrService,
-    private indiciesPipe: TabIndicesPipe
+    private indiciesPipe: TabIndicesPipe,
+    private fragPipe: TabFragmentPipe,
   ) { }
 
   ngOnInit(): void {
@@ -43,16 +49,17 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
     });
 
     this.route.fragment.subscribe((fragment) => {
-      if (!fragment) {
-        this.stepToggleId = undefined;
-        return;
+      this.stepToggleId = undefined;
+
+      if (fragment) {
+        const tabs = this.indiciesPipe.transform(fragment);
+
+        if (tabs.length >= 1) {
+          this.stepToggleId = tabs[0];
+        }
       }
 
-      const tabs = this.indiciesPipe.transform(fragment);
-
-      if (tabs.length >= 1) {
-        this.stepToggleId = tabs[0];
-      }
+      this.updateBreadCrumb();
     });
   }
 
@@ -78,8 +85,30 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
       };
     }
 
-    this.breadCrumbs = [{name: $localize `Process Templates`, url: "/templates/process" },
-      {name:(this.processTemplate.id)? this.processTemplate.name : $localize `New`, url:this.router.url}]
+    this.updateBreadCrumb();
+  }
+
+  updateBreadCrumb() {
+    if (!this.processTemplate) {
+      return;
+    }
+
+    let breadCrumb = [{
+      name: $localize `Process Templates`,
+      url: "/templates/process"
+    }, {
+      name:(this.processTemplate?.id) ? this.processTemplate.name : $localize `New`,
+      url: this.getBaseUrl()
+    }];
+
+    if (this.stepToggleId != undefined) {
+      breadCrumb.push({
+        name: this.stepsName[this.stepToggleId],
+        url: this.getBaseUrl() + '#' + this.fragPipe.transform([this.stepToggleId])
+      });
+    }
+
+    this.breadCrumbs = breadCrumb;
   }
 
   deleteModal(){

@@ -8,6 +8,7 @@ import { ProductTemplatesService } from 'src/app/core/productTemplates/product-t
 import { ProductTemplate } from 'src/app/models/productTemplate';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { deletingDataInformation } from 'src/app/models/ui/deletingData';
+import { TabFragmentPipe } from 'src/app/pipes/tab-fragment/tab-fragment.pipe';
 import { TabIndicesPipe } from 'src/app/pipes/tab-indices/tab-indices.pipe';
 import swal from 'sweetalert2';
 
@@ -83,6 +84,10 @@ export class ProductTemplateDetailComponent implements OnInit {
     return this._processToggleId
   }
 
+  private getBaseUrl() {
+    return '/templates/product/' + this.productId;
+  }
+
   isEdited = false;
 
   constructor(
@@ -92,7 +97,8 @@ export class ProductTemplateDetailComponent implements OnInit {
     private productTemplateService: ProductTemplatesService,
     private processTemplateService: ProcessTemplatesService,
     private toastr: ToastrService,
-    private indicesPipe: TabIndicesPipe
+    private indicesPipe: TabIndicesPipe,
+    private fragPipe: TabFragmentPipe
   ) { }
 
   ngOnInit(): void {
@@ -105,19 +111,19 @@ export class ProductTemplateDetailComponent implements OnInit {
       this._processToggleId = undefined;
       this._stepToggleId = undefined;
 
-      if (!fragment) {
-        return;
+      if (fragment) {
+        const parts = this.indicesPipe.transform(fragment);
+
+        if (parts.length >= 1) {
+          this._processToggleId = parts[0];
+        }
+
+        if (parts.length >= 2) {
+          this._stepToggleId = parts[1];
+        }
       }
 
-      const parts = this.indicesPipe.transform(fragment);
-
-      if (parts.length >= 1) {
-        this._processToggleId = parts[0];
-      }
-
-      if (parts.length >= 2) {
-        this._stepToggleId = parts[1];
-      }
+      this.updateBreadCrumb();
     });
   }
 
@@ -142,8 +148,7 @@ export class ProductTemplateDetailComponent implements OnInit {
       };
     }
 
-    this.breadCrumbs = [{name: $localize `Product Templates`, url: "/templates/product" },
-      {name:(this.productTemplate.id)? this.productTemplate.name : $localize `New`, url: this.router.url}]
+    this.updateBreadCrumb();
   }
 
   async saveDraft(dontFireToastr:boolean=false) {
@@ -186,6 +191,36 @@ export class ProductTemplateDetailComponent implements OnInit {
 
   cancle() {
     this.router.navigate(['templates/product']);
+  }
+
+  updateBreadCrumb() {
+    if (!this.productTemplate) {
+      return;
+    }
+
+    let breadCrumb = [{
+      name: $localize `Product Templates`,
+      url: "/templates/product"
+    }, {
+      name:(this.productTemplate?.id) ? this.productTemplate.name : $localize `New`,
+      url: this.getBaseUrl()
+    }];
+
+    if (this.processToggleId != undefined) {
+      breadCrumb.push({
+        name: this.processesNames[this.processToggleId],
+        url: this.getBaseUrl() + '#' + this.fragPipe.transform([this.processToggleId])
+      });
+    }
+
+    if (this.stepToggleId != undefined) {
+      breadCrumb.push({
+        name: this.stepsName[this.stepToggleId],
+        url: this.getBaseUrl() + '#' + this.fragPipe.transform([this.processToggleId, this.stepToggleId])
+      });
+    }
+
+    this.breadCrumbs = breadCrumb;
   }
 
   defContainer(){
