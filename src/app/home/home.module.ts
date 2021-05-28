@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { CookieModule } from 'ngx-cookie';
 
 import { HasUnsavedDataGuard } from '../core/guard/has-unsaved-data.guard';
+import { StatusPipe } from '../pipes/status/status.pipe';
 import { SharedModule } from '../shared/shared.module';
-import { StatusPipe } from './../pipes/status.pipe';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { DashboardComponent } from './view/dashboard/dashboard.component';
@@ -14,6 +14,7 @@ import { OrdersDraftComponent } from './view/orders/orders-draft/orders-draft.co
 import { OrdersOverviewComponent } from './view/orders/orders-overview/orders-overview.component';
 import { ProcessesOverviewComponent } from './view/processes/processes-overview/processes-overview.component';
 import { RolesOverviewComponent } from './view/roles/roles-overview/roles-overview.component';
+import { StatisticsOverviewComponent } from './view/statistics/statistics-overview/statistics-overview.component';
 import {
   ProcessTemplateDetailComponent,
 } from './view/templates/process/process-template-detail/process-template-detail.component';
@@ -29,7 +30,6 @@ import {
 import { TestingComponent } from './view/testing/testing.component';
 import { UserDetailComponent } from './view/users/user-detail/user-detail.component';
 import { UsersOverviewComponent } from './view/users/users-overview/users-overview.component';
-import { StatisticsOverviewComponent } from './view/statistics/statistics-overview/statistics-overview.component';
 
 
 @NgModule({

@@ -1,7 +1,7 @@
 .scrollable-but-hide::-webkit-scrollbar {
     display: none;
   }
-  
+
   /* Hide scrollbar for IE, Edge and Firefox */
   .scrollable-but-hide {
     -ms-overflow-style: none;  /* IE and Edge */
@@ -30,7 +30,7 @@
     color: inherit;
 }
 
-*:focus { 
+*:focus {
     outline: none;
 }
 .lightgray-color{
@@ -54,7 +54,7 @@ $animate: all 0.2s ease-in-out;
       transition: $animate;
       transition-duration: 0.75s;
       opacity: 0;
-     
+
     }
     &.hover-1 {
         &:before,

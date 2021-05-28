@@ -16,8 +16,9 @@ import { ShowIfUnauthorizedDirective } from '../auth/show-if-unauthorized.direct
 import { DurationPipe } from '../pipes/duration/duration.pipe';
 import { VideoTypePipe } from '../pipes/media-type/media-type.pipe';
 import { PermissionPipe } from '../pipes/permission/permission.pipe';
-import { TabFragmentPipe } from '../pipes/tab-fragment/tab-fragment.pipe';
-import { TabIndicesPipe } from '../pipes/tab-indices/tab-indices.pipe';
+import { StatusBadgePipe } from '../pipes/status/status-badge.pipe';
+import { TabFragmentPipe } from '../pipes/tab/tab-fragment.pipe';
+import { TabIndicesPipe } from '../pipes/tab/tab-indices.pipe';
 import {
   BottomNavigationOrderDraftComponent,
 } from './bottom-navigation-order-draft/bottom-navigation-order-draft.component';
@@ -66,7 +67,8 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     VideoTypePipe,
     TabFragmentPipe,
     TabIndicesPipe,
-    PermissionPipe
+    PermissionPipe,
+    StatusBadgePipe
      ],
   imports: [
     CommonModule,
@@ -120,7 +122,8 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     VideoTypePipe,
     TabFragmentPipe,
     TabIndicesPipe,
-    PermissionPipe
+    PermissionPipe,
+    StatusBadgePipe
   ]
 
 })

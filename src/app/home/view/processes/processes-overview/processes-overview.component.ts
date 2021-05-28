@@ -30,9 +30,14 @@ export class ProcessesOverviewComponent implements OnInit {
   loaded = false;
   windowWidth:number
   processNodeGroups: ProcessGroupNode [] = [
-    {
+    /*{
       title: $localize `Assistance Required`,
       status: 'assistance_required',
+      nodes: []
+    },*/
+    {
+      title: $localize `All`,
+      status: null,
       nodes: []
     },
     {
@@ -59,10 +64,18 @@ export class ProcessesOverviewComponent implements OnInit {
   temp: ProcessNode[];
   currentUser:LocalUser
   potentialAssignees:SingleMultiChoiceItem[]
+
+  tabIndex = 0;
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.windowWidth = event.target.innerWidth
   }
+
+  get tabNames() {
+    return this.processNodeGroups.map(process => process.title);
+  }
+
   constructor(
     private router: Router,
     private processesOverviewService: ProcessesOverviewService ,
@@ -116,7 +129,7 @@ export class ProcessesOverviewComponent implements OnInit {
 
   addNode(node: ProcessNode) {
     for (let group of this.processNodeGroups) {
-      if (group.status === node.status) {
+      if (group.status === node.status || group.status === null) {
         group.nodes.push(node);
         break;
       }
@@ -165,7 +178,7 @@ export class ProcessesOverviewComponent implements OnInit {
 
       for (let group of this.processNodeGroups) {
         group.nodes = [];
-        group.nodes.push(...processNodes.filter((node) => node.status === group.status));
+        group.nodes.push(...processNodes.filter((node) => node.status === group.status || group.status === null));
       }
 
       this.loaded = true;

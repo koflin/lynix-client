@@ -14,7 +14,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { TabFragmentPipe } from 'src/app/pipes/tab-fragment/tab-fragment.pipe';
+import { TabFragmentPipe } from 'src/app/pipes/tab/tab-fragment.pipe';
 
 
 @Component({
@@ -31,11 +31,13 @@ export class TabsComponent implements OnInit,AfterViewInit {
   @Input() tabsResIndex:number
   @Output() tabsResIndexChange= new EventEmitter<number>()
 
-  @Input() navFragmentBase: number[];
+  @Input() navFragmentBase: number[] = [];
   @Input() mark: number;
 
   @Output() tabAdd = new EventEmitter<void>()
   addable: boolean;
+
+  seemless: boolean;
 
   @ViewChild("tabContainer") tabs: ElementRef ;
 
@@ -46,9 +48,11 @@ export class TabsComponent implements OnInit,AfterViewInit {
     private renderer: Renderer2,
     private cdref: ChangeDetectorRef,
     private fragPipe: TabFragmentPipe,
-    @Optional() @Attribute('addable') addable: any
+    @Optional() @Attribute('addable') addable: any,
+    @Optional() @Attribute('seemless') seemless: any
   ) {
     this.addable = addable != undefined;
+    this.seemless = seemless != undefined;
   }
 
   ngOnInit(): void {

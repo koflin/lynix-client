@@ -8,8 +8,8 @@ import { ProductTemplatesService } from 'src/app/core/productTemplates/product-t
 import { ProductTemplate } from 'src/app/models/productTemplate';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { deletingDataInformation } from 'src/app/models/ui/deletingData';
-import { TabFragmentPipe } from 'src/app/pipes/tab-fragment/tab-fragment.pipe';
-import { TabIndicesPipe } from 'src/app/pipes/tab-indices/tab-indices.pipe';
+import { TabFragmentPipe } from 'src/app/pipes/tab/tab-fragment.pipe';
+import { TabIndicesPipe } from 'src/app/pipes/tab/tab-indices.pipe';
 import swal from 'sweetalert2';
 
 const left = [

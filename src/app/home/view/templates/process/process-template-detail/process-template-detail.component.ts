@@ -7,8 +7,8 @@ import { ProcessTemplate } from 'src/app/models/processTemplate';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { deletingDataInformation } from 'src/app/models/ui/deletingData';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
-import { TabFragmentPipe } from 'src/app/pipes/tab-fragment/tab-fragment.pipe';
-import { TabIndicesPipe } from 'src/app/pipes/tab-indices/tab-indices.pipe';
+import { TabFragmentPipe } from 'src/app/pipes/tab/tab-fragment.pipe';
+import { TabIndicesPipe } from 'src/app/pipes/tab/tab-indices.pipe';
 import swal from 'sweetalert2';
 
 @Component({

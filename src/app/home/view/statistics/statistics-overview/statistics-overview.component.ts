@@ -40,9 +40,9 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
       type: 'doughnut',
       data: {
         labels: [
-          'Open',
-          'In Progress',
-          'Finished'
+          $localize `Open`,
+          $localize `In Progress`,
+          $localize `Finished`
         ],
         datasets: [{
           label: 'Orders Now',
@@ -76,12 +76,12 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
         ],
         datasets: [
           {
-            label: 'Open',
+            label: $localize `Open`,
             data: [75, 55, 78, 80, 83, 83, 86, 84, 80, 90, 91, 90],
             backgroundColor: '#2C3E50',
           },
           {
-            label: 'Finished',
+            label: $localize `Finished`,
             data: [30, 24, 30, 36, 40, 45, 40, 43, 40, 47, 56, 54],
             backgroundColor: '#2ECC71',
           },
@@ -100,9 +100,9 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
       type: 'doughnut',
       data: {
         labels: [
-          'Open',
-          'In Progress',
-          'Finished'
+          $localize `Open`,
+          $localize `In Progress`,
+          $localize `Finished`
         ],
         datasets: [{
           label: 'Orders Now',
@@ -136,12 +136,12 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
         ],
         datasets: [
           {
-            label: 'Open',
+            label: $localize `Open`,
             data: [73, 20, 67, 70, 85, 70, 77, 88, 82, 89, 93, 40],
             backgroundColor: '#2C3E50',
           },
           {
-            label: 'Finished',
+            label: $localize `Finished`,
             data: [35, 8, 33, 40, 42, 38, 47, 30, 33, 40, 60, 20],
             backgroundColor: '#2ECC71',
           },
