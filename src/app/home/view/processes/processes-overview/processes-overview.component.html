@@ -2,7 +2,7 @@
     <span class=" mask bg-gradient-primary opacity-7"> </span>
     <app-breadcrumb-header [breadCrumbs]=breadCrumbs ></app-breadcrumb-header>
 </div>
-<div class=" container-fluid mt--4" *ngIf="loaded; else spinner">
+<div class=" container-fluid mt--6" *ngIf="loaded; else spinner">
     <div class=" row">
         <div class=" col padding-0-mobile">
           <ng-container *ngIf="nodesAreEmpty; else elseTemplate" >
@@ -13,156 +13,163 @@
             </div>
           </ng-container>
           <ng-template #elseTemplate>
-              <ng-container *ngFor="let group of processNodeGroups; let i = index" >
-                  <div class="card" *ngIf="group.nodes.length>0">
-                      <div class="card-body">
-                          <h5 class="h2 card-title mb-0">{{group.title}}</h5>
+              <div class="card">
+                <div class="card-body pl-0 pr-0 pt-1">
+                    <div class="container-fluid">
+                      <div class="row">
+                          <div class="col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1">
+                              <app-tabs [tabsvalue]="tabNames" [(tabsResIndex)]="tabIndex" seemless> </app-tabs>
+                          </div>
                       </div>
-                      <div class="card-body pl-0 pr-0">
-                          <ngx-datatable
-                          #myTable
+                    </div>
+                    <ngx-datatable
+                    #myTable
 
-                          class="bootstrap selection-cell"
-                          [columnMode]="'force'"
-                          [headerHeight]="50"
-                          [footerHeight]="50"
-                          [rowHeight]="'auto'"
-                          [scrollbarH]="false"
-                          [scrollbarV]="false"
+                    class="bootstrap selection-cell"
+                    [columnMode]="'force'"
+                    [headerHeight]="50"
+                    [footerHeight]="50"
+                    [rowHeight]="'auto'"
+                    [scrollbarH]="false"
+                    [scrollbarV]="false"
 
-                          [rows]="group.nodes"
+                    [rows]="processNodeGroups[tabIndex].nodes"
 
-                          >
-                          <!-- Row Detail Template -->
-                              <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onActivate(myTable, $event)">
-                                  <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
-                                  <div class="container-fluid">
-                                      <div class="row pl-2 pr-2">
-                                          <div class="col-12">
-                                              <p> <span class="h4" i18n>ID:</span>{{ row.id }}</p>
-                                          </div>
-                                          <div class="col-12" *ngIf="windowWidth<=966">
-                                              <p> <span class="h4" i18n>Execution time:</span>  {{ row.timeTaken | duration }}</p>
-                                          </div>
+                    >
+                    <!-- Row Detail Template -->
+                        <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onActivate(myTable, $event)">
+                            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                            <div class="container-fluid">
+                                <div class="row pl-2 pr-2">
+                                    <div class="col-12">
+                                        <p> <span class="h4" i18n>ID:</span>{{ row.id }}</p>
+                                    </div>
+                                    <div class="col-12" *ngIf="windowWidth<=966">
+                                        <p> <span class="h4" i18n>Execution time:</span>  {{ row.timeTaken | duration }}</p>
+                                    </div>
 
-                                      </div>
+                                </div>
 
-                                  </div>
-                                  </ng-template>
-                              </ngx-datatable-row-detail>
-                              <!-- Column Detail Templates -->
-                              <ngx-datatable-column
-                              [width]=50
-                              [maxWidth]=50
-                              [resizeable]="false"
-                              [sortable]="false"
-                              [draggable]="false"
-                              [canAutoResize]="false"
-                              [cellClass]="paddingLeftNone"
+                            </div>
+                            </ng-template>
+                        </ngx-datatable-row-detail>
+                        <!-- Column Detail Templates -->
+                        <ngx-datatable-column
+                        [width]=50
+                        [maxWidth]=50
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [draggable]="false"
+                        [canAutoResize]="false"
+                        [cellClass]="paddingLeftNone"
 
-                              >
-                                  <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-                                  <a
-                                      style="font-size: 30px;"
-                                      class="text-default pl-1"
-                                      href="javascript:void(0)"
-                                      [class.datatable-icon-up]="!expanded"
-                                      [class.datatable-icon-down]="expanded"
-                                      title="Expand/Collapse Row"
-                                      i18n-title
-                                      (click)="toggleExpandRow(myTable, row)"
-                                      >
-                                  </a>
-                                  </ng-template>
-                              </ngx-datatable-column>
-                              <!-- Name -->
-                              <ngx-datatable-column *ngIf="windowWidth>843" name="process name" i18n-name prop="name" [sortable]="true" >
-                                  <ng-template let-row="row" ngx-datatable-cell-template>
-                                  <p class="h3 text-default">
-                                      {{row.name}}
-                                  </p>
+                        >
+                            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                            <a
+                                style="font-size: 30px;"
+                                class="text-default pl-1"
+                                href="javascript:void(0)"
+                                [class.datatable-icon-up]="!expanded"
+                                [class.datatable-icon-down]="expanded"
+                                title="Expand/Collapse Row"
+                                i18n-title
+                                (click)="toggleExpandRow(myTable, row)"
+                                >
+                            </a>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <!-- Name -->
+                        <ngx-datatable-column *ngIf="windowWidth>843" name="process name" i18n-name prop="name" [sortable]="true" >
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                            <p class="h3 text-default">
+                                {{row.name}}
+                            </p>
 
-                                  </ng-template>
-                              </ngx-datatable-column>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <!-- status (only in all) -->
+                        <ngx-datatable-column *ngIf="windowWidth>566 && processNodeGroups[tabIndex].status === null" [minWidth]=125 name="Status" i18n-name>
+                          <ng-template let-row="row" ngx-datatable-cell-template>
+                            <span class="badge badge-{{ row.status | statusBadge }}">{{ row.status | status }}</span>
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <!-- Order Delivery Date -->
+                        <ngx-datatable-column [minWidth]="(windowWidth<=566) ? 220 : 50"  [width]=150 name="Order Delivery Date" i18n-name prop="orderDeliveryDate" [sortable]="true" >
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                            <p class="">
+                                {{row.orderDeliveryDate | date: 'dd.MM.yyyy'}}
+                            </p>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <!-- Process Delivery Date -->
+                        <ngx-datatable-column [minWidth]="(windowWidth<=566) ? 220 : 50"  [width]=150 name="Process Delivery Date" i18n-name prop="processDeliveryDate" [sortable]="true" >
+                          <ng-template let-row="row" ngx-datatable-cell-template>
+                          <p class="">
+                              {{row.processDeliveryDate | date: 'dd.MM.yyyy'}}
+                          </p>
+                          </ng-template>
+                      </ngx-datatable-column>
+                        <!-- Estimated Time -->
+                        <ngx-datatable-column *ngIf="windowWidth>966" [width]=150 [maxWidth]=150 name="Estimated Time" i18n-name prop="estimatedTime" [sortable]="true" >
+                          <ng-template let-value="value" ngx-datatable-cell-template>
+                          <p class="">
+                              {{ value | duration }}
+                          </p>
+                          </ng-template>
+                      </ngx-datatable-column>
+                        <!-- Time Taken -->
+                        <ngx-datatable-column *ngIf="windowWidth>966" [width]=125 [maxWidth]=125 name="Time Taken" i18n-name prop="timeTaken" [sortable]="true" >
+                            <ng-template let-value="value" ngx-datatable-cell-template>
+                            <p class="">
+                                {{ value | duration }}
+                            </p>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <!-- occupation -->
+                        <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=125 name="Occupation" i18n-name prop="occupation" >
+                          <ng-template let-row="row" ngx-datatable-cell-template>
+                          <p *ngIf="row.occupiedBy" i18n class="">Occupied</p>
+                          <p *ngIf="!row.occupiedBy" i18n class="">Free</p>
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <!-- assignee -->
+                        <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=190 name="Assignee" i18n-name prop="assignedUser" [comparator]="userNameSort" [cellClass]="getCellClass" >
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div  [hideIfUnauthorized]="permissions.ASSIGN">
+                              <p class="" *ngIf="row.occupiedBy">{{ (row.assignedUser) ? row.assignedUser.firstName : 'none' }}</p>
+                              <app-single-multiple-choice *ngIf="!row.occupiedBy" [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)" [readonly]="row.status === 'completed'"> </app-single-multiple-choice>
+                            </div>
+                            <div [showIfUnauthorized]="permissions.ASSIGN">
+                              <p *ngIf="row.assignedUser" class="">
+                                {{ row.assignedUser.firstName + row.assignedUser.lastName }}
+                              </p>
+                              <p *ngIf="!row.assignedUser" class="" i18n>None</p>
+                            </div>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <!-- Actions -->
+                        <ngx-datatable-column [maxWidth]=160 [minWidth]=0 name="" prop="status" [sortable]="false" [cellClass]="paddingClass" >
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" [hideIfUnauthorized]="permissions.EXECUTE" *ngIf="row.status === 'assistance_required'" >
+                                    <span class="btn-inner--icon"><i class="fas fa-headset"></i></span>
 
-                              <!-- Order Delivery Date -->
-                              <ngx-datatable-column [minWidth]="(windowWidth<=566) ? 220 : 50"  [width]=150 name="Order Delivery Date" i18n-name prop="orderDeliveryDate" [sortable]="true" >
-                                  <ng-template let-row="row" ngx-datatable-cell-template>
-                                  <p class="">
-                                      {{row.orderDeliveryDate | date: 'dd.MM.yyyy'}}
-                                  </p>
-                                  </ng-template>
-                              </ngx-datatable-column>
-                              <!-- Process Delivery Date -->
-                              <ngx-datatable-column [minWidth]="(windowWidth<=566) ? 220 : 50"  [width]=150 name="Process Delivery Date" i18n-name prop="processDeliveryDate" [sortable]="true" >
-                                <ng-template let-row="row" ngx-datatable-cell-template>
-                                <p class="">
-                                    {{row.processDeliveryDate | date: 'dd.MM.yyyy'}}
-                                </p>
-                                </ng-template>
-                            </ngx-datatable-column>
-                              <!-- Estimated Time -->
-                              <ngx-datatable-column *ngIf="windowWidth>966" [width]=150 [maxWidth]=150 name="Estimated Time" i18n-name prop="estimatedTime" [sortable]="true" >
-                                <ng-template let-value="value" ngx-datatable-cell-template>
-                                <p class="">
-                                    {{ value | duration }}
-                                </p>
-                                </ng-template>
-                            </ngx-datatable-column>
-                              <!-- Time Taken -->
-                              <ngx-datatable-column *ngIf="windowWidth>966" [width]=125 [maxWidth]=125 name="Time Taken" i18n-name prop="timeTaken" [sortable]="true" >
-                                  <ng-template let-value="value" ngx-datatable-cell-template>
-                                  <p class="">
-                                      {{ value | duration }}
-                                  </p>
-                                  </ng-template>
-                              </ngx-datatable-column>
-                              <!-- status -->
-                              <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=125 name="Status" i18n-name prop="status" >
-                                <ng-template let-row="row" ngx-datatable-cell-template>
-                                <p *ngIf="row.occupiedBy" i18n class="">Occupied</p>
-                                <p *ngIf="!row.occupiedBy" i18n class="">Free</p>
-                                </ng-template>
-                              </ngx-datatable-column>
-                              <!-- assignee -->
-                              <ngx-datatable-column *ngIf="windowWidth>566" [minWidth]=190 name="Assignee" i18n-name prop="assignedUser" [comparator]="userNameSort" [cellClass]="getCellClass" >
-                                  <ng-template let-row="row" ngx-datatable-cell-template>
-                                  <div  [hideIfUnauthorized]="permissions.ASSIGN"  #test>
-                                    <p class="" *ngIf="row.occupiedBy">{{ (row.assignedUser) ? row.assignedUser.firstName : 'none' }}</p>
-                                    <app-single-multiple-choice *ngIf="!row.occupiedBy" [data]=potentialAssignees [result]="(row.assignedUser) ? row.assignedUser.id : undefined"  [resultShouldBeOnlyValue]=true (resultChange)="assignUserToProcess($event, row)"> </app-single-multiple-choice>
-                                  </div>
-                                  <div [showIfUnauthorized]="permissions.ASSIGN">
-                                    <p *ngIf="row.assignedUser" class="">
-                                      {{ row.assignedUser.firstName + row.assignedUser.lastName }}
-                                    </p>
-                                    <p *ngIf="!row.assignedUser" class="" i18n>None</p>
-                                  </div>
-                                  </ng-template>
-                              </ngx-datatable-column>
-                              <!-- Actions -->
-                              <ngx-datatable-column [maxWidth]=160 [minWidth]=0 name="" prop="status" [sortable]="false" [cellClass]="paddingClass" >
-                                  <ng-template let-row="row" ngx-datatable-cell-template>
-                                      <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" [hideIfUnauthorized]="permissions.EXECUTE" *ngIf="row.status === 'assistance_required'" >
-                                          <span class="btn-inner--icon"><i class="fas fa-headset"></i></span>
+                                  </button>
+                                  <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" [hideIfUnauthorized]="permissions.EDIT" *ngIf="row.status === 'in_preparation'" >
+                                    <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
+                                  </button>
+                                  <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" (click)="start(row.id)" type="button" [hideIfUnauthorized]="permissions.EXECUTE" *ngIf="row.canExecute && !row.isOccupied && (row.status === 'released' || row.status === 'in_progress')" >
+                                    <span class="btn-inner--icon"><i class="fas fa-play"></i></span>
 
-                                        </button>
-                                        <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" [hideIfUnauthorized]="permissions.EDIT" *ngIf="row.status === 'in_preparation'" >
-                                          <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
-                                        </button>
-                                        <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" (click)="start(row.id)" type="button" [hideIfUnauthorized]="permissions.EXECUTE" *ngIf="row.canExecute && !row.isOccupied && (row.status === 'released' || row.status === 'in_progress')" >
-                                          <span class="btn-inner--icon"><i class="fas fa-play"></i></span>
+                                  </button>
+                                  <!--<button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" [hideIfUnauthorized]="permissions.EDIT" *ngIf="row.status === 'completed'" >
+                                    <span class="btn-inner--icon"><i class="fas fa-archive"></i></span>
 
-                                        </button>
-                                        <!--<button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" [hideIfUnauthorized]="permissions.EDIT" *ngIf="row.status === 'completed'" >
-                                          <span class="btn-inner--icon"><i class="fas fa-archive"></i></span>
-
-                                        </button>-->
-                                  </ng-template>
-                              </ngx-datatable-column>
-                          </ngx-datatable>
-                      </div>
-                  </div>
-              </ng-container>
+                                  </button>-->
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </div>
           </ng-template>
         </div>
     </div>

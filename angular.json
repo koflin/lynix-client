@@ -38,7 +38,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/fullcalendar/dist/fullcalendar.min.css",
+              "node_modules/fullcalendar/main.min.css",
               "src/assets/vendor/nucleo/css/nucleo.css",
               "src/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
@@ -52,7 +52,12 @@
             "scripts": [
               "node_modules/chart.js/dist/Chart.min.js"
             ],
-            "es5BrowserSupport": true
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "chart.js",
+              "socket.io-client"
+            ],
+            "i18nMissingTranslation": "warning"
           },
           "configurations": {
             "production": {
@@ -65,7 +70,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -85,10 +89,7 @@
             },
             "de": {
               "aot": true,
-              "outputPath": "dist/lynix-de",
-              "i18nFile": "src/locale/messages.de.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "de"
+              "localize": ["de"]
             },
             "demo": {
               "fileReplacements": [

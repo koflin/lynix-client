@@ -76,7 +76,7 @@ export class OrdersOverviewComponent implements OnInit {
     this.entries = $event.target.value;
   }
   filterTable($event) {
-    let val = this.searchValue;
+    let val = this.searchValue.toLowerCase();
     this.temp = this.orderNodes.filter(function(d) {
       for (let key in d) {
         if (typeof d[key]=== 'string') {

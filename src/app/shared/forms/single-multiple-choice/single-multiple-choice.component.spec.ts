@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SingleMultipleChoiceComponent } from './single-multiple-choice.component';
 
@@ -6,7 +6,7 @@ describe('SingleMultipleChoiceComponent', () => {
   let component: SingleMultipleChoiceComponent;
   let fixture: ComponentFixture<SingleMultipleChoiceComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SingleMultipleChoiceComponent ]
     })

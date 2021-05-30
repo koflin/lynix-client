@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ProcessTemplateDetailComponent } from './process-template-detail.component';
 
@@ -6,7 +6,7 @@ describe('ProcessTemplateDetailComponent', () => {
   let component: ProcessTemplateDetailComponent;
   let fixture: ComponentFixture<ProcessTemplateDetailComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ProcessTemplateDetailComponent ]
     })

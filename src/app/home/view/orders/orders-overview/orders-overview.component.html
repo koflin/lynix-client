@@ -158,9 +158,7 @@
                     <!-- Status -->
                     <ngx-datatable-column name="status" i18n-name [sortable]="true" >
                       <ng-template let-row="row" ngx-datatable-cell-template>
-                        <p class="h3 text-default">
-                          {{ row.status | status }}
-                        </p>
+                        <span class="badge badge-lg badge-{{ row.status | statusBadge }}">{{ row.status | status }}</span>
                       </ng-template>
                     </ngx-datatable-column>
                     <!-- Delivery Date -->

@@ -47,8 +47,8 @@
 }
 
 html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
-  left: auto;
-  right: 0;
+  left: 100%;
+  width: 10%;
 }
 
 .noUi-vertical .noUi-origin {
@@ -95,8 +95,8 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
 }
 
 html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
-  right: -17px;
-  left: auto;
+  right: 0;
+  left: 0;
 }
 
 .noUi-connects {
@@ -297,10 +297,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .noUi-horizontal {
   height: $noui-target-thickness;
-}
-
-html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
-  right: -10px;
 }
 
 .noUi-vertical {

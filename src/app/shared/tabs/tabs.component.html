@@ -32,4 +32,4 @@
 
 
 </div>
-<div style="height:2px; min-width:100%" [ngClass]="getNotSelectedClass()"></div>
+<div *ngIf="!seemless" style="height:2px; min-width:100%" [ngClass]="getNotSelectedClass()"></div>

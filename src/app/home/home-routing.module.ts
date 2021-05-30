@@ -37,7 +37,7 @@ const routes: Routes = [
       path:"dashboard", component: DashboardComponent, canActivate: [AuthGuard]
     },
     {
-      path: '', redirectTo: '/dashboard', pathMatch: 'full', canActivate: [AuthGuard]
+      path: '', redirectTo: '/dashboard', pathMatch: 'full'
     },
     //Order
     {

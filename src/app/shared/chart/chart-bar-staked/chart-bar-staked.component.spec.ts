@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ChartBarStakedComponent } from './chart-bar-staked.component';
 
@@ -6,7 +6,7 @@ describe('ChartBarStakedComponent', () => {
   let component: ChartBarStakedComponent;
   let fixture: ComponentFixture<ChartBarStakedComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ChartBarStakedComponent ]
     })

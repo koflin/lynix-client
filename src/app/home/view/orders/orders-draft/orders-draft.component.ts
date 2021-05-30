@@ -10,8 +10,8 @@ import { Order } from 'src/app/models/order';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { deletingDataInformation } from 'src/app/models/ui/deletingData';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
-import { TabFragmentPipe } from 'src/app/pipes/tab-fragment/tab-fragment.pipe';
-import { TabIndicesPipe } from 'src/app/pipes/tab-indices/tab-indices.pipe';
+import { TabFragmentPipe } from 'src/app/pipes/tab/tab-fragment.pipe';
+import { TabIndicesPipe } from 'src/app/pipes/tab/tab-indices.pipe';
 import swal from 'sweetalert2';
 
 import { ProcessesService } from './../../../../core/processes/processes.service';
@@ -60,11 +60,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   set orderDraft(value:Order){
     this._orderDraft = value;
     this.setProductNames()
-    this.breadCrumbs = [
-      {name: $localize `Orders`, url: "/orders/overview"},
-      {name: this.orderDraft?.name ? this.orderDraft.name : $localize `New`, url: this.router.url },
-    ];
-
+    this.updateBreadCrumb();
   }
 
   //productsNames:string[]=[]
@@ -131,6 +127,43 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     private indicesPipe: TabIndicesPipe
   ) { }
 
+  private getBaseUrl() {
+    return '/orders/draft/' + this.orderDraft?.id;
+  }
+
+  updateBreadCrumb() {
+    let breadCrumb = [{
+      name: $localize `Orders`,
+      url: "/orders/overview"
+    }, {
+      name: this.orderDraft?.name ? this.orderDraft.name : $localize `New`,
+      url: this.getBaseUrl()
+    }];
+
+    if (this.productToggleId != undefined) {
+      breadCrumb.push({
+        name: this.productsNames[this.productToggleId],
+        url: this.getBaseUrl() + '#' + this.fragPipe.transform([this.productToggleId])
+      });
+    }
+
+    if (this.processToggleId != undefined) {
+      breadCrumb.push({
+        name: this.processesNames[this.processToggleId],
+        url: this.getBaseUrl() + '#' + this.fragPipe.transform([this.productToggleId, this.processToggleId])
+      });
+    }
+
+    if (this.stepToggleId != undefined) {
+      breadCrumb.push({
+        name: this.stepsName[this.stepToggleId],
+        url: this.getBaseUrl() + '#' + this.fragPipe.transform([this.productToggleId, this.processToggleId, this.stepToggleId])
+      });
+    }
+
+    this.breadCrumbs = breadCrumb;
+  }
+
   hasUnsavedData(): boolean {
     return this.isEdited;
   }
@@ -167,6 +200,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
         this._stepToggleId = undefined;
 
       if (!fragment) {
+        this.updateBreadCrumb();
         return;
       }
 
@@ -183,6 +217,8 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
       if (parts.length >= 3) {
         this._stepToggleId = parts[2];
       }
+
+      this.updateBreadCrumb();
     });
   }
 
