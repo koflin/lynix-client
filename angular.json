@@ -18,9 +18,9 @@
         "locales": {
           "de": {
             "translation": "src/locale/messages.de.xlf",
-            "baseHref": "de"
+            "baseHref": ""
           }
-        }
+        },
       },
       "architect": {
         "build": {
@@ -85,7 +85,8 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "localize": true
             },
             "de": {
               "aot": true,
@@ -112,7 +113,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "lynix:build"
+            "browserTarget": "lynix:build",
           },
           "configurations": {
             "production": {
