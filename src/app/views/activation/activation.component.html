@@ -33,7 +33,8 @@ style="background-image: url(assets/img/lynix_img.jpeg); background-size: cover;
 
           <div *ngIf="activation" class=" card-body px-lg-5 py-lg-5">
             <form role="form">
-              <p>{{ activation?.user.displayName }}</p>
+              <p class="mb-0 h5 text-primary"><span>{{ activation?.user.displayName }}</span></p>
+              <p><small class="text-muted">{{ activation?.user.email }}</small> </p>
               <label *ngIf="error" class="text-danger">{{ error }}</label>
               <div class="form-group" [ngClass]="{ focused: focus1 === true }">
                 <div class="input-group input-group">

@@ -20,7 +20,7 @@
             "translation": "src/locale/messages.de.xlf",
             "baseHref": ""
           }
-        },
+        }
       },
       "architect": {
         "build": {
@@ -113,7 +113,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "lynix:build",
+            "browserTarget": "lynix:build"
           },
           "configurations": {
             "production": {
