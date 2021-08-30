@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Attribute, Component, Input, OnInit, Optional } from '@angular/core';
 import { CarouselConfig } from 'ngx-bootstrap/carousel';
 import { Process } from 'src/app/models/process';
 
@@ -18,7 +18,13 @@ export class StepGuideTabComponent implements OnInit {
   showAlert:boolean=true;
   currentImageIndex: number;
   currentVideoIndex: number;
-  constructor() {
+
+  isManual: boolean;
+
+  constructor(
+    @Optional() @Attribute('isManual') isManual: any,
+  ) {
+    this.isManual = isManual != undefined;
   }
 
   ngOnInit(): void {

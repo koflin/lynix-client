@@ -67,7 +67,7 @@ export class ProductComponent implements OnInit {
         id: undefined,
         name: '',
         mainTasks: [],
-        stepTemplates: [],
+        steps: [],
         previousComments: [],
       },
     });

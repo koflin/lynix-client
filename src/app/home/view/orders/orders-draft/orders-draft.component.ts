@@ -87,7 +87,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   _stepsName:string[]=[]
   get stepsName():string[]{
     if (this.processToggleId != undefined && this.productToggleId != undefined) {
-      return this.orderDraft.products[this.productToggleId].template.processes[this.processToggleId].template.stepTemplates.filter((p) => {
+      return this.orderDraft.products[this.productToggleId].template.processes[this.processToggleId].template.steps.filter((p) => {
         return p.title
       }).map((process)=>{
         return process.title
@@ -406,7 +406,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
         }else{
           //this.processToggleId=data.parentTabId
         }
-        this.orderDraft.products[this.productToggleId].template.processes[this.processToggleId].template.stepTemplates.splice(data.tabId, 1)
+        this.orderDraft.products[this.productToggleId].template.processes[this.processToggleId].template.steps.splice(data.tabId, 1)
         break;
       case 'process':
         if (data.tabId>0) {
@@ -469,7 +469,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   }
 
   addStep() {
-    const steps = this.orderDraft.products[this.productToggleId].template.processes[this.processToggleId].template.stepTemplates;
+    const steps = this.orderDraft.products[this.productToggleId].template.processes[this.processToggleId].template.steps;
     steps.push({
       title: $localize `Unnamed Step` + ' ' + (steps.length+1),
       keyMessage: null,

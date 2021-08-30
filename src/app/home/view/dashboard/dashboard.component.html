@@ -147,8 +147,8 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                 <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
                     <div class=" d-flex justify-content-between">
                       <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/orders/overview'"> <span i18n>Overview</span><i class="fas fa-angle-right text-default"></i></li>
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/orders/draft'" [hideIfUnauthorized]="permissions.EDIT"> <span i18n>Create New</span><i class="fas fa-angle-right text-default"></i></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/orders/overview'" [hideIfUnauthorized]="permissions.ORDER_VIEW"> <span i18n>Overview</span><i class="fas fa-angle-right text-default"></i></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/orders/draft'" [hideIfUnauthorized]="permissions.ORDER_EDIT"> <span i18n>Create New</span><i class="fas fa-angle-right text-default"></i></li>
                       </ul>
                     </div>
 
@@ -175,16 +175,15 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                 <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
                     <div class=" d-flex justify-content-between">
                       <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/processes/overview'"><span i18n>Overview</span><i class="fas fa-angle-right text-default"></i></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/processes/overview'" [hideIfUnauthorized]="permissions.PROCESS_VIEW"><span i18n>Overview</span><i class="fas fa-angle-right text-default"></i></li>
                       </ul>
                     </div>
-
                 </a>
             </div>
         </div>
       </div>
     </div>
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.EDIT">
+    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.TEMPLATE_VIEW">
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/template.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
@@ -213,6 +212,34 @@ class=" header pb-6 pt-6 d-flex align-items-center"
         </div>
       </div>
     </div>
+    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.MANUAL_VIEW">
+      <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
+        <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/template.jpg); background-size: cover; background-position: center center;" >
+            <span class="mask bg-gradient-default opacity-8"> </span>
+
+            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Manual</h5>
+            <div class="z-index-1">
+              <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
+                <i class=" icon icon-web-design-2 icon-big"> </i>
+              </div>
+            </div>
+        </div>
+        <div class=" card-body p-0">
+            <div class=" list-group list-group-flush">
+                <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
+                    <div class=" d-flex justify-content-between">
+                      <ul class="list-group container-fluid pl-0 pr-0">
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/manuals/overview'"><span i18n>Overview</span><i class="fas fa-angle-right text-default"></i></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/templates/process/new'"><span i18n>Create New</span><i class="fas fa-angle-right text-default"></i></li>
+
+                      </ul>
+                    </div>
+
+                </a>
+            </div>
+        </div>
+      </div>
+    </div>
     <div class="col-12 col-xl-4 col-md-6 col-sm-6">
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/admin.jpg); background-size: cover; background-position: center center;" >
@@ -230,8 +257,8 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                 <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
                     <div class=" d-flex justify-content-between">
                       <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/users'"><span i18n>Users</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/roles'"><span i18n>Roles</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/users'" [hideIfUnauthorized]="permissions.USER_VIEW"><span i18n>Users</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/roles'" [hideIfUnauthorized]="permissions.ROLE_VIEW"><span i18n>Roles</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
                       </ul>
                     </div>
 
@@ -240,7 +267,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
         </div>
       </div>
     </div>
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6">
+    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.STATISTIC_VIEW">
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
@@ -266,7 +293,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
         </div>
       </div>
     </div>
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6">
+    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.TESTING_VIEW">
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>

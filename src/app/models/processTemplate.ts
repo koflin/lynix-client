@@ -1,6 +1,7 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { CompanyBase } from './companyBase';
 import { StepTemplate } from './stepTemplate';
-import { v4 as uuidv4 } from 'uuid';
 
 export interface ProcessTemplate extends CompanyBase {
   id?: string;
@@ -9,7 +10,7 @@ export interface ProcessTemplate extends CompanyBase {
   mainTasks: string[];
   previousComments?: string[];
 
-  stepTemplates: StepTemplate[];
+  steps: StepTemplate[];
 }
 
 export class ProcessTemplateclass {

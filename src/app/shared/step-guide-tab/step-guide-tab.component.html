@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-12">
+    <div class="col-12" *ngIf="!isManual">
         <div class="card shadow-card-stronger p-3">
             <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="process.currentStepIndex != stepIndex">
                 <span class="alert-inner--text"><strong i18n>Warning!</strong><span i18n>If you want to start this process step, please press "switch"!</span></span>

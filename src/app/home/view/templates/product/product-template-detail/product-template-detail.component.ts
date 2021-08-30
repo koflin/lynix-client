@@ -65,7 +65,7 @@ export class ProductTemplateDetailComponent implements OnInit {
   _stepsName:string[]=[]
   get stepsName():string[]{
     if (this.processToggleId != undefined) {
-      return this.productTemplate.processes[this.processToggleId].template.stepTemplates.filter((p) => {
+      return this.productTemplate.processes[this.processToggleId].template.steps.filter((p) => {
         return p.title
       }).map((process)=>{
         return process.title
@@ -319,7 +319,7 @@ export class ProductTemplateDetailComponent implements OnInit {
     switch (data.tabContainerName ) {
 
       case 'step':
-        this.productTemplate.processes[this.processToggleId].template.stepTemplates.splice(data.tabId, 1)
+        this.productTemplate.processes[this.processToggleId].template.steps.splice(data.tabId, 1)
         break;
       case 'process':
         this.productTemplate.processes.splice(data.tabId, 1)

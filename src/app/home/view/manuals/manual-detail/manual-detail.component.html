@@ -1,0 +1,164 @@
+<div class=" header bg-default pb-7"  style="background-image: url(assets/img/theme/process.jpg); background-size: cover; background-position: center center;">
+  <span class=" mask bg-gradient-primary opacity-7"> </span>
+  <app-breadcrumb-header [breadCrumbs]=breadCrumbs ></app-breadcrumb-header>
+</div>
+<div *ngIf="processTemplate">
+<div class=" container-fluid mt--5">
+  <div class=" row">
+      <div class="col-12">
+          <app-tabs [tabsvalue]="stepNames" [(tabsResIndex)]="stepToggleId" [bgColorClassNotSelected]="'bg-default'" [navFragmentBase]="[0]"> </app-tabs>
+          <div class="pt-4 pb-4 mb-6 container-fluid" [@animSlider]="stepToggleId">
+              <div class="row" >
+                  <ng-container *ngFor="let step of processTemplate.steps; let i=index" >
+                      <ng-container *ngIf="stepToggleId == i+1 && stepToggleId != stepNames.length -1">
+                          <app-step-guide-tab class="container-fluid" [process]="processTemplate" isManual [stepIndex]="i"> </app-step-guide-tab>
+
+
+                      </ng-container>
+
+                  </ng-container>
+                  <ng-container *ngIf="!stepToggleId">
+
+                      <div class="col-12">
+                          <div class=" card pb-2 pt-2 shadow-card-stronger " >
+                              <div class="container-fluid">
+                                  <div class="row">
+                                      <div class="col">
+                                          <h4 i18n>Process:</h4>
+                                          <p>
+                                              {{processTemplate.name}}
+                                          </p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                              <div class="col-sm-12 col-md-6" *ngIf="processTemplate.mainTasks.length>0">
+                                  <div class=" card pb-2 pt-2 shadow-card-stronger">
+                                      <div class="container-fluid">
+                                          <div class="row">
+                                              <div class="col-12">
+                                                  <h4 i18n>Main Tasks & Challenges</h4>
+                                                  <ul class="list-group list-item-no-full-border pt-2 pb-2">
+                                                      <ng-container *ngFor="let item of processTemplate.mainTasks; let i=index; let first = first; let last = last">
+                                                          <li  class="list-group-item list-item-no-sideborder" [ngClass]="{'no-border-top':first, 'no-border-bottom':last}" >{{item}}</li>
+
+                                                      </ng-container>
+
+
+                                                    </ul>
+                                              </div>
+                                          </div>
+
+                                      </div>
+
+                                  </div>
+                              </div>
+                              <div class="col-6">
+                                  <div class=" card pb-2 pt-2 shadow-card-stronger ">
+                                      <div class="container-fluid">
+                                          <div class="row">
+                                              <div class="col-12">
+                                                  <h4 i18n>Steps</h4>
+                                                  <ul class="list-group list-item-no-full-border pt-2 pb-2">
+                                                      <ng-container *ngFor="let item of processTemplate.steps; let i=index; let first = first; let last = last">
+                                                          <li (click)="stepToggleId=i+1" class="list-group-item list-item-no-sideborder zooming d-flex justify-content-between" [ngClass]="{'no-border-top':first, 'no-border-bottom':last}" >
+                                                              {{item.title }} <i class="fas fa-angle-right"></i>
+                                                          </li>
+
+                                                      </ng-container>
+
+
+                                                    </ul>
+                                              </div>
+                                          </div>
+
+                                      </div>
+
+                                  </div>
+                              </div>
+
+                          <div>
+
+                      </div>
+
+                  </ng-container>
+                  <ng-container *ngIf="stepToggleId == stepNames.length -1">
+                      <div class="col-12">
+                          <div class=" card pb-2 pt-2 shadow-card-stronger" >
+                              <div class="container-fluid">
+                                  <div class="row">
+                                      <div class="col">
+                                          <h4 i18n>Process:</h4>
+                                          <p>
+                                              {{processTemplate.name}}
+                                          </p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="card shadow-card-stronger p-0" style="width: fit-content !important;">
+                              <div class="table-responsive">
+                                  <div class="table align-items-center table-flush">
+                                      <thead class=" thead-light">
+                                          <tr>
+                                              <th scope="col" i18n>Steps Number</th>
+
+                                              <th scope="col" i18n>Step Name</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody class="list">
+                                          <tr *ngFor="let item of processTemplate.steps; let i = index" >
+                                              <th>
+                                                  {{i+1}}
+                                              </th>
+                                              <td>
+                                                  {{item.title}}
+                                              </td>
+                                          </tr>
+                                      </tbody>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </ng-container>
+              </div>
+
+
+
+          </div>
+      </div>
+  </div>
+</div>
+<app-bottom-navigation-order-draft [noPadding]=true>
+  <div class="d-flex justify-content-between nav-pl-0" style="width: 100%;">
+      <div>
+          <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onExit()">
+              <span class="btn-inner--icon"><i style="font-size: 30px;" class="fas fa-times"></i></span> <br>
+              <span class="btn-inner--text ml-0" i18n>Exit</span>
+            </button>
+      </div>
+      <div>
+          <button class="btn btn-icon btn-3 btn-white none-shadow" [disabled]="stepToggleId === 0" type="button" (click)="onPrevious()">
+              <span class="btn-inner--icon">
+                  <i style="font-size: 30px;" class="fas fa-step-backward"></i></span> <br>
+              <span class="btn-inner--text ml-0" i18n>Previous Step</span>
+            </button>
+      </div>
+      <div>
+          <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" [disabled]="stepToggleId == stepNames.length-1" (click)="onNext()">
+              <span class="btn-inner--icon">
+                  <i style="font-size: 30px;" class="fas fa-step-forward"></i></span> <br>
+              <span class="btn-inner--text ml-0" i18n>Next step</span>
+            </button>
+      </div>
+      <div>
+      </div>
+  </div>
+
+</app-bottom-navigation-order-draft>
+</div>

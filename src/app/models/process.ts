@@ -1,17 +1,17 @@
 import { Order } from 'src/app/models/order';
+import { ProcessTemplate } from 'src/app/models/processTemplate';
 
-import { CompanyBase } from './companyBase';
 import { Step } from './step';
 
-export interface Process extends CompanyBase {
+export interface Process extends ProcessTemplate {
   id: string;
   order: Order;
   templateId: string;
   //template: ProcessTemplate;
 
-  name: string;
+  /*name: string;
   mainTasks: string[];
-  previousComments?: string[];
+  previousComments?: string[];*/
 
   estimatedTime: number | undefined;
   deliveryDate: Date;

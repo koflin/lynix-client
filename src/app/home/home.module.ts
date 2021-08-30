@@ -10,6 +10,8 @@ import { HomeComponent } from './home.component';
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { GuideComponent } from './view/guide/guide.component';
 import { GuideGuard } from './view/guide/guide.guard';
+import { ManualDetailComponent } from './view/manuals/manual-detail/manual-detail.component';
+import { ManualsOverviewComponent } from './view/manuals/manuals-overview/manuals-overview.component';
 import { OrdersDraftComponent } from './view/orders/orders-draft/orders-draft.component';
 import { OrdersOverviewComponent } from './view/orders/orders-overview/orders-overview.component';
 import { ProcessesOverviewComponent } from './view/processes/processes-overview/processes-overview.component';
@@ -49,7 +51,9 @@ import { UsersOverviewComponent } from './view/users/users-overview/users-overvi
     RolesOverviewComponent,
     ProductTemplateDetailComponent,
     ProcessTemplateDetailComponent,
-    StatisticsOverviewComponent
+    StatisticsOverviewComponent,
+    ManualsOverviewComponent,
+    ManualDetailComponent,
   ],
   imports: [
     HomeRoutingModule,

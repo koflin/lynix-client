@@ -64,7 +64,7 @@
       <ng-container [ngSwitch]="defContainer()" *ngIf="productTemplate">
           <ng-container *ngSwitchCase="'step'">
               <div class=" col-12 mt--8 pt-2" [@animSlider]="stepToggleId">
-                  <div *ngFor="let actualStep of productTemplate.processes[this.processToggleId].template.stepTemplates, let i = index">
+                  <div *ngFor="let actualStep of productTemplate.processes[this.processToggleId].template.steps, let i = index">
                       <div class=" card pb-8 pt-2  no-top-radius shadow-right" *ngIf="stepToggleId == i">
                            <app-step [stepTemplate]="actualStep" (stepTemplateChange)="detectChange()" navFragment="{{ [processToggleId, stepToggleId] | tabFragment }}"> </app-step>
 

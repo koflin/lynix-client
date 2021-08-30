@@ -76,7 +76,7 @@ export class AuthService {
     return null;
   }
 
-  hasPermissions(...requiredPermissions: Permission[]) {
+  hasPermissions(...requiredPermissions: (Permission | Permission[])[]) {
 
     const localUser = this.localUser.value;
 
@@ -84,15 +84,17 @@ export class AuthService {
       return false;
     }
 
-    if (requiredPermissions) {
-      for (let permission of requiredPermissions) {
-        if (!localUser.permissions.includes(permission)) {
-          return false;
-        }
-      }
+    if (!requiredPermissions) {
+      return true;
     }
 
-    return true;
+    return requiredPermissions.some((permission) => {
+      if (Array.isArray(permission)) {
+        return permission.every(p => localUser.permissions.includes(p));
+      }
+
+      return localUser.permissions.includes(permission);
+    });
   }
 
   refreshToken(): Observable<LocalUser> {

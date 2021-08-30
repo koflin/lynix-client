@@ -9,7 +9,7 @@
                 <div class="container-fluid">
                     <div class="row p-3">
                         <div class="d-flex justify-content-between" style="width: 100%;">
-                            <button class="btn btn-icon btn-3 btn-default" type="button" (click)="editUser('undefined')" [hideIfUnauthorized]="permissions.EDIT">
+                            <button class="btn btn-icon btn-3 btn-default" type="button" (click)="editUser('undefined')" [hideIfUnauthorized]="permissions.USER_EDIT">
                                 <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
                                 <span class="btn-inner--text" i18n>New user</span>
                             </button>
@@ -40,7 +40,7 @@
                                 <th scope="col" class="sort" data-sort="name" i18n>Name</th>
                                 <th scope="col" class="sort" data-sort="role" i18n>Role</th>
 
-                                <th scope="col" [hideIfUnauthorized]="permissions.EDIT" i18n>Operation</th>
+                                <th scope="col" [hideIfUnauthorized]="permissions.USER_EDIT" i18n>Operation</th>
 
                             </tr>
                         </thead>
@@ -60,7 +60,7 @@
                                 <td scope="row" class="role">
                                     {{user.role.name}}
                                 </td>
-                                <td scope="row" [hideIfUnauthorized]="permissions.EDIT">
+                                <td scope="row" [hideIfUnauthorized]="permissions.USER_EDIT">
                                     <button  class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button" (click)="editUser(user.id)">
                                         <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
                                     </button>

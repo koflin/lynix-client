@@ -1,5 +1,5 @@
-import { StepTemplate } from './../../models/stepTemplate';
 import { ProcessTemplate } from 'src/app/models/processTemplate';
+
 import { EditStepTemplateDto } from '../stepTemplate/editStepTemplateDto';
 
 export class EditProcessTemplateDto {
@@ -12,7 +12,7 @@ export class EditProcessTemplateDto {
   constructor(process: ProcessTemplate) {
     Object.assign(this, process);
 
-    this.stepTemplates = process.stepTemplates.map((template) => {
+    this.stepTemplates = process.steps.map((template) => {
       return new EditStepTemplateDto(template);
     });
   }

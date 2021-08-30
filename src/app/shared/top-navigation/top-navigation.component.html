@@ -27,7 +27,8 @@
 
         </div>
 
-          <h5>{{ user.firstName + ' ' + user.lastName }}</h5>
+          <h4 class="mb-0">{{ user.firstName + ' ' + user.lastName}}</h4>
+          <h5 class="text-muted">{{ user.role.name }}</h5>
         </div>
         <nav>
             <ul class="navbar-nav" style="padding-top:20px">
@@ -48,8 +49,8 @@
                   </div>
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('order')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/orders/overview" i18n>Overview</a>
-                <a class="dropdown-item h4 zooming" routerLink="/orders/draft" i18n>Create New</a>
+                <a class="dropdown-item h4 zooming" routerLink="/orders/overview" [hideIfUnauthorized]="permissions.ORDER_VIEW" i18n>Overview</a>
+                <a class="dropdown-item h4 zooming" routerLink="/orders/draft" [hideIfUnauthorized]="permissions.ORDER_EDIT" i18n>Create New</a>
 
                 </div>
               </li>
@@ -60,11 +61,10 @@
                   </div>
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('process')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/processes/overview" i18n>Overview</a>
-
+                <a class="dropdown-item h4 zooming" routerLink="/processes/overview" [hideIfUnauthorized]="permissions.PROCESS_VIEW"  i18n>Overview</a>
 
                 </div>
-              </li><li class="nav-item dropdown card menu-card-bottom-margin zooming ">
+              </li><li class="nav-item dropdown card menu-card-bottom-margin zooming " [hideIfUnauthorized]="permissions.TEMPLATE_VIEW">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('template')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
                     <i class="icon icon-web-design-2 icon-big item-icon mt--1"></i> <span i18n>Template</span>
@@ -77,6 +77,19 @@
 
 
                 </div>
+              </li><li class="nav-item dropdown card menu-card-bottom-margin zooming " [hideIfUnauthorized]="permissions.MANUAL_VIEW">
+                <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('manual')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="d-flex align-items-center">
+                    <i class="icon icon-web-design-2 icon-big item-icon mt--1"></i> <span i18n>Manual</span>
+                  </div>
+                </a>
+                <div class="dropdown-menu" [class.show]="isActive('manual')" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item h4 zooming" routerLink="/manuals/overview" i18n>Overview</a>
+                <a class="dropdown-item h4 zooming" routerLink="/templates/process/new" i18n>Create New</a>
+                <!--<a class="dropdown-item h4 zooming" i18n>Tools</a>-->
+
+
+                </div>
               </li><li class="nav-item dropdown card menu-card-bottom-margin zooming ">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('admin')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
@@ -85,12 +98,12 @@
 
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('admin')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/users" i18n>Users</a>
-                <a class="dropdown-item h4 zooming" routerLink="/roles" i18n>Roles</a>
+                <a class="dropdown-item h4 zooming" routerLink="/users" [hideIfUnauthorized]="permissions.USER_VIEW" i18n>Users</a>
+                <a class="dropdown-item h4 zooming" routerLink="/roles" [hideIfUnauthorized]="permissions.ROLE_VIEW" i18n>Roles</a>
 
                 </div>
               </li>
-              <li class="nav-item dropdown card menu-card-bottom-margin zooming ">
+              <li class="nav-item dropdown card menu-card-bottom-margin zooming " [hideIfUnauthorized]="permissions.STATISTIC_VIEW">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('statistics')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
                     <i class="icon icon-folder-shared icon-big item-icon mt--1"></i> <span i18n>Statistics</span>
@@ -106,5 +119,8 @@
 
               </ul>
         </nav>
+        <div class="col-12 pl-4 mt-3">
+          <small>Version: {{ version }}</small>
+        </div>
     </nav>
   </div>

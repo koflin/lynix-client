@@ -8,6 +8,8 @@ import { HomeComponent } from './home.component';
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { GuideComponent } from './view/guide/guide.component';
 import { GuideGuard } from './view/guide/guide.guard';
+import { ManualDetailComponent } from './view/manuals/manual-detail/manual-detail.component';
+import { ManualsOverviewComponent } from './view/manuals/manuals-overview/manuals-overview.component';
 import { OrdersDraftComponent } from './view/orders/orders-draft/orders-draft.component';
 import { OrdersOverviewComponent } from './view/orders/orders-overview/orders-overview.component';
 import { ProcessesOverviewComponent } from './view/processes/processes-overview/processes-overview.component';
@@ -41,25 +43,30 @@ const routes: Routes = [
     },
     //Order
     {
-      path: 'orders/overview', component: OrdersOverviewComponent, canActivate: [AuthGuard], data: { permissions: [Permission.VIEW]}
+      path: 'orders/overview', component: OrdersOverviewComponent, canActivate: [AuthGuard], data: { permissions: [Permission.ORDER_VIEW]}
     },
-    { path: 'orders/draft', component: OrdersDraftComponent, canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.EDIT]} },
-    { path: 'orders/draft/:id', component: OrdersDraftComponent, canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.EDIT]}},
-    { path: 'users', component: UsersOverviewComponent, canActivate: [AuthGuard], data: { permissions: [Permission.VIEW]}  },
-    { path: 'users/:id', component: UserDetailComponent , canActivate: [AuthGuard ], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.EDIT]}  },
-    { path: 'roles', component: RolesOverviewComponent, canActivate: [AuthGuard], data: { permissions: [Permission.VIEW]} },
+    { path: 'orders/draft', component: OrdersDraftComponent, canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.ORDER_EDIT]} },
+    { path: 'orders/draft/:id', component: OrdersDraftComponent, canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.ORDER_EDIT]}},
+    // Users
+    { path: 'users', component: UsersOverviewComponent, canActivate: [AuthGuard], data: { permissions: [Permission.USER_VIEW]}  },
+    { path: 'users/:id', component: UserDetailComponent , canActivate: [AuthGuard ], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.USER_VIEW]}  },
+    { path: 'roles', component: RolesOverviewComponent, canActivate: [AuthGuard], data: { permissions: [Permission.ROLE_VIEW]} },
 
-    {path: 'test/storage', component: TestingComponent, canActivate: [AuthGuard] },
-    {path: 'processes/overview', component: ProcessesOverviewComponent , canActivate: [AuthGuard], data: { permissions: [Permission.VIEW]} },
+    {path: 'test/storage', component: TestingComponent, canActivate: [AuthGuard], data: { permissions: [Permission.TESTING_VIEW]} },
+    // Process
+    {path: 'processes/overview', component: ProcessesOverviewComponent , canActivate: [AuthGuard], data: { permissions: [Permission.PROCESS_VIEW]} },
     // Guide
-    { path: 'guide/:id', component: GuideComponent, canActivate: [AuthGuard, GuideGuard], data: { permissions: [Permission.EXECUTE]} },
+    { path: 'guide/:id', component: GuideComponent, canActivate: [AuthGuard, GuideGuard], data: { permissions: [Permission.PROCESS_EXECUTE]} },
+    // Manuals
+    { path: 'manuals/overview', component: ManualsOverviewComponent, canActivate: [AuthGuard], data: { permissions: [Permission.MANUAL_VIEW]} },
+    { path: 'manuals/:id', component: ManualDetailComponent, canActivate: [AuthGuard], data: { permissions: [Permission.MANUAL_VIEW]} },
     // Templates
-    { path: 'templates/product', component: ProductTemplateLibraryComponent , canActivate: [AuthGuard], data: { permissions: [Permission.EDIT]} },
-    { path: 'templates/product/:id', component: ProductTemplateDetailComponent , canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.EDIT]} },
-    { path: 'templates/process', component: ProcessTemplateLibraryComponent, canActivate: [AuthGuard], data: { permissions: [Permission.EDIT]} },
-    { path: 'templates/process/:id', component: ProcessTemplateDetailComponent, canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.EDIT]} },
+    { path: 'templates/product', component: ProductTemplateLibraryComponent , canActivate: [AuthGuard], data: { permissions: [Permission.TEMPLATE_VIEW]} },
+    { path: 'templates/product/:id', component: ProductTemplateDetailComponent , canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.TEMPLATE_VIEW]} },
+    { path: 'templates/process', component: ProcessTemplateLibraryComponent, canActivate: [AuthGuard], data: { permissions: [Permission.TEMPLATE_VIEW]} },
+    { path: 'templates/process/:id', component: ProcessTemplateDetailComponent, canActivate: [AuthGuard], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.TEMPLATE_VIEW]} },
     // Statistics
-    { path: 'statistics/overview', component: StatisticsOverviewComponent , canActivate: [AuthGuard], data: { permissions: [Permission.VIEW]} },
+    { path: 'statistics/overview', component: StatisticsOverviewComponent , canActivate: [AuthGuard], data: { permissions: [Permission.STATISTIC_VIEW]} },
   ]},
 ];
 

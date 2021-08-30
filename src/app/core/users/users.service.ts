@@ -36,6 +36,10 @@ export class UsersService {
     });
   }
 
+  getMe() {
+    return this.api.get<User>('users/me');
+  }
+
   getWithPermissions(...permissions: Permission[]) {
     return this.api.get<User[]>('users', {
       permissions

@@ -25,7 +25,7 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
   stepToggleId: number;
 
   get stepsName() {
-    return this.processTemplate.stepTemplates.map(step => step.title);
+    return this.processTemplate.steps.map(step => step.title);
   }
 
   private getBaseUrl() {
@@ -79,7 +79,7 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
         companyId: this.authService.getLocalUser().companyId,
         id: undefined,
         name: $localize `Unnamed Process Template`,
-        stepTemplates: [],
+        steps: [],
         mainTasks: [],
         previousComments: []
       };
@@ -190,7 +190,7 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
     switch (data.tabContainerName ) {
 
       case 'step':
-        this.processTemplate.stepTemplates.splice(data.tabId, 1)
+        this.processTemplate.steps.splice(data.tabId, 1)
         break;
       default:
         this.deleteProcess()

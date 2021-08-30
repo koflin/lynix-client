@@ -29,7 +29,7 @@ export interface ProcessTemplateDraft  {
   previousComments?: string;
   estimatedTime?: number;
 
-  stepTemplates?: {
+  steps?: {
     title?: string;
     materials?: string[];
     toolIds?: string[];

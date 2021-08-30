@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UsersService } from 'src/app/core/users/users.service';
+import { Permission } from 'src/app/models/role';
 import { User } from 'src/app/models/user';
+import { environment } from 'src/environments/environment';
 
 import { LocalUser } from './../../models/localUser';
 
@@ -21,6 +23,10 @@ export class TopNavigationComponent implements OnInit {
   localUser: LocalUser;
   user: User;
 
+  version = environment.version;
+
+  permissions = Permission;
+
   constructor(
     private router: Router,
     private usersService: UsersService,
@@ -29,7 +35,7 @@ export class TopNavigationComponent implements OnInit {
   ngOnInit(): void {
     this.authService.onLocalUserChange.subscribe(localUser => {
       if (localUser) {
-        this.usersService.getById(localUser.id).subscribe(user => this.user = user);
+        this.usersService.getMe().subscribe(user => this.user = user);
       }
     });
 

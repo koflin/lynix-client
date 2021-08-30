@@ -41,7 +41,7 @@
       </div>
       <ng-container *ngIf="stepToggleId != undefined; else overview">
         <div class=" col-12 mt--8 pt-2">
-            <div *ngFor="let actualStep of processTemplate.stepTemplates, let i = index">
+            <div *ngFor="let actualStep of processTemplate.steps, let i = index">
                 <div class=" card pb-8 pt-2  no-top-radius shadow-right" *ngIf="stepToggleId == i">
                      <app-step [stepTemplate]="actualStep" (stepTemplateChange)="detectChange()" navFragment=""> </app-step>
                 </div>

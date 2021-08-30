@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class HideIfUnauthorizedDirective implements OnInit {
 
-  @Input('hideIfUnauthorized') requiredPermission: Permission;
+  @Input('hideIfUnauthorized') requiredPermission: Permission | Permission[];
 
   constructor(
     private element: ElementRef,

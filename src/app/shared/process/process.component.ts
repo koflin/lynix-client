@@ -32,7 +32,7 @@ export class ProcessComponent implements OnInit {
 
   }
   calcEstimatedTime() {
-    return this.processTemplate.stepTemplates.reduce((total, step) => total + step.estimatedTime, 0);
+    return this.processTemplate.steps.reduce((total, step) => total + step.estimatedTime, 0);
   }
 
   updateEstimatedTime() {
@@ -46,8 +46,8 @@ export class ProcessComponent implements OnInit {
   removeTask(index: number) {
     this.processTemplate.mainTasks.splice(index, 1);
   }
-  addStep(index:number=this.processTemplate.stepTemplates.length-1) {
-    this.processTemplate.stepTemplates.splice(index+1, 0, {
+  addStep(index:number=this.processTemplate.steps.length-1) {
+    this.processTemplate.steps.splice(index+1, 0, {
       title: $localize `Unnamed Step` + ' ' + (index+1),
       keyMessage: null,
       tasks: null,
@@ -60,24 +60,24 @@ export class ProcessComponent implements OnInit {
 
   }
   removeStep(index: number) {
-    this.processTemplate.stepTemplates.splice(index, 1);
+    this.processTemplate.steps.splice(index, 1);
   }
 
   moveUp(i: number) {
     if (i > 0) {
-      const top = this.processTemplate.stepTemplates[i - 1];
-      this.processTemplate.stepTemplates[i - 1] = this.processTemplate.stepTemplates[i];
-      this.processTemplate.stepTemplates[i] = top;
+      const top = this.processTemplate.steps[i - 1];
+      this.processTemplate.steps[i - 1] = this.processTemplate.steps[i];
+      this.processTemplate.steps[i] = top;
 
       this.processTemplateChange.emit(this.processTemplate);
     }
   }
 
   moveDown(i: number) {
-    if (i < this.processTemplate.stepTemplates.length - 1) {
-      const bottom = this.processTemplate.stepTemplates[i + 1];
-      this.processTemplate.stepTemplates[i + 1] = this.processTemplate.stepTemplates[i];
-      this.processTemplate.stepTemplates[i] = bottom;
+    if (i < this.processTemplate.steps.length - 1) {
+      const bottom = this.processTemplate.steps[i + 1];
+      this.processTemplate.steps[i + 1] = this.processTemplate.steps[i];
+      this.processTemplate.steps[i] = bottom;
 
       this.processTemplateChange.emit(this.processTemplate);
     }

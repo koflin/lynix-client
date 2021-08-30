@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const requiredPermissions: Permission[] = next.data['permissions'];
+    const requiredPermissions: (Permission | Permission[])[] = next.data['permissions'];
 
     return new Promise(async (resolve) => {
       const localUser = await this.authService.refreshToken().toPromise();

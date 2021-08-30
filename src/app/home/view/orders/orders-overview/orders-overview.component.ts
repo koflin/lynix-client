@@ -23,7 +23,7 @@ export class OrdersOverviewComponent implements OnInit {
   temp: OrderNode[] = [];
   rows: any[] = []
   SelectionType = SelectionType;
-  _showReleased: boolean=false;
+  _showReleased: boolean=true;
   searchValue:string=""
 
   get showReleased(): boolean {

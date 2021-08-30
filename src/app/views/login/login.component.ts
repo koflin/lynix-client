@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,9 @@ export class LoginComponent implements OnInit {
 
   showPassword=false
   error=false
+
+  version = environment.version;
+
   constructor(private authService: AuthService, private router: Router ) { }
 
   @HostListener('window:keyup', ['$event'])

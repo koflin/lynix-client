@@ -24,7 +24,7 @@ export class ProductTemplateLibraryService {
               name: processT.name,
               quantity: process.quantity,
               description: null,
-              stepNames: process.template.stepTemplates.map(step => step.title),
+              stepNames: process.template.steps.map(step => step.title),
               selected: false,
             };
           }),

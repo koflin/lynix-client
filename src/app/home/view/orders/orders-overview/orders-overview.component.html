@@ -31,12 +31,13 @@
                     </div>
 
                     <div class="col-6 col-md-4 d-flex align-items-start ">
-
-                      <label class="pb-2 mr-2" i18n>Show published</label>
-                      <label class="custom-toggle" >
-                        <input type="checkbox" [(ngModel)]="showReleased">
-                        <span class="custom-toggle-slider rounded-circle" data-label-off="No" i18n-data-label-off data-label-on="Yes" i18n-data-label-on></span>
-                      </label>
+                      <div [hideIfUnauthorized]="permissions.ORDER_EDIT">
+                        <label class="pb-2 mr-2" i18n>Show published</label>
+                        <label class="custom-toggle" >
+                          <input type="checkbox" [(ngModel)]="showReleased">
+                          <span class="custom-toggle-slider rounded-circle" data-label-off="No" i18n-data-label-off data-label-on="Yes" i18n-data-label-on></span>
+                        </label>
+                      </div>
                     </div>
 
                     <div class="col-6 col-md-4 d-flex justify-content-end" style="padding-left: 2.5rem;">
@@ -54,7 +55,7 @@
                         </label>
                       </div>
                     </div>
-                    <div class="col-6 col-md-12 mb-3 d-flex align-items-end justify-content-end " style="padding-right: 2.5rem;" [hideIfUnauthorized]="permissions.EDIT">
+                    <div class="col-6 col-md-12 mb-3 d-flex align-items-end justify-content-end " style="padding-right: 2.5rem;" [hideIfUnauthorized]="permissions.ORDER_EDIT">
                       <button [routerLink]="'/orders/draft'" class="btn btn-icon btn-3 btn-default" type="button">
                         <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
                         <span class="btn-inner--text" i18n>Add new order</span>
@@ -174,7 +175,7 @@
                     <ngx-datatable-column name="edit" i18n-name [sortable]="true">
                         <ng-template let-row="row" ngx-datatable-cell-template>
 
-                          <div [hideIfUnauthorized]="permissions.EDIT">
+                          <div [hideIfUnauthorized]="permissions.ORDER_EDIT">
                             <ng-container *ngIf="row.status=='in_preparation'">
                               <button (click)="edit(row.workOderId)" class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button">
                                 <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
