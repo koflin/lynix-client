@@ -1,6 +1,7 @@
 {
   "name": "lynix",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "author": "Colin Pfingstl",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "extract-i18n": "ng extract-i18n --output-path=src/locale",
     "merge-i18n": "ng run lynix:xliffmerge",
     "start-de": "ng serve --configuration=de"
   },
