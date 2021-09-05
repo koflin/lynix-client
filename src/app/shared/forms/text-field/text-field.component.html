@@ -1,5 +1,5 @@
 <div class=" form-row">
-    <div class=" col-12 mb-3">
+    <div class="col-12 mb-3">
     <div class=" form-group" [ngClass]="{'has-danger': (inputCheckForError || userHasTyped) && fieldInformation.error}">
         <label class=" form-control-label" [for]="fieldInformation.name" [ngClass]="{'text-danger': (inputCheckForError || userHasTyped) && fieldInformation.error}">
             {{fieldInformation.label}} <span class="text-primary" *ngIf="fieldInformation.label && inputRequired">*</span>
@@ -14,6 +14,7 @@
         [name]="fieldInformation.name"
         (ngModelChange)="validation_save(true, $event)"
         [(ngModel)]="result"
+        (keydown)="pressKey($event)"
         />
         <ng-container *ngIf="(inputCheckForError || userHasTyped) && fieldInformation.error">
             <div *ngIf="formatError" class=" invalid-feedback">

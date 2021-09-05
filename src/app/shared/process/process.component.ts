@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TimeService } from 'src/app/helpers/time/time.service';
 import { ProcessTemplate } from 'src/app/models/processTemplate';
 
+import { TextFieldComponent } from '../forms/text-field/text-field.component';
 import { InputOutputValue, SingleMultiChoiceItem } from '../models/InputOutputValue';
 
 @Component({
@@ -48,7 +49,7 @@ export class ProcessComponent implements OnInit {
   }
   addStep(index:number=this.processTemplate.steps.length-1) {
     this.processTemplate.steps.splice(index+1, 0, {
-      title: $localize `Unnamed Step` + ' ' + (index+1),
+      title: $localize `Unnamed Step` + ' ' + (this.processTemplate.steps.length+1),
       keyMessage: null,
       tasks: null,
       materials: [],
@@ -56,8 +57,7 @@ export class ProcessComponent implements OnInit {
       pictureUris: [],
       videoUris: [],
       estimatedTime: 0,
-    })
-
+    });
   }
   removeStep(index: number) {
     this.processTemplate.steps.splice(index, 1);
@@ -81,5 +81,9 @@ export class ProcessComponent implements OnInit {
 
       this.processTemplateChange.emit(this.processTemplate);
     }
+  }
+
+  onConfirmStep(index: number, target: TextFieldComponent) {
+    this.addStep(index);
   }
 }

@@ -1,9 +1,10 @@
 import { Order } from 'src/app/models/order';
 import { ProcessTemplate } from 'src/app/models/processTemplate';
 
+import { MetadataEntity } from './base/metadata';
 import { Step } from './step';
 
-export interface Process extends ProcessTemplate {
+export interface Process extends ProcessTemplate, MetadataEntity {
   id: string;
   order: Order;
   templateId: string;

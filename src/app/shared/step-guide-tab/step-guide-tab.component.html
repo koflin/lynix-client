@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="process.currentStepIndex !== null && process.steps[stepIndex] as currentStep">
     <div class="col-12" *ngIf="!isManual">
         <div class="card shadow-card-stronger p-3">
             <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="process.currentStepIndex != stepIndex">
@@ -15,7 +15,7 @@
                 </button>
               </div>
             <div class="row">
-              <ng-container  *ngIf="process.currentStepIndex !== null && process.steps[stepIndex] as currentStep">
+              <ng-container >
                 <div class="col">
                   <p><span class="h4" i18n>Time Taken:</span>  {{ currentStep.timeTaken | duration }}</p>
                 </div>
@@ -34,14 +34,14 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-sm">
+    <div class="col-12 col-sm" *ngIf="currentStep.materials?.length > 0">
         <div class=" card shadow-card-stronger p-3 " >
             <div class="container-fluid">
                 <div class="row">
                     <div class="col">
                         <h4 i18n>Materials</h4>
                         <ul class="list-group list-item-no-full-border pt-2 pb-2">
-                            <ng-container *ngFor="let item of process.steps[stepIndex].materials ; let i=index; let first = first; let last = last">
+                            <ng-container *ngFor="let item of currentStep.materials ; let i=index; let first = first; let last = last">
                                 <li class="list-group-item list-item-no-sideborder" [ngClass]="{'no-border-top':first, 'no-border-bottom':last}" >{{item}}</li>
                             </ng-container>
 
@@ -52,7 +52,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-sm">
+    <div class="col-12 col-sm" *ngIf="currentStep.toolIds?.length > 0">
         <div class=" card shadow-card-stronger p-3 " >
             <div class="container-fluid">
                 <div class="row">
@@ -60,7 +60,7 @@
                         <h4 i18n>Tools
                         </h4>
                         <ul class="list-group list-item-no-full-border pt-2 pb-2">
-                            <ng-container *ngFor="let item of process.steps[stepIndex].toolIds ; let i=index; let first = first; let last = last">
+                            <ng-container *ngFor="let item of currentStep.toolIds ; let i=index; let first = first; let last = last">
                                 <li class="list-group-item list-item-no-sideborder" [ngClass]="{'no-border-top':first, 'no-border-bottom':last}" >{{item}}</li>
                             </ng-container>
                         </ul>
@@ -73,13 +73,13 @@
         <div class="row">
             <ng-container>
                 <ng-container>
-                    <div class="col-sm-12 col-md">
+                    <div class="col-sm-12 col-md" *ngIf="currentStep.keyMessage">
                         <div class=" card shadow-card-stronger p-3 " >
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col">
                                         <h4 i18n>Key Message</h4>
-                                        <app-text-area [result]="process.steps[stepIndex].keyMessage" [disabled]=true> </app-text-area>
+                                        <app-text-area [result]="currentStep.keyMessage" [disabled]=true> </app-text-area>
                                     </div>
                                 </div>
                             </div>
@@ -91,13 +91,13 @@
             </ng-container>
             <ng-container>
                 <ng-container>
-                    <div class="col-sm-12 col-md">
+                    <div class="col-sm-12 col-md" *ngIf="currentStep.tasks">
                         <div class=" card shadow-card-stronger p-3 " >
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col">
                                         <h4 i18n>Tasks</h4>
-                                        <app-text-area [result]="process.steps[stepIndex].tasks" [disabled]=true> </app-text-area>
+                                        <app-text-area [result]="currentStep.tasks" [disabled]=true> </app-text-area>
                                     </div>
                                 </div>
                             </div>
@@ -114,14 +114,14 @@
 
         <div class="row">
             <ng-container>
-                <div class="col-sm-12 col-md">
+                <div class="col-sm-12 col-md" *ngIf="currentStep.pictureUris?.length > 0">
                     <div class=" card shadow-card-stronger p-3 ">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col" >
                                     <h4 i18n>Pictures</h4>
                                     <carousel>
-                                        <slide *ngFor="let picture of process.steps[stepIndex].pictureUris; let i=index" >
+                                        <slide *ngFor="let picture of currentStep.pictureUris; let i=index" >
                                           <img [src]="picture" alt="first slide" style="display: block;" class="object-fit-cover">
 
                                         </slide>
@@ -134,14 +134,14 @@
             </ng-container>
             <ng-container>
 
-                <div class="col">
+                <div class="col-sm-12 col-md" *ngIf="currentStep.videoUris?.length > 0">
                     <div class=" card shadow-card-stronger p-3 " >
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col" >
                                     <h4 i18n>Videos</h4>
                                     <carousel>
-                                        <slide *ngFor="let video of process.steps[stepIndex].videoUris; let i=index" >
+                                        <slide *ngFor="let video of currentStep.videoUris; let i=index" >
                                             <video width="100%" controls>
                                                 <source [src]="video" type="{{ video | videoType }}">
                                             </video>

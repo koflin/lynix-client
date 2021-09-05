@@ -19,6 +19,10 @@ export class ProcessTemplateLibraryService {
           quantity: 1,
           description: 'Not implemented yet',
           stepNames: template.steps.map(step => step.title),
+          createdAt: template.createdAt,
+          createdBy: template.createdBy?.displayName,
+          editedAt: template.editedAt,
+          editedBy: template.editedBy?.displayName,
           selected: false
         };
       });

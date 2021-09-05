@@ -92,6 +92,10 @@ export class TabsComponent implements OnInit,AfterViewInit {
   }
 
   toggle(value) {
+    if (value === null) {
+      value = this.tabsvalue.length;
+    }
+
     if (this.tabsResIndex == value && !this.setNotUndefined) {
       return this.fragPipe.transform(this.navFragmentBase);
     }

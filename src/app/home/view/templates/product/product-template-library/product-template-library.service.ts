@@ -25,6 +25,10 @@ export class ProductTemplateLibraryService {
               quantity: process.quantity,
               description: null,
               stepNames: process.template.steps.map(step => step.title),
+              createdAt: processT.createdAt,
+              createdBy: processT.createdBy?.displayName,
+              editedAt: processT.editedAt,
+              editedBy: processT.editedBy?.displayName,
               selected: false,
             };
           }),

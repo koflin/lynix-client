@@ -1,4 +1,6 @@
-export interface Role {
+import { MetadataEntity } from './base/metadata';
+
+export interface Role extends MetadataEntity {
   id: string;
   name: string;
   permissions: Permission[];

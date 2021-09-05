@@ -1,6 +1,6 @@
-import { CompanyBase } from './companyBase';
+import { MetadataEntity } from './base/metadata';
 
-export interface Company {
+export interface Company extends MetadataEntity {
   id: string;
   name: string;
   logo?: string;

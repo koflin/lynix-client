@@ -5,5 +5,10 @@ export interface ProcessTemplateNode {
   description: string;
   stepNames: string[];
 
+  createdAt: Date;
+  createdBy: string;
+  editedAt: Date;
+  editedBy: string;
+
   selected: boolean;
 }

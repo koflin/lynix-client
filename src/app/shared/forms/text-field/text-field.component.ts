@@ -16,6 +16,7 @@ export class TextFieldComponent implements OnInit {
   @Input() result: any
   @Output() resultChange= new EventEmitter<any>()
 
+  @Output() inputConfirm= new EventEmitter<any>();
 
   @Input() inputPlaceholder:string="";
   @Input() inputRequired:boolean=false;
@@ -39,6 +40,16 @@ export class TextFieldComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.validation_save(false);
+  }
+
+  pressKey(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.inputConfirm.emit(this);
+    }
+  }
+
+  test() {
+    this.result = 'I GOT CHANGED';
   }
 
   validation_save(userHasTyped:boolean, $e?){

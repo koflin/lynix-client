@@ -1,9 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { CompanyBase } from './companyBase';
+import { CompanyBase } from './base/companyBase';
+import { MetadataEntity } from './base/metadata';
 import { ProcessTemplate } from './processTemplate';
 
-export interface ProductTemplate extends CompanyBase {
+export interface ProductTemplate extends CompanyBase, MetadataEntity {
   id: string;
 
   name: string;

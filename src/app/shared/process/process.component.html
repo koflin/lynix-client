@@ -15,14 +15,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 accordion-card-shaddow">
+        <div class="col-6 col-md-6 accordion-card-shaddow">
             <accordion [isAnimated]="true" [closeOthers]="false">
                 <accordion-group >
                     <div accordion-heading>
                         <p class="col-auto mb-0 h5 text-primary"><span i18n>Main Tasks & Challenges</span><i class=" float-right pull-right fa fa-angle-down p-2"></i></p>
                         <p><small class="text-muted col-12" i18n>Add main tasks</small> </p>
                     </div>
-                    <div class="table align-items-center table-flush">
+                    <div class="table-responsive">
+                      <div class="table align-items-center table-flush">
                         <thead class=" thead-light">
                             <tr>
                                 <th scope="col" i18n>Tasks & Challenges</th>
@@ -34,7 +35,7 @@
                         <tbody class="list">
                             <tr *ngFor="let task of processTemplate.mainTasks; let i = index">
                                 <td scope="row">
-                                    <p> {{task}}</p>
+                                  <p> {{task}}</p>
                                 </td>
                                 <td scope="row">
                                     <button (click)="removeTask(i)" class=" ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-danger" type="button">
@@ -46,7 +47,6 @@
                                 <td scope="row">
                                     <div class="pt-3">
                                         <app-text-field inputPlaceholder="tasks & challenges" i18n-inputPlaceholder [(result)]="taskToAdd" [inputRequired]="false"> </app-text-field>
-
                                     </div>
                                 </td>
                                 <td scope="row">
@@ -57,15 +57,14 @@
                                 </td>
                             </tr>
                         </tbody>
-
+                      </div>
                     </div>
-
 
                 </accordion-group>
               </accordion>
 
         </div>
-        <div class="col-12 col-md-6 accordion-card-shaddow">
+        <div class="col-6 col-md-6 accordion-card-shaddow">
             <accordion [isAnimated]="true" [closeOthers]="false">
                 <accordion-group >
                     <div accordion-heading>
@@ -115,23 +114,23 @@
 
                                     <td scope="row">
                                         <div  class="pt-3">
-                                            <app-text-field inputPlaceholder="step name" i18n-inputPlaceholder [(result)]="step.title" [inputRequired]="true"> </app-text-field>
+                                            <app-text-field inputPlaceholder="step name" i18n-inputPlaceholder [(result)]="step.title" [inputRequired]="true" (inputConfirm)="onConfirmStep(i,$event)"> </app-text-field>
                                         </div>
                                     </td>
                                     <td scope="row">
-                                        <button class="btn btn-icon btn-3 btn-default" type="button" (click)="addStep(i)" >
+                                        <button class="btn btn-icon btn-3 btn-default mr-1" type="button" (click)="addStep(i)" >
                                             <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
                                         </button>
-                                        <button class="btn btn-icon btn-3 btn-default" type="button" (click)="moveUp(i)">
+                                        <button class="btn btn-icon btn-3 btn-default mr-1" type="button" (click)="moveUp(i)">
                                           <span class="btn-inner--icon"><i class="fas fa-arrow-up"></i></span>
                                         </button>
-                                        <button class="btn btn-icon btn-3 btn-default" type="button" (click)="moveDown(i)">
+                                        <button class="btn btn-icon btn-3 btn-default mr-1" type="button" (click)="moveDown(i)">
                                           <span class="btn-inner--icon"><i class="fas fa-arrow-down"></i></span>
                                         </button>
-                                        <button class="btn btn-icon btn-3 btn-default" type="button" [routerLink]="" fragment="{{ (navFragment != '' ? navFragment + '.' + i : i) }}">
+                                        <button class="btn btn-icon btn-3 btn-default mr-1" type="button" [routerLink]="" fragment="{{ (navFragment != '' ? navFragment + '.' + i : i) }}">
                                           <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
                                         </button>
-                                        <button class="btn btn-icon btn-3 btn-danger" type="button" (click)="removeStep(i)">
+                                        <button class="btn btn-icon btn-3 btn-danger mr-1" type="button" (click)="removeStep(i)">
                                             <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
                                         </button>
                                     </td>

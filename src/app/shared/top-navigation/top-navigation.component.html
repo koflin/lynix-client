@@ -1,17 +1,20 @@
 <!-- Desktop View -->
 <nav class="navbar navbar-expand-lg sticky desktop_nav navigation_bar">
-    <div class="d-flex justify-content-between" style="width: 100%;">
-      <a class="navbar-brand" routerLink="/dashboard"><img style="object-fit: scale-down;" src="assets/img/Logo_Lynix_RGB.svg"></a>
-
-      <p class="d-none d-lg-block text-default" style="padding-top:10px"> SMART ASSISTANT SYSTEM </p>
-
-      <div class="navbar-toggle">
-        <div class="menu-icon-margin">
-            <i class="fas fa-bars" style="font-size: 36px;" (click)="openNavigation()"></i>
-        </div>
+  <div class="d-flex justify-content-between" style="width: 100%;">
+    <a class="navbar-brand mr-5" routerLink="/dashboard"><img style="object-fit: scale-down;" src="assets/img/Logo_Lynix_RGB.svg"></a>
+    <div>
+      <img *ngIf="user && user.companyLogo" style="height: 80%;" [src]="user.companyLogo">
     </div>
+
+    <p class="d-none d-lg-block text-default" style="padding-top:10px"> SMART ASSISTANT SYSTEM </p>
+
+    <div class="navbar-toggle">
+      <div class="menu-icon-margin">
+          <i class="fas fa-bars" style="font-size: 36px;" (click)="openNavigation()"></i>
+      </div>
     </div>
-  </nav>
+  </div>
+</nav>
 
 
 
@@ -84,8 +87,8 @@
                   </div>
                 </a>
                 <div class="dropdown-menu" [class.show]="isActive('manual')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/manuals/overview" i18n>Overview</a>
-                <a class="dropdown-item h4 zooming" routerLink="/templates/process/new" i18n>Create New</a>
+                <a class="dropdown-item h4 zooming" routerLink="/manuals/overview" [hideIfUnauthorized]="permissions.MANUAL_VIEW" i18n>Overview</a>
+                <a class="dropdown-item h4 zooming" routerLink="/templates/process/new" [hideIfUnauthorized]="permissions.TEMPLATE_EDIT" i18n>Create New</a>
                 <!--<a class="dropdown-item h4 zooming" i18n>Tools</a>-->
 
 

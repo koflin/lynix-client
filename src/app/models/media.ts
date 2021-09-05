@@ -1,4 +1,4 @@
-import { CompanyBase } from './companyBase';
+import { CompanyBase } from './base/companyBase';
 
 export interface Media extends CompanyBase {
   id: string;

@@ -76,10 +76,9 @@
                       <!-- Name -->
                       <ngx-datatable-column  name="process name" i18n-name prop="name" [sortable]="true" >
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                        <p class="h3 text-default">
-                            {{row.name}}
-                        </p>
-
+                          <p class="h3 text-default">
+                              {{row.name}}
+                          </p>
                         </ng-template>
                     </ngx-datatable-column>
                       <!-- Description -->
@@ -91,6 +90,43 @@
 
                         </ng-template>
                       </ngx-datatable-column>-->
+
+                      <!-- Created At -->
+                      <ngx-datatable-column name="created at" i18n-name>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <p class="h3 text-default">
+                            {{ (row.createdAt ? row.createdAt : '') | date: 'dd.MM.yyyy HH:mm:ss' }}
+                          </p>
+                        </ng-template>
+                      </ngx-datatable-column>
+
+                      <!-- Created By -->
+                      <ngx-datatable-column name="created by" i18n-name>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <p class="h3 text-default">
+                            {{ row.createdBy ? row.createdBy : '' }}
+                          </p>
+                        </ng-template>
+                      </ngx-datatable-column>
+
+                      <!-- Edited At -->
+                      <ngx-datatable-column name="edited at" i18n-name>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <p class="h3 text-default">
+                            {{ (row.editedAt ? row.editedAt : '') | date: 'dd.MM.yyyy HH:mm:ss ' }}
+                          </p>
+                        </ng-template>
+                      </ngx-datatable-column>
+
+                      <!-- Edited By -->
+                      <ngx-datatable-column name="edited by" i18n-name>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <p class="h3 text-default">
+                            {{ row.editedBy ? row.editedBy : '' }}
+                          </p>
+                        </ng-template>
+                      </ngx-datatable-column>
+
                       <!-- Edit -->
                       <ngx-datatable-column name="view" i18n-name>
                         <ng-template let-row="row" ngx-datatable-cell-template>

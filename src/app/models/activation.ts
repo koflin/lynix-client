@@ -1,4 +1,4 @@
-import { CompanyBase } from './companyBase';
+import { CompanyBase } from './base/companyBase';
 import { User } from './user';
 
 export interface Activation extends CompanyBase {

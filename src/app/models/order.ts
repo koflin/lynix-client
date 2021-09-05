@@ -1,8 +1,9 @@
-import { CompanyBase } from './companyBase';
+import { CompanyBase } from './base/companyBase';
+import { MetadataEntity } from './base/metadata';
 import { ProductTemplate } from './productTemplate';
 
 
-export interface Order extends CompanyBase {
+export interface Order extends CompanyBase, MetadataEntity {
   id: string;
 
   status: OrderStatus;

@@ -1,4 +1,4 @@
-import { CompanyBase } from './companyBase';
+import { CompanyBase } from './base/companyBase';
 import { Permission } from './role';
 
 export interface LocalUser extends CompanyBase {

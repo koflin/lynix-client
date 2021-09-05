@@ -59,8 +59,11 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   }
   set orderDraft(value:Order){
     this._orderDraft = value;
-    this.setProductNames()
-    this.updateBreadCrumb();
+
+    if (value != undefined) {
+      this.setProductNames()
+      this.updateBreadCrumb();
+    }
   }
 
   //productsNames:string[]=[]
@@ -101,15 +104,62 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     return this._stepToggleId
   }
 
+  set stepToggleId(index: number) {
+    if (index != undefined) {
+      const length = this.orderDraft?.products[this.productToggleId]?.template.processes[this.processToggleId]?.template.steps.length;
+
+      if (index > length) {
+        index = undefined;
+      }
+
+      if (index == length) {
+        this.addStep();
+      }
+    }
+
+    this._stepToggleId = index;
+  }
+
   _processToggleId:number
   get processToggleId(){
     return this._processToggleId
   }
 
+  set processToggleId(index: number) {
+    if (index != undefined) {
+      const length = this.orderDraft?.products[this.productToggleId]?.template.processes.length;
+
+      if (index > length) {
+        index = undefined;
+      }
+
+      /*if (index != undefined && index == length) {
+        this.addProcess();
+      }*/
+    }
+
+    this._processToggleId = index;
+  }
+
   _productToggleId:number
   get productToggleId(){
-
     return this._productToggleId
+  }
+
+  set productToggleId(index: number) {
+    if (index != undefined) {
+      const length = this.orderDraft?.products.length;
+
+      if (index > length) {
+        index = undefined;
+      }
+
+      /*if (index != undefined && index == length) {
+        this.addProduct();
+      }*/
+    }
+
+    this._productToggleId = index;
   }
 
   isEdited = false;
@@ -139,6 +189,10 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
       name: this.orderDraft?.name ? this.orderDraft.name : $localize `New`,
       url: this.getBaseUrl()
     }];
+
+    if (!this.orderDraft) {
+      return;
+    }
 
     if (this.productToggleId != undefined) {
       breadCrumb.push({
@@ -195,28 +249,16 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     });
 
     this.route.fragment.subscribe((fragment) => {
-      this._productToggleId = undefined;
-        this._processToggleId = undefined;
-        this._stepToggleId = undefined;
+      let parts = this.indicesPipe.transform(fragment);
+      parts.push(...new Array<number>(3 - parts.length));
 
-      if (!fragment) {
-        this.updateBreadCrumb();
-        return;
-      }
+      console.log(parts);
 
-      const parts = this.indicesPipe.transform(fragment);
+      this.productToggleId = parts[0];
 
-      if (parts.length >= 1) {
-        this._productToggleId = parts[0];
-      }
+      this.processToggleId = parts[1];
 
-      if (parts.length >= 2) {
-        this._processToggleId = parts[1];
-      }
-
-      if (parts.length >= 3) {
-        this._stepToggleId = parts[2];
-      }
+      this.stepToggleId = parts[2];
 
       this.updateBreadCrumb();
     });
@@ -469,7 +511,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   }
 
   addStep() {
-    const steps = this.orderDraft.products[this.productToggleId].template.processes[this.processToggleId].template.steps;
+    const steps = this.orderDraft?.products[this.productToggleId].template?.processes[this.processToggleId].template?.steps;
     steps.push({
       title: $localize `Unnamed Step` + ' ' + (steps.length+1),
       keyMessage: null,
