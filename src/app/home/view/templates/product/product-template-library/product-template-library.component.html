@@ -90,7 +90,7 @@
                           </ng-template>
                       </ngx-datatable-column>
                         <!-- Description -->
-                        <ngx-datatable-column  name="Processes" i18n-name prop="processes" [sortable]="true" >
+                        <ngx-datatable-column  name="Processes" i18n-name prop="processes" [sortable]="false" >
                           <ng-template let-row="row" ngx-datatable-cell-template>
                           <p *ngFor="let item of row.processes; let i=index; let first = first; let last = last" class="">
                               {{item.name}} <ng-container *ngIf="!(first && last) && !last" ></ng-container>
@@ -99,7 +99,7 @@
                           </ng-template>
                       </ngx-datatable-column>
                       <!-- Quantity -->
-                      <ngx-datatable-column  name="Quantity" i18n-name prop="quantity" [sortable]="true" >
+                      <ngx-datatable-column  name="Quantity" i18n-name prop="quantity" [sortable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                         <p *ngFor="let item of row.processes; let i=index; let first = first; let last = last" class="">
                             {{item.quantity}} <ng-container *ngIf="!(first && last) && !last" ></ng-container>
@@ -108,7 +108,7 @@
                         </ng-template>
                     </ngx-datatable-column>
                     <!-- Edit -->
-                    <ngx-datatable-column name="edit" i18n-name>
+                    <ngx-datatable-column name="edit" i18n-name [sortable]="false">
                       <ng-template let-row="row" ngx-datatable-cell-template>
 
                         <div [hideIfUnauthorized]="permissions.TEMPLATE_EDIT">

@@ -17,11 +17,13 @@ export class ManualsOverviewComponent implements OnInit {
 
   breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Process Manuals`, url: this.router.url },];
   templates: ProcessTemplateNode[];
+  visibleTemplates: ProcessTemplateNode[];
   windowWidth:number
 
   permissions = Permission;
 
   searchValue:string=""
+  entries: number = 10;
 
   @ViewChild('myTable') table: any;
 
@@ -36,12 +38,19 @@ export class ManualsOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.processTemplateLibraryService.getAll().subscribe(templates => this.templates = templates);
+    this.processTemplateLibraryService.getAll().subscribe(templates => {
+      this.templates = templates;
+      this.filterTable();
+    });
     this.windowWidth = window.innerWidth
   }
 
   openManual(id: string) {
     this.router.navigate(['manuals/' + id]);
+  }
+
+  edit(id: string) {
+    this.router.navigate(['templates/process/' + id], { queryParams: { return: 'manual' } });
   }
 
   onActivate($event){
@@ -56,5 +65,24 @@ export class ManualsOverviewComponent implements OnInit {
     return{
       'pl-0': true,
       }
+  }
+
+  filterTable() {
+    let val = this.searchValue.toLowerCase();
+    this.visibleTemplates = this.templates.filter(function(d) {
+      for (let key in d) {
+        if (typeof d[key]=== 'string') {
+          if (d[key].toLowerCase().indexOf(val) !== -1) {
+            return true;
+          }
+        }
+
+      }
+      return false;
+    });
+  }
+
+  entriesChange($event) {
+    this.entries = $event.target.value;
   }
 }

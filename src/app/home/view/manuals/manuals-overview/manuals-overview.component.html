@@ -2,7 +2,7 @@
   <span class=" mask bg-gradient-primary opacity-7"> </span>
   <app-breadcrumb-header [breadCrumbs]=breadCrumbs ></app-breadcrumb-header>
 </div>
-<div class=" container-fluid mt--4" *ngIf="templates; else spinner">
+<div class=" container-fluid mt--6" *ngIf="templates; else spinner">
   <div class=" row">
       <div class=" col padding-0-mobile">
           <ng-container *ngIf="!templates || templates.length<1; else elseTemplate" >
@@ -15,6 +15,54 @@
 
           <ng-template #elseTemplate >
               <div class="card">
+                <div class="dataTables_wrapper py-4 container-fluid">
+                  <div class="row">
+                    <div class="col-4 col-sm-4">
+                      <div class="dataTables_length" id="datatable_length">
+                        <label>
+                          <span i18n>Show</span>
+                          <select
+                            name="datatable_length"
+                            aria-controls="datatable"
+                            class="form-control form-control-sm"
+                            (change)="entriesChange($event)"
+                          >
+                            <option value="10" [selected]="entries == 10">10</option>
+                            <option value="25" [selected]="entries == 25">25</option>
+                            <option value="50" [selected]="entries == 50">50</option>
+                            <option value="-1" [selected]="entries == -1" i18n>All</option>
+                          </select>
+                          <span i18n>entries</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="col-4 col-sm-4 d-flex justify-content-center"></div>
+
+                    <div class="col-4 col-sm-4 d-flex justify-content-end" style="padding-left: 2.5rem;">
+                      <div id="datatable_filter" class="dataTables_filter" style="float: left; width:100%">
+                        <label style="width: 100%;">
+                          <input
+                            type="search"
+                            class="form-control form-control-sm"
+                            placeholder="Search records"
+                            i18n-placeholder
+                            aria-controls="datatable"
+                            [(ngModel)]="searchValue"
+                            (keyup)="filterTable()"
+                          />
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-12 mb-3 d-flex align-items-end justify-content-end " style="padding-right: 2.5rem;" [hideIfUnauthorized]="permissions.ORDER_EDIT">
+                      <button [routerLink]="'/templates/process/new'" [queryParams]="{ return: 'manual' }" class="btn btn-icon btn-3 btn-default" type="button">
+                        <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                        <span class="btn-inner--text" i18n>Add new process manual</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
                 <div class="card-body pl-0 pr-0 pt-0">
                     <ngx-datatable
                         #myTable
@@ -26,9 +74,8 @@
                         [rowHeight]="'auto'"
                         [scrollbarH]="true"
                         [scrollbarV]="false"
-
-                        [rows]="templates"
-
+                        [limit]="entries != -1 ? entries : undefined"
+                        [rows]="visibleTemplates"
                     >
                     <!-- Row Detail Template -->
                     <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onActivate($event)">
@@ -92,7 +139,7 @@
                       </ngx-datatable-column>-->
 
                       <!-- Created At -->
-                      <ngx-datatable-column name="created at" i18n-name>
+                      <ngx-datatable-column name="created at" i18n-name [sortable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                           <p class="h3 text-default">
                             {{ (row.createdAt ? row.createdAt : '') | date: 'dd.MM.yyyy HH:mm:ss' }}
@@ -101,7 +148,7 @@
                       </ngx-datatable-column>
 
                       <!-- Created By -->
-                      <ngx-datatable-column name="created by" i18n-name>
+                      <ngx-datatable-column name="created by" i18n-name [sortable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                           <p class="h3 text-default">
                             {{ row.createdBy ? row.createdBy : '' }}
@@ -110,7 +157,7 @@
                       </ngx-datatable-column>
 
                       <!-- Edited At -->
-                      <ngx-datatable-column name="edited at" i18n-name>
+                      <ngx-datatable-column name="edited at" i18n-name [sortable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                           <p class="h3 text-default">
                             {{ (row.editedAt ? row.editedAt : '') | date: 'dd.MM.yyyy HH:mm:ss ' }}
@@ -119,7 +166,7 @@
                       </ngx-datatable-column>
 
                       <!-- Edited By -->
-                      <ngx-datatable-column name="edited by" i18n-name>
+                      <ngx-datatable-column name="edited by" i18n-name [sortable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                           <p class="h3 text-default">
                             {{ row.editedBy ? row.editedBy : '' }}
@@ -128,7 +175,20 @@
                       </ngx-datatable-column>
 
                       <!-- Edit -->
-                      <ngx-datatable-column name="view" i18n-name>
+                      <ngx-datatable-column name="edit" i18n-name [sortable]="false">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+
+                          <div [hideIfUnauthorized]="permissions.TEMPLATE_EDIT">
+                            <button (click)="edit(row.id)" class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button">
+                              <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
+                            </button>
+                          </div>
+
+                        </ng-template>
+                      </ngx-datatable-column>
+
+                      <!-- View -->
+                      <ngx-datatable-column name="view" i18n-name [sortable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
 
                           <div [hideIfUnauthorized]="permissions.MANUAL_VIEW">

@@ -135,27 +135,34 @@
   </div>
 </div>
 <app-bottom-navigation-order-draft [noPadding]=true>
-  <div class="d-flex justify-content-between nav-pl-0" style="width: 100%;">
-      <div>
+  <div class="row nav-pl-0" style="width: 100%;">
+      <div class="col-3 d-flex justify-content-center">
           <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onExit()">
               <span class="btn-inner--icon"><i style="font-size: 30px;" class="fas fa-times"></i></span> <br>
               <span class="btn-inner--text ml-0" i18n>Exit</span>
             </button>
       </div>
-      <div>
+      <div class="col-3 d-flex justify-content-center">
           <button class="btn btn-icon btn-3 btn-white none-shadow" [disabled]="stepToggleId === 0" type="button" (click)="onPrevious()">
               <span class="btn-inner--icon">
                   <i style="font-size: 30px;" class="fas fa-step-backward"></i></span> <br>
               <span class="btn-inner--text ml-0" i18n>Previous Step</span>
             </button>
       </div>
-      <div>
+      <div class="col-3 d-flex justify-content-center">
           <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" [disabled]="stepToggleId == stepNames.length-1" (click)="onNext()">
               <span class="btn-inner--icon">
                   <i style="font-size: 30px;" class="fas fa-step-forward"></i></span> <br>
               <span class="btn-inner--text ml-0" i18n>Next step</span>
             </button>
       </div>
+      <div class="col-3 d-flex justify-content-center" *ngIf="stepToggleId == stepNames.length-1">
+        <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onExit()">
+            <span class="btn-inner--icon">
+                <i style="font-size: 30px;" class="fas fa-check-circle"></i></span> <br>
+            <span class="btn-inner--text ml-0" i18n>Finish</span>
+          </button>
+    </div>
       <div>
       </div>
   </div>

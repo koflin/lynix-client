@@ -23,7 +23,7 @@
                         <p><small class="text-muted col-12" i18n>Add main tasks</small> </p>
                     </div>
                     <div class="table-responsive">
-                      <div class="table align-items-center table-flush">
+                      <table class="table align-items-center table-flush">
                         <thead class=" thead-light">
                             <tr>
                                 <th scope="col" i18n>Tasks & Challenges</th>
@@ -46,7 +46,7 @@
                             <tr>
                                 <td scope="row">
                                     <div class="pt-3">
-                                        <app-text-field inputPlaceholder="tasks & challenges" i18n-inputPlaceholder [(result)]="taskToAdd" [inputRequired]="false"> </app-text-field>
+                                        <app-text-field inputPlaceholder="tasks & challenges" i18n-inputPlaceholder [(result)]="taskToAdd" [inputRequired]="false" (inputConfirm)="addTask()"> </app-text-field>
                                     </div>
                                 </td>
                                 <td scope="row">
@@ -57,7 +57,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                      </div>
+                      </table>
                     </div>
 
                 </accordion-group>

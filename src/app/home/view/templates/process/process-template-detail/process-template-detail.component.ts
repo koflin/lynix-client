@@ -24,6 +24,8 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
   isEdited = false;
   stepToggleId: number;
 
+  returnUrl: string = '/templates/process';
+
   get stepsName() {
     return this.processTemplate.steps.map(step => step.title);
   }
@@ -46,6 +48,16 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
     this.route.paramMap.subscribe((params) => {
       this.processId = params.get('id');
       this.refresh();
+    });
+
+    this.route.queryParamMap.subscribe((query) => {
+      if (query && query.get('return')) {
+        const returnType = query.get('return');
+
+        if (returnType === 'manual') {
+          this.returnUrl = '/manuals/overview';
+        }
+      }
     });
 
     this.route.fragment.subscribe((fragment) => {
@@ -95,7 +107,7 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
 
     let breadCrumb = [{
       name: $localize `Process Templates`,
-      url: "/templates/process"
+      url: this.returnUrl
     }, {
       name:(this.processTemplate?.id) ? this.processTemplate.name : $localize `New`,
       url: this.getBaseUrl()
@@ -160,7 +172,7 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
   }
 
   cancle() {
-    this.router.navigate(['templates/process']);
+    this.router.navigate([this.returnUrl]);
   }
 
   specificDeleteData(): deletingDataInformation{
@@ -207,6 +219,6 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
   }
 
   deleteProcess() {
-    this.processTemplateService.delete(this.processId).subscribe(() => this.router.navigate(['templates/process']));
+    this.processTemplateService.delete(this.processId).subscribe(() => this.router.navigate([this.returnUrl]));
   }
 }

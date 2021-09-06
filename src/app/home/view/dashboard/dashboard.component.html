@@ -230,7 +230,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                     <div class=" d-flex justify-content-between">
                       <ul class="list-group container-fluid pl-0 pr-0">
                         <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/manuals/overview'" [hideIfUnauthorized]="permissions.MANUAL_VIEW"><span i18n>Overview</span><i class="fas fa-angle-right text-default"></i></li>
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/templates/process/new'" [hideIfUnauthorized]="permissions.TEMPLATE_EDIT"><span i18n>Create New</span><i class="fas fa-angle-right text-default"></i></li>
+                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/templates/process/new'" [queryParams]="{ return: 'manual' }" [hideIfUnauthorized]="permissions.TEMPLATE_EDIT"><span i18n>Create New</span><i class="fas fa-angle-right text-default"></i></li>
 
                       </ul>
                     </div>

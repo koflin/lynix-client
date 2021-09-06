@@ -252,8 +252,6 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
       let parts = this.indicesPipe.transform(fragment);
       parts.push(...new Array<number>(3 - parts.length));
 
-      console.log(parts);
-
       this.productToggleId = parts[0];
 
       this.processToggleId = parts[1];

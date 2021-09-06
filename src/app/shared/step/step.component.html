@@ -104,7 +104,7 @@
                                     <tr>
                                         <td scope="row">
                                             <div class="pt-0">
-                                                <app-text-field inputPlaceholder="material" i18n-inputPlaceholder [(result)]="materialToAdd"> </app-text-field>
+                                                <app-text-field inputPlaceholder="material" i18n-inputPlaceholder [(result)]="materialToAdd" (inputConfirm)="addMaterial()"> </app-text-field>
                                             </div>
                                         </td>
                                         <td class="pt-0">
@@ -165,7 +165,7 @@
                                     <tr>
                                         <td scope="row">
                                             <div class="pt-0">
-                                                <app-text-field inputPlaceholder="tool" i18n-inputPlaceholder [(result)]="toolToAdd"> </app-text-field>
+                                                <app-text-field inputPlaceholder="tool" i18n-inputPlaceholder [(result)]="toolToAdd" (inputConfirm)="addTool()"> </app-text-field>
                                             </div>
                                         </td>
                                         <td class="pt-0">

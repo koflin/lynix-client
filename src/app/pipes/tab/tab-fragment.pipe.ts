@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TabFragmentPipe implements PipeTransform {
 
   transform(tabIndices: number[]): string {
-    return tabIndices.join('.');
+    return tabIndices.filter(o => o != undefined && o != null).join('.');
   }
 
 }
