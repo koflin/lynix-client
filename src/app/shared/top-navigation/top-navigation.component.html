@@ -45,7 +45,7 @@
 
               </li>
 
-              <li class="nav-item dropdown card menu-card-bottom-margin zooming ">
+              <li class="nav-item dropdown card menu-card-bottom-margin zooming " *ngIf="false">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('order')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
                     <i class="icon icon-hierarchy-56 icon-big item-icon mt--1"></i> <span i18n>Order</span>
@@ -57,7 +57,7 @@
 
                 </div>
               </li>
-              <li class="nav-item dropdown card menu-card-bottom-margin zooming ">
+              <li class="nav-item dropdown card menu-card-bottom-margin zooming " *ngIf="false">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('process')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
                     <i class="icon icon-configuration-tool icon-big item-icon mt--1"></i> <span i18n>Process</span>
@@ -67,7 +67,7 @@
                 <a class="dropdown-item h4 zooming" routerLink="/processes/overview" [hideIfUnauthorized]="permissions.PROCESS_VIEW"  i18n>Overview</a>
 
                 </div>
-              </li><li class="nav-item dropdown card menu-card-bottom-margin zooming " [hideIfUnauthorized]="permissions.TEMPLATE_VIEW">
+              </li><li class="nav-item dropdown card menu-card-bottom-margin zooming " *ngIf="false" [hideIfUnauthorized]="permissions.TEMPLATE_VIEW">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('template')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
                     <i class="icon icon-web-design-2 icon-big item-icon mt--1"></i> <span i18n>Template</span>
@@ -106,7 +106,7 @@
 
                 </div>
               </li>
-              <li class="nav-item dropdown card menu-card-bottom-margin zooming " [hideIfUnauthorized]="permissions.STATISTIC_VIEW">
+              <li class="nav-item dropdown card menu-card-bottom-margin zooming " *ngIf="false" [hideIfUnauthorized]="permissions.STATISTIC_VIEW">
                 <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('statistics')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
                     <i class="icon icon-folder-shared icon-big item-icon mt--1"></i> <span i18n>Statistics</span>
