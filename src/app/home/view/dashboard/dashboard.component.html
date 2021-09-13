@@ -130,7 +130,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
 
 <div class="container-fluid pt-3">
   <div class="row">
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6" *ngIf="false">
+    <div class="col-12 col-xl-4 col-md-6 col-sm-6">
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/order.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
@@ -158,7 +158,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
       </div>
     </div>
 
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6" *ngIf="false">
+    <div class="col-12 col-xl-4 col-md-6 col-sm-6">
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/process.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
@@ -183,7 +183,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
         </div>
       </div>
     </div>
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.TEMPLATE_VIEW" *ngIf="false">
+    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.TEMPLATE_VIEW">
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/template.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
@@ -202,7 +202,6 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                       <ul class="list-group container-fluid pl-0 pr-0">
                         <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/templates/product'"><span i18n>Product</span><i class="fas fa-angle-right text-default"></i></li>
                         <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/templates/process'"><span i18n>Process</span><i class="fas fa-angle-right text-default"></i></li>
-                        <!--<li class="list-group-item zooming d-flex justify-content-between"><span>Tools</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>-->
 
                       </ul>
                     </div>
@@ -267,7 +266,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
         </div>
       </div>
     </div>
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.STATISTIC_VIEW" *ngIf="false">
+    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.STATISTIC_VIEW">
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
         <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center center;" >
             <span class="mask bg-gradient-default opacity-8"> </span>
