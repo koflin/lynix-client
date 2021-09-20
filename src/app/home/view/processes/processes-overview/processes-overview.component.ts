@@ -7,6 +7,7 @@ import { EventsService } from 'src/app/core/events/events.service';
 import { ProcessesService } from 'src/app/core/processes/processes.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { UsersService } from 'src/app/core/users/users.service';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { Event } from 'src/app/models/event';
 import { LocalUser } from 'src/app/models/localUser';
 import { Permission } from 'src/app/models/role';
@@ -25,7 +26,7 @@ import { ProcessesOverviewService } from '../processes-overview.service';
 export class ProcessesOverviewComponent implements OnInit {
   permissions = Permission;
 
-  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Processes`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Processes`, url: new RouteInfo(this.router.url) },];
   nodesAreEmpty:boolean = undefined;
   loaded = false;
   windowWidth:number

@@ -7,6 +7,7 @@ import { ActivationService } from 'src/app/core/activation/activation.service';
 import { MediaService } from 'src/app/core/media/media.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { UsersService } from 'src/app/core/users/users.service';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { Activation } from 'src/app/models/activation';
 import { Role } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
@@ -202,8 +203,8 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
       }
     }
     this.orginalUserDetail = _.cloneDeep(this.userDetail)
-    this.breadCrumbs = [{name:"Users Overview", url: "/users" },
-      {name:(this.userDetail.id)? this.userDetail.displayName : 'New', url:this.router.url}]
+    this.breadCrumbs = [{name:"Users Overview", url: new RouteInfo("/users") },
+      {name:(this.userDetail.id)? this.userDetail.displayName : 'New', url: new RouteInfo(this.router.url) }]
 
 
     this.availableRoles = await this.rolesService.getAll().toPromise();

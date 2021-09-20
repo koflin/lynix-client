@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
       }
 
       // Check if permissions match
-      if (requiredPermissions && !this.authService.hasPermissions(...requiredPermissions)) {
+      if (requiredPermissions && !this.authService.hasPermissions(requiredPermissions)) {
         resolve(false);
       }
 

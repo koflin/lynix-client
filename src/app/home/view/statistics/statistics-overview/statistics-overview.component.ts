@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 
 @Component({
@@ -10,7 +11,7 @@ import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 })
 export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
 
-  breadCrumbs: BreadCrumbInfo[]=[{ name: $localize `Statistics Overview`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{ name: $localize `Statistics Overview`, url: new RouteInfo(this.router.url) },];
   stats: any = {};
   users = [
     { name: "Colin Pfingstl", status: "Online", role: "Developer" },

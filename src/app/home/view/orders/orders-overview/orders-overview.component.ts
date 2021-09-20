@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrdersService } from 'src/app/core/orders/orders.service';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { Permission } from 'src/app/models/role';
 import { OrderNode } from 'src/app/models/ui';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
@@ -18,7 +19,7 @@ export class OrdersOverviewComponent implements OnInit {
   permissions = Permission;
 
   orderNodes: OrderNode[];
-  breadCrumbs: BreadCrumbInfo[]=[{ name: $localize `Orders`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{ name: $localize `Orders`, url: new RouteInfo(this.router.url) },];
   entries: number = 10;
   temp: OrderNode[] = [];
   rows: any[] = []

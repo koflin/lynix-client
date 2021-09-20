@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CookieModule } from 'ngx-cookie';
 
 import { HasUnsavedDataGuard } from '../core/guard/has-unsaved-data.guard';
+import { PluckPipe } from '../pipes/pluck/pluck.pipe';
 import { StatusPipe } from '../pipes/status/status.pipe';
 import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
@@ -54,6 +55,7 @@ import { UsersOverviewComponent } from './view/users/users-overview/users-overvi
     StatisticsOverviewComponent,
     ManualsOverviewComponent,
     ManualDetailComponent,
+    PluckPipe
   ],
   imports: [
     HomeRoutingModule,

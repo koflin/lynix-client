@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { Permission } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { ProductTemplateNode } from 'src/app/models/ui/productTemplateNode';
@@ -17,7 +18,7 @@ export class ProductTemplateLibraryComponent implements OnInit {
   templates: ProductTemplateNode[];
   windowWidth:number
   @ViewChild('myTable') table: any;
-  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Product Templates`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Product Templates`, url: new RouteInfo(this.router.url) },];
 
   permissions = Permission;
 

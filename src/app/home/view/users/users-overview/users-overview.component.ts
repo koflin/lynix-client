@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/core/users/users.service';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { Permission } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { UserRowNode } from 'src/app/models/ui/userRowNode';
@@ -18,7 +19,7 @@ export class UsersOverviewComponent implements OnInit {
 
   entries: number = 10;
   searchValue:string= ""
-  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Users`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Users`, url: new RouteInfo(this.router.url) },];
   userRows: UserRowNode[];
   options = {
     valueNames: [ 'user-name', 'name' ]
