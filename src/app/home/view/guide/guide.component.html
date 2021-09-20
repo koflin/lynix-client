@@ -231,7 +231,7 @@
                 <span class="btn-inner--text ml-0" i18n>Next step</span>
               </button>
         </div>
-        <div class="col-3 d-flex justify-content-center" *ngIf="process.isRunning">
+        <div class="col-3 d-flex justify-content-center" *ngIf="process.isRunning && process.currentStepIndex + 1 === stepToggleId">
           <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onStop()">
               <span class="btn-inner--icon">
                   <i style="font-size: 30px;" class="fas fa-pause"></i></span> <br>

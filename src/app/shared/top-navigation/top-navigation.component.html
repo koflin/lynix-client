@@ -2,8 +2,8 @@
 <nav class="navbar navbar-expand-lg sticky desktop_nav navigation_bar">
   <div class="d-flex justify-content-between" style="width: 100%;">
     <a class="navbar-brand mr-5" routerLink="/dashboard"><img style="object-fit: scale-down;" src="assets/img/Logo_Lynix_RGB.svg"></a>
-    <div>
-      <img *ngIf="user && user.companyLogo" style="height: 80%;" [src]="user.companyLogo">
+    <div class="d-none d-lg-block">
+      <img *ngIf="user && user.companyLogo" style="height: 40px;" [src]="user.companyLogo">
     </div>
 
     <p class="d-none d-lg-block text-default" style="padding-top:10px"> SMART ASSISTANT SYSTEM </p>
