@@ -41,85 +41,17 @@
                     <i class="icon icon-log-out icon-big item-icon mt--1"></i><span i18n>Logout</span>
                   </div>
                 </a>
-
-
               </li>
-
-              <li class="nav-item dropdown card menu-card-bottom-margin zooming ">
-                <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('order')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <li *ngFor="let group of menu" class="nav-item dropdown card menu-card-bottom-margin zooming ">
+                <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive(group.name)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
-                    <i class="icon icon-hierarchy-56 icon-big item-icon mt--1"></i> <span i18n>Order</span>
+                    <i class="icon icon-big item-icon mt--1 {{ group.icon }}"></i> <span i18n>{{ group.name }}</span>
                   </div>
                 </a>
-                <div class="dropdown-menu" [class.show]="isActive('order')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/orders/overview" [hideIfUnauthorized]="permissions.ORDER_VIEW" i18n>Overview</a>
-                <a class="dropdown-item h4 zooming" routerLink="/orders/draft" [hideIfUnauthorized]="permissions.ORDER_EDIT" i18n>Create New</a>
-
+                <div class="dropdown-menu" [class.show]="isActive(group.name)" aria-labelledby="navbarDropdownMenuLink">
+                  <a *ngFor="let item of group.items" class="dropdown-item h4 zooming" [routerLink]="item.route" [queryParams]="item.return ? { return: item.return } : undefined" [hideIfUnauthorized]="item.neededPermissions" i18n>{{ item.name }}</a>
                 </div>
               </li>
-              <li class="nav-item dropdown card menu-card-bottom-margin zooming ">
-                <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('process')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <div class="d-flex align-items-center">
-                    <i class="icon icon-configuration-tool icon-big item-icon mt--1"></i> <span i18n>Process</span>
-                  </div>
-                </a>
-                <div class="dropdown-menu" [class.show]="isActive('process')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/processes/overview" [hideIfUnauthorized]="permissions.PROCESS_VIEW"  i18n>Overview</a>
-
-                </div>
-              </li><li class="nav-item dropdown card menu-card-bottom-margin zooming " [hideIfUnauthorized]="permissions.TEMPLATE_VIEW">
-                <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('template')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <div class="d-flex align-items-center">
-                    <i class="icon icon-web-design-2 icon-big item-icon mt--1"></i> <span i18n>Template</span>
-                  </div>
-                </a>
-                <div class="dropdown-menu" [class.show]="isActive('template')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/templates/product" i18n>Product</a>
-                <a class="dropdown-item h4 zooming" routerLink="/templates/process" i18n>Process</a>
-                <!--<a class="dropdown-item h4 zooming" i18n>Tools</a>-->
-
-
-                </div>
-              </li><li class="nav-item dropdown card menu-card-bottom-margin zooming " [hideIfUnauthorized]="permissions.MANUAL_VIEW">
-                <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('manual')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <div class="d-flex align-items-center">
-                    <i class="icon icon-web-design-2 icon-big item-icon mt--1"></i> <span i18n>Manual</span>
-                  </div>
-                </a>
-                <div class="dropdown-menu" [class.show]="isActive('manual')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/manuals/overview" [hideIfUnauthorized]="permissions.MANUAL_VIEW" i18n>Overview</a>
-                <a class="dropdown-item h4 zooming" routerLink="/templates/process/new" [hideIfUnauthorized]="permissions.TEMPLATE_EDIT" i18n>Create New</a>
-                <!--<a class="dropdown-item h4 zooming" i18n>Tools</a>-->
-
-
-                </div>
-              </li><li class="nav-item dropdown card menu-card-bottom-margin zooming ">
-                <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('admin')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <div class="d-flex align-items-center">
-                    <i class="icon icon-folder-shared icon-big item-icon mt--1"></i> <span i18n>Administration</span>
-                  </div>
-
-                </a>
-                <div class="dropdown-menu" [class.show]="isActive('admin')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/users" [hideIfUnauthorized]="permissions.USER_VIEW" i18n>Users</a>
-                <a class="dropdown-item h4 zooming" routerLink="/roles" [hideIfUnauthorized]="permissions.ROLE_VIEW" i18n>Roles</a>
-
-                </div>
-              </li>
-              <li class="nav-item dropdown card menu-card-bottom-margin zooming " [hideIfUnauthorized]="permissions.STATISTIC_VIEW">
-                <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive('statistics')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <div class="d-flex align-items-center">
-                    <i class="icon icon-folder-shared icon-big item-icon mt--1"></i> <span i18n>Statistics</span>
-                  </div>
-
-                </a>
-                <div class="dropdown-menu" [class.show]="isActive('statistics')" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item h4 zooming" routerLink="/statistics/overview" i18n>Overview</a>
-
-                </div>
-              </li>
-
-
               </ul>
         </nav>
         <div class="col-12 pl-4 mt-3">

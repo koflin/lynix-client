@@ -76,7 +76,7 @@ export class AuthService {
     return null;
   }
 
-  hasPermissions(...requiredPermissions: (Permission | Permission[])[]) {
+  hasPermissions(requiredPermissions: Permission | (Permission | Permission[])[]) {
 
     const localUser = this.localUser.value;
 
@@ -86,6 +86,10 @@ export class AuthService {
 
     if (!requiredPermissions) {
       return true;
+    }
+
+    if (!Array.isArray(requiredPermissions)) {
+      requiredPermissions = [requiredPermissions];
     }
 
     return requiredPermissions.some((permission) => {

@@ -6,6 +6,7 @@ import { EventsService } from 'src/app/core/events/events.service';
 import { OrdersService } from 'src/app/core/orders/orders.service';
 import { ProcessesService } from 'src/app/core/processes/processes.service';
 import { UsersService } from 'src/app/core/users/users.service';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { Event } from 'src/app/models/event';
 import { Order } from 'src/app/models/order';
 import { Process } from 'src/app/models/process';
@@ -122,7 +123,7 @@ export class GuideComponent implements OnInit, OnDestroy {
 
       this.assignee = await this.usersService.getById(this.process.assignedUserId).toPromise();
 
-      this.breadCrumbs=[{name: $localize `Processes`, url: "/processes/overview" }, {name: this.process.name , url: this.router.url},];
+      this.breadCrumbs=[{name: $localize `Processes`, url: new RouteInfo("/processes/overview") }, {name: this.process.name , url: new RouteInfo(this.router.url) },];
       this.stepNames = this.process.steps.map((s)=>{
         return s.title
       })

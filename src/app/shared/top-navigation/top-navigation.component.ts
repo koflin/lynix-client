@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UsersService } from 'src/app/core/users/users.service';
+import { DashboardService } from 'src/app/home/view/dashboard/dashboard.service';
 import { Permission } from 'src/app/models/role';
+import { MenuGroup } from 'src/app/models/ui/menuGroup';
 import { User } from 'src/app/models/user';
 import { environment } from 'src/environments/environment';
 
@@ -27,10 +29,13 @@ export class TopNavigationComponent implements OnInit {
 
   permissions = Permission;
 
+  menu: MenuGroup[];
+
   constructor(
     private router: Router,
     private usersService: UsersService,
-    private authService: AuthService){
+    private authService: AuthService,
+    private dashboardService: DashboardService){
   }
   ngOnInit(): void {
     this.authService.onLocalUserChange.subscribe(localUser => {
@@ -46,6 +51,8 @@ export class TopNavigationComponent implements OnInit {
         }
       }
     });
+
+    this.dashboardService.getMenu().then(menu => this.menu = menu);
   }
 
 
@@ -75,6 +82,10 @@ export class TopNavigationComponent implements OnInit {
     } else {
       this.activeItem = menuItem
     }
+  }
+
+  getGroupPermissions(group: MenuGroup): (Permission | Permission[])[] {
+    return group.items.map(item => item.neededPermissions);
   }
 
 }

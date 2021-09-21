@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventsService } from 'src/app/core/events/events.service';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 
 @Component({
@@ -9,7 +10,7 @@ import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
   styleUrls: ['./testing.component.scss']
 })
 export class TestingComponent implements OnInit {
-  breadCrumbs: BreadCrumbInfo[]=[{name: "Test", url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: "Test", url: new RouteInfo(this.router.url) },];
 
   count = 0;
 

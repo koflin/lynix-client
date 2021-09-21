@@ -2,6 +2,7 @@ import { animate, group, query, style, transition, trigger } from '@angular/anim
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { ProcessTemplate } from 'src/app/models/processTemplate';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 
@@ -82,7 +83,10 @@ export class ManualDetailComponent implements OnInit {
     this.processTemplateService.getById(this.id).subscribe(async (process) => {
       this.processTemplate = process;
 
-      this.breadCrumbs=[{name: $localize `Process Manuals`, url: "/manuals/overview" }, {name: this.processTemplate.name , url: this.router.url},];
+      this.breadCrumbs=[
+        {name: $localize `Process Manuals`, url: new RouteInfo("/manuals/overview") },
+        {name: this.processTemplate.name , url: new RouteInfo(this.router.url) }
+      ];
 
       this.stepNames = this.processTemplate.steps.map((s)=>{
         return s.title

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Permission } from 'src/app/models/role';
 import { DashboardStats } from 'src/app/models/ui/dashboardStats';
 
+import { MenuGroup } from './../../../models/ui/menuGroup';
 import { DashboardService } from './dashboard.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { DashboardService } from './dashboard.service';
 export class DashboardComponent implements OnInit {
 
   stats: DashboardStats;
-  permissions = Permission;
+  menu: MenuGroup[];
 
   constructor(
     private dashboardService: DashboardService
@@ -21,6 +22,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.dashboardService.onUpdate.subscribe((stats) => this.stats = stats);
+    this.dashboardService.getMenu().then((menu) => this.menu = menu);
   }
 
+  getGroupPermissions(group: MenuGroup): (Permission | Permission[])[] {
+    return group.items.map(item => item.neededPermissions);
+  }
 }

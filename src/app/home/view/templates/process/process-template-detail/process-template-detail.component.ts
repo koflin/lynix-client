@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { ProcessTemplate } from 'src/app/models/processTemplate';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
-import { deletingDataInformation } from 'src/app/models/ui/deletingData';
+import { ComponentInfo } from 'src/app/models/ui/componentInfo';
+import { ComponentType } from 'src/app/models/ui/componentType';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
 import { TabFragmentPipe } from 'src/app/pipes/tab/tab-fragment.pipe';
 import { TabIndicesPipe } from 'src/app/pipes/tab/tab-indices.pipe';
@@ -20,19 +22,17 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
 
   processId: string;
   processTemplate: ProcessTemplate;
+
   breadCrumbs: BreadCrumbInfo[];
+
   isEdited = false;
-  stepToggleId: number;
+  stepToggleIndex: number;
+
+  currentComponent: ComponentInfo;
 
   returnUrl: string = '/templates/process';
 
-  get stepsName() {
-    return this.processTemplate.steps.map(step => step.title);
-  }
-
-  private getBaseUrl() {
-    return '/templates/process/' + this.processId;
-  }
+  ComponentType = ComponentType;
 
   constructor(
     private router: Router,
@@ -42,6 +42,7 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
     private toastr: ToastrService,
     private indiciesPipe: TabIndicesPipe,
     private fragPipe: TabFragmentPipe,
+    private cref: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -59,28 +60,10 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
         }
       }
     });
-
-    this.route.fragment.subscribe((fragment) => {
-      this.stepToggleId = undefined;
-
-      if (fragment) {
-        const tabs = this.indiciesPipe.transform(fragment);
-
-        if (tabs.length >= 1) {
-          this.stepToggleId = tabs[0];
-        }
-      }
-
-      this.updateBreadCrumb();
-    });
   }
 
   hasUnsavedData(): boolean {
     return this.isEdited;
-  }
-
-  detectChange() {
-    this.isEdited = true;
   }
 
   async refresh() {
@@ -96,38 +79,24 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
         previousComments: []
       };
     }
-
-    this.updateBreadCrumb();
   }
 
-  updateBreadCrumb() {
+  updateBreadCrumb(subBreadcrumbs: BreadCrumbInfo[]) {
     if (!this.processTemplate) {
       return;
     }
 
-    let breadCrumb = [{
+    this.breadCrumbs = [{
       name: $localize `Process Templates`,
-      url: this.returnUrl
-    }, {
-      name:(this.processTemplate?.id) ? this.processTemplate.name : $localize `New`,
-      url: this.getBaseUrl()
-    }];
+      url: new RouteInfo(this.returnUrl)
+    }, ...subBreadcrumbs];
 
-    if (this.stepToggleId != undefined) {
-      breadCrumb.push({
-        name: this.stepsName[this.stepToggleId],
-        url: this.getBaseUrl() + '#' + this.fragPipe.transform([this.stepToggleId])
-      });
-    }
-
-    this.breadCrumbs = breadCrumb;
+    this.cref.detectChanges();
   }
 
   deleteModal(){
-    let data: deletingDataInformation = this.specificDeleteData()
-
     swal.fire({
-      title: $localize `Are you sure to delete ${data.tabContainerDisplayname} '${data.tabName}'?`,
+      title: $localize `Are you sure to delete ${this.currentComponent.typeDisplayname} '${this.currentComponent.name}'?`,
       text: $localize `You won't be able to revert this!`,
       type: 'warning',
       showCancelButton: true,
@@ -138,7 +107,7 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
       cancelButtonText: $localize `Cancel`
     }).then((result) => {
       if (result.value) {
-          this.deleting(data)
+        this.deleting(this.currentComponent);
       }
     })
   }
@@ -175,46 +144,14 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
     this.router.navigate([this.returnUrl]);
   }
 
-  specificDeleteData(): deletingDataInformation{
-    let container= this.defContainer()
-    let deletingData:deletingDataInformation={'parentTabId':undefined,
-      'tabId': undefined, 'tabName': undefined, 'tabContainerName':undefined, 'tabContainerDisplayname':undefined}
-    switch (container) {
-      case 'step':
-        deletingData.parentTabId=0
-        deletingData.tabId=this.stepToggleId
-        deletingData.tabName= this.stepsName[this.stepToggleId]
-        deletingData.tabContainerName='step'
-        deletingData.tabContainerDisplayname= $localize `step`
-        break;
-      default:
-        deletingData.parentTabId=0
-        deletingData.tabId=0
-        deletingData.tabName= this.processTemplate.name
-        deletingData.tabContainerName='process'
-        deletingData.tabContainerDisplayname= $localize `process`
-        break;
-    }
-    return deletingData
-  }
-
-  deleting(data: deletingDataInformation){
-    switch (data.tabContainerName ) {
-
-      case 'step':
-        this.processTemplate.steps.splice(data.tabId, 1)
+  deleting(data: ComponentInfo){
+    switch (data.type ) {
+      case ComponentType.step:
+        this.processTemplate.steps.splice(data.index, 1)
         break;
       default:
         this.deleteProcess()
         break;
-    }
-  }
-
-  defContainer(){
-    if (this.stepToggleId!=undefined) {
-      return 'step'
-    } else {
-      return 'process'
     }
   }
 
