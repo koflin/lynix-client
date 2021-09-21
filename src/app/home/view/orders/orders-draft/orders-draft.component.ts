@@ -9,6 +9,7 @@ import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { Order } from 'src/app/models/order';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { ComponentInfo } from 'src/app/models/ui/componentInfo';
+import { ComponentType } from 'src/app/models/ui/componentType';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
 import { TabFragmentPipe } from 'src/app/pipes/tab/tab-fragment.pipe';
 import { TabIndicesPipe } from 'src/app/pipes/tab/tab-indices.pipe';
@@ -32,6 +33,8 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   stepToggleIndex: number;
 
   currentComponent: ComponentInfo;
+
+  ComponentType = ComponentType;
 
   constructor(
     private router: Router,
@@ -230,13 +233,13 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
 
   deleting(data: ComponentInfo){
     switch (data.type ) {
-      case 'step':
+      case ComponentType.step:
         this.orderDraft.products[this.productToggleIndex].template.processes[this.processToggleIndex].template.steps.splice(data.index, 1)
         break;
-      case 'process':
+      case ComponentType.process:
         this.orderDraft.products[this.productToggleIndex].template.processes.splice(data.index, 1)
         break;
-      case 'product':
+      case ComponentType.product:
         this.orderDraft.products.splice(data.index, 1)
         break;
       default:

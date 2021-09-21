@@ -3,7 +3,7 @@
   <app-breadcrumb-header [breadCrumbs]=breadCrumbs></app-breadcrumb-header>
 </div>
 <div class=" container-fluid mt--7" *ngIf="productTemplate; else spinner">
-  <app-component-view [component]="productTemplate" [topType]="'product'" [(isEdited)]="isEdited"
+  <app-component-view [component]="productTemplate" [topType]="ComponentType.product" [(isEdited)]="isEdited"
     [(processToggleIndex)]="processToggleIndex" [(stepToggleIndex)]="stepToggleIndex" [(currentComponent)]="currentComponent"
     (breadcrumbsChange)="updateBreadCrumb($event)"></app-component-view>
 </div>

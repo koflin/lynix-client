@@ -8,6 +8,7 @@ import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { ProductTemplate } from 'src/app/models/productTemplate';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { ComponentInfo } from 'src/app/models/ui/componentInfo';
+import { ComponentType } from 'src/app/models/ui/componentType';
 import { TabFragmentPipe } from 'src/app/pipes/tab/tab-fragment.pipe';
 import { TabIndicesPipe } from 'src/app/pipes/tab/tab-indices.pipe';
 import swal from 'sweetalert2';
@@ -30,6 +31,8 @@ export class ProductTemplateDetailComponent implements OnInit {
   stepToggleIndex: number;
 
   currentComponent: ComponentInfo;
+
+  ComponentType = ComponentType;
 
   constructor(
     private router: Router,
@@ -176,10 +179,10 @@ export class ProductTemplateDetailComponent implements OnInit {
   deleting(data: ComponentInfo){
     switch (data.type ) {
 
-      case 'step':
+      case ComponentType.step:
         this.productTemplate.processes[this.processToggleIndex].template.steps.splice(data.index, 1)
         break;
-      case 'process':
+      case ComponentType.process:
         this.productTemplate.processes.splice(data.index, 1)
         break;
       default:

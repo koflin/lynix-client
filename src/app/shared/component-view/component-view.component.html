@@ -15,7 +15,7 @@
               <h2 class="text-default mb-0" i18n>Products:</h2> <!--<p class="pl-2 mb-0 text-muted" *ngIf="productsNames.length==0">None defined</p>-->
             </div>
             <div class="pl-2 col-11 col-xl-11 col-sm-10 pl-0 pr-0 z-index-1" style="display: inline;">
-              <app-tabs [tabsvalue]="productNames" [tabsResIndex]="productToggleIndex" [bgColorClassNotSelected]="'bg-default'" [setNotUndefined]="processToggleIndex!=undefined" [navFragmentBase]="[]"> </app-tabs>
+              <app-tabs [tabsvalue]="productNames" [tabsResIndex]="productToggleIndex" [bgColorClassNotSelected]="'bg-default'" [setNotUndefined]="processToggleIndex!=undefined" [navFragmentBase]="getFragment(undefined)"> </app-tabs>
             </div>
           </div>
         </div>
@@ -27,7 +27,7 @@
               <h3 class="text-default mb-0" i18n>Processes:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="processesNames.length==0">None defined</p>-->
             </div>
             <div class="pl-4 col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1">
-              <app-tabs [tabsvalue]="processNames" [tabsResIndex]="processToggleIndex" [setNotUndefined]="stepToggleIndex!=undefined" [navFragmentBase]="[productToggleIndex]"> </app-tabs>
+              <app-tabs [tabsvalue]="processNames" [tabsResIndex]="processToggleIndex" [setNotUndefined]="stepToggleIndex!=undefined" [navFragmentBase]="getFragment(ComponentType.product)"> </app-tabs>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
               <h3 class="text-default mb-0" i18n>Steps:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="stepsName.length==0">None defined</p>-->
             </div>
             <div class="pl-6 col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1">
-              <app-tabs [tabsvalue]="stepNames" [tabsResIndex]="stepToggleIndex" [navFragmentBase]="[productToggleIndex, processToggleIndex]" addable> </app-tabs>
+              <app-tabs [tabsvalue]="stepNames" [tabsResIndex]="stepToggleIndex" [navFragmentBase]="getFragment(ComponentType.process)" addable> </app-tabs>
             </div>
           </div>
         </div>
@@ -53,31 +53,31 @@
       </div>
   </div>
   <ng-container [ngSwitch]="getBottomType()">
-      <ng-container *ngSwitchCase="'step'">
+      <ng-container *ngSwitchCase="ComponentType.step">
           <div class=" col-12 mt--8 pt-2" [@animSlider]="stepToggleIndex">
             <div class=" card pb-8 pt-2  no-top-radius shadow-right">
-              <app-step [stepTemplate]="step" (stepTemplateChange)="detectChange()" navFragment="{{ [productToggleIndex, processToggleIndex, stepToggleIndex] | tabFragment }}"> </app-step>
+              <app-step [stepTemplate]="step" (stepTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.step) | tabFragment }}"> </app-step>
             </div>
           </div>
       </ng-container>
-      <ng-container *ngSwitchCase="'process'">
+      <ng-container *ngSwitchCase="ComponentType.process">
           <div class=" col-12 mt--8 pt-2" [@animSlider]="processToggleIndex">
             <div class=" card pb-8 pt-2  no-top-radius shadow-right">
-              <app-process [processTemplate]="process" (processTemplateChange)="detectChange()" navFragment="{{ [productToggleIndex, processToggleIndex] | tabFragment }}"></app-process>
+              <app-process [processTemplate]="process" (processTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.process) | tabFragment }}"></app-process>
             </div>
           </div>
       </ng-container>
-      <ng-container *ngSwitchCase="'product'">
+      <ng-container *ngSwitchCase="ComponentType.product">
           <div class=" col-12 mt--8 pt-2" [@animSlider]="productToggleIndex">
             <div class=" card pb-8 pt-2 no-top-radius shadow-right pl-3 pr-2">
-              <app-product [productTemplate]="product" (productTemplateChange)="detectChange()" navFragment="{{ [productToggleIndex] | tabFragment }}"> </app-product>
+              <app-product [productTemplate]="product" (productTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.product) | tabFragment }}"> </app-product>
             </div>
           </div>
       </ng-container>
       <ng-container *ngSwitchDefault>
           <div class=" col-12 mt--8 pt-2">
               <div class=" card pb-8 pt-2 pl-2 pr-2 no-top-radius shadow-right">
-                  <app-order [order]="order" (orderChange)="detectChange()" navFragment="{{ [] | tabFragment }}"> </app-order>
+                  <app-order [order]="order" (orderChange)="detectChange()" navFragment="{{ getFragment(undefined) | tabFragment }}"> </app-order>
               </div>
           </div>
       </ng-container>

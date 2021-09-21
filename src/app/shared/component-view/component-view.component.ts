@@ -50,7 +50,7 @@ const right = [
 export class ComponentViewComponent implements OnInit {
 
   @Input() component: any;
-  @Input() topType: Exclude<ComponentType, 'step'>;
+  @Input() topType: Exclude<ComponentType, ComponentType.step>;
 
   @Input() isEdited: boolean;
   @Output() isEditedChange = new EventEmitter<boolean>();
@@ -81,6 +81,9 @@ export class ComponentViewComponent implements OnInit {
   stepNames: string[];
 
   fragment: string;
+  fragmentParts: number[];
+
+  ComponentType = ComponentType;
 
   constructor(
     private route: ActivatedRoute,
@@ -93,16 +96,15 @@ export class ComponentViewComponent implements OnInit {
     this.route.fragment.subscribe((fragment) => {
       this.fragment = fragment;
 
-      let parts = this.indicesPipe.transform(fragment);
-      parts.push(...new Array<number>(3 - parts.length));
+      this.fragmentParts = [...new Array<number>(this.topType), ...this.indicesPipe.transform(fragment)];
 
-      this.productToggleIndex = parts[0];
+      this.productToggleIndex = this.fragmentParts[0];
       this.productToggleIndexChange.emit(this.productToggleIndex);
 
-      this.processToggleIndex = parts[1];
+      this.processToggleIndex = this.fragmentParts[1];
       this.processToggleIndexChange.emit(this.processToggleIndex);
 
-      this.stepToggleIndex = parts[2];
+      this.stepToggleIndex = this.fragmentParts[2];
       this.stepToggleIndexChange.emit(this.stepToggleIndex);
 
       this.updateComponents();
@@ -110,9 +112,9 @@ export class ComponentViewComponent implements OnInit {
   }
 
   updateComponents() {
-    this.order = this.topType === 'order' ? this.component : undefined;
-    this.product = this.topType === 'product' ? this.component : (this.productToggleIndex != undefined ? this.order.products[this.productToggleIndex].template : undefined);
-    this.process = this.topType === 'process' ? this.component : (this.processToggleIndex != undefined ? this.product.processes[this.processToggleIndex].template : undefined);
+    this.order = this.topType === ComponentType.order ? this.component : undefined;
+    this.product = this.topType === ComponentType.product ? this.component : (this.productToggleIndex != undefined ? this.order.products[this.productToggleIndex].template : undefined);
+    this.process = this.topType === ComponentType.process ? this.component : (this.processToggleIndex != undefined ? this.product.processes[this.processToggleIndex].template : undefined);
 
     if (this.process && this.stepToggleIndex >= this.process.steps.length) {
       this.addStep();
@@ -128,50 +130,46 @@ export class ComponentViewComponent implements OnInit {
     this.processNames = this.product?.processes?.map(process => process.template.name);
     this.stepNames = this.process?.steps?.map(step => step.title);
 
-    console.log(this.order);
-    console.log(this.product);
-    console.log(this.process);
-    console.log(this.step);
+    let bottomType = this.getBottomType();
 
-    console.log(this.productNames);
-    console.log(this.processNames);
-    console.log(this.stepNames);
-
-    switch(this.getBottomType()) {
-      case 'order':
+    switch(bottomType) {
+      case ComponentType.order:
         this.currentComponent = {
           name: this.order.name,
           index: undefined,
-          type: 'order',
+          type: bottomType,
           typeDisplayname: $localize `order`
         };
         break;
 
-      case 'product':
+      case ComponentType.product:
         this.currentComponent = {
           name: this.product.name,
           index: this.productToggleIndex,
-          type: 'product',
+          type: bottomType,
           typeDisplayname: $localize `product`
         };
         break;
 
-      case 'process':
+      case ComponentType.process:
         this.currentComponent = {
           name: this.process.name,
           index: this.processToggleIndex,
-          type: 'process',
+          type: bottomType,
           typeDisplayname: $localize `process`
         };
         break;
 
-      case 'step':
+      case ComponentType.step:
         this.currentComponent = {
           name: this.step.title,
           index: this.stepToggleIndex,
-          type: 'step',
+          type: bottomType,
           typeDisplayname: $localize `step`
         };
+        break;
+
+      default:
         break;
     }
 
@@ -204,16 +202,25 @@ export class ComponentViewComponent implements OnInit {
     this.breadcrumbsChange.emit(breadCrumbs);
   }
 
-  getBottomType() {
-    if (this.step) return 'step';
-    if (this.process) return 'process';
-    if (this.product) return 'product';
-    return 'order';
+  getBottomType(): ComponentType {
+    if (this.step) return ComponentType.step;
+    if (this.process) return ComponentType.process;
+    if (this.product) return ComponentType.product;
+    if (this.order) return ComponentType.order;
+    return undefined;
   }
 
   detectChange() {
     this.isEdited = true;
     this.isEditedChange.emit(this.isEdited);
+  }
+
+  getFragment(until: ComponentType) {
+    if (until === undefined) {
+      return [];
+    }
+
+    return [...this.fragmentParts].splice(this.topType.valueOf(), until.valueOf() - this.topType.valueOf());
   }
 
   addStep() {

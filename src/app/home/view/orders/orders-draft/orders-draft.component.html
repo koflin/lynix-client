@@ -3,7 +3,7 @@
     <app-breadcrumb-header [breadCrumbs]="breadCrumbs"></app-breadcrumb-header>
   </div>
 <div class=" container-fluid mt--7" *ngIf="orderDraft; else spinner">
-    <app-component-view [component]="orderDraft" [topType]="'order'" [(isEdited)]="isEdited" [(productToggleIndex)]="productToggleIndex"
+    <app-component-view [component]="orderDraft" [topType]="ComponentType.order" [(isEdited)]="isEdited" [(productToggleIndex)]="productToggleIndex"
     [(processToggleIndex)]="processToggleIndex" [(stepToggleIndex)]="stepToggleIndex" [(currentComponent)]="currentComponent"
     (breadcrumbsChange)="updateBreadCrumb($event)"></app-component-view>
 </div>
