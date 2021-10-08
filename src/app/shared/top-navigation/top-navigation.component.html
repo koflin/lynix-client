@@ -8,9 +8,14 @@
 
     <p class="d-none d-lg-block text-default" style="padding-top:10px"> SMART ASSISTANT SYSTEM </p>
 
-    <div class="navbar-toggle">
-      <div class="menu-icon-margin">
-          <i class="fas fa-bars" style="font-size: 36px;" (click)="openNavigation()"></i>
+    <div class="row">
+      <div class="col">
+        <app-language-select></app-language-select>
+      </div>
+      <div class="navbar-toggle col">
+        <div class="menu-icon-margin">
+            <i class="fas fa-bars" style="font-size: 36px;" (click)="openNavigation()"></i>
+        </div>
       </div>
     </div>
   </div>

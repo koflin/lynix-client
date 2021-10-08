@@ -1,0 +1,17 @@
+<div class="dropdown" dropdown>
+  <a href="javascript:void(0)" class="btn btn-default dropdown-toggle " id="dropdownMenuLink" data-toggle="dropdown">
+    {{ selectedLanguage | language }}
+  </a>
+  <ul  aria-labelledby="dropdownMenuLink" class="dropdown-menu">
+    <li>
+      <a class="dropdown-item" href="#" (click)="selectLanguage(Language.DE)">
+        Deutsch
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="#" (click)="selectLanguage(Language.EN)">
+        English
+      </a>
+    </li>
+  </ul>
+</div>

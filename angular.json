@@ -50,7 +50,9 @@
               "src/assets/scss/custom/_lynix_icon.css"
             ],
             "scripts": [
-              "node_modules/chart.js/dist/Chart.min.js"
+              "node_modules/chart.js/dist/Chart.min.js",
+              "node_modules/jquery/dist/jquery.slim.min.js",
+              "src/assets/js/bootstrap.bundle.min.js"
             ],
             "allowedCommonJsDependencies": [
               "lodash",

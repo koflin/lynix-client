@@ -14,6 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { HideIfUnauthorizedDirective } from '../auth/hide-if-unauthorized.directive';
 import { ShowIfUnauthorizedDirective } from '../auth/show-if-unauthorized.directive';
 import { DurationPipe } from '../pipes/duration/duration.pipe';
+import { LanguagePipe } from '../pipes/language/language.pipe';
 import { VideoTypePipe } from '../pipes/media-type/media-type.pipe';
 import { PermissionPipe } from '../pipes/permission/permission.pipe';
 import { StatusBadgePipe } from '../pipes/status/status-badge.pipe';
@@ -30,6 +31,7 @@ import { SingleDatePickerComponent } from './forms/single-date-picker/single-dat
 import { SingleMultipleChoiceComponent } from './forms/single-multiple-choice/single-multiple-choice.component';
 import { TextAreaComponent } from './forms/text-area/text-area.component';
 import { TextFieldComponent } from './forms/text-field/text-field.component';
+import { LanguageSelectComponent } from './language-select/language-select.component';
 import { OrderComponent } from './order/order.component';
 import { ProcessNodeComponent } from './process-node/process-node.component';
 import { ProcessComponent } from './process/process.component';
@@ -70,7 +72,9 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     TabIndicesPipe,
     PermissionPipe,
     StatusBadgePipe,
-    ComponentViewComponent
+    ComponentViewComponent,
+    LanguageSelectComponent,
+    LanguagePipe
      ],
   imports: [
     CommonModule,
@@ -127,6 +131,8 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     PermissionPipe,
     StatusBadgePipe,
     ComponentViewComponent,
+    LanguageSelectComponent,
+    LanguagePipe
   ]
 
 })
