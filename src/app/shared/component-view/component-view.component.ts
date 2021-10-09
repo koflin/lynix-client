@@ -213,6 +213,7 @@ export class ComponentViewComponent implements OnInit {
   detectChange() {
     this.isEdited = true;
     this.isEditedChange.emit(this.isEdited);
+    this.updateComponents();
   }
 
   getFragment(until: ComponentType) {
