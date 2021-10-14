@@ -57,63 +57,63 @@ export class DashboardService {
   async getMenu(): Promise<MenuGroup[]> {
     return <MenuGroup[]>[
       {
-        name: 'Order',
+        name: $localize `Order`,
         icon: 'icon-hierarchy-56',
         background: 'assets/img/theme/order.jpg',
         items: [
           {
-            name: 'Overview',
+            name: $localize `Overview`,
             route: '/orders/overview',
             neededPermissions: Permission.ORDER_VIEW
           },
           {
-            name: 'Create New',
+            name: $localize `Create New`,
             route: '/orders/draft',
             neededPermissions: Permission.ORDER_EDIT
           }
         ]
       },
       {
-        name: 'Process',
+        name: $localize `Process`,
         icon: 'icon-configuration-tool',
         background: 'assets/img/theme/process.jpg',
         items: [
           {
-            name: 'Overview',
+            name: $localize `Overview`,
             route: '/processes/overview',
             neededPermissions: Permission.PROCESS_VIEW
           }
         ]
       },
       {
-        name: 'Template',
+        name: $localize `Template`,
         icon: 'icon-web-design-2',
         background: 'assets/img/theme/template.jpg',
         items: [
           {
-            name: 'Product',
+            name: $localize `Product`,
             route: '/templates/product',
             neededPermissions: Permission.TEMPLATE_VIEW
           },
           {
-            name: 'Process',
+            name: $localize `Process`,
             route: '/templates/process',
             neededPermissions: Permission.TEMPLATE_VIEW
           }
         ]
       },
       {
-        name: 'Manual',
+        name: $localize `Manual`,
         icon: 'icon-web-design-2',
         background: 'assets/img/theme/template.jpg',
         items: [
           {
-            name: 'Overview',
+            name: $localize `Overview`,
             route: '/manuals/overview',
             neededPermissions: Permission.MANUAL_VIEW
           },
           {
-            name: 'Create New',
+            name: $localize `Create New`,
             route: '/templates/process/new',
             return: 'manual',
             neededPermissions: Permission.TEMPLATE_EDIT
@@ -121,29 +121,29 @@ export class DashboardService {
         ]
       },
       {
-        name: 'Administration',
+        name: $localize `Administration`,
         icon: 'icon-folder-shared',
         background: 'assets/img/theme/admin.jpg',
         items: [
           {
-            name: 'Users',
+            name: $localize `Users`,
             route: '/users',
             neededPermissions: Permission.USER_VIEW
           },
           {
-            name: 'Roles',
+            name: $localize `Roles`,
             route: '/roles',
             neededPermissions: Permission.ROLE_VIEW
           }
         ]
       },
       {
-        name: 'Statistics',
+        name: $localize `Statistics`,
         icon: 'icon-chemistry',
         background: 'assets/img/theme/profile-cover.jpg',
         items: [
           {
-            name: 'Overview',
+            name: $localize `Overview`,
             route: '/statistics/overview',
             neededPermissions: Permission.STATISTIC_VIEW
           }

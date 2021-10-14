@@ -7,19 +7,19 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/core/guard/has-unsaved-data.guard.ts</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">379</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">292</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/core/guard/has-unsaved-data.guard.ts</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">175</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">153</context></context-group></trans-unit>
       <trans-unit id="1420440660896866320" datatype="html">
         <source>Are you sure, you want to leave this page?</source><target state="final">Are you sure, you want to leave this page?</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/core/guard/has-unsaved-data.guard.ts</context><context context-type="linenumber">18</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">380</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">293</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/core/guard/has-unsaved-data.guard.ts</context><context context-type="linenumber">18</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">176</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">154</context></context-group></trans-unit>
       <trans-unit id="4898793840630668320" datatype="html">
         <source>Yes, cancel!</source><target state="final">Yes, cancel!</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/core/guard/has-unsaved-data.guard.ts</context><context context-type="linenumber">23</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">385</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">298</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/core/guard/has-unsaved-data.guard.ts</context><context context-type="linenumber">23</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">181</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">159</context></context-group></trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source><target state="final">Cancel</target>
         
@@ -35,7 +35,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/core/guard/has-unsaved-data.guard.ts</context><context context-type="linenumber">25</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">185</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">387</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">409</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">429</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.ts</context><context context-type="linenumber">115</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">138</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.ts</context><context context-type="linenumber">68</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">248</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">300</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.ts</context><context context-type="linenumber">74</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">230</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.ts</context><context context-type="linenumber">105</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/core/guard/has-unsaved-data.guard.ts</context><context context-type="linenumber">25</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">186</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">183</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">205</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">223</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.ts</context><context context-type="linenumber">116</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">107</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.ts</context><context context-type="linenumber">69</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">139</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">161</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.ts</context><context context-type="linenumber">75</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">231</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.ts</context><context context-type="linenumber">106</context></context-group></trans-unit>
       <trans-unit id="2ac17b27a06d9ff9fe468eb8c5c9e5e212d24fed" datatype="html">
         <source>Overall process</source><target state="final">Overall process</target>
         <context-group purpose="location">
@@ -92,62 +92,47 @@
           <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context>
           <context context-type="linenumber">105</context>
         </context-group>
-      </trans-unit>
-      <trans-unit id="5704ec2049d007c5f5fb495a5d8b607e68d58081" datatype="html">
+      </trans-unit><trans-unit id="78d5b199c38ff2d561fa06f37a5e1fc6c0bc49f0" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ group.name }}"/></source><target state="final"><x id="INTERPOLATION" equiv-text="{{ group.name }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit><trans-unit id="bae08f57b5a51b7e31c7d508a9517b52f7f7342c" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ item.name }}"/></source><target state="final"><x id="INTERPOLATION" equiv-text="{{ item.name }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">150</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit><trans-unit id="220550782947016929" datatype="html">
         <source>Order</source><target state="final">Order</target>
-        
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">138</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">51</context></context-group></trans-unit>
-      <trans-unit id="e95ae009d0bdb45fcc656e8b65248cf7396080d5" datatype="html">
-        <source>Overview</source><target state="final">Overview</target>
-        
-        
-        
-        
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">150</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">178</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">232</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">287</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">55</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">67</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">90</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">117</context></context-group></trans-unit>
-      <trans-unit id="fb8c3bdc1fa9d7ab1f70d4e9e57046cbf11b0401" datatype="html">
-        <source>Create New</source><target state="final">Create New</target>
-        
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">151</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">233</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">56</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">91</context></context-group></trans-unit>
-      <trans-unit id="6b6a341244987842b9a398da39530352bb9dab9f" datatype="html">
-        <source>Process</source><target state="final">Process</target>
-        
-        
-        
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">166</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">204</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">63</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">78</context></context-group></trans-unit>
-      <trans-unit id="467bff8643ae9525e0477374f132a6b19bedbfd5" datatype="html">
-        <source>Template</source><target state="final">Template</target>
-        
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">191</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">73</context></context-group></trans-unit>
-      <trans-unit id="d3cbff754f1c148f3fec696edd246993aea35b01" datatype="html">
-        <source>Product</source><target state="final">Product</target>
-        
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">203</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">77</context></context-group></trans-unit><trans-unit id="9d0ac9c23563b10fafabeedbf739e933b054d1c8" datatype="html">
-        <source>Manual</source><target state="final">Manual</target>
-        
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">220</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">86</context></context-group></trans-unit>
-      <trans-unit id="b7648e7aced164498aa843b5c4e8f2f1c36a7919" datatype="html">
-        <source>Administration</source><target state="final">Administration</target>
-        
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">248</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">99</context></context-group></trans-unit>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      
+      
+      
+      
+      
+      
+      
       <trans-unit id="4d13a9cd5ed3dcee0eab22cb25198d43886942be" datatype="html">
         <source>Users</source><target state="final">Users</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">260</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.html</context><context context-type="linenumber">18</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">104</context></context-group></trans-unit>
-      <trans-unit id="9610487cbeb5796d34d8601b5ac0c0a65f9e1d19" datatype="html">
-        <source>Roles</source><target state="final">Roles</target>
-        
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">261</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">105</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.html</context><context context-type="linenumber">18</context></context-group></trans-unit>
+      
       <trans-unit id="49e8977ccc2eb1acd62ced2d988707d61ed590c6" datatype="html">
         <source>Order:</source><target state="final">Order:</target>
         <context-group purpose="location">
@@ -275,44 +260,73 @@
       <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.html</context><context context-type="linenumber">231</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manual-detail/manual-detail.component.html</context><context context-type="linenumber">156</context></context-group></trans-unit>
       <trans-unit id="139651487721336451" datatype="html">
         <source>Processes</source><target state="final">Processes</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context>
-          <context context-type="linenumber">125</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.ts</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-      </trans-unit>
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">126</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.ts</context><context context-type="linenumber">29</context></context-group></trans-unit>
       <trans-unit id="2614607010577950577" datatype="html">
         <source>Overview</source><target state="final">Overview</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">129</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manual-detail/manual-detail.component.ts</context><context context-type="linenumber">90</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context><context context-type="linenumber">65</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context><context context-type="linenumber">82</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context><context context-type="linenumber">111</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context><context context-type="linenumber">146</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">130</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manual-detail/manual-detail.component.ts</context><context context-type="linenumber">94</context></context-group></trans-unit><trans-unit id="8446648227891361412" datatype="html">
+        <source>Create New</source><target state="final">Create New</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+      </trans-unit><trans-unit id="467152698327190533" datatype="html">
+        <source>Process</source><target state="final">Process</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+      </trans-unit><trans-unit id="5610425955750546094" datatype="html">
+        <source>Template</source><target state="final">Template</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit><trans-unit id="7616770651914901276" datatype="html">
+        <source>Product</source><target state="final">Product</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit><trans-unit id="2233560223291461480" datatype="html">
+        <source>Manual</source><target state="final">Manual</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+      </trans-unit><trans-unit id="7844706011418789951" datatype="html">
+        <source>Administration</source><target state="final">Administration</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="65984904390749158" datatype="html">
         <source>Finish</source><target state="final">Finish</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">130</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manual-detail/manual-detail.component.ts</context><context context-type="linenumber">91</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">131</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manual-detail/manual-detail.component.ts</context><context context-type="linenumber">95</context></context-group></trans-unit>
       <trans-unit id="3596999469695059491" datatype="html">
         <source>Steps not started</source><target state="final">Steps not started</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context>
-          <context context-type="linenumber">177</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">178</context></context-group></trans-unit>
       <trans-unit id="6278898165775718204" datatype="html">
         <source>Are you sure, you want to finish this process? Some steps haven't been started yet.</source><target state="final">Are you sure, you want to finish this process? Some steps haven't been started yet.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context>
-          <context context-type="linenumber">178</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">179</context></context-group></trans-unit>
       <trans-unit id="7755892718002611115" datatype="html">
         <source>Yes, finish!</source><target state="final">Yes, finish!</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context>
-          <context context-type="linenumber">183</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">184</context></context-group></trans-unit>
       <trans-unit id="4648900870671159218" datatype="html">
         <source>Success</source><target state="final">Success</target>
         
@@ -322,56 +336,32 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">195</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">319</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">347</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">157</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">175</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">124</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">169</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">196</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">126</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">154</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">126</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">95</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">125</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">170</context></context-group></trans-unit>
       <trans-unit id="340430316261570792" datatype="html">
         <source>Finished</source><target state="final">Finished</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context>
-          <context context-type="linenumber">195</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
-          <context context-type="linenumber">45</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
-          <context context-type="linenumber">84</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
-          <context context-type="linenumber">105</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
-          <context context-type="linenumber">144</context>
-        </context-group>
-      </trans-unit><trans-unit id="417702039522088464" datatype="html">
+        
+        
+        
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">196</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">46</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">85</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">106</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">145</context></context-group></trans-unit><trans-unit id="417702039522088464" datatype="html">
         <source>Process Manuals</source><target state="final">Process Manuals</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/manuals/manual-detail/manual-detail.component.ts</context>
-          <context context-type="linenumber">85</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/manuals/manuals-overview/manuals-overview.component.ts</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-      </trans-unit>
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manual-detail/manual-detail.component.ts</context><context context-type="linenumber">87</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manuals-overview/manuals-overview.component.ts</context><context context-type="linenumber">19</context></context-group></trans-unit>
       <trans-unit id="e6a6423fe24edfaa2d4d1620ee74343fcd47c076" datatype="html">
         <source>Products:</source><target state="final">Products:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/component-view/component-view.component.html</context><context context-type="linenumber">15</context></context-group></trans-unit>
       <trans-unit id="f3cbb98c624f08c6fa53e7733f2adc0ffa81136e" datatype="html">
         <source>Processes:</source><target state="final">Processes:</target>
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/component-view/component-view.component.html</context><context context-type="linenumber">27</context></context-group></trans-unit><trans-unit id="5827443239842051713" datatype="html">
+        <source>order</source><target state="final">order</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="sourcefile">src/app/shared/component-view/component-view.component.ts</context>
+          <context context-type="linenumber">141</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8fc5487bd87cf164dfd72489d6595d12713865f6" datatype="html">
@@ -381,115 +371,76 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manuals-overview/manuals-overview.component.html</context><context context-type="linenumber">89</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manuals-overview/manuals-overview.component.html</context><context context-type="linenumber">90</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.html</context><context context-type="linenumber">53</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.html</context><context context-type="linenumber">21</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.html</context><context context-type="linenumber">52</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.html</context><context context-type="linenumber">53</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.html</context><context context-type="linenumber">38</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manuals-overview/manuals-overview.component.html</context><context context-type="linenumber">89</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manuals-overview/manuals-overview.component.html</context><context context-type="linenumber">90</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.html</context><context context-type="linenumber">52</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.html</context><context context-type="linenumber">53</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/component-view/component-view.component.html</context><context context-type="linenumber">39</context></context-group></trans-unit>
       <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
         <source>Cancel</source><target state="final">Cancel</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.html</context>
-          <context context-type="linenumber">135</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.html</context>
-          <context context-type="linenumber">68</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.html</context>
-          <context context-type="linenumber">105</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.html</context>
-          <context context-type="linenumber">52</context>
-        </context-group>
-      </trans-unit>
+        
+        
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.html</context><context context-type="linenumber">18</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.html</context><context context-type="linenumber">18</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.html</context><context context-type="linenumber">18</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.html</context><context context-type="linenumber">52</context></context-group></trans-unit>
       <trans-unit id="52c9a103b812f258bcddc3d90a6e3f46871d25fe" datatype="html">
         <source>Save</source><target state="final">Save</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.html</context>
-          <context context-type="linenumber">141</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.html</context>
-          <context context-type="linenumber">74</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.html</context>
-          <context context-type="linenumber">111</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.html</context>
-          <context context-type="linenumber">58</context>
-        </context-group>
-      </trans-unit>
+        
+        
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.html</context><context context-type="linenumber">24</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.html</context><context context-type="linenumber">24</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.html</context><context context-type="linenumber">24</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.html</context><context context-type="linenumber">58</context></context-group></trans-unit>
       <trans-unit id="223aae0477f79f0bc4436c1c57619415f04cbbb3" datatype="html">
         <source>Publish</source><target state="final">Publish</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.html</context>
-          <context context-type="linenumber">147</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.html</context><context context-type="linenumber">30</context></context-group></trans-unit>
       <trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
         <source>Delete</source><target state="final">Delete</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.html</context>
-          <context context-type="linenumber">153</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.html</context>
-          <context context-type="linenumber">80</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.html</context>
-          <context context-type="linenumber">117</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.html</context>
-          <context context-type="linenumber">65</context>
-        </context-group>
-      </trans-unit>
+        
+        
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.html</context><context context-type="linenumber">36</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.html</context><context context-type="linenumber">30</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.html</context><context context-type="linenumber">30</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.html</context><context context-type="linenumber">65</context></context-group></trans-unit>
       <trans-unit id="6575195871133210332" datatype="html">
         <source>Orders</source><target state="final">Orders</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">186</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.ts</context><context context-type="linenumber">21</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">55</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.ts</context><context context-type="linenumber">22</context></context-group></trans-unit>
       <trans-unit id="5280218112746407598" datatype="html">
         <source>New</source><target state="final">New</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">189</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">112</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">205</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">58</context></context-group></trans-unit>
       <trans-unit id="9050851721740039731" datatype="html">
         <source>Unnamed Order</source><target state="final">Unnamed Order</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">239</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">79</context></context-group></trans-unit>
       <trans-unit id="6333335057236774263" datatype="html">
         <source>Saved</source><target state="final">Saved</target>
         
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">319</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">157</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">175</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">124</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">126</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">126</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">95</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">125</context></context-group></trans-unit>
       <trans-unit id="4058575476871566236" datatype="html">
         <source>Published</source><target state="final">Published</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">347</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">154</context></context-group></trans-unit>
       <trans-unit id="7515883357904500238" datatype="html">
         <source>Are you sure?</source><target state="final">Are you sure?</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">401</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">197</context></context-group></trans-unit>
       <trans-unit id="2442684248379706708" datatype="html">
         <source>You won't be able to edit this order!</source><target state="final">You won't be able to edit this order!</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">402</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">198</context></context-group></trans-unit>
       <trans-unit id="1810825962216333199" datatype="html">
         <source>Yes, publish!</source><target state="final">Yes, publish!</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">407</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">203</context></context-group></trans-unit>
       <trans-unit id="5522744029409612185" datatype="html">
         <source>Are you sure to delete <x id="PH" equiv-text="data.tabContainerDisplayname"/> '<x id="PH_1" equiv-text="data.tabName"/>'?</source><target state="final">Are you sure to delete <x id="PH" equiv-text="data.tabContainerDisplayname"/> '<x id="PH_1" equiv-text="data.tabName"/>'?</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">421</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">130</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">240</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">215</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">99</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">131</context></context-group></trans-unit>
       <trans-unit id="4696587297744409785" datatype="html">
         <source>You won't be able to revert this!</source><target state="final">You won't be able to revert this!</target>
         
@@ -500,7 +451,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">422</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.ts</context><context context-type="linenumber">108</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">131</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.ts</context><context context-type="linenumber">61</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">241</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.ts</context><context context-type="linenumber">67</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">223</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.ts</context><context context-type="linenumber">98</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">216</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.ts</context><context context-type="linenumber">109</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">100</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.ts</context><context context-type="linenumber">62</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">132</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.ts</context><context context-type="linenumber">68</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">224</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.ts</context><context context-type="linenumber">99</context></context-group></trans-unit>
       <trans-unit id="6565045598593417189" datatype="html">
         <source>Yes, delete!</source><target state="final">Yes, delete!</target>
         
@@ -511,29 +462,29 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">427</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.ts</context><context context-type="linenumber">113</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">136</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.ts</context><context context-type="linenumber">66</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">246</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.ts</context><context context-type="linenumber">72</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">228</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.ts</context><context context-type="linenumber">103</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">221</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.ts</context><context context-type="linenumber">114</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">105</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.ts</context><context context-type="linenumber">67</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">137</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.ts</context><context context-type="linenumber">73</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">229</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.ts</context><context context-type="linenumber">104</context></context-group></trans-unit>
       <trans-unit id="268563843519645044" datatype="html">
         <source>step</source><target state="final">step</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">485</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">188</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">269</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/component-view/component-view.component.ts</context><context context-type="linenumber">168</context></context-group></trans-unit>
       <trans-unit id="3208993982906517533" datatype="html">
         <source>process</source><target state="final">process</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">492</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">195</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">276</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/component-view/component-view.component.ts</context><context context-type="linenumber">159</context></context-group></trans-unit>
       <trans-unit id="776785241867401546" datatype="html">
         <source>product</source><target state="final">product</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">499</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">283</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/component-view/component-view.component.ts</context><context context-type="linenumber">150</context></context-group></trans-unit>
       <trans-unit id="7842852794443170215" datatype="html">
         <source>Unnamed Step</source><target state="final">Unnamed Step</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">514</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/process/process.component.ts</context><context context-type="linenumber">52</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-draft/orders-draft.component.ts</context><context context-type="linenumber">256</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/component-view/component-view.component.ts</context><context context-type="linenumber">229</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/process/process.component.ts</context><context context-type="linenumber">52</context></context-group></trans-unit>
       <trans-unit id="2aba1e87039819aca3b70faa9aa848c12bf139ca" datatype="html">
         <source>Show</source><target state="final">Show</target>
         
@@ -626,11 +577,8 @@
       <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manuals-overview/manuals-overview.component.html</context><context context-type="linenumber">178</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.html</context><context context-type="linenumber">175</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.html</context><context context-type="linenumber">105</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.html</context><context context-type="linenumber">111</context></context-group></trans-unit>
       <trans-unit id="8748559190977994028" datatype="html">
         <source>Are you sure to delete order '<x id="PH" equiv-text="order.name"/>'?</source><target state="final">Are you sure to delete order '<x id="PH" equiv-text="order.name"/>'?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.ts</context>
-          <context context-type="linenumber">107</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.ts</context><context context-type="linenumber">108</context></context-group></trans-unit>
       <trans-unit id="71c5a2d85870556e50fb868c43cb7946cff2a77a" datatype="html">
         <source>Warning!</source><target state="final">Warning!</target>
         
@@ -747,39 +695,24 @@
       <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/manuals/manuals-overview/manuals-overview.component.html</context><context context-type="linenumber">90</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.html</context><context context-type="linenumber">146</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.html</context><context context-type="linenumber">53</context></context-group></trans-unit>
       <trans-unit id="1616102757855967475" datatype="html">
         <source>All</source><target state="final">All</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.ts</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.ts</context><context context-type="linenumber">40</context></context-group></trans-unit>
       <trans-unit id="7639225633265427455" datatype="html">
         <source>In Preparation</source><target state="final">In Preparation</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.ts</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.ts</context><context context-type="linenumber">45</context></context-group></trans-unit>
       <trans-unit id="7879546973853685748" datatype="html">
         <source>Released</source><target state="final">Released</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.ts</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.ts</context><context context-type="linenumber">50</context></context-group></trans-unit>
       <trans-unit id="3307214558906712688" datatype="html">
         <source>In progress</source><target state="final">In progress</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.ts</context>
-          <context context-type="linenumber">54</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.ts</context><context context-type="linenumber">55</context></context-group></trans-unit>
       <trans-unit id="1161299114153631702" datatype="html">
         <source>Completed</source><target state="final">Completed</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.ts</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/processes/processes-overview/processes-overview.component.ts</context><context context-type="linenumber">60</context></context-group></trans-unit>
       <trans-unit id="cff1428d10d59d14e45edec3c735a27b5482db59" datatype="html">
         <source>Name</source><target state="final">Name</target>
         
@@ -802,9 +735,12 @@
       </trans-unit>
       <trans-unit id="795890916060309463" datatype="html">
         <source>Roles</source><target state="final">Roles</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context><context context-type="linenumber">134</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/roles/roles-overview/roles-overview.component.ts</context><context context-type="linenumber">18</context></context-group></trans-unit><trans-unit id="1069523139277190436" datatype="html">
+        <source>Statistics</source><target state="final">Statistics</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/roles/roles-overview/roles-overview.component.ts</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context>
+          <context context-type="linenumber">141</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c36a66f2107e8da5371ebc9d15c2008dff567f46" datatype="html">
@@ -821,50 +757,29 @@
       </trans-unit>
       <trans-unit id="7961567331715373975" datatype="html">
         <source>Statistics Overview</source><target state="final">Statistics Overview</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">14</context></context-group></trans-unit>
       <trans-unit id="7593555694782789615" datatype="html">
         <source>Open</source><target state="final">Open</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
-          <context context-type="linenumber">79</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
-          <context context-type="linenumber">103</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
-          <context context-type="linenumber">139</context>
-        </context-group>
-      </trans-unit>
+        
+        
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">44</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">80</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">104</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">140</context></context-group></trans-unit>
       <trans-unit id="1780950485960518731" datatype="html">
         <source>In Progress</source><target state="final">In Progress</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
-          <context context-type="linenumber">104</context>
-        </context-group>
-      </trans-unit>
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">45</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">105</context></context-group></trans-unit>
       <trans-unit id="7380746425400381171" datatype="html">
         <source>Unnamed Process Template</source><target state="final">Unnamed Process Template</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">93</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">76</context></context-group></trans-unit>
       <trans-unit id="5266753995399107581" datatype="html">
         <source>Process Templates</source><target state="final">Process Templates</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">109</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.ts</context><context context-type="linenumber">17</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-detail/process-template-detail.component.ts</context><context context-type="linenumber">90</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.ts</context><context context-type="linenumber">18</context></context-group></trans-unit>
       <trans-unit id="a041b604045dbee3de835db4349e8b0c5bf92750" datatype="html">
         <source>You haven't created a process yet!</source><target state="final">You haven't created a process yet!</target>
         
@@ -878,29 +793,17 @@
       </trans-unit>
       <trans-unit id="5612044817510700346" datatype="html">
         <source>Are you sure to delete process '<x id="PH" equiv-text="process.name"/>'?</source><target state="final">Are you sure to delete process '<x id="PH" equiv-text="process.name"/>'?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.ts</context>
-          <context context-type="linenumber">60</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/process/process-template-library/process-template-library.component.ts</context><context context-type="linenumber">61</context></context-group></trans-unit>
       <trans-unit id="5242903681712782100" datatype="html">
         <source>Unnamed Product Template</source><target state="final">Unnamed Product Template</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context>
-          <context context-type="linenumber">145</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">67</context></context-group></trans-unit>
       <trans-unit id="6672994033224734739" datatype="html">
         <source>Product Templates</source><target state="final">Product Templates</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context>
-          <context context-type="linenumber">202</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.ts</context>
-          <context context-type="linenumber">20</context>
-        </context-group>
-      </trans-unit>
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-detail/product-template-detail.component.ts</context><context context-type="linenumber">122</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.ts</context><context context-type="linenumber">21</context></context-group></trans-unit>
       <trans-unit id="f669be15ef5e2a8586401fd938255663ac37bc16" datatype="html">
         <source>You haven't created Processes yet!</source><target state="final">You haven't created Processes yet!</target>
         <context-group purpose="location">
@@ -924,11 +827,8 @@
       </trans-unit>
       <trans-unit id="8924478549814863797" datatype="html">
         <source>Are you sure to delete product '<x id="PH" equiv-text="product.name"/>'?</source><target state="final">Are you sure to delete product '<x id="PH" equiv-text="product.name"/>'?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.ts</context>
-          <context context-type="linenumber">66</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.ts</context><context context-type="linenumber">67</context></context-group></trans-unit>
       <trans-unit id="f8192fc640f2d5659d745e145db974c36bb8b4df" datatype="html">
         <source>This user is not activated yet. Copy the activation link and send it to the user.</source><target state="final">This user is not activated yet. Copy the activation link and send it to the user.</target>
         <context-group purpose="location">
@@ -957,71 +857,41 @@
       </trans-unit>
       <trans-unit id="4145496584631696119" datatype="html">
         <source>Role</source><target state="final">Role</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">47</context></context-group></trans-unit>
       <trans-unit id="8115083664628466958" datatype="html">
         <source>E-Mail</source><target state="final">E-Mail</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context>
-          <context context-type="linenumber">47</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">48</context></context-group></trans-unit>
       <trans-unit id="5342432350421167093" datatype="html">
         <source>First name</source><target state="final">First name</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context>
-          <context context-type="linenumber">48</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">49</context></context-group></trans-unit>
       <trans-unit id="3586674587150281199" datatype="html">
         <source>Last name</source><target state="final">Last name</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">50</context></context-group></trans-unit>
       <trans-unit id="2115592966120408375" datatype="html">
         <source>Copied</source><target state="final">Copied</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context>
-          <context context-type="linenumber">169</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">170</context></context-group></trans-unit>
       <trans-unit id="5031343019627316230" datatype="html">
         <source>Are you sure to delete?</source><target state="final">Are you sure to delete?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context>
-          <context context-type="linenumber">222</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.ts</context>
-          <context context-type="linenumber">97</context>
-        </context-group>
-      </trans-unit>
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">223</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.ts</context><context context-type="linenumber">98</context></context-group></trans-unit>
       <trans-unit id="1857811008791982049" datatype="html">
         <source>Back to overview?</source><target state="final">Back to overview?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context>
-          <context context-type="linenumber">246</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">247</context></context-group></trans-unit>
       <trans-unit id="2807800733729323332" datatype="html">
         <source>Yes</source><target state="final">Yes</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context>
-          <context context-type="linenumber">252</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">253</context></context-group></trans-unit>
       <trans-unit id="3542042671420335679" datatype="html">
         <source>No</source><target state="final">No</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context>
-          <context context-type="linenumber">255</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/user-detail/user-detail.component.ts</context><context context-type="linenumber">256</context></context-group></trans-unit>
       <trans-unit id="34a99ddfd42f243b1c50c2753e83e866f40b4597" datatype="html">
         <source>New user</source><target state="final">New user</target>
         <context-group purpose="location">
@@ -1044,11 +914,8 @@
       <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.html</context><context context-type="linenumber">78</context></context-group></trans-unit>
       <trans-unit id="4555457172864212828" datatype="html">
         <source>Users</source><target state="final">Users</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.ts</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit><trans-unit id="1422594813862863111" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context><context context-type="linenumber">129</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.ts</context><context context-type="linenumber">22</context></context-group></trans-unit><trans-unit id="1422594813862863111" datatype="html">
         <source>view orders</source><target state="final">view orders</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipes/permission/permission.pipe.ts</context>
@@ -1618,15 +1485,12 @@
       <trans-unit id="bb694b49d408265c91c62799c2b3a7e3151c824d" datatype="html">
         <source>Logout</source><target state="final">Logout</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">41</context></context-group></trans-unit><trans-unit id="e753bcc30e8ac90e36cdccfa311785b2c681042e" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">46</context></context-group></trans-unit><trans-unit id="e753bcc30e8ac90e36cdccfa311785b2c681042e" datatype="html">
         <source>Version: <x id="INTERPOLATION" equiv-text="{{ version }}"/></source><target state="final">Version: <x id="INTERPOLATION" equiv-text="{{ version }}"/></target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">126</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/views/login/login.component.html</context><context context-type="linenumber">122</context></context-group></trans-unit>
-      <trans-unit id="61e0f26d843eec0b33ff475e111b0c2f7a80b835" datatype="html">
-        <source>Statistics</source><target state="final">Statistics</target>
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/dashboard/dashboard.component.html</context><context context-type="linenumber">275</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">112</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/top-navigation/top-navigation.component.html</context><context context-type="linenumber">63</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/views/login/login.component.html</context><context context-type="linenumber">122</context></context-group></trans-unit>
+      
       <trans-unit id="4be1532cda0acd480319613e2b31ca192a039849" datatype="html">
         <source>Account Activation</source><target state="final">Account Activation</target>
         <context-group purpose="location">

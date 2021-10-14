@@ -17,8 +17,7 @@
         "sourceLocale": "en",
         "locales": {
           "de": {
-            "translation": "src/locale/messages.de.xlf",
-            "baseHref": ""
+            "translation": "src/locale/messages.de.xlf"
           }
         }
       },
@@ -89,10 +88,6 @@
                 }
               ],
               "localize": true
-            },
-            "de": {
-              "aot": true,
-              "localize": ["de"]
             },
             "demo": {
               "fileReplacements": [

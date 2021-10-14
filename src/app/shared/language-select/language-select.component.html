@@ -3,14 +3,9 @@
     {{ selectedLanguage | language }}
   </a>
   <ul  aria-labelledby="dropdownMenuLink" class="dropdown-menu">
-    <li>
-      <a class="dropdown-item" href="#" (click)="selectLanguage(Language.DE)">
-        Deutsch
-      </a>
-    </li>
-    <li>
-      <a class="dropdown-item" href="#" (click)="selectLanguage(Language.EN)">
-        English
+    <li *ngFor="let lang of availableLanguages">
+      <a class="dropdown-item" href="/{{ lang }}{{ getCurrentRoute() }}" (click)="selectLanguage(lang)">
+        {{ lang | language }}
       </a>
     </li>
   </ul>
