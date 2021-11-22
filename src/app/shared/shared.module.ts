@@ -13,6 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { HideIfUnauthorizedDirective } from '../auth/hide-if-unauthorized.directive';
 import { ShowIfUnauthorizedDirective } from '../auth/show-if-unauthorized.directive';
+import { DatetimePipe } from '../pipes/datetime/datetime.pipe';
 import { DurationPipe } from '../pipes/duration/duration.pipe';
 import { LanguagePipe } from '../pipes/language/language.pipe';
 import { VideoTypePipe } from '../pipes/media-type/media-type.pipe';
@@ -20,6 +21,7 @@ import { PermissionPipe } from '../pipes/permission/permission.pipe';
 import { StatusBadgePipe } from '../pipes/status/status-badge.pipe';
 import { TabFragmentPipe } from '../pipes/tab/tab-fragment.pipe';
 import { TabIndicesPipe } from '../pipes/tab/tab-indices.pipe';
+import { UserStatusPipe } from '../pipes/user/user-status.pipe';
 import {
   BottomNavigationOrderDraftComponent,
 } from './bottom-navigation-order-draft/bottom-navigation-order-draft.component';
@@ -74,7 +76,9 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     StatusBadgePipe,
     ComponentViewComponent,
     LanguageSelectComponent,
-    LanguagePipe
+    LanguagePipe,
+    UserStatusPipe,
+    DatetimePipe,
      ],
   imports: [
     CommonModule,
@@ -132,7 +136,9 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     StatusBadgePipe,
     ComponentViewComponent,
     LanguageSelectComponent,
-    LanguagePipe
+    LanguagePipe,
+    UserStatusPipe,
+    DatetimePipe,
   ]
 
 })

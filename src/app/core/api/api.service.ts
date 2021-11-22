@@ -23,7 +23,13 @@ export class ApiService {
 
     for (const key in queryParams) {
       if (queryParams.hasOwnProperty(key)) {
-        query += key + '=' + encodeURIComponent(queryParams[key]) + '&';
+        const value = queryParams[key];
+
+        if (value instanceof Date) {
+          query += key + '=' + encodeURIComponent(value.toISOString()) + '&';
+        } else {
+          query += key + '=' + encodeURIComponent(queryParams[key]) + '&';
+        }
       }
     }
 

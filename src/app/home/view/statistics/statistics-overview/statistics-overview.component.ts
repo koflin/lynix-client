@@ -1,8 +1,13 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
+import moment from 'moment';
 import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
+import { InputOutputValue } from 'src/app/shared/models/InputOutputValue';
+
+import { UserStat } from '../statistics.model';
+import { StatisticsService } from '../statistics.service';
 
 @Component({
   selector: 'app-statistics-overview',
@@ -13,10 +18,14 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
 
   breadCrumbs: BreadCrumbInfo[]=[{ name: $localize `Statistics Overview`, url: new RouteInfo(this.router.url) },];
   stats: any = {};
-  users = [
-    { name: "Colin Pfingstl", status: "Online", role: "Developer" },
-    { name: "Lars Streit", status: "Offline", role: "Process Admin" },
-    { name: "Dominik Koster", status: "Offline", role: "Process Admin" },
+
+  colors = [
+    'rgba(255, 99, 132)',
+    'rgba(255, 159, 64)',
+    'rgba(255, 205, 86)',
+    'rgba(75, 192, 192)',
+    'rgba(54, 162, 235)',
+    'rgba(153, 102, 255)'
   ];
 
   orderNowChart: Chart;
@@ -29,14 +38,55 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
   @ViewChild('processNow') processNow: ElementRef;
   @ViewChild('processHistory') processHistory: ElementRef;
 
+  userStats: UserStat[];
+
+  // Process Stats
+  processTo: Date = moment().toDate();
+  processFrom: Date = moment().subtract(1, 'week').toDate();
+  processTimeStatsChart: Chart;
+  @ViewChild('processTimeStatsEl') processTimeStatsRef: ElementRef;
+
+  // IO
+  fromDate = new InputOutputValue("fromdate", $localize `From`, false);
+  toDate = new InputOutputValue("todate", $localize `To`, false);
+
   constructor(
-    private router: Router
+    private router: Router,
+    private statisticsService: StatisticsService
   ) { }
 
   ngOnInit(): void {
+    this.statisticsService.getUsers().subscribe((data) => {
+      this.userStats = data;
+    });
+
+    this.processTo = moment().toDate();
+    this.processFrom = moment().subtract(1, 'week').toDate()
   }
 
   ngAfterViewInit(): void {
+
+    this.processTimeStatsChart = new Chart(this.processTimeStatsRef.nativeElement, {
+      type: 'bar',
+      options: {
+        scales: {
+          xAxes: [{
+            stacked: true
+          }],
+          yAxes: [{
+            stacked: true,
+            beginAtZero: true,
+            scaleLabel: {
+              labelString: $localize `seconds`,
+              display: true
+            }
+          }]
+        }
+      }
+    });
+
+
+
     this.orderNowChart = new Chart(this.orderNow.nativeElement, {
       type: 'doughnut',
       data: {
@@ -78,12 +128,12 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
         datasets: [
           {
             label: $localize `Open`,
-            data: [75, 55, 78, 80, 83, 83, 86, 84, 80, 90, 91, 90],
+            data: [75, 55, 78, 80, 83, 83, 86, 84, 80, 90, 91, 90, 88],
             backgroundColor: '#2C3E50',
           },
           {
             label: $localize `Finished`,
-            data: [30, 24, 30, 36, 40, 45, 40, 43, 40, 47, 56, 54],
+            data: [30, 20, 24, 30, 36, 40, 45, 40, 43, 40, 47, 56, 54],
             backgroundColor: '#2ECC71',
           },
         ]
@@ -91,7 +141,7 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
           }
         }
       }
@@ -156,6 +206,28 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
         }
       }
     });
+
+    this.updateProcess();
   }
 
+  updateProcess() {
+    this.statisticsService.getProcessTimes(this.processFrom, this.processTo, '6056f641498b996caccccbf0').subscribe(data => {
+
+      if (data == undefined || data.length == 0) {
+        return;
+      }
+
+      this.processTimeStatsChart.data = {
+        labels: data.map(process => process.orderName),
+        datasets: data[0].steps.map((template, i) => {
+          return {
+            label: template.name,
+            backgroundColor: this.colors[i % this.colors.length],
+            data: data.map(process => moment.duration(process.steps[i].timeTaken, 'seconds').asSeconds())
+          }
+        })
+      };
+      this.processTimeStatsChart.update();
+    });
+  }
 }

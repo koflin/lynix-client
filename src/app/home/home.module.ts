@@ -55,7 +55,7 @@ import { UsersOverviewComponent } from './view/users/users-overview/users-overvi
     StatisticsOverviewComponent,
     ManualsOverviewComponent,
     ManualDetailComponent,
-    PluckPipe
+    PluckPipe,
   ],
   imports: [
     HomeRoutingModule,
