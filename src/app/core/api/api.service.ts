@@ -25,6 +25,8 @@ export class ApiService {
       if (queryParams.hasOwnProperty(key)) {
         const value = queryParams[key];
 
+        if (value == undefined) continue;
+
         if (value instanceof Date) {
           query += key + '=' + encodeURIComponent(value.toISOString()) + '&';
         } else {

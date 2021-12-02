@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ProcessTemplatePreview } from 'src/app/models/previews/processTemplate-preview';
 import { ProcessTemplate } from 'src/app/models/processTemplate';
 
 import { ApiService } from '../api/api.service';
@@ -38,5 +39,9 @@ export class ProcessTemplatesService {
 
   getById(id: string) {
     return this.api.get<ProcessTemplate>('templates/process/' + id);
+  }
+
+  search(name: string, limit?: number) {
+    return this.api.get<ProcessTemplatePreview[]>('templates/process/search', { name, limit });
   }
 }

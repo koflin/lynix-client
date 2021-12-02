@@ -2,9 +2,10 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import moment from 'moment';
+import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
 import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
-import { InputOutputValue } from 'src/app/shared/models/InputOutputValue';
+import { InputOutputValue, SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
 
 import { UserStat } from '../statistics.model';
 import { StatisticsService } from '../statistics.service';
@@ -43,16 +44,20 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
   // Process Stats
   processTo: Date = moment().toDate();
   processFrom: Date = moment().subtract(1, 'week').toDate();
+  processTemplate: SingleMultiChoiceItem = null;
+  processTemplateOptions: SingleMultiChoiceItem[];
   processTimeStatsChart: Chart;
   @ViewChild('processTimeStatsEl') processTimeStatsRef: ElementRef;
 
   // IO
-  fromDate = new InputOutputValue("fromdate", $localize `From`, false);
-  toDate = new InputOutputValue("todate", $localize `To`, false);
+  fromDateIO = new InputOutputValue("fromdate", $localize `From`, false);
+  toDateIO = new InputOutputValue("todate", $localize `To`, false);
+  processTemplateIO = new InputOutputValue("processTemplate", $localize `Process Template`, false);
 
   constructor(
     private router: Router,
-    private statisticsService: StatisticsService
+    private statisticsService: StatisticsService,
+    private processTemplatesSerivce: ProcessTemplatesService
   ) { }
 
   ngOnInit(): void {
@@ -61,7 +66,9 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
     });
 
     this.processTo = moment().toDate();
-    this.processFrom = moment().subtract(1, 'week').toDate()
+    this.processFrom = moment().subtract(1, 'week').toDate();
+
+    this.searchProcessTemplates(undefined);
   }
 
   ngAfterViewInit(): void {
@@ -211,9 +218,15 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
   }
 
   updateProcess() {
-    this.statisticsService.getProcessTimes(this.processFrom, this.processTo, '6056f641498b996caccccbf0').subscribe(data => {
+    if (!this.processTemplate) {
+      this.clearProcess();
+      return;
+    }
+
+    this.statisticsService.getProcessTimes(this.processFrom, this.processTo, this.processTemplate.value.toString()).subscribe(data => {
 
       if (data == undefined || data.length == 0) {
+        this.clearProcess();
         return;
       }
 
@@ -228,6 +241,27 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
         })
       };
       this.processTimeStatsChart.update();
+    });
+  }
+
+  clearProcess() {
+    this.processTimeStatsChart.data.labels.pop();
+    this.processTimeStatsChart.data.datasets.pop();
+    this.processTimeStatsChart.update();
+  }
+
+  selectProcessTemplate(item: SingleMultiChoiceItem) {
+    this.processTemplate = item;
+
+    this.updateProcess();
+  }
+
+  async searchProcessTemplates(text: string) {
+    this.processTemplateOptions = (await this.processTemplatesSerivce.search(text, 20).toPromise()).map((template) => {
+      return {
+        value: template.id,
+        label: template.name
+      }
     });
   }
 }

@@ -73,10 +73,13 @@
                         </div>
                         <div class="row">
                           <div class="col-12 col-md-6">
-                            <app-single-date-picker [(result)]="processFrom" (resultChange)="updateProcess()" [(fieldInformation)]="fromDate" [inputRequired]="true" format="DD.MM.YYYY"> </app-single-date-picker>
+                            <app-single-date-picker [(result)]="processFrom" (resultChange)="updateProcess()" [(fieldInformation)]="fromDateIO" [inputRequired]="true" format="DD.MM.YYYY"> </app-single-date-picker>
                           </div>
                           <div class="col-12 col-md-6">
-                            <app-single-date-picker [(result)]="processTo" (resultChange)="updateProcess()" [(fieldInformation)]="toDate" [inputRequired]="true" format="DD.MM.YYYY"> </app-single-date-picker>
+                            <app-single-date-picker [(result)]="processTo" (resultChange)="updateProcess()" [(fieldInformation)]="toDateIO" [inputRequired]="true" format="DD.MM.YYYY"> </app-single-date-picker>
+                          </div>
+                          <div class="col-12 col-md-6">
+                            <app-single-multiple-choice [result]="processTemplate || ''" (resultChange)="selectProcessTemplate($event)" (searchChange)="searchProcessTemplates($event)" [isMultipleChoice]="false"  [isSearchable]="true" [inputRequired]="false" [data]="processTemplateOptions" [(fieldInformation)]="processTemplateIO" placeholder="search a process template" i18n-placeholder> </app-single-multiple-choice>
                           </div>
                         </div>
                       </div>
@@ -104,7 +107,7 @@
                   </div>
 
                   <!-- Processes -->
-                  <div class="col-12 col-xl-4 col-md-6 col-sm-6">
+                  <!--<div class="col-12 col-xl-4 col-md-6 col-sm-6">
                     <div class="card card-static-strong-shadow ml-2 mr-2 pl-0 pr-0">
                       <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/template.jpg); background-size: cover; background-position: center center;" >
                           <span class="mask bg-gradient-default opacity-8"> </span>
@@ -121,7 +124,7 @@
                         <canvas class="mt-3" #processHistory> </canvas>
                       </div>
                     </div>
-                  </div>
+                  </div>-->
                 </div>
               </div>
             </div>

@@ -9,8 +9,8 @@
                 [addTag]="allowUserCreateOption" [dropdownPosition]="'bottom'" [addTagText]="addTagText" [closeOnSelect]="!isMultipleChoice"
                 [items]="tempData"
                 (change)="validation_save(true)" [bindLabel]="(resultShouldBeOnlyValue)?'label': undefined"
+                (search)="searchChange.emit($event.term)"
                 [bindValue]="(resultShouldBeOnlyValue) ? 'value': undefined" class="custom" class="custom" [readonly]="readonly">
-
 
 
 
