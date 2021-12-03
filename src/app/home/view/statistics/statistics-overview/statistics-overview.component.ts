@@ -5,6 +5,7 @@ import moment from 'moment';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
 import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
+import { DatetimePipe } from 'src/app/pipes/datetime/datetime.pipe';
 import { InputOutputValue, SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
 
 import { UserStat } from '../statistics.model';
@@ -52,12 +53,16 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
   // IO
   fromDateIO = new InputOutputValue("fromdate", $localize `From`, false);
   toDateIO = new InputOutputValue("todate", $localize `To`, false);
+  dateRangeIO = new InputOutputValue("dateRange", $localize `From - To`, false);
   processTemplateIO = new InputOutputValue("processTemplate", $localize `Process Template`, false);
+
+  format = 'DD.MM.YYYY';
 
   constructor(
     private router: Router,
     private statisticsService: StatisticsService,
-    private processTemplatesSerivce: ProcessTemplatesService
+    private processTemplatesSerivce: ProcessTemplatesService,
+    private dateTimePipe: DatetimePipe
   ) { }
 
   ngOnInit(): void {
@@ -88,13 +93,17 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
               display: true
             }
           }]
+        },
+        title: {
+          display: true,
+          text: $localize `Select a date range and a process template`,
         }
       }
     });
 
 
 
-    this.orderNowChart = new Chart(this.orderNow.nativeElement, {
+    /*this.orderNowChart = new Chart(this.orderNow.nativeElement, {
       type: 'doughnut',
       data: {
         labels: [
@@ -214,6 +223,8 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
       }
     });
 
+    */
+
     this.updateProcess();
   }
 
@@ -240,13 +251,23 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
           }
         })
       };
+
+      this.processTimeStatsChart.options.title = {
+        display: true,
+        text: `${this.processTemplate.label}: ${this.dateTimePipe.transform(this.processFrom, this.format)} - ${this.dateTimePipe.transform(this.processTo, this.format)}`
+      };
+
       this.processTimeStatsChart.update();
     });
   }
 
   clearProcess() {
-    this.processTimeStatsChart.data.labels.pop();
-    this.processTimeStatsChart.data.datasets.pop();
+    this.processTimeStatsChart.data.labels = [];
+    this.processTimeStatsChart.data.datasets = [];
+    this.processTimeStatsChart.options.title = {
+      display: true,
+      text: $localize `Select a date range and a process template`,
+    };
     this.processTimeStatsChart.update();
   }
 

@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import moment from 'moment';
 import { ProductTemplatesService } from 'src/app/core/productTemplates/product-tempaltes.service';
 import { Order } from 'src/app/models/order';
 
@@ -68,8 +67,8 @@ export class OrderComponent implements OnInit {
 
   }
 
-  changeDeliveryDate(newDate: string) {
-    this.order.deliveryDate = newDate != 'Invalid Date' ? moment(newDate, 'DD.MM.YYYY').toDate() : undefined;
+  changeDeliveryDate(newDate: Date) {
+    this.order.deliveryDate = newDate;
     this.cdRef.detectChanges();
     this.orderChange.emit(this.order);
   }

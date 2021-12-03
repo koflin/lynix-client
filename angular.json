@@ -104,6 +104,10 @@
                   "with": "src/environments/environment.testing.ts"
                 }
               ]
+            },
+            "de": {
+              "aot": true,
+              "localize": ["de"]
             }
           }
         },

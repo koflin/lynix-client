@@ -331,7 +331,7 @@
       <trans-unit id="340430316261570792" datatype="html">
         <source>Finished</source><target state="new">Erledigt</target>
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">196</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">46</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">85</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">106</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">145</context></context-group></trans-unit><trans-unit id="417702039522088464" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/guide/guide.component.ts</context><context context-type="linenumber">196</context></context-group></trans-unit><trans-unit id="417702039522088464" datatype="html">
         <source>Process Manuals</source><target state="new">Prozess Anleitungen</target>
 
 
@@ -525,7 +525,7 @@
 
 
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.html</context><context context-type="linenumber">92</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.html</context><context context-type="linenumber">83</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.html</context><context context-type="linenumber">93</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/product/product.component.html</context><context context-type="linenumber">29</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/orders/orders-overview/orders-overview.component.html</context><context context-type="linenumber">92</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/templates/product/product-template-library/product-template-library.component.html</context><context context-type="linenumber">93</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/product/product.component.html</context><context context-type="linenumber">29</context></context-group></trans-unit>
       <trans-unit id="ca30c1aa79fb5ab487fbd2caa4ca01f2f6691d70" datatype="html">
         <source>Quantity</source><target state="new">Anzahl</target>
 
@@ -700,27 +700,51 @@
           <context context-type="linenumber">141</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4e7f5f07ae8e67878f35b34bcee10e39300ff41a" datatype="html">
-        <source>Orders</source><target state="new">Aufträge</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.html</context>
-          <context context-type="linenumber">63</context>
-        </context-group>
-      </trans-unit>
+
       <trans-unit id="7961567331715373975" datatype="html">
         <source>Statistics Overview</source><target state="new">Statistik Übersicht</target>
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">14</context></context-group></trans-unit><trans-unit id="7593555694782789615" datatype="html">
-        <source>Open</source><target state="new">Offen</target>
-
-
-
-
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">44</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">80</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">104</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">140</context></context-group></trans-unit><trans-unit id="1780950485960518731" datatype="html">
-        <source>In Progress</source><target state="new">In Arbeit</target>
-
-
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">45</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">105</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context><context context-type="linenumber">21</context></context-group></trans-unit><trans-unit id="5203279511751768967" datatype="html">
+        <source>From</source><target state="new">Von</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit><trans-unit id="1640609344969975994" datatype="html">
+        <source>To</source><target state="new">Bis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit><trans-unit id="3544894839068180953" datatype="html">
+        <source>From - To</source><target state="new">Von - Bis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit><trans-unit id="6764759227289755803" datatype="html">
+        <source>Process Template</source><target state="new">Prozessvorlage</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit><trans-unit id="227749613426254192" datatype="html">
+        <source>seconds</source><target state="new">Sekunden</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit><trans-unit id="7537468556380062462" datatype="html">
+        <source>Select a date range and a process template</source><target state="new">Wähle eine Zeitspanne und eine Prozessvorlage</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.ts</context>
+          <context context-type="linenumber">269</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="7380746425400381171" datatype="html">
         <source>Unnamed Process Template</source><target state="new">Unbenannte Prozessvorlage</target>
 
@@ -852,7 +876,19 @@
       <trans-unit id="c36a66f2107e8da5371ebc9d15c2008dff567f46" datatype="html">
         <source>Role</source><target state="new">Rolle</target>
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.html</context><context context-type="linenumber">40</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/home/view/users/users-overview/users-overview.component.html</context><context context-type="linenumber">40</context></context-group></trans-unit><trans-unit id="6b6a341244987842b9a398da39530352bb9dab9f" datatype="html">
+        <source>Process</source><target state="new">Process</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit><trans-unit id="f40cb872a84b268b4425b912ef6ee9b4e1069ed0" datatype="html">
+        <source>search a process template</source><target state="new">search a process template</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/view/statistics/statistics-overview/statistics-overview.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="787e44bf8fb991dfb43b1c7eb7056090514d6905" datatype="html">
         <source>Operation</source><target state="new">Vorgang</target>
 
@@ -985,6 +1021,24 @@
           <context context-type="sourcefile">src/app/pipes/status/status.pipe.ts</context>
           <context context-type="linenumber">25</context>
         </context-group>
+      </trans-unit><trans-unit id="8870711330013548872" datatype="html">
+        <source>Online</source><target state="new">Online</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pipes/user/user-status.pipe.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit><trans-unit id="313850810538580916" datatype="html">
+        <source>Offline</source><target state="new">Offline</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pipes/user/user-status.pipe.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit><trans-unit id="8113435529986872828" datatype="html">
+        <source>Error: Unknown status</source><target state="new">Fehler: Unbekannter Status</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pipes/user/user-status.pipe.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="dc4b46c48b4ff7b2e2b51ec8e028e336e58d2f14" datatype="html">
         <source>Please fill the field.</source><target state="new">Bitte das Feld ausfüllen.</target>
@@ -992,14 +1046,11 @@
 
 
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/single-date-picker/single-date-picker.component.html</context><context context-type="linenumber">23</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/single-multiple-choice/single-multiple-choice.component.html</context><context context-type="linenumber">35</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/text-area/text-area.component.html</context><context context-type="linenumber">15</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/text-field/text-field.component.html</context><context context-type="linenumber">30</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/range-date-picker/range-date-picker.component.html</context><context context-type="linenumber">23</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/single-date-picker/single-date-picker.component.html</context><context context-type="linenumber">23</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/single-multiple-choice/single-multiple-choice.component.html</context><context context-type="linenumber">35</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/text-area/text-area.component.html</context><context context-type="linenumber">15</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/text-field/text-field.component.html</context><context context-type="linenumber">30</context></context-group></trans-unit>
       <trans-unit id="cf60379abfdef80fb3b28eff82345e8522e1f863" datatype="html">
         <source>Please check the format. It has to be: 03/30/2021</source><target state="new">Bitte überprüfe das Format. Gültiges Format: 03/30/2021</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/forms/single-date-picker/single-date-picker.component.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-      </trans-unit>
+
+      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/range-date-picker/range-date-picker.component.html</context><context context-type="linenumber">24</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/single-date-picker/single-date-picker.component.html</context><context context-type="linenumber">24</context></context-group></trans-unit>
       <trans-unit id="3584333943624577182" datatype="html">
         <source>selecting a option...</source><target state="new">Option auswählen...</target>
         <context-group purpose="location">
@@ -1009,11 +1060,8 @@
       </trans-unit>
       <trans-unit id="5526006990252644049" datatype="html">
         <source>press enter to create a new option</source><target state="new">Enter drücken um neue Option zu erstellen</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/forms/single-multiple-choice/single-multiple-choice.component.ts</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-      </trans-unit>
+
+      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/single-multiple-choice/single-multiple-choice.component.ts</context><context context-type="linenumber">29</context></context-group></trans-unit>
       <trans-unit id="d548edd9ddbb5499695db2dd0ca866913a420a5b" datatype="html">
         <source>Please check the format. It has to be</source><target state="new">Bitte überprüfe das Format. Gültiges Format</target>
 

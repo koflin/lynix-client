@@ -29,6 +29,7 @@ import { BreadcrumbHeaderComponent } from './breadcrumb-header/breadcrumb-header
 import { ChartBarStakedComponent } from './chart/chart-bar-staked/chart-bar-staked.component';
 import { PieChartComponent } from './chart/pie-chart/pie-chart.component';
 import { ComponentViewComponent } from './component-view/component-view.component';
+import { RangeDatePickerComponent } from './forms/range-date-picker/range-date-picker.component';
 import { SingleDatePickerComponent } from './forms/single-date-picker/single-date-picker.component';
 import { SingleMultipleChoiceComponent } from './forms/single-multiple-choice/single-multiple-choice.component';
 import { TextAreaComponent } from './forms/text-area/text-area.component';
@@ -79,6 +80,7 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     LanguagePipe,
     UserStatusPipe,
     DatetimePipe,
+    RangeDatePickerComponent,
      ],
   imports: [
     CommonModule,
@@ -139,6 +141,7 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     LanguagePipe,
     UserStatusPipe,
     DatetimePipe,
+    RangeDatePickerComponent
   ]
 
 })
