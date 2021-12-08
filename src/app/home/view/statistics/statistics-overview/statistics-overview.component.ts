@@ -50,6 +50,12 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
   processTimeStatsChart: Chart;
   @ViewChild('processTimeStatsEl') processTimeStatsRef: ElementRef;
 
+  // Order Stats
+  orderTo: Date = moment().toDate();
+  orderFrom: Date = moment().subtract(1, 'week').toDate();
+  orderTimeStatsChart: Chart;
+  @ViewChild('orderTimeStatsEl') orderTimeStatsRef: ElementRef;
+
   // IO
   fromDateIO = new InputOutputValue("fromdate", $localize `From`, false);
   toDateIO = new InputOutputValue("todate", $localize `To`, false);
@@ -72,6 +78,9 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
 
     this.processTo = moment().toDate();
     this.processFrom = moment().subtract(1, 'week').toDate();
+
+    this.orderTo = moment().toDate();
+    this.orderFrom = moment().subtract(1, 'week').toDate();
 
     this.searchProcessTemplates(undefined);
   }
@@ -101,9 +110,33 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
       }
     });
 
+    this.orderTimeStatsChart = new Chart(this.orderTimeStatsRef.nativeElement, {
+      type: 'bar',
+      options: {
+        scales: {
+          xAxes: [{
+            stacked: false
+          }],
+          yAxes: [{
+            stacked: false,
+            beginAtZero: true,
+            scaleLabel: {
+              labelString: $localize `seconds`,
+              display: true
+            }
+          }]
+        },
+        title: {
+          display: true,
+          text: $localize `Select a date range`,
+        }
+      }
+    });
 
+    this.updateProcess();
+    this.updateOrder();
 
-    /*this.orderNowChart = new Chart(this.orderNow.nativeElement, {
+    /* this.orderNowChart = new Chart(this.orderNow.nativeElement, {
       type: 'doughnut',
       data: {
         labels: [
@@ -224,8 +257,6 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
     });
 
     */
-
-    this.updateProcess();
   }
 
   updateProcess() {
@@ -281,8 +312,44 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
     this.processTemplateOptions = (await this.processTemplatesSerivce.search(text, 20).toPromise()).map((template) => {
       return {
         value: template.id,
-        label: template.name
+        label: template.name,
       }
     });
+  }
+
+  updateOrder() {
+    this.statisticsService.getOrderTimes(this.orderFrom, this.orderTo).subscribe(data => {
+
+      if (data == undefined || data.length == 0) {
+        this.clearOrder();
+        return;
+      }
+
+      this.orderTimeStatsChart.data = {
+        labels: data.map(order => order.name),
+        datasets: [{
+          label: 'Total Time Taken',
+          backgroundColor: this.colors[0],
+          data: data.map(order => moment.duration(order.timeTaken, 'seconds').asSeconds())
+        }]
+      };
+
+      this.orderTimeStatsChart.options.title = {
+        display: true,
+        text: `Orders: ${this.dateTimePipe.transform(this.orderFrom, this.format)} - ${this.dateTimePipe.transform(this.orderTo, this.format)}`
+      };
+
+      this.orderTimeStatsChart.update();
+    });
+  }
+
+  clearOrder() {
+    this.orderTimeStatsChart.data.labels = [];
+    this.orderTimeStatsChart.data.datasets = [];
+    this.orderTimeStatsChart.options.title = {
+      display: true,
+      text: $localize `Select a date range`,
+    };
+    this.orderTimeStatsChart.update();
   }
 }

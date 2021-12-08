@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/core/api/api.service';
 
-import { ProcessTimeStat, UserStat } from './statistics.model';
+import { OrderTimeStat, ProcessTimeStat, UserStat } from './statistics.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +18,9 @@ export class StatisticsService {
 
   getProcessTimes(from: Date, to: Date, templateId: string) {
     return this.apiService.get<ProcessTimeStat[]>('statistics/processes/time', { from, to, templateId });
+  }
+
+  getOrderTimes(from: Date, to: Date) {
+    return this.apiService.get<OrderTimeStat[]>('statistics/orders/time', { from, to });
   }
 }

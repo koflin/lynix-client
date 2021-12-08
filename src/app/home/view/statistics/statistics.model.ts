@@ -7,10 +7,17 @@ export interface UserStat {
 }
 
 export interface ProcessTimeStat {
+  id: string;
   name: string;
   orderName: string;
   steps: {
     name: string;
     timeTaken: number;
   }[];
+}
+
+export interface OrderTimeStat {
+  id: string;
+  name: string;
+  timeTaken: number;
 }
