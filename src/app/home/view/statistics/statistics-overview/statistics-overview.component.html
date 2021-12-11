@@ -78,10 +78,20 @@
                           <div class="col-12 col-md-6">
                             <app-single-multiple-choice [result]="processTemplate || ''" (resultChange)="selectProcessTemplate($event)" (searchChange)="searchProcessTemplates($event)" [isMultipleChoice]="false"  [isSearchable]="true" [inputRequired]="false" [data]="processTemplateOptions" [(fieldInformation)]="processTemplateIO" placeholder="search a process template" i18n-placeholder> </app-single-multiple-choice>
                           </div>
+                          <div class="col-12">
+                            <app-checkbox-select name="Status" i18n-name [options]="processStatusOptions" [(selectedOptions)]="processSelectedStatusOptions" (selectedOptionsChange)="updateProcess()"></app-checkbox-select>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+
+                  <!--<a class="dropdown-item" href="javascript:void(0)">
+                                  <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                                  </div>
+                                </a>-->
 
                   <!-- Orders -->
                   <div class="col-12 col-xl-4 col-md-6 col-sm-6">
@@ -103,6 +113,9 @@
                         <div class="row">
                           <div class="col-12 col-md-6">
                             <app-range-date-picker [(startDate)]="orderFrom" [(endDate)]="orderTo" (dateChange)="updateOrder()" [(fieldInformation)]="dateRangeIO" [inputRequired]="false" [format]="format"> </app-range-date-picker>
+                          </div>
+                          <div class="col-12">
+                            <app-checkbox-select name="Status" i18n-name [options]="orderStatusOptions" [(selectedOptions)]="orderSelectedStatusOptions" (selectedOptionsChange)="updateOrder()"></app-checkbox-select>
                           </div>
                         </div>
                       </div>

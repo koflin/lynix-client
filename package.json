@@ -67,6 +67,7 @@
     "sweetalert2": "8.16.3",
     "tslib": "1.10.0",
     "url-polyfill": "^1.1.12",
+    "uuidv4": "^6.2.12",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

@@ -6,7 +6,7 @@ import { OrdersService } from 'src/app/core/orders/orders.service';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
 import { ProductTemplatesService } from 'src/app/core/productTemplates/product-tempaltes.service';
 import { RouteInfo } from 'src/app/helpers/routeInfo';
-import { Order } from 'src/app/models/order';
+import { Order, OrderStatus } from 'src/app/models/order';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { ComponentInfo } from 'src/app/models/ui/componentInfo';
 import { ComponentType } from 'src/app/models/ui/componentType';
@@ -79,7 +79,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
           name: $localize `Unnamed Order`,
           description: undefined,
           products: [],
-          status: 'in_preparation',
+          status: OrderStatus.IN_PREPARATION,
           deliveryDate: new Date()
         };
       }
@@ -146,7 +146,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   }
 
   publishDraft() {
-    this.orderDraft.status = 'released';
+    this.orderDraft.status = OrderStatus.RELEASED;
     this.saveDraft(true).then(() => {
       this.processService.createForOrder(this.orderDraft).then(() => {
         this.toastr.show(

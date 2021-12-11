@@ -1,0 +1,18 @@
+<div class="d-flex flex-row">
+  <div class="dropdown mr-2 " dropdown [insideClick]="true" [dropup]="true">
+    <button class="btn btn-secondary dropdown-toggle test" dropdownToggle type="button">
+      {{ name }}
+    </button>
+    <div *dropdownMenu class="dropdown-menu">
+      <div class="dropdown-item" *ngFor="let option of options">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" [id]="idPrefix + option.value" (change)="changeSelected(option, $event)" [checked]="selectedOptions.indexOf(option) >= 0">
+          <label class="custom-control-label" [for]="idPrefix + option.value">{{ option.name }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <tag-input *ngIf="showTags" [ngModel]="selectedOptionTags" theme="regular-theme" name="tags" [hideForm]="true" [removable]="false"></tag-input>
+  </div>
+</div>

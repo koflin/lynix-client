@@ -4,8 +4,12 @@ import { Chart } from 'chart.js';
 import moment from 'moment';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
 import { RouteInfo } from 'src/app/helpers/routeInfo';
+import { OrderStatus } from 'src/app/models/order';
+import { ProcessStatus } from 'src/app/models/process';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { DatetimePipe } from 'src/app/pipes/datetime/datetime.pipe';
+import { StatusPipe } from 'src/app/pipes/status/status.pipe';
+import { CheckboxSelectOption } from 'src/app/shared/models/checkbox-select-option';
 import { InputOutputValue, SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
 
 import { UserStat } from '../statistics.model';
@@ -48,12 +52,20 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
   processTemplate: SingleMultiChoiceItem = null;
   processTemplateOptions: SingleMultiChoiceItem[];
   processTimeStatsChart: Chart;
+  processStatusOptions: CheckboxSelectOption<ProcessStatus>[] = Object.values(ProcessStatus).map((status) => {
+    return { name: this.statusPipe.transform(status), value: status };
+  });
+  processSelectedStatusOptions: CheckboxSelectOption<ProcessStatus>[];
   @ViewChild('processTimeStatsEl') processTimeStatsRef: ElementRef;
 
   // Order Stats
   orderTo: Date = moment().toDate();
   orderFrom: Date = moment().subtract(1, 'week').toDate();
   orderTimeStatsChart: Chart;
+  orderStatusOptions: CheckboxSelectOption<OrderStatus>[] = Object.values(OrderStatus).map((status) => {
+    return { name: this.statusPipe.transform(status), value: status };
+  });
+  orderSelectedStatusOptions: CheckboxSelectOption<OrderStatus>[];
   @ViewChild('orderTimeStatsEl') orderTimeStatsRef: ElementRef;
 
   // IO
@@ -68,8 +80,12 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
     private router: Router,
     private statisticsService: StatisticsService,
     private processTemplatesSerivce: ProcessTemplatesService,
-    private dateTimePipe: DatetimePipe
-  ) { }
+    private dateTimePipe: DatetimePipe,
+    private statusPipe: StatusPipe
+  ) {
+    this.processSelectedStatusOptions = [...this.processStatusOptions];
+    this.orderSelectedStatusOptions = [...this.orderStatusOptions];
+  }
 
   ngOnInit(): void {
     this.statisticsService.getUsers().subscribe((data) => {
@@ -260,12 +276,21 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
   }
 
   updateProcess() {
+    console.log('Update Process');
+    console.log(this.processSelectedStatusOptions);
+    console.log(this.orderSelectedStatusOptions)
+
     if (!this.processTemplate) {
       this.clearProcess();
       return;
     }
 
-    this.statisticsService.getProcessTimes(this.processFrom, this.processTo, this.processTemplate.value.toString()).subscribe(data => {
+    this.statisticsService.getProcessTimes(
+      this.processFrom,
+      this.processTo,
+      this.processTemplate.value.toString(),
+      this.processSelectedStatusOptions.map(option => option.value)
+    ).subscribe(data => {
 
       if (data == undefined || data.length == 0) {
         this.clearProcess();
@@ -318,7 +343,7 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
   }
 
   updateOrder() {
-    this.statisticsService.getOrderTimes(this.orderFrom, this.orderTo).subscribe(data => {
+    this.statisticsService.getOrderTimes(this.orderFrom, this.orderTo, this.orderSelectedStatusOptions.map(option => option.value)).subscribe(data => {
 
       if (data == undefined || data.length == 0) {
         this.clearOrder();
@@ -328,7 +353,7 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
       this.orderTimeStatsChart.data = {
         labels: data.map(order => order.name),
         datasets: [{
-          label: 'Total Time Taken',
+          label: $localize `Total Time Taken`,
           backgroundColor: this.colors[0],
           data: data.map(order => moment.duration(order.timeTaken, 'seconds').asSeconds())
         }]
