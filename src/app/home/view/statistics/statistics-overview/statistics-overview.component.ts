@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
+import { template } from 'lodash';
 import moment from 'moment';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
 import { RouteInfo } from 'src/app/helpers/routeInfo';
@@ -8,6 +9,7 @@ import { OrderStatus } from 'src/app/models/order';
 import { ProcessStatus } from 'src/app/models/process';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { DatetimePipe } from 'src/app/pipes/datetime/datetime.pipe';
+import { DurationUnitPipe } from 'src/app/pipes/duration/duration-unit.pipe';
 import { StatusPipe } from 'src/app/pipes/status/status.pipe';
 import { CheckboxSelectOption } from 'src/app/shared/models/checkbox-select-option';
 import { InputOutputValue, SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
@@ -81,7 +83,8 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
     private statisticsService: StatisticsService,
     private processTemplatesSerivce: ProcessTemplatesService,
     private dateTimePipe: DatetimePipe,
-    private statusPipe: StatusPipe
+    private statusPipe: StatusPipe,
+    private durationUnitPipe: DurationUnitPipe
   ) {
     this.processSelectedStatusOptions = [...this.processStatusOptions];
     this.orderSelectedStatusOptions = [...this.orderStatusOptions];
@@ -276,10 +279,6 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
   }
 
   updateProcess() {
-    console.log('Update Process');
-    console.log(this.processSelectedStatusOptions);
-    console.log(this.orderSelectedStatusOptions)
-
     if (!this.processTemplate) {
       this.clearProcess();
       return;
@@ -297,16 +296,22 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
         return;
       }
 
+      const timeData = data[0].steps.map((t, i) => data.map(process => process.steps[i].timeTaken ?? 0));
+      const normalized = this.normalizeData(timeData);
+
       this.processTimeStatsChart.data = {
         labels: data.map(process => process.orderName),
         datasets: data[0].steps.map((template, i) => {
+
           return {
             label: template.name,
             backgroundColor: this.colors[i % this.colors.length],
-            data: data.map(process => moment.duration(process.steps[i].timeTaken, 'seconds').asSeconds())
+            data: normalized.data[i]
           }
         })
       };
+
+      this.processTimeStatsChart.options.scales.yAxes[0].scaleLabel.labelString = this.durationUnitPipe.transform(normalized.unit);
 
       this.processTimeStatsChart.options.title = {
         display: true,
@@ -350,14 +355,19 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
         return;
       }
 
+      const orderTime = data.map(order => order.timeTaken ?? 0);
+      const normalized = this.normalizeData(orderTime);
+
       this.orderTimeStatsChart.data = {
         labels: data.map(order => order.name),
         datasets: [{
           label: $localize `Total Time Taken`,
           backgroundColor: this.colors[0],
-          data: data.map(order => moment.duration(order.timeTaken, 'seconds').asSeconds())
+          data: normalized.data
         }]
       };
+
+      this.orderTimeStatsChart.options.scales.yAxes[0].scaleLabel.labelString = this.durationUnitPipe.transform(normalized.unit);
 
       this.orderTimeStatsChart.options.title = {
         display: true,
@@ -376,5 +386,37 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
       text: $localize `Select a date range`,
     };
     this.orderTimeStatsChart.update();
+  }
+
+  private normalizeData<T extends number | number[]>(data: T[], max?: number): { data: T[], unit: moment.unitOfTime.Base } {
+    let unit: moment.unitOfTime.Base;
+
+    if (!data || data.length == 0) {
+      return { data: [], unit: 'seconds' };
+    }
+
+    if (max === undefined) {
+      max = Math.max(...data.flat(2));
+    }
+
+    if (max >= 60*60) {
+      unit = 'hours';
+    } else if (max >= 60) {
+      unit = 'minutes';
+    } else {
+      unit = 'seconds';
+    }
+
+    if (Array.isArray(data[0])) {
+      return {
+        data: <T[]>(<number[][]>data).map(subData => this.normalizeData(subData, max).data),
+        unit
+      };
+    } else {
+      return {
+        data: <T[]>(<number[]>data).map(value => parseFloat(moment.duration(value, 'seconds').as(unit).toFixed(1))),
+        unit
+      };
+    }
   }
 }

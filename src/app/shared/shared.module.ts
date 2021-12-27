@@ -16,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { HideIfUnauthorizedDirective } from '../auth/hide-if-unauthorized.directive';
 import { ShowIfUnauthorizedDirective } from '../auth/show-if-unauthorized.directive';
 import { DatetimePipe } from '../pipes/datetime/datetime.pipe';
+import { DurationUnitPipe } from '../pipes/duration/duration-unit.pipe';
 import { DurationPipe } from '../pipes/duration/duration.pipe';
 import { LanguagePipe } from '../pipes/language/language.pipe';
 import { VideoTypePipe } from '../pipes/media-type/media-type.pipe';
@@ -54,7 +55,8 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
   providers: [
     TabFragmentPipe,
     TabIndicesPipe,
-    StatusPipe
+    StatusPipe,
+    DurationUnitPipe,
   ],
   declarations: [TopNavigationComponent,
     TabsComponent,
@@ -88,6 +90,7 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
     DatetimePipe,
     RangeDatePickerComponent,
     CheckboxSelectComponent,
+    DurationUnitPipe,
      ],
   imports: [
     CommonModule,
