@@ -159,7 +159,6 @@
                                   </button>
                                   <button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" (click)="start(row.id)" type="button" [hideIfUnauthorized]="permissions.PROCESS_EXECUTE" *ngIf="row.canExecute && !row.isOccupied && (row.status === 'released' || row.status === 'in_progress')" >
                                     <span class="btn-inner--icon"><i class="fas fa-play"></i></span>
-
                                   </button>
                                   <!--<button class="btn btn-icon btn-3 btn-default" [ngClass]="{'btn-sm' : windowWidth<428}" type="button" [hideIfUnauthorized]="permissions.ORDER_EDIT" *ngIf="row.status === 'completed'" >
                                     <span class="btn-inner--icon"><i class="fas fa-archive"></i></span>

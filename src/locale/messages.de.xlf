@@ -113,7 +113,7 @@
           <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit><trans-unit id="220550782947016929" datatype="html">
-        <source>Order</source><target state="new">Order</target>
+        <source>Order</source><target state="new">Auftrag</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/view/dashboard/dashboard.service.ts</context>
           <context context-type="linenumber">60</context>

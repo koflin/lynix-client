@@ -1,7 +1,6 @@
 import { group } from '@angular/animations';
-import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { cloneDeep } from 'lodash';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EventsService } from 'src/app/core/events/events.service';
 import { ProcessesService } from 'src/app/core/processes/processes.service';
@@ -10,6 +9,7 @@ import { UsersService } from 'src/app/core/users/users.service';
 import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { Event } from 'src/app/models/event';
 import { LocalUser } from 'src/app/models/localUser';
+import { ProcessStatus } from 'src/app/models/process';
 import { Permission } from 'src/app/models/role';
 import { ProcessGroupNode, ProcessNode } from 'src/app/models/ui';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
@@ -23,7 +23,7 @@ import { ProcessesOverviewService } from '../processes-overview.service';
   templateUrl: './processes-overview.component.html',
   styleUrls: ['./processes-overview.component.scss']
 })
-export class ProcessesOverviewComponent implements OnInit {
+export class ProcessesOverviewComponent implements OnInit, OnChanges {
   permissions = Permission;
 
   breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Processes`, url: new RouteInfo(this.router.url) },];
@@ -31,11 +31,6 @@ export class ProcessesOverviewComponent implements OnInit {
   loaded = false;
   windowWidth:number
   processNodeGroups: ProcessGroupNode [] = [
-    /*{
-      title: $localize `Assistance Required`,
-      status: 'assistance_required',
-      nodes: []
-    },*/
     {
       title: $localize `All`,
       status: null,
@@ -43,22 +38,22 @@ export class ProcessesOverviewComponent implements OnInit {
     },
     {
       title: $localize `In Preparation`,
-      status: 'in_preparation',
+      status: ProcessStatus.IN_PREPARATION,
       nodes: []
     },
     {
       title: $localize `Released`,
-      status: 'released',
+      status: ProcessStatus.RELEASED,
       nodes: []
     },
     {
       title: $localize `In progress`,
-      status: 'in_progress',
+      status: ProcessStatus.IN_PROGRESS,
       nodes: []
     },
     {
       title: $localize `Completed`,
-      status: 'completed',
+      status: ProcessStatus.COMPLETED,
       nodes: []
     }
   ];
@@ -80,7 +75,7 @@ export class ProcessesOverviewComponent implements OnInit {
   constructor(
     private router: Router,
     private processesOverviewService: ProcessesOverviewService ,
-    private processesService: ProcessesService ,
+    private processesService: ProcessesService,
     private usersService: UsersService,
     private authService: AuthService,
     private rolesService: RolesService,
@@ -90,6 +85,10 @@ export class ProcessesOverviewComponent implements OnInit {
 
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
+
   ngOnInit(): void {
     this.currentUser = this.authService.getLocalUser();
 
@@ -97,12 +96,17 @@ export class ProcessesOverviewComponent implements OnInit {
 
     // Change
     this.processesOverviewService.onProcessNodeChange.subscribe((changedNode) => {
-      for (let group of this.processNodeGroups) {
+      console.log(changedNode);
+
+      for (let i = 1; i < this.processNodeGroups.length; i++) {
+        const group = this.processNodeGroups[i];
         const node = group.nodes.find(candidate => candidate.id === changedNode.id);
 
         if (node) {
-          this.removeNode(node.id);
-          this.addNode(changedNode);
+          if (node.status != group.status) {
+            this.removeNode(node.id);
+            this.addNode(changedNode);
+          }
           this.processNodeGroups = cloneDeep(this.processNodeGroups);
           break;
         }

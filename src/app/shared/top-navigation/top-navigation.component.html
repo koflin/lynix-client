@@ -48,7 +48,7 @@
                 </a>
               </li>
               <li *ngFor="let group of menu" class="nav-item dropdown card menu-card-bottom-margin zooming ">
-                <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive(group.name)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle menu-card-a-padding" style="white-space: normal !important;" href="javascript:void(0)" (click)="setActive(group.name)" id="navbarDropdownMenuLink" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
                     <i class="icon icon-big item-icon mt--1 {{ group.icon }}"></i> <span i18n>{{ group.name }}</span>
                   </div>
