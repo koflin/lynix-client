@@ -1,5 +1,5 @@
 import { group } from '@angular/animations';
-import { ChangeDetectorRef, Component, HostListener, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EventsService } from 'src/app/core/events/events.service';
@@ -23,7 +23,7 @@ import { ProcessesOverviewService } from '../processes-overview.service';
   templateUrl: './processes-overview.component.html',
   styleUrls: ['./processes-overview.component.scss']
 })
-export class ProcessesOverviewComponent implements OnInit, OnChanges {
+export class ProcessesOverviewComponent implements OnInit {
   permissions = Permission;
 
   breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Processes`, url: new RouteInfo(this.router.url) },];
@@ -85,10 +85,6 @@ export class ProcessesOverviewComponent implements OnInit, OnChanges {
 
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
-
   ngOnInit(): void {
     this.currentUser = this.authService.getLocalUser();
 
@@ -96,7 +92,6 @@ export class ProcessesOverviewComponent implements OnInit, OnChanges {
 
     // Change
     this.processesOverviewService.onProcessNodeChange.subscribe((changedNode) => {
-      console.log(changedNode);
 
       for (let i = 1; i < this.processNodeGroups.length; i++) {
         const group = this.processNodeGroups[i];
@@ -106,8 +101,10 @@ export class ProcessesOverviewComponent implements OnInit, OnChanges {
           if (node.status != group.status) {
             this.removeNode(node.id);
             this.addNode(changedNode);
+          } else {
+            this.changeNode(changedNode);
           }
-          this.processNodeGroups = cloneDeep(this.processNodeGroups);
+          this.processNodeGroups[i].nodes = [...group.nodes];
           break;
         }
       }
@@ -137,6 +134,16 @@ export class ProcessesOverviewComponent implements OnInit, OnChanges {
       if (group.status === node.status || group.status === null) {
         group.nodes.push(node);
         break;
+      }
+    }
+  }
+
+  changeNode(node: ProcessNode) {
+    for (let group of this.processNodeGroups) {
+      const index = group.nodes.findIndex(candidate => candidate.id === node.id);
+
+      if (index != -1) {
+        group.nodes[index] = node;
       }
     }
   }

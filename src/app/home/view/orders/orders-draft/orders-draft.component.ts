@@ -234,19 +234,51 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   deleting(data: ComponentInfo){
     switch (data.type ) {
       case ComponentType.step:
-        this.orderDraft.products[this.productToggleIndex].template.processes[this.processToggleIndex].template.steps.splice(data.index, 1)
+        const steps = this.orderDraft.products[this.productToggleIndex].template.processes[this.processToggleIndex].template.steps;
+        steps.splice(data.index, 1);
+
+        if (this.stepToggleIndex === steps.length) {
+          this.stepToggleIndex--;
+        }
+
+        if (this.stepToggleIndex < 0) {
+          this.stepToggleIndex == undefined;
+        }
         break;
       case ComponentType.process:
-        this.orderDraft.products[this.productToggleIndex].template.processes.splice(data.index, 1)
+        const processes = this.orderDraft.products[this.productToggleIndex].template.processes;
+        processes.splice(data.index, 1);
+
+        if (this.processToggleIndex === processes.length) {
+          this.processToggleIndex--;
+        }
+
+        if (this.processToggleIndex < 0) {
+          this.processToggleIndex == undefined;
+        }
+        this.stepToggleIndex = undefined;
         break;
       case ComponentType.product:
-        this.orderDraft.products.splice(data.index, 1)
+        const products = this.orderDraft.products;
+        products.splice(data.index, 1);
+
+        if (this.productToggleIndex === products.length) {
+          this.productToggleIndex--;
+        }
+
+        if (this.productToggleIndex < 0) {
+          this.productToggleIndex == undefined;
+        }
+
+        this.processToggleIndex = undefined;
+        this.stepToggleIndex = undefined;
         break;
       default:
         this.deleteDraft()
-        break;
+        return;
     }
 
+    this.orderDraft = {...this.orderDraft};
   }
 
   addStep() {

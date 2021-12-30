@@ -180,15 +180,36 @@ export class ProductTemplateDetailComponent implements OnInit {
     switch (data.type ) {
 
       case ComponentType.step:
-        this.productTemplate.processes[this.processToggleIndex].template.steps.splice(data.index, 1)
+        const steps = this.productTemplate.processes[this.processToggleIndex].template.steps;
+        steps.splice(data.index, 1);
+
+        if (this.stepToggleIndex === steps.length) {
+          this.stepToggleIndex--;
+        }
+
+        if (this.stepToggleIndex < 0) {
+          this.stepToggleIndex == undefined;
+        }
         break;
       case ComponentType.process:
-        this.productTemplate.processes.splice(data.index, 1)
+        const processes = this.productTemplate.processes;
+        processes.splice(data.index, 1);
+
+        if (this.processToggleIndex === processes.length) {
+          this.processToggleIndex--;
+        }
+
+        if (this.processToggleIndex < 0) {
+          this.processToggleIndex == undefined;
+        }
+        this.stepToggleIndex = undefined;
         break;
       default:
         this.deleteProduct()
-        break;
+        return;
     }
+
+    this.productTemplate = {...this.productTemplate};
   }
 
   deleteProduct() {

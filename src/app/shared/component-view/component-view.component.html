@@ -6,9 +6,9 @@
       </label>
     </div>
   </div>
-  <div class=" col-12 mt--4 pt-1 mb-0" *ngIf="productNames || processNames || stepNames">
+  <div class=" col-12 mt--4 pt-1 mb-0" *ngIf="productNames?.length > 0 || processNames?.length > 0 || stepNames?.length > 0">
     <div class="card pt-0 mb-0 shadow-right no-bottom-radius">
-      <div class="col-12 pt-1" *ngIf="productNames">
+      <div class="col-12 pt-1" *ngIf="productNames?.length > 0">
         <div class="container-fluid">
           <div class="row">
             <div class="col-1 col-xl-1 col-sm-2 d-flex align-items-center justify-content-center">
@@ -20,9 +20,9 @@
           </div>
         </div>
       </div>
-      <div class="col-12 pt-1" *ngIf="processNames">
+      <div class="col-12 pt-1" *ngIf="processNames?.length > 0">
         <div class="container-fluid">
-          <div class="row" [@animSlider]="productToggleIndex">
+          <div class="row">
             <div class="pl-4 col-1 col-xl-1 col-sm-2 d-flex align-items-center justify-content-center" [ngClass]="{'none-defined-padding': processNames.length==0}">
               <h3 class="text-default mb-0" i18n>Processes:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="processesNames.length==0">None defined</p>-->
             </div>
@@ -32,9 +32,9 @@
           </div>
         </div>
       </div>
-      <div class="col-12 pt-1" *ngIf="stepNames">
+      <div class="col-12 pt-1" *ngIf="stepNames?.length > 0">
         <div class="container-fluid">
-          <div class="row" [@animSlider]="processToggleIndex">
+          <div class="row">
             <div class="pl-6 col-1 col-xl-1 col-sm-2 d-flex align-items-center justify-content-center" [ngClass]="{'none-defined-padding': stepNames.length==0}">
               <h3 class="text-default mb-0" i18n>Steps:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="stepsName.length==0">None defined</p>-->
             </div>
@@ -55,22 +55,28 @@
   <ng-container [ngSwitch]="getBottomType()">
       <ng-container *ngSwitchCase="ComponentType.step">
           <div class=" col-12 mt--8 pt-2" [@animSlider]="stepToggleIndex">
-            <div class=" card pb-8 pt-2  no-top-radius shadow-right">
-              <app-step [stepTemplate]="step" (stepTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.step) | tabFragment }}"> </app-step>
+            <div *ngFor="let actualStep of process.steps, let i = index">
+              <div class=" card pb-8 pt-2  no-top-radius shadow-right" *ngIf="stepToggleIndex == i">
+                <app-step [stepTemplate]="actualStep" (stepTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.step) | tabFragment }}"> </app-step>
+              </div>
             </div>
           </div>
       </ng-container>
       <ng-container *ngSwitchCase="ComponentType.process">
           <div class=" col-12 mt--8 pt-2" [@animSlider]="processToggleIndex">
-            <div class=" card pb-8 pt-2  no-top-radius shadow-right">
-              <app-process [processTemplate]="process" (processTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.process) | tabFragment }}"></app-process>
+            <div *ngFor="let actualProcess of product.processes, let i = index">
+              <div class=" card pb-8 pt-2  no-top-radius shadow-right" *ngIf="processToggleIndex == i">
+                <app-process [processTemplate]="actualProcess.template" (processTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.process) | tabFragment }}"></app-process>
+              </div>
             </div>
           </div>
       </ng-container>
       <ng-container *ngSwitchCase="ComponentType.product">
           <div class=" col-12 mt--8 pt-2" [@animSlider]="productToggleIndex">
-            <div class=" card pb-8 pt-2 no-top-radius shadow-right pl-3 pr-2">
-              <app-product [productTemplate]="product" (productTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.product) | tabFragment }}"> </app-product>
+            <div *ngFor="let actualProduct of order.products, let i = index">
+              <div class=" card pb-8 pt-2 no-top-radius shadow-right pl-3 pr-2" *ngIf="productToggleIndex == i">
+                <app-product [productTemplate]="actualProduct.template" (productTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.product) | tabFragment }}"> </app-product>
+              </div>
             </div>
           </div>
       </ng-container>
