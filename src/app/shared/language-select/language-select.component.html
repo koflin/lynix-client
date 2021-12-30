@@ -1,11 +1,11 @@
 <div class="dropdown" dropdown>
-  <a href="javascript:void(0)" class="btn btn-default dropdown-toggle " id="dropdownMenuLink" data-toggle="dropdown">
-    {{ selectedLanguage | language }}
+  <a href="javascript:void(0)" class="btn btn-default dropdown-toggle" [class.btn-sm]="small" id="dropdownMenuLink" data-toggle="dropdown">
+    {{ selectedLanguage | language: (small ? 'short' : 'full') }}
   </a>
   <ul  aria-labelledby="dropdownMenuLink" class="dropdown-menu">
     <li *ngFor="let lang of availableLanguages">
       <a class="dropdown-item" href="/{{ lang }}{{ getCurrentRoute() }}" (click)="selectLanguage(lang)">
-        {{ lang | language }}
+        {{ lang | language: (small ? 'short' : 'full')  }}
       </a>
     </li>
   </ul>

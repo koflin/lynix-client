@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 
@@ -9,13 +9,15 @@ import { Language } from '../models/language';
   templateUrl: './language-select.component.html',
   styleUrls: ['./language-select.component.scss']
 })
-export class LanguageSelectComponent implements OnInit {
+export class LanguageSelectComponent implements OnInit, DoCheck {
 
   selectedLanguage: Language;
 
   Language = Language;
 
   availableLanguages: Language[];
+
+  @Input() small: boolean = false;
 
   constructor(
     private cookieService: CookieService,
@@ -24,7 +26,15 @@ export class LanguageSelectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.selectLanguage(<any>this.cookieService.get('preferred_language') ?? Language.EN);
+    this.ngDoCheck();
+  }
+
+  ngDoCheck(): void {
+    const current = <any>this.cookieService.get('preferred_language');
+
+    if (current != this.selectedLanguage) {
+      this.selectLanguage(current ?? Language.EN);
+    }
   }
 
   selectLanguage(language: Language) {
@@ -35,10 +45,6 @@ export class LanguageSelectComponent implements OnInit {
     this.cookieService.put('preferred_language', this.selectedLanguage, { expires: expirationDate, path: '/' });
 
     this.availableLanguages = Object.values(Language).filter(x => (typeof x === "string") && x != this.selectedLanguage);
-
-    /*if (isDevMode()) {
-      location.reload();
-    }*/
   }
 
   getCurrentRoute() {

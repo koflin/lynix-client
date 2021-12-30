@@ -24,7 +24,7 @@ export class ManualsOverviewComponent implements OnInit {
   permissions = Permission;
 
   searchValue:string=""
-  entries: number = 10;
+  entries: number = 5;
 
   @ViewChild('myTable') table: any;
 

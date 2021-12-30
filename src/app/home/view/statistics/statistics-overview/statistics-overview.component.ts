@@ -78,6 +78,8 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
 
   format = 'DD.MM.YYYY';
 
+  labelLimit = 8;
+
   constructor(
     private router: Router,
     private statisticsService: StatisticsService,
@@ -298,13 +300,14 @@ export class StatisticsOverviewComponent implements OnInit, AfterViewInit {
 
       const timeData = data[0].steps.map((t, i) => data.map(process => process.steps[i].timeTaken ?? 0));
       const normalized = this.normalizeData(timeData);
+      const amountOfSteps = data[0].steps?.length;
 
       this.processTimeStatsChart.data = {
         labels: data.map(process => process.orderName),
         datasets: data[0].steps.map((template, i) => {
 
           return {
-            label: template.name,
+            label: amountOfSteps > this.labelLimit ? undefined : template.name,
             backgroundColor: this.colors[i % this.colors.length],
             data: normalized.data[i]
           }

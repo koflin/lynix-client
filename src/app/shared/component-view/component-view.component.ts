@@ -93,8 +93,6 @@ export class ComponentViewComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-
     if (changes.productToggleIndex != undefined || changes.processToggleIndex != undefined || changes.stepToggleIndex != undefined) {
       this.router.navigate([], { fragment: this.fragPipe.transform([this.productToggleIndex, this.processToggleIndex, this.stepToggleIndex]) });
     } else if (changes.component) {

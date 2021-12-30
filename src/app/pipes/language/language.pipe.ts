@@ -6,7 +6,11 @@ import { Language } from 'src/app/shared/models/language';
 })
 export class LanguagePipe implements PipeTransform {
 
-  transform(value: Language, ...args: unknown[]): string {
+  transform(value: Language, format: 'full' | 'short' = 'full'): string {
+    if (format === 'short') {
+      return value.toUpperCase();
+    }
+
     switch(value) {
       case Language.EN:
         return 'English';

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrdersService } from 'src/app/core/orders/orders.service';
 import { RouteInfo } from 'src/app/helpers/routeInfo';
+import { OrderStatus } from 'src/app/models/order';
 import { Permission } from 'src/app/models/role';
 import { OrderNode } from 'src/app/models/ui';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
@@ -20,12 +21,14 @@ export class OrdersOverviewComponent implements OnInit {
 
   orderNodes: OrderNode[];
   breadCrumbs: BreadCrumbInfo[]=[{ name: $localize `Orders`, url: new RouteInfo(this.router.url) },];
-  entries: number = 10;
+  entries: number = 5;
   temp: OrderNode[] = [];
   rows: any[] = []
   SelectionType = SelectionType;
   _showReleased: boolean=true;
   searchValue:string=""
+
+  OrderStatus = OrderStatus;
 
   get showReleased(): boolean {
       return this._showReleased;

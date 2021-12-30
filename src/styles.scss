@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files NOTE: use !important*/
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
 
@@ -251,5 +251,13 @@ li:focus{
 }
 .real-strong strong {
   font-weight: bold !important;
+}
+
+datatable-scroller {
+  width: 100% !important;
+}
+
+.dropdown-menu {
+  min-width: auto !important;
 }
 

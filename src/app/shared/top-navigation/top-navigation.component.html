@@ -1,18 +1,25 @@
 <!-- Desktop View -->
 <nav class="navbar navbar-expand-lg sticky desktop_nav navigation_bar">
-  <div class="d-flex justify-content-between" style="width: 100%;">
-    <a class="navbar-brand mr-5" routerLink="/dashboard"><img style="object-fit: scale-down;" src="assets/img/Logo_Lynix_RGB.svg"></a>
-    <div>
-      <img *ngIf="user && user.companyLogo" style="height: 80%;" [src]="user.companyLogo">
+  <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
+    <a class="navbar-brand mr-3" routerLink="/dashboard"><img style="object-fit: scale-down;" src="assets/img/Logo_Lynix_RGB.svg"></a>
+    <div class="d-none d-lg-block">
+      <img *ngIf="user?.companyLogo" style="background-size: contain; max-height: 80%;" [src]="user.companyLogo">
     </div>
 
-    <p class="d-none d-lg-block text-default" style="padding-top:10px"> SMART ASSISTANT SYSTEM </p>
+    <p class="d-none d-xl-block text-default mb-0"> SMART ASSISTANT SYSTEM </p>
 
-    <div class="row">
-      <div class="col">
-        <app-language-select></app-language-select>
+    <div class="d-flex">
+      <div class="d-none d-sm-block">
+        <div class="d-flex align-items-center h-100">
+          <app-language-select></app-language-select>
+        </div>
       </div>
-      <div class="navbar-toggle col">
+      <div class="d-block d-sm-none">
+        <div class="d-flex align-items-center h-100">
+          <app-language-select [small]="true"></app-language-select>
+        </div>
+      </div>
+      <div class="navbar-toggle ml-3">
         <div class="menu-icon-margin">
             <i class="fas fa-bars" style="font-size: 36px;" (click)="openNavigation()"></i>
         </div>

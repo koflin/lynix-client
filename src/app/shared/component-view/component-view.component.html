@@ -64,20 +64,34 @@
       </ng-container>
       <ng-container *ngSwitchCase="ComponentType.process">
           <div class=" col-12 mt--8 pt-2" [@animSlider]="processToggleIndex">
-            <div *ngFor="let actualProcess of product.processes, let i = index">
-              <div class=" card pb-8 pt-2  no-top-radius shadow-right" *ngIf="processToggleIndex == i">
-                <app-process [processTemplate]="actualProcess.template" (processTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.process) | tabFragment }}"></app-process>
+            <div *ngIf="topType === ComponentType.process; else processNotTop">
+              <div class=" card pb-8 pt-2 no-top-radius shadow-right pl-3 pr-2">
+                <app-process [processTemplate]="process" (processTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.process) | tabFragment }}"></app-process>
               </div>
             </div>
+            <ng-template #processNotTop>
+              <div *ngFor="let actualProcess of product.processes, let i = index">
+                <div class=" card pb-8 pt-2  no-top-radius shadow-right" *ngIf="processToggleIndex == i">
+                  <app-process [processTemplate]="actualProcess.template" (processTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.process) | tabFragment }}"></app-process>
+                </div>
+              </div>
+            </ng-template>
           </div>
       </ng-container>
       <ng-container *ngSwitchCase="ComponentType.product">
           <div class=" col-12 mt--8 pt-2" [@animSlider]="productToggleIndex">
-            <div *ngFor="let actualProduct of order.products, let i = index">
-              <div class=" card pb-8 pt-2 no-top-radius shadow-right pl-3 pr-2" *ngIf="productToggleIndex == i">
-                <app-product [productTemplate]="actualProduct.template" (productTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.product) | tabFragment }}"> </app-product>
+            <div *ngIf="topType === ComponentType.product; else productNotTop">
+              <div class=" card pb-8 pt-2 no-top-radius shadow-right pl-3 pr-2">
+                <app-product [productTemplate]="product" (productTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.product) | tabFragment }}"> </app-product>
               </div>
             </div>
+            <ng-template #productNotTop>
+              <div *ngFor="let actualProduct of order.products, let i = index">
+                <div class=" card pb-8 pt-2 no-top-radius shadow-right pl-3 pr-2" *ngIf="productToggleIndex == i">
+                  <app-product [productTemplate]="actualProduct.template" (productTemplateChange)="detectChange()" navFragment="{{ getFragment(ComponentType.product) | tabFragment }}"> </app-product>
+                </div>
+              </div>
+            </ng-template>
           </div>
       </ng-container>
       <ng-container *ngSwitchDefault>
