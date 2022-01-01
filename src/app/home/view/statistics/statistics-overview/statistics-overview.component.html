@@ -34,7 +34,7 @@
                             </thead>
 
                             <tbody class=" list">
-                              <tr *ngFor="let user of users">
+                              <tr *ngFor="let user of userStats">
                                 <th scope="row">
                                   <div class=" media align-items-center">
                                     <div class=" media-body">
@@ -44,32 +44,12 @@
                                     </div>
                                   </div>
                                 </th>
-                                <td>{{ user.status }}</td>
-                                <td>{{ user.role }}</td>
+                                <td>{{ user.status | userStatus }}</td>
+                                <td>{{ user.roleName }}</td>
                               </tr>
                             </tbody>
                           </table>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Orders -->
-                  <div class="col-12 col-xl-4 col-md-6 col-sm-6">
-                    <div class="card card-static-strong-shadow ml-2 mr-2 pl-0 pr-0">
-                      <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/process.jpg); background-size: cover; background-position: center center;" >
-                          <span class="mask bg-gradient-default opacity-8"> </span>
-
-                          <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Orders</h5>
-                          <div class="z-index-1">
-                            <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
-                              <i class=" icon icon-hierarchy-56 icon-big" > </i>
-                            </div>
-                          </div>
-                      </div>
-                      <div class=" card-body p-0">
-                        <canvas class="mt-3" #orderNow> </canvas>
-                        <canvas class="mt-3" #orderHistory> </canvas>
                       </div>
                     </div>
                   </div>
@@ -87,12 +67,100 @@
                             </div>
                           </div>
                       </div>
+                      <div class=" card-body p-2">
+                        <div class="row p-3">
+                          <canvas class="mt-3" #processTimeStatsEl> </canvas>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 col-md-6">
+                            <app-range-date-picker [(startDate)]="processFrom" [(endDate)]="processTo" (dateChange)="updateProcess()" [(fieldInformation)]="dateRangeIO" [inputRequired]="false" [format]="format"> </app-range-date-picker>
+                          </div>
+                          <div class="col-12 col-md-6">
+                            <app-single-multiple-choice [result]="processTemplate || ''" (resultChange)="selectProcessTemplate($event)" (searchChange)="searchProcessTemplates($event)" [isMultipleChoice]="false"  [isSearchable]="true" [inputRequired]="false" [data]="processTemplateOptions" [(fieldInformation)]="processTemplateIO" placeholder="search a process template" i18n-placeholder> </app-single-multiple-choice>
+                          </div>
+                          <div class="col-12">
+                            <app-checkbox-select name="Status" i18n-name [options]="processStatusOptions" [(selectedOptions)]="processSelectedStatusOptions" (selectedOptionsChange)="updateProcess()"></app-checkbox-select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--<a class="dropdown-item" href="javascript:void(0)">
+                                  <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                                  </div>
+                                </a>-->
+
+                  <!-- Orders -->
+                  <div class="col-12 col-xl-4 col-md-6 col-sm-6">
+                    <div class="card card-static-strong-shadow ml-2 mr-2 pl-0 pr-0">
+                      <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/template.jpg); background-size: cover; background-position: center center;" >
+                          <span class="mask bg-gradient-default opacity-8"> </span>
+
+                          <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Orders</h5>
+                          <div class="z-index-1">
+                            <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
+                              <i class=" icon icon-configuration-tool icon-big"> </i>
+                            </div>
+                          </div>
+                      </div>
+                      <div class=" card-body p-2">
+                        <div class="row p-3">
+                          <canvas class="mt-3" #orderTimeStatsEl> </canvas>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 col-md-6">
+                            <app-range-date-picker [(startDate)]="orderFrom" [(endDate)]="orderTo" (dateChange)="updateOrder()" [(fieldInformation)]="dateRangeIO" [inputRequired]="false" [format]="format"> </app-range-date-picker>
+                          </div>
+                          <div class="col-12">
+                            <app-checkbox-select name="Status" i18n-name [options]="orderStatusOptions" [(selectedOptions)]="orderSelectedStatusOptions" (selectedOptionsChange)="updateOrder()"></app-checkbox-select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Orders -->
+                  <!--<div class="col-12 col-xl-4 col-md-6 col-sm-6">
+                    <div class="card card-static-strong-shadow ml-2 mr-2 pl-0 pr-0">
+                      <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/process.jpg); background-size: cover; background-position: center center;" >
+                          <span class="mask bg-gradient-default opacity-8"> </span>
+
+                          <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Orders</h5>
+                          <div class="z-index-1">
+                            <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
+                              <i class=" icon icon-hierarchy-56 icon-big" > </i>
+                            </div>
+                          </div>
+                      </div>
+                      <div class=" card-body p-0">
+                        <canvas class="mt-3" #orderNow> </canvas>
+                        <canvas class="mt-3" #orderHistory> </canvas>
+                      </div>
+                    </div>
+                  </div>-->
+
+                  <!-- Processes -->
+                  <!--<div class="col-12 col-xl-4 col-md-6 col-sm-6">
+                    <div class="card card-static-strong-shadow ml-2 mr-2 pl-0 pr-0">
+                      <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/template.jpg); background-size: cover; background-position: center center;" >
+                          <span class="mask bg-gradient-default opacity-8"> </span>
+
+                          <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Processes</h5>
+                          <div class="z-index-1">
+                            <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
+                              <i class=" icon icon-configuration-tool icon-big"> </i>
+                            </div>
+                          </div>
+                      </div>
                       <div class=" card-body p-0">
                         <canvas class="mt-3" #processNow> </canvas>
                         <canvas class="mt-3" #processHistory> </canvas>
                       </div>
                     </div>
-                  </div>
+                  </div>-->
                 </div>
               </div>
             </div>

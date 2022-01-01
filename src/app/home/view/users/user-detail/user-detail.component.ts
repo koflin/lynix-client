@@ -188,7 +188,6 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
 
       if (!this.userDetail.activatedAt) {
         this.activation = await this.activationService.getByUserId(this.userId).toPromise();
-        console.log(this.activation);
       }
     }else{
       this.userDetail = {

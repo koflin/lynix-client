@@ -6,7 +6,7 @@ import * as moment from 'moment';
 })
 export class DurationPipe implements PipeTransform {
 
-  transform(seconds: number, format: 'hour-second' = 'hour-second'): string {
+  transform(seconds: number, format: DurationFormat = 'hour-second'): string {
     const duration = moment.duration(seconds, 'seconds');
 
     switch(format) {
@@ -18,3 +18,5 @@ export class DurationPipe implements PipeTransform {
   }
 
 }
+
+export type DurationFormat = 'hour-second';

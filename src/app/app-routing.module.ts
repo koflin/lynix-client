@@ -6,6 +6,7 @@ import { LoginComponent } from './views/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
   // Login
   { path: 'login', component: LoginComponent },
   { path: 'activation/:id', component: ActivationComponent },

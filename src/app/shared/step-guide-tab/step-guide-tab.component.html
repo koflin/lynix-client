@@ -2,14 +2,16 @@
     <div class="col-12" *ngIf="!isManual">
         <div class="card shadow-card-stronger p-3">
             <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="process.currentStepIndex != stepIndex">
-                <span class="alert-inner--text"><strong i18n>Warning!</strong><span i18n>If you want to start this process step, please press "switch"!</span></span>
+                <span class="alert-inner--text"><strong i18n>Warning! </strong>
+                  <span i18n>If you want to start this process step, please press "switch"!</span>
+                </span>
                 <button type="button" (click)="showAlert=false" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
               <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="process.currentStepIndex == stepIndex && !process.isRunning ">
 
-                <span class="alert-inner--text"><strong i18n>Warning!</strong><span i18n>If you want to start this process step, please press "start"!</span></span>
+                <span class="alert-inner--text"><strong i18n>Warning! </strong><span i18n>If you want to start this process step, please press "resume"!</span></span>
                 <button type="button" (click)="showAlert=false" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>

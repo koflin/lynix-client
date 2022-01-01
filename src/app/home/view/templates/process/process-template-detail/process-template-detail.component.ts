@@ -147,12 +147,23 @@ export class ProcessTemplateDetailComponent implements OnInit, HasUnsavedData {
   deleting(data: ComponentInfo){
     switch (data.type ) {
       case ComponentType.step:
-        this.processTemplate.steps.splice(data.index, 1)
+        const steps = this.processTemplate.steps;
+        steps.splice(data.index, 1);
+
+        if (this.stepToggleIndex === steps.length) {
+          this.stepToggleIndex--;
+        }
+
+        if (this.stepToggleIndex < 0) {
+          this.stepToggleIndex == undefined;
+        }
         break;
       default:
         this.deleteProcess()
-        break;
+        return;
     }
+
+    this.processTemplate = {...this.processTemplate};
   }
 
   deleteProcess() {

@@ -125,7 +125,7 @@ export class GuideComponent implements OnInit, OnDestroy {
 
       this.breadCrumbs=[{name: $localize `Processes`, url: new RouteInfo("/processes/overview") }, {name: this.process.name , url: new RouteInfo(this.router.url) },];
       this.stepNames = this.process.steps.map((s)=>{
-        return s.title
+        return s.title;
       })
       this.stepNames.unshift($localize `Overview`)
       this.stepNames.push($localize `Finish`)

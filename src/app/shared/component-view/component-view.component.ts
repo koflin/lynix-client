@@ -1,5 +1,5 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { Order } from 'src/app/models/order';
@@ -47,7 +47,7 @@ const right = [
     ]),
   ]
 })
-export class ComponentViewComponent implements OnInit {
+export class ComponentViewComponent implements OnInit, OnChanges {
 
   @Input() component: any;
   @Input() topType: Exclude<ComponentType, ComponentType.step>;
@@ -91,6 +91,14 @@ export class ComponentViewComponent implements OnInit {
     private indicesPipe: TabIndicesPipe,
     private fragPipe: TabFragmentPipe
   ) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.productToggleIndex != undefined || changes.processToggleIndex != undefined || changes.stepToggleIndex != undefined) {
+      this.router.navigate([], { fragment: this.fragPipe.transform([this.productToggleIndex, this.processToggleIndex, this.stepToggleIndex]) });
+    } else if (changes.component) {
+      this.updateComponents();
+    }
+  }
 
   ngOnInit(): void {
     this.route.fragment.subscribe((fragment) => {
@@ -213,6 +221,7 @@ export class ComponentViewComponent implements OnInit {
   detectChange() {
     this.isEdited = true;
     this.isEditedChange.emit(this.isEdited);
+    this.updateComponents();
   }
 
   getFragment(until: ComponentType) {
@@ -234,5 +243,9 @@ export class ComponentViewComponent implements OnInit {
       videoUris: [],
       estimatedTime: 0,
     });
+  }
+
+  toJson(obj: any) {
+    return JSON.stringify(obj);
   }
 }

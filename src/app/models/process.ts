@@ -28,4 +28,10 @@ export interface Process extends ProcessTemplate, MetadataEntity {
   steps: Step[];
 }
 
-export type ProcessStatus = 'in_preparation' | 'released' | 'in_progress' | 'completed' | 'assistance_required';
+export enum ProcessStatus {
+  IN_PREPARATION = 'in_preparation',
+  RELEASED = 'released',
+  IN_PROGRESS = 'in_progress',
+  COMPLETED = 'completed',
+  ASSISTANCE_REQUIRED = 'assistance_required'
+};
