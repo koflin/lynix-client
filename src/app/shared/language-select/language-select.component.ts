@@ -32,7 +32,7 @@ export class LanguageSelectComponent implements OnInit, DoCheck {
   ngDoCheck(): void {
     const current = <any>this.cookieService.get('preferred_language');
 
-    if (current != this.selectedLanguage) {
+    if (!current || current != this.selectedLanguage) {
       this.selectLanguage(current ?? Language.EN);
     }
   }
