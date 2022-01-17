@@ -17,4 +17,9 @@ export interface Order extends CompanyBase, MetadataEntity {
   }[];
 }
 
-export type OrderStatus = 'in_preparation' | 'released' | 'in_progress' | 'completed';
+export enum OrderStatus {
+  IN_PREPARATION = 'in_preparation',
+  RELEASED = 'released',
+  IN_PROGRESS = 'in_progress',
+  COMPLETED = 'completed'
+}

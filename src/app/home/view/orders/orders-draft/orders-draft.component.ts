@@ -1,14 +1,15 @@
-import { animate, group, query, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth/auth.service';
 import { OrdersService } from 'src/app/core/orders/orders.service';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
 import { ProductTemplatesService } from 'src/app/core/productTemplates/product-tempaltes.service';
-import { Order } from 'src/app/models/order';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
+import { Order, OrderStatus } from 'src/app/models/order';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
-import { deletingDataInformation } from 'src/app/models/ui/deletingData';
+import { ComponentInfo } from 'src/app/models/ui/componentInfo';
+import { ComponentType } from 'src/app/models/ui/componentType';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
 import { TabFragmentPipe } from 'src/app/pipes/tab/tab-fragment.pipe';
 import { TabIndicesPipe } from 'src/app/pipes/tab/tab-indices.pipe';
@@ -16,153 +17,24 @@ import swal from 'sweetalert2';
 
 import { ProcessesService } from './../../../../core/processes/processes.service';
 
-const left = [
-  query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
-  group([
-    query(':enter', [style({ transform: 'translateX(-100%)' }), animate('.3s ease-out', style({ transform: 'translateX(0%)' }))], {
-      optional: true,
-    }),
-    query(':leave', [style({ transform: 'translateX(0%)' }), animate('.3s ease-out', style({ transform: 'translateX(100%)' }))], {
-      optional: true,
-    }),
-  ]),
-];
-
-const right = [
-  query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
-  group([
-    query(':enter', [style({ transform: 'translateX(100%)' }), animate('.3s ease-out', style({ transform: 'translateX(0%)' }))], {
-      optional: true,
-    }),
-    query(':leave', [style({ transform: 'translateX(0%)' }), animate('.3s ease-out', style({ transform: 'translateX(-100%)' }))], {
-      optional: true,
-    }),
-  ]),
-];
-
 @Component({
   selector: 'app-orders-draft',
   templateUrl: './orders-draft.component.html',
-  styleUrls: ['./orders-draft.component.scss'],
-  animations: [
-    trigger('animSlider', [
-      transition(':increment', right),
-      transition(':decrement', left),
-    ]),
-  ],
+  styleUrls: ['./orders-draft.component.scss']
 })
 export class OrdersDraftComponent implements OnInit, HasUnsavedData {
-  _orderDraft: Order;
-  breadCrumbs: BreadCrumbInfo[]
-  get orderDraft():Order{
-    return this._orderDraft;
-  }
-  set orderDraft(value:Order){
-    this._orderDraft = value;
-
-    if (value != undefined) {
-      this.setProductNames()
-      this.updateBreadCrumb();
-    }
-  }
-
-  //productsNames:string[]=[]
-  get productsNames():string[]{
-    return this.orderDraft ? this.orderDraft.products.filter((p) => {
-      return p.template
-    })
-    .map((product)=>{
-      return product.template.name
-    }) : [];
-  }
-  _processesNames:string[]=[]
-  get processesNames():string[]{
-    if (this.productToggleId != undefined) {
-      return this.orderDraft.products[this.productToggleId].template.processes.filter((p) => {
-        return p.template
-      }).map((process)=>{
-        return process.template.name
-      })
-    }
-    return []
-
-  }
-  _stepsName:string[]=[]
-  get stepsName():string[]{
-    if (this.processToggleId != undefined && this.productToggleId != undefined) {
-      return this.orderDraft.products[this.productToggleId].template.processes[this.processToggleId].template.steps.filter((p) => {
-        return p.title
-      }).map((process)=>{
-        return process.title
-      })
-    }
-    return []
-
-  }
-  _stepToggleId:number
-  get stepToggleId(){
-    return this._stepToggleId
-  }
-
-  set stepToggleId(index: number) {
-    if (index != undefined) {
-      const length = this.orderDraft?.products[this.productToggleId]?.template.processes[this.processToggleId]?.template.steps.length;
-
-      if (index > length) {
-        index = undefined;
-      }
-
-      if (index == length) {
-        this.addStep();
-      }
-    }
-
-    this._stepToggleId = index;
-  }
-
-  _processToggleId:number
-  get processToggleId(){
-    return this._processToggleId
-  }
-
-  set processToggleId(index: number) {
-    if (index != undefined) {
-      const length = this.orderDraft?.products[this.productToggleId]?.template.processes.length;
-
-      if (index > length) {
-        index = undefined;
-      }
-
-      /*if (index != undefined && index == length) {
-        this.addProcess();
-      }*/
-    }
-
-    this._processToggleId = index;
-  }
-
-  _productToggleId:number
-  get productToggleId(){
-    return this._productToggleId
-  }
-
-  set productToggleId(index: number) {
-    if (index != undefined) {
-      const length = this.orderDraft?.products.length;
-
-      if (index > length) {
-        index = undefined;
-      }
-
-      /*if (index != undefined && index == length) {
-        this.addProduct();
-      }*/
-    }
-
-    this._productToggleId = index;
-  }
+  orderDraft: Order;
+  breadCrumbs: BreadCrumbInfo[] = [];
 
   isEdited = false;
+
+  productToggleIndex: number;
+  processToggleIndex: number;
+  stepToggleIndex: number;
+
+  currentComponent: ComponentInfo;
+
+  ComponentType = ComponentType;
 
   constructor(
     private router: Router,
@@ -174,64 +46,32 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     private processService: ProcessesService,
     private toastr: ToastrService,
     private fragPipe: TabFragmentPipe,
-    private indicesPipe: TabIndicesPipe
+    private indicesPipe: TabIndicesPipe,
+    private cref: ChangeDetectorRef
   ) { }
 
-  private getBaseUrl() {
-    return '/orders/draft/' + this.orderDraft?.id;
-  }
-
-  updateBreadCrumb() {
-    let breadCrumb = [{
+  updateBreadCrumb(subBreadcrumbs: BreadCrumbInfo[]) {
+    this.breadCrumbs = [{
       name: $localize `Orders`,
-      url: "/orders/overview"
+      url: new RouteInfo("/orders/overview")
     }, {
       name: this.orderDraft?.name ? this.orderDraft.name : $localize `New`,
-      url: this.getBaseUrl()
-    }];
+      url: new RouteInfo(this.router.url.split('#')[0])
+    }, ...subBreadcrumbs];
 
-    if (!this.orderDraft) {
-      return;
-    }
-
-    if (this.productToggleId != undefined) {
-      breadCrumb.push({
-        name: this.productsNames[this.productToggleId],
-        url: this.getBaseUrl() + '#' + this.fragPipe.transform([this.productToggleId])
-      });
-    }
-
-    if (this.processToggleId != undefined) {
-      breadCrumb.push({
-        name: this.processesNames[this.processToggleId],
-        url: this.getBaseUrl() + '#' + this.fragPipe.transform([this.productToggleId, this.processToggleId])
-      });
-    }
-
-    if (this.stepToggleId != undefined) {
-      breadCrumb.push({
-        name: this.stepsName[this.stepToggleId],
-        url: this.getBaseUrl() + '#' + this.fragPipe.transform([this.productToggleId, this.processToggleId, this.stepToggleId])
-      });
-    }
-
-    this.breadCrumbs = breadCrumb;
+    this.cref.detectChanges();
   }
 
   hasUnsavedData(): boolean {
     return this.isEdited;
   }
 
-  detectChange() {
-    this.isEdited = true;
-  }
-
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.subscribe(async (params) => {
       const id = params.get('id');
 
       if (id) {
-        this.getOrder(id);
+        this.orderDraft = await this.ordersService.getById(id).toPromise();
       } else {
         this.orderDraft = {
           companyId: this.authService.getLocalUser().companyId,
@@ -239,45 +79,14 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
           name: $localize `Unnamed Order`,
           description: undefined,
           products: [],
-          status: 'in_preparation',
+          status: OrderStatus.IN_PREPARATION,
           deliveryDate: new Date()
         };
-
-        this.isEdited = false;
       }
 
-    });
-
-    this.route.fragment.subscribe((fragment) => {
-      let parts = this.indicesPipe.transform(fragment);
-      parts.push(...new Array<number>(3 - parts.length));
-
-      this.productToggleId = parts[0];
-
-      this.processToggleId = parts[1];
-
-      this.stepToggleId = parts[2];
-
-      this.updateBreadCrumb();
-    });
-  }
-
-  getOrder(id: string) {
-    this.ordersService.getById(id).subscribe(draft => {
-      this.orderDraft = draft;
       this.isEdited = false;
     });
   }
-
-  setProductNames(){
-    /* this.productsNames = this.orderDraft.products.filter((p) => {
-      return p.template
-    })
-    .map((product)=>{
-      return product.template.name
-    }) */
-  }
-
 
   discardDraft() {
     // Ask if really want to discard changes
@@ -308,9 +117,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     if (this.orderDraft && this.orderDraft.id) {
       this.ordersService.save(this.orderDraft);
     } else {
-      const fragment = this.fragPipe.transform([this.productToggleId, this.processToggleId, this.stepToggleId]);
-
-      this.ordersService.create(this.orderDraft).subscribe(id => this.router.navigate(['orders/draft/' + id], { fragment }));
+      this.ordersService.create(this.orderDraft).subscribe(id => this.router.navigate(['orders/draft/' + id], { preserveFragment: true }));
     }
 
     if (!dontFireToastr) {
@@ -339,7 +146,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   }
 
   publishDraft() {
-    this.orderDraft.status = 'released';
+    this.orderDraft.status = OrderStatus.RELEASED;
     this.saveDraft(true).then(() => {
       this.processService.createForOrder(this.orderDraft).then(() => {
         this.toastr.show(
@@ -362,17 +169,6 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     });
   }
 
-  defContainer(){
-    if (this.stepToggleId!=undefined) {
-      return 'step'
-    }else if (this.processToggleId != undefined) {
-      return 'process'
-    } else if(this.productToggleId != undefined){
-      return 'product'
-    }else{
-      return 'order'
-    }
-  }
   cancelModal(){
     if (this.hasUnsavedData()) {
       swal.fire({
@@ -415,10 +211,8 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
   })
   }
   deleteModal(){
-    let data: deletingDataInformation = this.specificDeleteData()
-
     swal.fire({
-      title: $localize `Are you sure to delete ${data.tabContainerDisplayname} '${data.tabName}'?`,
+      title: $localize `Are you sure to delete ${this.currentComponent.typeDisplayname} '${this.currentComponent.name}'?`,
       text: $localize `You won't be able to revert this!`,
       type: 'warning',
       showCancelButton: true,
@@ -429,7 +223,7 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
       cancelButtonText: $localize `Cancel`
     }).then((result) => {
       if (result.value) {
-          this.deleting(data)
+          this.deleting(this.currentComponent)
 
           // Show confirmation
           //this.deleteDraft()
@@ -437,79 +231,59 @@ export class OrdersDraftComponent implements OnInit, HasUnsavedData {
     })
   }
 
-  deleting(data: deletingDataInformation){
-    switch (data.tabContainerName ) {
+  deleting(data: ComponentInfo){
+    switch (data.type ) {
+      case ComponentType.step:
+        const steps = this.orderDraft.products[this.productToggleIndex].template.processes[this.processToggleIndex].template.steps;
+        steps.splice(data.index, 1);
 
-      case 'step':
-        if (data.tabId>0) {
-          //this.stepToggleId=data.tabId-1
-        }else{
-          //this.processToggleId=data.parentTabId
+        if (this.stepToggleIndex === steps.length) {
+          this.stepToggleIndex--;
         }
-        this.orderDraft.products[this.productToggleId].template.processes[this.processToggleId].template.steps.splice(data.tabId, 1)
-        break;
-      case 'process':
-        if (data.tabId>0) {
-          //this.processToggleId=data.tabId-1
-        }else{
-          //this.productToggleId=data.parentTabId
+
+        if (this.stepToggleIndex < 0) {
+          this.stepToggleIndex == undefined;
         }
-        this.orderDraft.products[this.productToggleId].template.processes.splice(data.tabId, 1)
-
         break;
-      case 'product':
-          if (data.tabId>0) {
-            //this.productToggleId=data.tabId-1
-          }else{
-            //this.overallInformation()
-          }
-          this.orderDraft.products.splice(data.tabId, 1)
+      case ComponentType.process:
+        const processes = this.orderDraft.products[this.productToggleIndex].template.processes;
+        processes.splice(data.index, 1);
 
-          break;
+        if (this.processToggleIndex === processes.length) {
+          this.processToggleIndex--;
+        }
+
+        if (this.processToggleIndex < 0) {
+          this.processToggleIndex == undefined;
+        }
+        this.stepToggleIndex = undefined;
+        break;
+      case ComponentType.product:
+        const products = this.orderDraft.products;
+        products.splice(data.index, 1);
+
+        if (this.productToggleIndex === products.length) {
+          this.productToggleIndex--;
+        }
+
+        if (this.productToggleIndex < 0) {
+          this.productToggleIndex == undefined;
+        }
+
+        this.processToggleIndex = undefined;
+        this.stepToggleIndex = undefined;
+        break;
       default:
         this.deleteDraft()
-        break;
+        return;
     }
 
-  }
-  specificDeleteData(): deletingDataInformation{
-    let container= this.defContainer()
-    let deletingData:deletingDataInformation={'parentTabId':undefined,
-      'tabId': undefined, 'tabName': undefined, 'tabContainerName':undefined, 'tabContainerDisplayname': undefined}
-    switch (container) {
-      case 'step':
-        deletingData.parentTabId=this.processToggleId
-        deletingData.tabId=this.stepToggleId
-        deletingData.tabName= this.stepsName[this.stepToggleId]
-        deletingData.tabContainerName='step'
-        deletingData.tabContainerDisplayname = $localize `step`
-        break;
-      case 'process':
-        deletingData.parentTabId=this.productToggleId
-        deletingData.tabId=this.processToggleId
-        deletingData.tabName= this.processesNames[this.processToggleId]
-        deletingData.tabContainerName='process'
-        deletingData.tabContainerDisplayname = $localize `process`
-        break;
-      case 'product':
-        deletingData.parentTabId=0
-        deletingData.tabId=this.productToggleId
-        deletingData.tabName= this.productsNames[this.productToggleId]
-        deletingData.tabContainerName='product'
-        deletingData.tabContainerDisplayname = $localize `product`
-        break;
-      default:
-        deletingData.parentTabId=undefined
-        deletingData.tabId=0
-        deletingData.tabName= this.orderDraft.name
-        deletingData.tabContainerName='order'
-        break;
-    }
-    return deletingData
+    this.orderDraft = {...this.orderDraft};
   }
 
   addStep() {
-    const steps = this.orderDraft?.products[this.productToggleId].template?.processes[this.processToggleId].template?.steps;
+    const steps = this.orderDraft?.products[this.productToggleIndex].template?.processes[this.processToggleIndex].template?.steps;
+
     steps.push({
       title: $localize `Unnamed Step` + ' ' + (steps.length+1),
       keyMessage: null,

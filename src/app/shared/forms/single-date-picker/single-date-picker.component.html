@@ -11,12 +11,12 @@
                 class="form-control"
                 [ngClass] ="{'is-invalid': (inputCheckForError || userHasTyped) && fieldInformation.error}"
                 bsDatepicker
-                [(ngModel)]="result"
-                (ngModelChange)="validation_save(true)"
+                [ngModel]="result | datetime: format"
+                (ngModelChange)="validation_save($event, true)"
                 [bsConfig]="{
                 isAnimated: true,
                 containerClass: 'theme-blue',
-                dateInputFormat: 'DD.MM.YYYY'
+                dateInputFormat: format
                 }"
             />
             <ng-container  *ngIf="(inputCheckForError || userHasTyped) && fieldInformation.error">

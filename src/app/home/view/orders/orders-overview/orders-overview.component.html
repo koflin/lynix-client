@@ -20,6 +20,7 @@
                             class="form-control form-control-sm"
                             (change)="entriesChange($event)"
                           >
+                            <option value="5" [selected]="entries == 5">5</option>
                             <option value="10" [selected]="entries == 10">10</option>
                             <option value="25" [selected]="entries == 25">25</option>
                             <option value="50" [selected]="entries == 50">50</option>
@@ -30,14 +31,14 @@
                       </div>
                     </div>
 
-                    <div class="col-6 col-md-4 d-flex align-items-start ">
-                      <div [hideIfUnauthorized]="permissions.ORDER_EDIT">
-                        <label class="pb-2 mr-2" i18n>Show published</label>
+                    <div class="col-6 col-md-4 d-flex align-items-center ">
+                      <ng-container [hideIfUnauthorized]="permissions.ORDER_EDIT">
+                        <label class="mb-0 mr-2" i18n>Show published</label>
                         <label class="custom-toggle" >
                           <input type="checkbox" [(ngModel)]="showReleased">
                           <span class="custom-toggle-slider rounded-circle" data-label-off="No" i18n-data-label-off data-label-on="Yes" i18n-data-label-on></span>
                         </label>
-                      </div>
+                      </ng-container>
                     </div>
 
                     <div class="col-6 col-md-4 d-flex justify-content-end" style="padding-left: 2.5rem;">
@@ -69,9 +70,10 @@
                     class="bootstrap selection-cell"
                     [columnMode]="'force'"
                     [headerHeight]="50"
-                    [footerHeight]="50"
+                    [footerHeight]="55"
                     [rowHeight]="'auto'"
                     [scrollbarH]="true"
+                    [scrollbarV]="false"
                     [limit]="entries != -1 ? entries : undefined"
                     [rows]="temp"
                     (activate)="onActivate($event)"
@@ -80,13 +82,10 @@
                    <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow>
                     <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
                     <div class="container-fluid">
-                        <div class="row pl-2 pr-2">
-                            <div class="col-12">
-                                <p> <span class="h4" i18n>Delivery Date:</span>  {{ row.deliveryDate | date: "dd.MM.yyyy" }}</p>
-                            </div>
+                        <div class="row ml-5 pr-2">
                             <ng-container *ngIf="row.processGroups.length>0">
                               <div class=" table-responsive">
-                                <table class=" table align-items-center table-flush">
+                                <table class=" table align-items-center table-flush table-sm">
                                   <thead class=" thead-light">
                                     <tr>
                                       <th class=""  scope="col" i18n>Processes</th>
@@ -133,6 +132,7 @@
                     [class.datatable-icon-down]="expanded"
                     title="Expand/Collapse Row"
                     i18n-title
+                    *ngIf="row?.processGroups?.length > 0"
                   >
                   </a>
                 </ng-template>
@@ -174,20 +174,18 @@
 
                     <ngx-datatable-column name="edit" i18n-name [sortable]="true">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-
                           <div [hideIfUnauthorized]="permissions.ORDER_EDIT">
                             <ng-container *ngIf="row.status=='in_preparation'">
-                              <button (click)="edit(row.workOderId)" class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button">
+                              <button (click)="edit(row.workOderId)" class="mx-1 my-1 btn btn-icon btn-2 btn-default" type="button" title="Edit" i18n-title>
                                 <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
                               </button>
                             </ng-container>
                             <ng-container>
-                              <button (click)="deleteModal(row)" class="ml-1 mr-1 mt--1 btn btn-icon btn-2 btn-default" type="button">
+                              <button (click)="deleteModal(row)" class="mx-1 my-1 btn btn-icon btn-2 btn-default" type="button" title="Delete" i18n-title>
                                 <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
                               </button>
                             </ng-container>
                           </div>
-
                         </ng-template>
                       </ngx-datatable-column>
 

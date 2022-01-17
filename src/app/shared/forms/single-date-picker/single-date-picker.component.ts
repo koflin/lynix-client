@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import moment from 'moment';
 
 import { InputOutputValue } from '../../models/InputOutputValue';
 
@@ -12,8 +13,11 @@ export class SingleDatePickerComponent implements OnInit {
   @Input() fieldInformation: InputOutputValue = new InputOutputValue()
   @Output() fieldInformationChange= new EventEmitter<InputOutputValue>()
   //result
-  @Input() result:  any
-  @Output() resultChange= new EventEmitter<any>()
+  @Input() result:  Date
+  @Output() resultChange= new EventEmitter<Date>()
+
+  @Input() format: string;
+
   // parentComponent want to check if there is an error or parentComponent has calculated there is an error
   @Input() inputCheckForError: boolean = false
   userHasTyped:boolean = false
@@ -30,12 +34,7 @@ export class SingleDatePickerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    this.validation_save(false);
-  }
-  validation_save(userHasTyped:boolean){
+  validation_save(value: string, userHasTyped:boolean){
     this.requiredError = false
     this.formatError = false
     this.error = false
@@ -44,11 +43,13 @@ export class SingleDatePickerComponent implements OnInit {
       this.userHasTyped = userHasTyped
     }
 
-    if (this.result!=='' && this.result!=undefined) {
-      if (this.result == 'Invalid Date') {
+    if (value!=='' && value!=undefined) {
+      if (value == 'Invalid Date') {
         this.formatError = true
         this.error = true
-        this.result=""
+        this.result= undefined;
+      } else {
+        this.result = moment(value).toDate();
       }
 
     }else if (this.inputRequired) {
@@ -56,6 +57,7 @@ export class SingleDatePickerComponent implements OnInit {
           this.requiredError=true;
         }
         this.error=true;
+        this.result = undefined;
     }
     this.fieldInformation.error = this.error
 

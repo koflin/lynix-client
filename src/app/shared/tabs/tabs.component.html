@@ -3,10 +3,12 @@
             <span class="btn-inner--icon"><i class="fas fa-chevron-left"></i></span>
           </button>
 
-
+        <label *ngIf="!tabsvalue || tabsvalue.length === 0" class="nav-link-tab-placeholder"></label>
         <label (click)="selectTabs(i, $event)" [routerLink]="" fragment="{{ toggle(i) }}" *ngFor="let item of tabsvalue, let i = index let first= first, let last=last" [id]="item" class="nav-link-tab zooming shadow-right mt-1 mb-0"    [ngClass]="calculateClasses(first, false, i)" tabindex="0" role="button">
             <div class="hover hover-1">
-                {{item + (i == mark ? '*' : '')}} <i class="fa fa-angle-right p-2" [ngClass]="{'open': i==tabsResIndex}"></i>
+                {{item + (i == mark ? '*' : '')}}
+                <i *ngIf="i == mark && markIcon" class="ml-1" [ngClass]="markIcon"></i>
+                <i class="fa fa-angle-right p-2" [ngClass]="{'open': i==tabsResIndex}"></i>
                 <span *ngIf="first || last" inViewport  (inViewportAction)="onIntersection($event, first, false)" >
 
                 </span>

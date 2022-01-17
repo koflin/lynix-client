@@ -3,59 +3,9 @@
   <app-breadcrumb-header [breadCrumbs]=breadCrumbs></app-breadcrumb-header>
 </div>
 <div class=" container-fluid mt--7" *ngIf="processTemplate; else spinner">
-  <div class=" row">
-
-      <div class="col-12">
-          <div class="" >
-              <label [routerLink]="" class="nav-link-tab bg-white" style="padding-bottom: 13px; margin-bottom: 0;" role="button">
-                   <h1 class="text-default"> {{processTemplate.name + (this.isEdited ? '*' : '')}} <i class="fa fa-angle-down p-2"></i> </h1>
-              </label>
-          </div>
-      </div>
-      <div class=" col-12 mt--4 pt-1 mb-0" *ngIf="stepsName.length>0">
-          <div class="card pt-0 mb-0 shadow-right no-bottom-radius">
-              <div class="col-12 pt-1">
-                  <div class="container-fluid">
-                      <div class="row">
-                          <div class="pl-6 col-1 col-xl-1 col-sm-2 d-flex align-items-center justify-content-center" [ngClass]="{'none-defined-padding': stepsName.length==0}">
-                              <h3 class="text-default mb-0" i18n>Steps:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="stepsName.length==0">None defined</p>-->
-                          </div>
-                          <div class="pl-6 col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1">
-                              <app-tabs [tabsvalue]="stepsName" [tabsResIndex]="stepToggleId" [navFragmentBase]="[]"> </app-tabs>
-                          </div>
-                      </div>
-
-                  </div>
-
-              </div>
-          </div>
-      </div>
-
-
-
-     <!-- next div is for css purpose-->
-      <div class=" col-12  mb-0">
-          <div class=" card pb-8 pt-2 no-top-radius shadow-right " >
-
-          </div>
-      </div>
-      <ng-container *ngIf="stepToggleId != undefined; else overview">
-        <div class=" col-12 mt--8 pt-2">
-            <div *ngFor="let actualStep of processTemplate.steps, let i = index">
-                <div class=" card pb-8 pt-2  no-top-radius shadow-right" *ngIf="stepToggleId == i">
-                     <app-step [stepTemplate]="actualStep" (stepTemplateChange)="detectChange()" navFragment=""> </app-step>
-                </div>
-            </div>
-        </div>
-      </ng-container>
-      <ng-template #overview>
-        <div class=" col-12 mt--8 pt-2">
-          <div class=" card pb-8 pt-2 pl-2 pr-2 no-top-radius shadow-right">
-              <app-process [(processTemplate)]="processTemplate" (processTemplateChange)="detectChange()" navFragment=""></app-process>
-          </div>
-      </div>
-      </ng-template>
-  </div>
+  <app-component-view [component]="processTemplate" [topType]="ComponentType.process" [(isEdited)]="isEdited"
+    [(stepToggleIndex)]="stepToggleIndex" [(currentComponent)]="currentComponent"
+    (breadcrumbsChange)="updateBreadCrumb($event)"></app-component-view>
 </div>
 <ng-template #spinner>
 <app-spinner></app-spinner>

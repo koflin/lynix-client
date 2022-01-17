@@ -3,96 +3,9 @@
   <app-breadcrumb-header [breadCrumbs]=breadCrumbs></app-breadcrumb-header>
 </div>
 <div class=" container-fluid mt--7" *ngIf="productTemplate; else spinner">
-  <div class=" row">
-
-      <div class="col-12">
-          <div class="" >
-              <label [routerLink]="" fragment="{{ [] | tabFragment }}" class="nav-link-tab bg-white" style="padding-bottom: 13px; margin-bottom: 0;" role="button">
-                   <h1 class="text-default"> {{(productTemplate != undefined ? productTemplate.name : 'Unnamed') + (this.isEdited ? '*' : '')}} <i class="fa fa-angle-down p-2"></i> </h1>
-
-              </label>
-
-
-          </div>
-      </div>
-      <div class=" col-12 mt--4 pt-1 mb-0" *ngIf="processesNames.length>0">
-          <div class="card pt-0 mb-0 shadow-right no-bottom-radius">
-              <div class="col-12 pt-1">
-                  <div class="container-fluid">
-                      <div class="row">
-                          <div class="pl-4 col-1 col-xl-1 col-sm-2 d-flex align-items-center justify-content-center" [ngClass]="{'none-defined-padding': processesNames.length==0}">
-                              <h3 class="text-default mb-0" i18n>Processes:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="processesNames.length==0">None defined</p>-->
-                          </div>
-                          <div class="pl-4 col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1">
-                              <app-tabs [tabsvalue]="processesNames" [tabsResIndex]="processToggleId" [setNotUndefined]="stepToggleId!=undefined" [navFragmentBase]="[]"> </app-tabs>
-                          </div>
-                      </div>
-
-                  </div>
-
-              </div>
-              <div class="col-12 pt-1" *ngIf="stepsName.length>0 && processToggleId != undefined">
-                  <div class="container-fluid">
-                      <div class="row" [@animSlider]="processToggleId">
-                          <div class="pl-6 col-1 col-xl-1 col-sm-2 d-flex align-items-center justify-content-center" [ngClass]="{'none-defined-padding': stepsName.length==0}">
-                              <h3 class="text-default mb-0" i18n>Steps:</h3> <!--<p class="pl-2 pb-1 mb-0 text-muted" *ngIf="stepsName.length==0">None defined</p>-->
-                          </div>
-                          <div class="pl-6 col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1">
-                              <app-tabs [tabsvalue]="stepsName" [tabsResIndex]="stepToggleId" [navFragmentBase]="[processToggleId]"> </app-tabs>
-                          </div>
-                      </div>
-
-                  </div>
-
-              </div>
-              <!-- <div class="col-12 mb-0">
-                  <div class="ml-2 card pt-2 mb-0 shadow-right" [ngClass]="{'bg-secondary' : defContainer() == 'order' && productsNames.length == 0}">
-
-                  </div>
-              </div> -->
-          </div>
-      </div>
-
-
-
-     <!-- next div is for css purpose-->
-      <div class=" col-12  mb-0">
-          <div class=" card pb-8 pt-2 no-top-radius shadow-right " >
-
-          </div>
-      </div>
-      <ng-container [ngSwitch]="defContainer()" *ngIf="productTemplate">
-          <ng-container *ngSwitchCase="'step'">
-              <div class=" col-12 mt--8 pt-2" [@animSlider]="stepToggleId">
-                  <div *ngFor="let actualStep of productTemplate.processes[this.processToggleId].template.steps, let i = index">
-                      <div class=" card pb-8 pt-2  no-top-radius shadow-right" *ngIf="stepToggleId == i">
-                           <app-step [stepTemplate]="actualStep" (stepTemplateChange)="detectChange()" navFragment="{{ [processToggleId, stepToggleId] | tabFragment }}"> </app-step>
-
-                      </div>
-                  </div>
-
-              </div>
-          </ng-container>
-          <ng-container *ngSwitchCase="'process'">
-              <div class=" col-12 mt--8 pt-2" [@animSlider]="processToggleId">
-                  <div *ngFor="let process of productTemplate.processes, let i = index">
-                      <div class=" card pb-8 pt-2  no-top-radius shadow-right" *ngIf="processToggleId == i">
-                          <app-process [(processTemplate)]="process.template" (processTemplateChange)="detectChange()" navFragment="{{ [processToggleId] | tabFragment }}"></app-process>
-                      </div>
-                  </div>
-
-              </div>
-          </ng-container>
-          <ng-container *ngSwitchDefault>
-              <div class=" col-12 mt--8 pt-2">
-                  <div class=" card pb-8 pt-2 pl-2 pr-2 no-top-radius shadow-right">
-                      <app-product [(productTemplate)]="productTemplate" (productTemplateChange)="detectChange()" navFragment="{{ [] | tabFragment }}"> </app-product>
-                  </div>
-              </div>
-          </ng-container>
-      </ng-container>
-
-  </div>
+  <app-component-view [component]="productTemplate" [topType]="ComponentType.product" [(isEdited)]="isEdited"
+    [(processToggleIndex)]="processToggleIndex" [(stepToggleIndex)]="stepToggleIndex" [(currentComponent)]="currentComponent"
+    (breadcrumbsChange)="updateBreadCrumb($event)"></app-component-view>
 </div>
 <ng-template #spinner>
   <app-spinner></app-spinner>

@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { Permission } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { ProcessTemplateNode } from 'src/app/models/ui/processTemplateNode';
@@ -14,7 +15,7 @@ import { ProcessTemplateLibraryService } from './process-template-library.servic
   styleUrls: ['./process-template-library.component.scss']
 })
 export class ProcessTemplateLibraryComponent implements OnInit {
-  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Process Templates`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Process Templates`, url: new RouteInfo(this.router.url) },];
   templates: ProcessTemplateNode[];
   windowWidth:number
 

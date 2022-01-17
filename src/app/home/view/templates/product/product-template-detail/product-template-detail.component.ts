@@ -1,94 +1,38 @@
-import { animate, group, query, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ProcessTemplatesService } from 'src/app/core/processTemplates/process-templates.service';
 import { ProductTemplatesService } from 'src/app/core/productTemplates/product-tempaltes.service';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { ProductTemplate } from 'src/app/models/productTemplate';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
-import { deletingDataInformation } from 'src/app/models/ui/deletingData';
+import { ComponentInfo } from 'src/app/models/ui/componentInfo';
+import { ComponentType } from 'src/app/models/ui/componentType';
 import { TabFragmentPipe } from 'src/app/pipes/tab/tab-fragment.pipe';
 import { TabIndicesPipe } from 'src/app/pipes/tab/tab-indices.pipe';
 import swal from 'sweetalert2';
 
-const left = [
-  query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
-  group([
-    query(':enter', [style({ transform: 'translateX(-100%)' }), animate('.3s ease-out', style({ transform: 'translateX(0%)' }))], {
-      optional: true,
-    }),
-    query(':leave', [style({ transform: 'translateX(0%)' }), animate('.3s ease-out', style({ transform: 'translateX(100%)' }))], {
-      optional: true,
-    }),
-  ]),
-];
-
-const right = [
-  query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
-  group([
-    query(':enter', [style({ transform: 'translateX(100%)' }), animate('.3s ease-out', style({ transform: 'translateX(0%)' }))], {
-      optional: true,
-    }),
-    query(':leave', [style({ transform: 'translateX(0%)' }), animate('.3s ease-out', style({ transform: 'translateX(-100%)' }))], {
-      optional: true,
-    }),
-  ]),
-];
-
 @Component({
   selector: 'app-product-template-detail',
   templateUrl: './product-template-detail.component.html',
-  styleUrls: ['./product-template-detail.component.scss'],
-  animations: [
-    trigger('animSlider', [
-      transition(':increment', right),
-      transition(':decrement', left),
-    ]),
-  ],
+  styleUrls: ['./product-template-detail.component.scss']
 })
 export class ProductTemplateDetailComponent implements OnInit {
 
   productId: string;
   productTemplate: ProductTemplate;
+
   breadCrumbs: BreadCrumbInfo[];
 
-  _processesNames:string[]=[]
-  get processesNames():string[]{
-    return this.productTemplate.processes.filter((p) => {
-      return p.template
-    }).map((process)=>{
-      return process.template.name
-    })
-  }
-
-  _stepsName:string[]=[]
-  get stepsName():string[]{
-    if (this.processToggleId != undefined) {
-      return this.productTemplate.processes[this.processToggleId].template.steps.filter((p) => {
-        return p.title
-      }).map((process)=>{
-        return process.title
-      })
-    }
-    return []
-
-  }
-  _stepToggleId:number
-  get stepToggleId(){
-    return this._stepToggleId
-  }
-
-  _processToggleId:number
-  get processToggleId(){
-    return this._processToggleId
-  }
-
-  private getBaseUrl() {
-    return '/templates/product/' + this.productId;
-  }
-
   isEdited = false;
+
+  processToggleIndex: number;
+  stepToggleIndex: number;
+
+  currentComponent: ComponentInfo;
+
+  ComponentType = ComponentType;
 
   constructor(
     private router: Router,
@@ -98,7 +42,8 @@ export class ProductTemplateDetailComponent implements OnInit {
     private processTemplateService: ProcessTemplatesService,
     private toastr: ToastrService,
     private indicesPipe: TabIndicesPipe,
-    private fragPipe: TabFragmentPipe
+    private fragPipe: TabFragmentPipe,
+    private cref: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -106,33 +51,10 @@ export class ProductTemplateDetailComponent implements OnInit {
       this.productId = params.get('id');
       this.refresh();
     });
-
-    this.route.fragment.subscribe((fragment) => {
-      this._processToggleId = undefined;
-      this._stepToggleId = undefined;
-
-      if (fragment) {
-        const parts = this.indicesPipe.transform(fragment);
-
-        if (parts.length >= 1) {
-          this._processToggleId = parts[0];
-        }
-
-        if (parts.length >= 2) {
-          this._stepToggleId = parts[1];
-        }
-      }
-
-      this.updateBreadCrumb();
-    });
   }
 
   hasUnsavedData(): boolean {
     return this.isEdited;
-  }
-
-  detectChange() {
-    this.isEdited = true;
   }
 
   async refresh() {
@@ -147,8 +69,6 @@ export class ProductTemplateDetailComponent implements OnInit {
         processes: [],
       };
     }
-
-    this.updateBreadCrumb();
   }
 
   async saveDraft(dontFireToastr:boolean=false) {
@@ -193,51 +113,22 @@ export class ProductTemplateDetailComponent implements OnInit {
     this.router.navigate(['templates/product']);
   }
 
-  updateBreadCrumb() {
+  updateBreadCrumb(subBreadcrumbs: BreadCrumbInfo[]) {
     if (!this.productTemplate) {
       return;
     }
 
-    let breadCrumb = [{
+    this.breadCrumbs = [{
       name: $localize `Product Templates`,
-      url: "/templates/product"
-    }, {
-      name:(this.productTemplate?.id) ? this.productTemplate.name : $localize `New`,
-      url: this.getBaseUrl()
-    }];
+      url: new RouteInfo("/templates/product")
+    }, ...subBreadcrumbs];
 
-    if (this.processToggleId != undefined) {
-      breadCrumb.push({
-        name: this.processesNames[this.processToggleId],
-        url: this.getBaseUrl() + '#' + this.fragPipe.transform([this.processToggleId])
-      });
-    }
-
-    if (this.stepToggleId != undefined) {
-      breadCrumb.push({
-        name: this.stepsName[this.stepToggleId],
-        url: this.getBaseUrl() + '#' + this.fragPipe.transform([this.processToggleId, this.stepToggleId])
-      });
-    }
-
-    this.breadCrumbs = breadCrumb;
-  }
-
-  defContainer(){
-    if (this.stepToggleId!=undefined) {
-      return 'step'
-    }else if (this.processToggleId != undefined) {
-      return 'process'
-    } else {
-      return 'product'
-    }
+    this.cref.detectChanges();
   }
 
   deleteModal(){
-    let data: deletingDataInformation = this.specificDeleteData()
-
     swal.fire({
-      title: $localize `Are you sure to delete ${data.tabContainerDisplayname} '${data.tabName}'?`,
+      title: $localize `Are you sure to delete ${this.currentComponent.typeDisplayname} '${this.currentComponent.name}'?`,
       text: $localize `You won't be able to revert this!`,
       type: 'warning',
       showCancelButton: true,
@@ -248,42 +139,12 @@ export class ProductTemplateDetailComponent implements OnInit {
       cancelButtonText: $localize `Cancel`
     }).then((result) => {
       if (result.value) {
-          this.deleting(data)
+          this.deleting(this.currentComponent)
 
           // Show confirmation
           //this.deleteDraft()
       }
     })
-  }
-
-  specificDeleteData(): deletingDataInformation{
-    let container= this.defContainer()
-    let deletingData:deletingDataInformation={'parentTabId':undefined,
-      'tabId': undefined, 'tabName': undefined, 'tabContainerName':undefined, 'tabContainerDisplayname':undefined}
-    switch (container) {
-      case 'step':
-        deletingData.parentTabId=this.processToggleId
-        deletingData.tabId=this.stepToggleId
-        deletingData.tabName= this.stepsName[this.stepToggleId]
-        deletingData.tabContainerName='step',
-        deletingData.tabContainerDisplayname = $localize `step`
-        break;
-      case 'process':
-        deletingData.parentTabId=0
-        deletingData.tabId=this.processToggleId
-        deletingData.tabName= this.processesNames[this.processToggleId]
-        deletingData.tabContainerName='process'
-        deletingData.tabContainerDisplayname = $localize `process`
-        break;
-      default:
-        deletingData.parentTabId=0
-        deletingData.tabId=0
-        deletingData.tabName= this.productTemplate.name
-        deletingData.tabContainerName='product'
-        deletingData.tabContainerDisplayname = $localize `product`
-        break;
-    }
-    return deletingData
   }
 
   cancelModal(){
@@ -315,19 +176,40 @@ export class ProductTemplateDetailComponent implements OnInit {
     this.router.navigate(['templates/product']);
   }
 
-  deleting(data: deletingDataInformation){
-    switch (data.tabContainerName ) {
+  deleting(data: ComponentInfo){
+    switch (data.type ) {
 
-      case 'step':
-        this.productTemplate.processes[this.processToggleId].template.steps.splice(data.tabId, 1)
+      case ComponentType.step:
+        const steps = this.productTemplate.processes[this.processToggleIndex].template.steps;
+        steps.splice(data.index, 1);
+
+        if (this.stepToggleIndex === steps.length) {
+          this.stepToggleIndex--;
+        }
+
+        if (this.stepToggleIndex < 0) {
+          this.stepToggleIndex == undefined;
+        }
         break;
-      case 'process':
-        this.productTemplate.processes.splice(data.tabId, 1)
+      case ComponentType.process:
+        const processes = this.productTemplate.processes;
+        processes.splice(data.index, 1);
+
+        if (this.processToggleIndex === processes.length) {
+          this.processToggleIndex--;
+        }
+
+        if (this.processToggleIndex < 0) {
+          this.processToggleIndex == undefined;
+        }
+        this.stepToggleIndex = undefined;
         break;
       default:
         this.deleteProduct()
-        break;
+        return;
     }
+
+    this.productTemplate = {...this.productTemplate};
   }
 
   deleteProduct() {

@@ -20,9 +20,14 @@ input, button, select, optgroup, textarea {
     background-color: rgb(255, 255, 255) !important;
 }
 .desktop_nav .navbar-brand img {
-    width: 204px;
+    /*width: 204px;*/
     height: 40px;
+    padding-left: 15px;
 }
+.navbar-brand {
+  margin-right: 0;
+}
+
 .collapse {
     padding: 0;
 }
@@ -38,7 +43,7 @@ input, button, select, optgroup, textarea {
     top: 0;
     width: 100vw;
     z-index: 300;
-    
+
 }
 /* .search_form  {
     width: calc(100% - 445px);
@@ -72,7 +77,7 @@ input, button, select, optgroup, textarea {
 }
 
 .search_input:focus {
-    box-shadow: 0 0 0 0.2rem rgba(0, 64, 144, 0.2); 
+    box-shadow: 0 0 0 0.2rem rgba(0, 64, 144, 0.2);
 }
 
 .user_btn:focus {

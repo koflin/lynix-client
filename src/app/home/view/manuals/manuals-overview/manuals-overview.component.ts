@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { Permission } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { ProcessTemplateNode } from 'src/app/models/ui/processTemplateNode';
@@ -15,7 +16,7 @@ import {
 })
 export class ManualsOverviewComponent implements OnInit {
 
-  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Process Manuals`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Process Manuals`, url: new RouteInfo(this.router.url) },];
   templates: ProcessTemplateNode[];
   visibleTemplates: ProcessTemplateNode[];
   windowWidth:number
@@ -23,7 +24,7 @@ export class ManualsOverviewComponent implements OnInit {
   permissions = Permission;
 
   searchValue:string=""
-  entries: number = 10;
+  entries: number = 5;
 
   @ViewChild('myTable') table: any;
 

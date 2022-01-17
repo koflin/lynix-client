@@ -6,14 +6,19 @@
   <div class=" container-fluid mt--5">
     <div class=" row">
         <div class="col-12">
-            <app-tabs [mark]="process.currentStepIndex + 1" [tabsvalue]="stepNames" [(tabsResIndex)]="stepToggleId" [bgColorClassNotSelected]="'bg-default'" [navFragmentBase]="[0]"> </app-tabs>
+            <app-tabs
+              [mark]="process.currentStepIndex + 1"
+              [tabsvalue]="stepNames"
+              [(tabsResIndex)]="stepToggleId"
+              [bgColorClassNotSelected]="'bg-default'"
+              [navFragmentBase]="[0]"
+              [markIcon]="process.isRunning ? 'fas fa-hourglass-start fa-spin' : undefined">
+            </app-tabs>
             <div class="pt-4 pb-4 mb-6 container-fluid" [@animSlider]="stepToggleId">
                 <div class="row" >
                     <ng-container *ngFor="let step of process.steps; let i=index" >
                         <ng-container *ngIf="stepToggleId == i+1 && stepToggleId != stepNames.length -1">
                             <app-step-guide-tab class="container-fluid" [process]="process" [stepIndex]="i"> </app-step-guide-tab>
-
-
                         </ng-container>
 
                     </ng-container>
@@ -221,17 +226,17 @@
             <button class="btn btn-icon btn-3 btn-white none-shadow" [disabled]="stepToggleId === 0" type="button" (click)="onPrevious()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="fas fa-step-backward"></i></span> <br>
-                <span class="btn-inner--text ml-0" i18n>Previous Step</span>
+                <span class="btn-inner--text ml-0" i18n>Previous</span>
               </button>
         </div>
         <div class="col-3 d-flex justify-content-center">
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" [disabled]="stepToggleId == stepNames.length-1" (click)="onNext()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="fas fa-step-forward"></i></span> <br>
-                <span class="btn-inner--text ml-0" i18n>Next step</span>
+                <span class="btn-inner--text ml-0" i18n>Next</span>
               </button>
         </div>
-        <div class="col-3 d-flex justify-content-center" *ngIf="process.isRunning && process.currentStepIndex + 1 === stepToggleId">
+        <div class="col-3 d-flex justify-content-center" *ngIf="process.isRunning && stepToggleId === process.currentStepIndex + 1">
           <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onStop()">
               <span class="btn-inner--icon">
                   <i style="font-size: 30px;" class="fas fa-pause"></i></span> <br>
@@ -249,7 +254,7 @@
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onSwitch()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="fas fa-sign-in-alt"></i></span> <br>
-                <span class="btn-inner--text ml-0" i18n>Switch step</span>
+                <span class="btn-inner--text ml-0" i18n>Switch</span>
               </button>
         </div>
         <div class="col-3 d-flex justify-content-center" *ngIf="stepToggleId == 0 && process.currentStepIndex === null">
@@ -263,10 +268,10 @@
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onJump()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="fas fa-angle-double-right"></i></span> <br>
-                <span class="btn-inner--text ml-0" i18n>Continue Work</span>
-              </button>
+                <span class="btn-inner--text ml-0" i18n>Go to current</span>
+            </button>
         </div>
-        <div class="col-3 d-flex justify-content-center" *ngIf="stepToggleId == stepNames.length-1">
+        <div class="col-3 d-flex justify-content-center" *ngIf="!process.isRunning && stepToggleId == stepNames.length-1">
             <button class="btn btn-icon btn-3 btn-white none-shadow" type="button" (click)="onFinish()">
                 <span class="btn-inner--icon">
                     <i style="font-size: 30px;" class="far fa-check-circle"></i></span> <br>

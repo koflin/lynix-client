@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files NOTE: use !important*/
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
 
@@ -68,6 +68,23 @@ html, body {
     background-color: #f7f8fd !important; // Changed from #fff
     color: #000;
     // border: grey solid 2px
+  }
+
+  .nav-link-tab-placeholder {
+    padding-top: 13px;
+    text-align: center;
+
+    border-radius: 20px;
+    padding-bottom: 1rem;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    min-height: auto;
+    // border: white solid 2px;
+    width: -moz-fit-content;
+    width: fit-content;
+    min-width: 90px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
 
@@ -234,5 +251,13 @@ li:focus{
 }
 .real-strong strong {
   font-weight: bold !important;
+}
+
+datatable-scroller {
+  width: 100% !important;
+}
+
+.dropdown-menu {
+  min-width: auto !important;
 }
 

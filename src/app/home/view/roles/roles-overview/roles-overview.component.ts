@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { RolesService } from 'src/app/core/roles/roles.service';
+import { RouteInfo } from 'src/app/helpers/routeInfo';
 import { Role } from 'src/app/models/role';
 import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { UserRowNode } from 'src/app/models/ui/userRowNode';
@@ -14,7 +15,7 @@ export class RolesOverviewComponent implements OnInit {
 
   entries: number = 10;
   searchValue:string= ""
-  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Roles`, url: this.router.url },];
+  breadCrumbs: BreadCrumbInfo[]=[{name: $localize `Roles`, url: new RouteInfo(this.router.url) },];
   roleRows: Role[];
   options = {
     valueNames: [ 'name' ]

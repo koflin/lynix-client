@@ -24,6 +24,7 @@ import { TabFragmentPipe } from 'src/app/pipes/tab/tab-fragment.pipe';
 })
 export class TabsComponent implements OnInit,AfterViewInit {
   @Input() tabsvalue: string[]= []
+
   @Input() bgColorClassNotSelected:string = 'bg-default';
   @Input() setNotUndefined:boolean=false
   _tabsResIndex:number
@@ -33,6 +34,7 @@ export class TabsComponent implements OnInit,AfterViewInit {
 
   @Input() navFragmentBase: number[] = [];
   @Input() mark: number;
+  @Input() markIcon: string;
 
   @Output() tabAdd = new EventEmitter<void>()
   addable: boolean;

@@ -5,7 +5,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
   <div class=" container-fluid" *ngIf="stats">
       <div class=" header-body">
 
-        <div class="justify-content-space-around row" *ngIf="false">
+        <div class="justify-content-space-around row">
 
           <div class=" col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
             <a class="" [routerLink]="'/processes/overview'">
@@ -130,15 +130,15 @@ class=" header pb-6 pt-6 d-flex align-items-center"
 
 <div class="container-fluid pt-3">
   <div class="row">
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6">
+    <div *ngFor="let group of menu" class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="getGroupPermissions(group)">
       <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
-        <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/order.jpg); background-size: cover; background-position: center center;" >
+        <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" [style]="'background-image: url(' + group.background + '); background-size: cover; background-position: center center;'" >
             <span class="mask bg-gradient-default opacity-8"> </span>
 
-            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Order</h5>
+            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>{{ group.name }}</h5>
             <div class="z-index-1">
               <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
-                 <i class="icon icon-hierarchy-56 icon-big"></i>
+                  <i [class]="'icon icon-big ' + group.icon"></i>
               </div>
             </div>
         </div>
@@ -147,35 +147,7 @@ class=" header pb-6 pt-6 d-flex align-items-center"
                 <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
                     <div class=" d-flex justify-content-between">
                       <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/orders/overview'" [hideIfUnauthorized]="permissions.ORDER_VIEW"> <span i18n>Overview</span><i class="fas fa-angle-right text-default"></i></li>
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/orders/draft'" [hideIfUnauthorized]="permissions.ORDER_EDIT"> <span i18n>Create New</span><i class="fas fa-angle-right text-default"></i></li>
-                      </ul>
-                    </div>
-
-                </a>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6">
-      <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
-        <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/process.jpg); background-size: cover; background-position: center center;" >
-            <span class="mask bg-gradient-default opacity-8"> </span>
-
-            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Process</h5>
-            <div class="z-index-1">
-              <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
-                <i class=" icon icon-configuration-tool icon-big" > </i>
-              </div>
-            </div>
-        </div>
-        <div class=" card-body p-0">
-            <div class=" list-group list-group-flush">
-                <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
-                    <div class=" d-flex justify-content-between">
-                      <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/processes/overview'" [hideIfUnauthorized]="permissions.PROCESS_VIEW"><span i18n>Overview</span><i class="fas fa-angle-right text-default"></i></li>
+                        <li *ngFor="let item of group.items" class="list-group-item zooming d-flex justify-content-between" [routerLink]="item.route" [queryParams]="item.return ? { return: item.return } : undefined" [hideIfUnauthorized]="item.neededPermissions"> <span i18n>{{ item.name }}</span><i class="fas fa-angle-right text-default"></i></li>
                       </ul>
                     </div>
                 </a>
@@ -183,156 +155,5 @@ class=" header pb-6 pt-6 d-flex align-items-center"
         </div>
       </div>
     </div>
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.TEMPLATE_VIEW">
-      <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
-        <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/template.jpg); background-size: cover; background-position: center center;" >
-            <span class="mask bg-gradient-default opacity-8"> </span>
-
-            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Template</h5>
-            <div class="z-index-1">
-              <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
-                <i class=" icon icon-web-design-2 icon-big"> </i>
-              </div>
-            </div>
-        </div>
-        <div class=" card-body p-0">
-            <div class=" list-group list-group-flush">
-                <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
-                    <div class=" d-flex justify-content-between">
-                      <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/templates/product'"><span i18n>Product</span><i class="fas fa-angle-right text-default"></i></li>
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/templates/process'"><span i18n>Process</span><i class="fas fa-angle-right text-default"></i></li>
-
-                      </ul>
-                    </div>
-
-                </a>
-            </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.MANUAL_VIEW">
-      <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
-        <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/template.jpg); background-size: cover; background-position: center center;" >
-            <span class="mask bg-gradient-default opacity-8"> </span>
-
-            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Manual</h5>
-            <div class="z-index-1">
-              <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
-                <i class=" icon icon-web-design-2 icon-big"> </i>
-              </div>
-            </div>
-        </div>
-        <div class=" card-body p-0">
-            <div class=" list-group list-group-flush">
-                <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
-                    <div class=" d-flex justify-content-between">
-                      <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/manuals/overview'" [hideIfUnauthorized]="permissions.MANUAL_VIEW"><span i18n>Overview</span><i class="fas fa-angle-right text-default"></i></li>
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/templates/process/new'" [queryParams]="{ return: 'manual' }" [hideIfUnauthorized]="permissions.TEMPLATE_EDIT"><span i18n>Create New</span><i class="fas fa-angle-right text-default"></i></li>
-
-                      </ul>
-                    </div>
-
-                </a>
-            </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6">
-      <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
-        <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/admin.jpg); background-size: cover; background-position: center center;" >
-            <span class="mask bg-gradient-default opacity-8"> </span>
-
-            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Administration</h5>
-            <div class="z-index-1">
-              <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
-                <i class=" icon icon-folder-shared icon-big"> </i>
-              </div>
-            </div>
-        </div>
-        <div class=" card-body p-0">
-            <div class=" list-group list-group-flush">
-                <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
-                    <div class=" d-flex justify-content-between">
-                      <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/users'" [hideIfUnauthorized]="permissions.USER_VIEW"><span i18n>Users</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/roles'" [hideIfUnauthorized]="permissions.ROLE_VIEW"><span i18n>Roles</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
-                      </ul>
-                    </div>
-
-                </a>
-            </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.STATISTIC_VIEW">
-      <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
-        <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center center;" >
-            <span class="mask bg-gradient-default opacity-8"> </span>
-
-            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase" i18n>Statistics</h5>
-            <div class="z-index-1">
-              <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
-                <i class=" icon icon-chemistry icon-big"> </i>
-              </div>
-            </div>
-        </div>
-        <div class=" card-body p-0">
-            <div class=" list-group list-group-flush">
-                <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
-                    <div class=" d-flex justify-content-between">
-                      <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/statistics/overview'"><span i18n>Overview</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
-                      </ul>
-                    </div>
-
-                </a>
-            </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-xl-4 col-md-6 col-sm-6" [hideIfUnauthorized]="permissions.TESTING_VIEW" *ngIf="false">
-      <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
-        <div class="d-flex align-items-center justify-content-between card-header pr-3 header-card-strong-border-and-position" style="background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center center;" >
-            <span class="mask bg-gradient-default opacity-8"> </span>
-
-            <h5 class="h3 mb-0 z-index-1 text-white text-uppercase">Testing</h5>
-            <div class="z-index-1">
-              <div class=" icon icon-shape bg-gradient-primary text-white rounded-circle shadow icon-padding">
-                <i class=" icon icon-chemistry icon-big"> </i>
-              </div>
-            </div>
-        </div>
-        <div class=" card-body p-0">
-            <div class=" list-group list-group-flush">
-                <a class=" list-group-item list-group-item-action flex-column align-items-start py-0 px-0" href="javascript:void(0)">
-                    <div class=" d-flex justify-content-between">
-                      <ul class="list-group container-fluid pl-0 pr-0">
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/test/storage'"><span>Storage</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
-                        <li class="list-group-item zooming d-flex justify-content-between" [routerLink]="'/test/storage'"><span>Dialog</span> <span> <i class="fas fa-angle-right text-default"></i> </span></li>
-
-
-                      </ul>
-                    </div>
-
-                </a>
-            </div>
-        </div>
-      </div>
-    </div>
-    <!-- <div class="col-12 col-xl-4 col-md-6 col-sm-6">
-      <div class="card card-stronger-shadow ml-2 mr-2  zooming pl-0 pr-0">
-        <div class=" card-header">
-          <h6 class=" surtitle">Overview</h6>
-
-          <h5 class=" h3 mb-0">Product comparison</h5>
-        </div>
-        <app-chart-bar-staked></app-chart-bar-staked>
-      </div>
-    </div> -->
-
-
   </div>
-
 </div>

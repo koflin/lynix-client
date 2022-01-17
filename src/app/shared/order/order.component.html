@@ -8,7 +8,7 @@
                             <app-text-field [(result)]="order.name" (resultChange)="orderChange.emit(order)" [(fieldInformation)]=name  [inputCheckForError]="checkForError" [inputRequired]="true"> </app-text-field>
                         </div>
                         <div class="col-12 col-md-6">
-                            <app-single-date-picker [result]="order.deliveryDate | date: 'dd.MM.yyyy'" (resultChange)="changeDeliveryDate($event)" [(fieldInformation)]=dueDate [inputCheckForError]="checkForError" [inputRequired]="true"> </app-single-date-picker>
+                            <app-single-date-picker [result]="order.deliveryDate" format="DD.MM.YYYY" (resultChange)="changeDeliveryDate($event)" [(fieldInformation)]=dueDate [inputCheckForError]="checkForError" [inputRequired]="true"> </app-single-date-picker>
                         </div>
                     </div>
 

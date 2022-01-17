@@ -9,19 +9,23 @@ export class StatusPipe implements PipeTransform {
 
   transform(value: OrderStatus | ProcessStatus, ...args: unknown[]): string {
     switch(value) {
-      case 'in_preparation':
+      case OrderStatus.IN_PREPARATION:
+      case ProcessStatus.IN_PREPARATION:
         return $localize `in preparation`;
 
-      case 'released':
+      case OrderStatus.RELEASED:
+      case ProcessStatus.RELEASED:
         return $localize `released`;
 
-      case 'in_progress':
+      case OrderStatus.IN_PROGRESS:
+      case ProcessStatus.IN_PROGRESS:
         return $localize `in progress`;
 
-      case 'completed':
+      case OrderStatus.COMPLETED:
+      case ProcessStatus.COMPLETED:
         return $localize `completed`;
 
-      case 'assistance_required':
+      case ProcessStatus.ASSISTANCE_REQUIRED:
         return $localize `assistance required`;
     }
   }

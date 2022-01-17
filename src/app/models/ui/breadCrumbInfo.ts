@@ -1,6 +1,8 @@
+import { RouteInfo } from 'src/app/helpers/routeInfo';
+
 export class BreadCrumbInfo {
-     
-    name: string;
-    url: string;
-  }
+
+  name: string;
+  url: RouteInfo;
+}
 

@@ -23,6 +23,7 @@ export class SingleMultipleChoiceComponent implements OnInit {
   @Input() ignoreOptions: any[]
   _data: SingleMultiChoiceItem[] = []
   @Input() data:SingleMultiChoiceItem[] = [];
+  @Output() searchChange = new EventEmitter<string>();
 
   tempData: SingleMultiChoiceItem[]
   @Input() addTagText:string= $localize `press enter to create a new option`
@@ -66,6 +67,7 @@ export class SingleMultipleChoiceComponent implements OnInit {
   }
 
   validation_save(userHasTyped:boolean, option?){
+
     this.error= false
     this.requiredError = false
     let requiredError = false
