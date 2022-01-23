@@ -44,7 +44,7 @@ export class UsersDetailService {
   }
 
   updateDetail(userDetail: UserDetailNode) {
-    this.usersService.save({
+    return this.usersService.save({
       companyId: userDetail.company.id,
       id: userDetail.id,
       email: userDetail.email,

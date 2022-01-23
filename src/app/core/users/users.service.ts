@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { CreateUserDto } from 'src/app/dto/user/createUserDto';
 import { EditUserDto } from 'src/app/dto/user/editUserDto';
 import { Permission } from 'src/app/models/role';
@@ -51,7 +52,7 @@ export class UsersService {
   }
 
   save(user: User) {
-    this.api.put<User>('users/' + user.id, new EditUserDto(user)).subscribe(() => this.usersChange.next(user.id));
+    return this.api.put<User>('users/' + user.id, new EditUserDto(user)).pipe(tap(() => this.usersChange.next(user.id)));
   }
 
   deleteUser(id: string) {

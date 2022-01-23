@@ -14,6 +14,7 @@ import { BreadCrumbInfo } from 'src/app/models/ui/breadCrumbInfo';
 import { HasUnsavedData } from 'src/app/models/ui/hasUnsavedData';
 import { UserDetailNode } from 'src/app/models/ui/userDetailNode';
 import { User } from 'src/app/models/user';
+import { AlertsService } from 'src/app/shared/alerts/alerts.service';
 import { InputOutputValue, SingleMultiChoiceItem } from 'src/app/shared/models/InputOutputValue';
 import { environment } from 'src/environments/environment';
 import swal from 'sweetalert2';
@@ -69,7 +70,8 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
     private authService: AuthService,
     private mediaService: MediaService,
     private toastr: ToastrService,
-    private activationService: ActivationService
+    private activationService: ActivationService,
+    private alert: AlertsService
     ) {
       //history.pushState(null, null, window.location.href);
     // check if back or forward button is pressed.
@@ -105,35 +107,35 @@ export class UserDetailComponent implements OnInit, OnDestroy, HasUnsavedData {
 
   async save() {
     this.checkForError=true
-    if (!(this.roleField.error || this.email.error || this.firstname.error || this.lastname.error)) {
-      if (this.avatarImage) {
-        const media = await this.mediaService.upload(this.avatarImage).toPromise();
-        this.userDetail.avatar = media.url;
-      }
-      if (this.userDetail.id==undefined) {
-        let userDraft:User = {...this.userDetail, 'companyId': this.authService.getLocalUser().companyId, 'role': this.userDetail.role }
-        this.usersService.createUser(userDraft).subscribe((user) => this.router.navigate(['users/' + user.id]));
-      }else{
-        this.usersDetailService.updateDetail(this.userDetail);
 
-      }
-      this.orginalUserDetail = _.cloneDeep(this.userDetail)
+    if (this.roleField.error || this.email.error || this.firstname.error || this.lastname.error) {
+      return;
     }
 
-    this.toastr.show(
-      '<span class="alert-icon ni ni-bell-55"></span> <div class="alert-text"> <span class="alert-title">'
-      + $localize `Success` + '</span> <span>' + $localize `Saved` + '</span></div>',
-      '',
-      {
-        timeOut: 1500,
-        closeButton: true,
-        enableHtml: true,
-        tapToDismiss: false,
-        titleClass: 'alert-title',
-        positionClass: 'toast-top-center',
-        toastClass: "ngx-toastr alert alert-dismissible alert-success alert-notify",
+    if (this.avatarImage) {
+      try {
+        const media = await this.mediaService.upload(this.avatarImage).toPromise();
+        this.userDetail.avatar = media.url;
+
+      } catch(error: any) {
+        this.alert.alertError(error);
+        return;
       }
-    );
+    }
+
+    if (this.userDetail.id==undefined) {
+      let userDraft:User = {...this.userDetail, 'companyId': this.authService.getLocalUser().companyId, 'role': this.userDetail.role }
+      this.usersService.createUser(userDraft).subscribe(
+        (user) => { this.router.navigate(['users/' + user.id]); this.alert.alertSaved(); },
+        (error: any) => { this.alert.alertError(error) }
+      );
+    } else{
+      this.usersDetailService.updateDetail(this.userDetail).subscribe(
+        () => { this.alert.alertSaved() },
+        (error: any) => { this.alert.alertError(error) }
+      );
+    }
+    this.orginalUserDetail = _.cloneDeep(this.userDetail)
   }
 
   selectAvatar(event) {
