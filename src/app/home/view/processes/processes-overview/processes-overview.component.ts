@@ -30,38 +30,44 @@ export class ProcessesOverviewComponent implements OnInit {
   nodesAreEmpty:boolean = undefined;
   loaded = false;
   windowWidth:number
+
   processNodeGroups: ProcessGroupNode [] = [
     {
       title: $localize `All`,
       status: null,
-      nodes: []
+      nodes: [],
+      loaded: false
     },
     {
       title: $localize `In Preparation`,
       status: ProcessStatus.IN_PREPARATION,
-      nodes: []
+      nodes: [],
+      loaded: false
     },
     {
       title: $localize `Released`,
       status: ProcessStatus.RELEASED,
-      nodes: []
+      nodes: [],
+      loaded: false
     },
     {
       title: $localize `In progress`,
       status: ProcessStatus.IN_PROGRESS,
-      nodes: []
+      nodes: [],
+      loaded: false
     },
     {
       title: $localize `Completed`,
       status: ProcessStatus.COMPLETED,
-      nodes: []
+      nodes: [],
+      loaded: false
     }
   ];
   temp: ProcessNode[];
   currentUser:LocalUser
   potentialAssignees:SingleMultiChoiceItem[]
 
-  tabIndex = 0;
+  groupIndex = 0;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {

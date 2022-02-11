@@ -18,7 +18,7 @@
                     <div class="container-fluid">
                       <div class="row">
                           <div class="col-11 col-xl-11 col-sm-10  pl-0 pr-0 z-index-1">
-                              <app-tabs [tabsvalue]="tabNames" [(tabsResIndex)]="tabIndex" seemless> </app-tabs>
+                              <app-tabs [tabsvalue]="tabNames" [(tabsResIndex)]="groupIndex" seemless> </app-tabs>
                           </div>
                       </div>
                     </div>
@@ -28,12 +28,12 @@
                     class="bootstrap selection-cell"
                     [columnMode]="'force'"
                     [headerHeight]="50"
-                    [footerHeight]="50"
+                    [footerHeight]="55"
                     [rowHeight]="'auto'"
                     [scrollbarH]="false"
                     [scrollbarV]="false"
 
-                    [rows]="processNodeGroups[tabIndex].nodes"
+                    [rows]="processNodeGroups[groupIndex].nodes"
 
                     >
                     <!-- Row Detail Template -->
@@ -88,7 +88,7 @@
                             </ng-template>
                         </ngx-datatable-column>
                         <!-- status (only in all) -->
-                        <ngx-datatable-column *ngIf="windowWidth>566 && processNodeGroups[tabIndex].status === null" [minWidth]=125 name="Status" i18n-name>
+                        <ngx-datatable-column *ngIf="windowWidth>566 && processNodeGroups[groupIndex].status === null" [minWidth]=125 name="Status" i18n-name>
                           <ng-template let-row="row" ngx-datatable-cell-template>
                             <span class="badge badge-{{ row.status | statusBadge }}">{{ row.status | status }}</span>
                           </ng-template>

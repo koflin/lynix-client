@@ -4,7 +4,7 @@ import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { RolesService } from 'src/app/core/roles/roles.service';
 import { UsersService } from 'src/app/core/users/users.service';
-import { Process } from 'src/app/models/process';
+import { Process, ProcessStatus } from 'src/app/models/process';
 import { Permission } from 'src/app/models/role';
 import { UserRowNode } from 'src/app/models/ui/userRowNode';
 
@@ -53,6 +53,10 @@ export class ProcessesOverviewService {
       orderDeliveryDate: order.deliveryDate,
       processDeliveryDate: deliveryDate,
     } as ProcessNode;
+  }
+
+  getProcesses(status: ProcessStatus, ) {
+
   }
 
   getAll() {

@@ -39,7 +39,8 @@ import { LoginComponent } from './views/login/login.component';
         return {
           cache: new InMemoryCache(),
           link: httpLink.create({
-            uri: environment.apiHost,
+            uri: environment.apiHost + 'graphql',
+            withCredentials: true,
           }),
         };
       },

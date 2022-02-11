@@ -5,4 +5,5 @@ export interface ProcessGroupNode {
   title: string;
   status: ProcessStatus;
   nodes: ProcessNode[];
+  loaded: boolean;
 }

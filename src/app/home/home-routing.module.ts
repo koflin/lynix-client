@@ -52,7 +52,7 @@ const routes: Routes = [
     { path: 'users/:id', component: UserDetailComponent , canActivate: [AuthGuard ], canDeactivate:[HasUnsavedDataGuard], data: { permissions: [Permission.USER_VIEW]}  },
     { path: 'roles', component: RolesOverviewComponent, canActivate: [AuthGuard], data: { permissions: [Permission.ROLE_VIEW]} },
 
-    {path: 'test/storage', component: TestingComponent, canActivate: [AuthGuard], data: { permissions: [Permission.TESTING_VIEW]} },
+    {path: 'test', component: TestingComponent, canActivate: [AuthGuard], data: { permissions: [Permission.TESTING_VIEW]} },
     // Process
     {path: 'processes/overview', component: ProcessesOverviewComponent , canActivate: [AuthGuard], data: { permissions: [Permission.PROCESS_VIEW]} },
     // Guide
